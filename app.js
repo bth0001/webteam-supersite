@@ -30,7 +30,7 @@ var app = express();
 //=================================================
 // CONNECT TO DATABASE
 //=================================================
-var mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/supersite'
+var mongoUri = process.env.MONGODB_URI || 'mongodb://brad:Bees123>@ds263791.mlab.com:63791/webteam-super-site'
 
 mongoose.connect(mongoUri);
 
