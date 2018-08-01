@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Item = require('../models/item');
+var Item = require('../models/taskType');
 
 function makeError(res, message, status) {
     res.statusCode = status;

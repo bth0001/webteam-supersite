@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var Schema   = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-// create model task
-var taskType = new Schema( {
+// create model taskType
+var TaskTypeSchema = new Schema( {
   taskName: {
     type: String,
     required: false
@@ -13,7 +13,7 @@ var taskType = new Schema( {
     required: false
   }
 }, { timestamps: true});
- // end ItemSchema
+ // end TaskTypeSchema
 
 function date2String(date){
   var options = {
@@ -23,13 +23,13 @@ function date2String(date){
   return date.toLocaleDateString('en-US', options);
   }
 
-  ItemSchema.methods.getCreatedAt = function() {
+  TaskTypeSchema.methods.getCreatedAt = function() {
     return date2String(this.createdAt);
   };
 
-  ItemSchema.methods.getUpdatedAt = function() {
+  TaskTypeSchema.methods.getUpdatedAt = function() {
     return date2String(this.updatedAt);
   };
 
 // make model avail for use
-module.exports = mongoose.model('taskType', taskTypeSchema);
+module.exports = mongoose.model('taskType', TaskTypeSchema);

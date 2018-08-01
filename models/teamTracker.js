@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var Schema   = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
-// create model item
-var ItemSchema = new Schema( {
+// create model TeamTracker
+var TeamTrackerSchema = new Schema( {
   name: {
     type: String,
     required: true
@@ -21,7 +21,7 @@ var ItemSchema = new Schema( {
   material: String,
   users: [ {type: Schema.ObjectId, ref: "User"} ]
 }, { timestamps: true});
- // end ItemSchema
+ // end TeamTrackerSchema
 
 function date2String(date){
   var options = {
@@ -31,13 +31,13 @@ function date2String(date){
   return date.toLocaleDateString('en-US', options);
   }
 
-  ItemSchema.methods.getCreatedAt = function() {
+  TeamTrackerSchema.methods.getCreatedAt = function() {
     return date2String(this.createdAt);
   };
 
-  ItemSchema.methods.getUpdatedAt = function() {
+  TeamTrackerSchema.methods.getUpdatedAt = function() {
     return date2String(this.updatedAt);
   };
 
 // make model avail for use
-module.exports = mongoose.model('Item', ItemSchema);
+module.exports = mongoose.model('TeamTracker', TeamTrackerSchema);

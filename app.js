@@ -23,7 +23,7 @@ var S3_BUCKET     = process.env.S3_BUCKET;
 //=================================================
 var routes = require('./routes/index');
 var users  = require('./routes/users');
-var itemsRouter = require('./routes/items');
+var itemsRouter = require('./routes/teamTracker');
 
 var app = express();
 

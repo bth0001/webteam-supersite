@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 var bcrypt   = require('bcrypt-nodejs');
-var Item = require('./item');
+var Item = require('./taskType');
 
 // create model user
 var UserSchema = new Schema( {
