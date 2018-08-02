@@ -1,9 +1,74 @@
 var express = require('express');
 var router = express.Router();
+var passport = require("passport");
+var User = require("../models/user");
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/", function(req, res){
+  res.render("index");
 });
+
+router.get("/dashboard", function(req, res){
+  res.render("dashboard");
+});
+
+//Register form route
+router.get("/signup", function(req, res){
+  res.render("signup")
+});
+
+//handles signup route
+router.post("/signup", function(req, res){
+  const newUser = new User({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    profileImageUrl: req.body.profileImageUrl,
+    team: req.body.team,
+    password: req.body.password
+  });
+ 
+  User.register(newUser, req.body.password, function(err, user){
+      if(err){
+          console.log(err);
+          return res.render("signup")
+      } else {
+        res.redirect("/dashboard");
+      }
+      // passport.authenticate("local")(req, res, function(){
+      //     res.redirect("/dashboard");
+      // });
+  });
+});
+//==============================================================================
+
+//Show Login Form
+router.get("/login", function(req, res){
+  res.render("login");
+});
+
+//handling login logic
+router.post("/login", passport.authenticate("local", 
+  {
+      successRedirect: "/dashboard", 
+      failureRedirect: "/login"
+  }), function(req, res){
+});
+//==============================================================================
+
+//Logout route
+router.get("/logout", function(req, res){
+  req.logout();
+  res.redirect("/login");
+});
+//==============================================================================
+
+//middleware
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+      return next();
+  }
+  res.redirect("/login");
+}
+
 
 module.exports = router;
