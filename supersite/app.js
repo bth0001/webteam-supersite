@@ -3,15 +3,27 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require("body-parser");
+var passport = require("passport");
+var localStrategy = require("passport-local");
+var session = require("express-session");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var User = require('./models/user');
 
 var app = express();
+const mongoose = require("mongoose");
+mongoose.set("debug", true);
+mongoose.connect("mongodb://brad:Bees123@ds263791.mlab.com:63791/webteam-super-site", {
+  keepAlive: true,
+  useNewUrlParser: true 
+});
 
+app.use(bodyParser.urlencoded({extended: true}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -21,6 +33,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+//PASSPORT CONFIG
+app.use(session({
+  secret: "We is amazing",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
