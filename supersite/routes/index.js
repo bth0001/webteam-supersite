@@ -23,20 +23,17 @@ router.post("/signup", function(req, res){
     lastName: req.body.lastName,
     email: req.body.email,
     profileImageUrl: req.body.profileImageUrl,
-    team: req.body.team,
-    password: req.body.password
+    team: req.body.team
   });
  
   User.register(newUser, req.body.password, function(err, user){
       if(err){
           console.log(err);
           return res.render("signup")
-      } else {
-        res.redirect("/dashboard");
       }
-      // passport.authenticate("local")(req, res, function(){
-      //     res.redirect("/dashboard");
-      // });
+      passport.authenticate("local")(req, res, function(){
+        res.redirect("/dashboard");
+      });
   });
 });
 //==============================================================================
