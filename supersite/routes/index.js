@@ -37,11 +37,11 @@ router.post("/signup", function(req, res){
  
   User.register(newUser, req.body.password, function(err, user){
       if(err){
-          return res.render("signup", {"error": err.message});
+          req.flash("error", err.message);
+          return res.render("signup");
       }
       passport.authenticate("local")(req, res, function(){
-        // res.flash("success", "Welcome " + user.firstname + " " + user.lastName);
-        res.redirect("/dashboard", {"success": "Welcome " + user.firstName + " " + user.lastName});
+        res.redirect("/dashboard");
       });
   });
 });

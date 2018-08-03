@@ -1,10 +1,11 @@
 var express = require('express');
 var app = express();
+var flash = require("connect-flash");
+var router = express.Router();
 var bodyParser = require("body-parser");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var session = require("express-session");
-var flash = require("connect-flash");
 
 var db = require("./models/index")
 var User = require("./models/user");
@@ -26,7 +27,9 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(User.createStrategy());
+passport.use(User.createStrategy({
+  passReqToCallback : true
+}));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 //==============================================================================
