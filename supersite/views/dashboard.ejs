@@ -3,9 +3,13 @@
 <h1 class="pageHeader">Hey <%= currentUser.firstName %>! Welcome to your <%= currentUser.team %> Dashboard.</h1>
 <div id="dashboard">
     <div id="stats">
-        <div></div>
+        <h3>View your stats from this month below:</h3><br />
+        <div class="statsContainer">
+            
+        </div>
     </div>
     <div id="dashboardLinks">
+        <h3>Select a tool to use below:</h3><br />
         <div class="dashboardLinksContainer">
             <a href="/tracker"><img src="https://i.imgur.com/QDOoFQe.png" alt="Team Tracker" /><br /><%= currentUser.team %> Tracker</a>
             <a href="/projects-tracker"><img src="https://i.imgur.com/QDOoFQe.png" alt="Special Projects Tracker" /><br />Special Projects Tracker</a>
