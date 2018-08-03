@@ -1,1 +1,33 @@
 <% include partials/header %>
+<h1>Hey <%= currentUser.firstName %>! Welcome to your <%= currentUser.team %> Dashboard.</h1>
+<div id="mainSection">
+<aside id="left">
+    <div class="menu">
+        <div class="asideUser">
+            <img src="<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" />
+            <h3><%= currentUser.team %></h3>
+        </div>
+        <ul>
+            <li><a>Tracker</a></li>
+            <li><a class="active">Projects</a></li>
+            <li><a>Admin</a></li>
+            <li><a>Calendar</a></li>
+            <li><a>CRM</a></li>
+            <li><a>Admin</a></li>
+            <li><a>More ♦</a></li>
+        </ul>
+    </div>
+</aside>
+<section id="main">
+    <nav class="contentNav">
+        <a>Ongoing</a>
+        <a class="active">Assisting</a>
+        <a>Set by Me</a>
+        <a>Following</a>
+        <a>Favorites</a>
+        <a>All</a>
+        <a>Availability</a>
+        <a>Projects</a>
+    </nav>
+</section>
+</div>
