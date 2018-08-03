@@ -1,12 +1,138 @@
 <% include partials/header %>
 
+<style>
+        /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+    
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    #myBtn {margin: 10px 0;}
+    </style>
+
 <a href="/dashboard">&larr; Back to Dashboard</a><br /><br />
 
 <h3 class="pageHeader"><%= currentUser.firstName %>, this is where you will track any of your completed tasks.</h1>
 <div id="tracker">
     <div class="trackerContainer">
-        <p>The tracker will go here.</p>
+        <!-- <% tracking.forEach(function(tracked){%> -->
+            <%= JSON.stringify(tracking) %>
+        <!-- <% }); %> -->
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Track Something</button>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div>
+            <form class="trackerForm" action="/tracker" method="POST">
+                <label name="user">Developer:
+                    <input type="text" name="user" value="<%= currentUser.firstName %>" />
+                </label>
+                <label name="date">Date:
+                    <input type="date" name="date" />
+                </label>
+                <label name="acctNum" />Account Number:
+                    <input type="number" name="acctNum" placeholder="######" >
+                </label>
+                <label name="package">Package:
+                    <select name="package">
+                        <option value="Neverland Starter">Neverland Starter</option>
+                        <option value="Atlantis Starter">Atlantis Starter</option>
+                        <option value="Camelot Starter">Camelot Starter</option>
+                        <option value="Olympus Starter">Olympus Starter</option>
+                        <option value="Essentials">Essentials</option>
+                    </select>
+                </label>
+                <label name="specialFeatures">Special Features:
+                    <input type="text" name="specialFeatures" placeholder="Special Features">
+                </label>
+                <label name="domain">Domain:
+                    <input type="text" name="domain" placeholder="Domain">
+                </label>
+                <label name="designer">Designer:
+                    <input type="text" name="designer" placeholder="Logic coming later">
+                </label>
+                <label name="onboarder">On-Boarder:
+                    <input type="text" name="onboarder" placeholder="Logic coming later">
+                </label>
+            </div>
+            <div>
+                <label class="labelTask" name="taskType">Task:
+                    <input type="text" name="taskType" placeholder="Logic coming later">
+                </label>
+            </div>
+                <label class="labelNotes" name="notes">Notes:
+                    <textarea name="notes"></textarea>
+                </label>
+                
+                <button>Submit</button>
+            </form>
+        </div>
+
+        </div>
     </div>
 </div>
+<script>
+    // Get the modal
+var modal = document.getElementById('myModal');
 
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
 <% include partials/footer %>
