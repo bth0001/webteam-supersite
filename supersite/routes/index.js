@@ -7,13 +7,18 @@ router.get("/", function(req, res){
   res.render("index");
 });
 
-router.get("/dashboard", function(req, res){
+router.get("/dashboard", isLoggedIn, function(req, res){
   res.render("dashboard");
 });
 
-router.get("/tracker", function(req, res){
+router.get("/tracker", isLoggedIn, function(req, res){
   res.render("tracker");
-})
+});
+
+
+router.post("/tracker", function(req, res){
+  res.render("tracker");
+});
 
 router.get("/idea-warehouse", function(req, res){
   res.render("idea-warehouse");
@@ -56,8 +61,8 @@ router.post("/signup", function(req, res){
  
   User.register(newUser, req.body.password, function(err, user){
       if(err){
-          console.log(err);
-          return res.render("signup")
+          req.flash("error", err.message);
+          return res.render("signup");
       }
       passport.authenticate("local")(req, res, function(){
         res.redirect("/dashboard");
@@ -68,14 +73,15 @@ router.post("/signup", function(req, res){
 
 //Show Login Form
 router.get("/login", function(req, res){
-  res.render("login");
+  res.render("login", {});
 });
 
 //handling login logic
 router.post("/login", passport.authenticate("local", 
   {
       successRedirect: "/dashboard", 
-      failureRedirect: "/login"
+      failureRedirect: "/login",
+      failureFlash: true
   }), function(req, res){
 });
 //==============================================================================
@@ -83,6 +89,7 @@ router.post("/login", passport.authenticate("local",
 //Logout route
 router.get("/logout", function(req, res){
   req.logout();
+  req.flash("success", "Logged you out!");
   res.redirect("/login");
 });
 //==============================================================================
@@ -92,6 +99,7 @@ function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
       return next();
   }
+  req.flash("error", "Please Login First!");
   res.redirect("/login");
 }
 

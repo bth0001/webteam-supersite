@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var flash = require("connect-flash");
+var router = express.Router();
 var bodyParser = require("body-parser");
 var passport = require("passport");
 var localStrategy = require("passport-local");
@@ -15,6 +17,7 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(flash());
 //==============================================================================
 //PASSPORT CONFIGURATION
 app.use(session({
@@ -24,13 +27,17 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(User.createStrategy());
+passport.use(User.createStrategy({
+  passReqToCallback : true
+}));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 //==============================================================================
 
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
   next();
 });
 
