@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var session = require("express-session");
+var flash = require("connect-flash");
 
 var db = require("./models/index")
 var User = require("./models/user");
@@ -15,6 +16,7 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(flash());
 //==============================================================================
 //PASSPORT CONFIGURATION
 app.use(session({
@@ -31,6 +33,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
   next();
 });
 
