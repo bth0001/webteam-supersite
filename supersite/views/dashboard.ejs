@@ -1,7 +1,24 @@
 <% include partials/header %>
 
-<h1>Hey <%= currentUser.firstName %>! Welcome to your <%= currentUser.team %> Dashboard.</h1>
-<div id="mainSection">
+<h1 class="pageHeader">Hey <%= currentUser.firstName %>! Welcome to your <%= currentUser.team %> Dashboard.</h1>
+<div id="dashboard">
+    <div id="stats">
+        <div></div>
+    </div>
+    <div id="dashboardLinks">
+        <div class="dashboardLinksContainer">
+            <a href="/tracker"><img src="https://i.imgur.com/QDOoFQe.png" alt="Team Tracker" /><br /><%= currentUser.team %> Tracker</a>
+            <a href="/projects-tracker"><img src="https://i.imgur.com/QDOoFQe.png" alt="Team Tracker" /><br />Special Projects Tracker</a>
+            <a href="/checklist"><img src="https://i.imgur.com/QDOoFQe.png" alt="Developer Checklist" /><br /><%= currentUser.team %> Checklist</a>
+            <a href="/idea-warehouse"><img src="https://i.imgur.com/QDOoFQe.png" alt="Team Tracker" /><br />Idea Warehouse</a>
+            <a href="/hats-off"><img src="https://i.imgur.com/QDOoFQe.png" alt="Team Tracker" /><br />Hats-Off</a>
+            <a href="/blueprint-generator"><img src="https://i.imgur.com/QDOoFQe.png" alt="Team Tracker" /><br />Blueprint Generator</a>
+            <a href="/presence-url-tracker"><img src="https://i.imgur.com/QDOoFQe.png" alt="Team Tracker" /><br />Presence URL Tracker</a>
+        </div>
+    </div>
+</div>
+
+<!--<div id="mainSection">
 <aside id="left">
     <div class="menu">
         <div class="asideUser">
@@ -31,6 +48,6 @@
         <a>Projects</a>
     </nav>
 </section>
-</div>
+</div>-->
 
 <% include partials/footer %>

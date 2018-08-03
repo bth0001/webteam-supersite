@@ -20,6 +20,30 @@ router.post("/tracker", function(req, res){
   res.render("tracker");
 });
 
+router.get("/idea-warehouse", function(req, res){
+  res.render("idea-warehouse");
+})
+
+router.get("/hats-off", function(req, res){
+  res.render("hats-off");
+})
+
+router.get("/presence-url-tracker", function(req, res){
+  res.render("presence-url-tracker");
+})
+
+router.get("/blueprint-generator", function(req, res){
+  res.render("blueprint-generator");
+})
+
+router.get("/checklist", function(req, res){
+  res.render("checklist");
+})
+
+router.get("/projects-tracker", function(req, res){
+  res.render("projects-tracker");
+})
+
 //Register form route
 router.get("/signup", function(req, res){
   res.render("signup")
