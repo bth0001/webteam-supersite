@@ -2,6 +2,14 @@ var express = require('express');
 var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
+var TeamTracker = require("../models/teamTracker");
+var taskType = require("../models/taskType");
+
+var tracking = [
+  {accNum: 212},
+  {accNum: 213},
+  {accNum: 214}
+];
 
 router.get("/", function(req, res){
   res.render("index");
@@ -12,13 +20,30 @@ router.get("/dashboard", isLoggedIn, function(req, res){
 });
 
 router.get("/tracker", isLoggedIn, function(req, res){
-  res.render("tracker");
+  TeamTracker.find({}, function(err, allTracks){
+    if(err){
+      console.log(err);
+    } else {
+      res.render("tracker", {tracking: allTracks});
+    }
+  })
 });
-
 
 router.post("/tracker", function(req, res){
-  res.render("tracker");
+  const { acctNum, user, date, buildPkg, starterTemplate, specialFeatures, domain, server, note, }  = req.body;
+  var newTrack = {acctNum: acctNum, user: user, date: date, buildPkg: buildPkg, starterTemplate: starterTemplate, specialFeatures: specialFeatures, domain: domain, server: server, note: note};
+  TeamTracker.create(newTrack, function(err, newlyTracked){
+    if(err){
+      console.log(err)
+    } else {
+      res.redirect("/tracker");
+    }
+  });
 });
+
+// router.get("/tracker/new", isLoggedIn, function(req, res){
+//     res.render("trackerNew");
+// })
 
 router.get("/idea-warehouse", function(req, res){
   res.render("idea-warehouse");
