@@ -1,0 +1,12 @@
+<% include partials/header %>
+
+<a href="/dashboard">&larr; Back to Dashboard</a><br /><br />
+
+<h3 class="pageHeader"><%= currentUser.firstName %>, this is the checklist for the <%= currentUser.team %> team. This will make completing a checklist a breeze!</h1>
+<div id="checklist">
+    <div class="checklistContainer">
+        <p>The checklist will go here.</p>
+    </div>
+</div>
+
+<% include partials/footer %>
