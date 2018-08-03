@@ -11,6 +11,10 @@ router.get("/dashboard", function(req, res){
   res.render("dashboard");
 });
 
+router.get("/tracker", function(req, res){
+  res.render("tracker");
+})
+
 //Register form route
 router.get("/signup", function(req, res){
   res.render("signup")

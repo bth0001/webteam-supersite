@@ -1,5 +1,30 @@
 <% include partials/header %>
 
-<h1>Dashboard</h1>
+<h1>Welcome <%= currentUser.firstName + " " + currentUser.lastName %> to the <%= currentUser.team %> Dashboard</h1>
+
+<div class="container">
+    <div class="row">
+        <div id="dashboard" class="col-lg-12">
+            <div class="item itemOne">
+                <a href="/tracker">Tracker</a>
+            </div>
+            <div class="item itemTwo">
+                <a href="/tracker">Tracker</a>
+            </div>
+            <div class="item itemThree">
+                <a href="/tracker">Tracker</a>
+            </div>
+            <div class="item itemFour">
+                <a href="/tracker">Tracker</a>
+            </div>
+            <div class="item itemFive">
+                <a href="/tracker">Tracker</a>
+            </div>
+            <div class="item itemSix">
+                <a href="/tracker">Tracker</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <% include partials/footer %>

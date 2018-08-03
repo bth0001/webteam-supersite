@@ -1,41 +1,23 @@
-body {background-color: #f3f3f3}
+body {background-color: #f3f3f3; }
 
 /*header */
-#header {background-color: #252525; padding: 25px 0; margin: 0 0 50px;}
+#header {background-color: #252525; padding: 10px 0; margin: 0 0 50px;}
 #header h1 {color: #fff; margin: 0;}
 #header h1 a {color: inherit; text-decoration: none;}
+#header a img {width: 35%;}
 #header > div.container {display: flex; align-items: center;}
 #header > div.container > div.logo {flex: 1 auto;}
 #utilityNav {flex: 1 auto; text-align: right; margin: 0; padding: 0;}
 #utilityNav > li {display: inline-block; margin: 0 0 0 20px;}
-#utilityNav > li > a {color: #fff;}
-#utilityNav span.loggedIn {color: #fff;}
+#utilityNav > li > a {color: #fff; font-size: 20px; font-weight: 700;}
+#utilityNav span.loggedIn {color: #fff; font-size: 20px;}
 #utilityNav span.loggedIn:after {content: " | "; margin: 0 0 0 20px;}
 
 /* Home */
 .home {text-align: center;}
 
-/* Campground index page */
-#campgroundWrap {display: flex; flex-wrap: wrap;}
-#campgroundWrap > div.campground {flex: 1 50%; text-align: center;}
-#campgroundWrap > div.campground img {max-width: 100%; border-radius: 6px; border: 1px solid #dbdbdb; padding: 3px;}
-#campgroundWrap a.moreinfo {display: inline-block; padding: 10px 25px; margin: 20px 0 0; border-radius: 6px; color: #fff; font-weight: bold; border: 1px solid #000; background: linear-gradient(135deg, #131313 0%,#2d2d2d 24%,#2c2c2c 44%,#2b2b2b 66%,#1c1c1c 83%,#131313 100%);}
-#campgroundWrap a h3 {color: #252525; text-decoration: none;}
-#campgroundWrap div.title > a:hover {text-decoration: none !important;}
-#campgroundWrap div.image > a {transition: all 250ms ease;}
-#campgroundWrap div.image > a:hover {opacity: .85;}
-
-/* Show Page */
-div.campgroundShow {}
-div.campgroundShow > div.wrap {display: flex;}
-div.campgroundShow > div.wrap > div.image {margin: 0 30px 0 0;flex: 1 40%;}
-div.campgroundShow > div.wrap > div.image img {max-width: 100%; border-radius: 6px; border: 1px solid #dbdbdb; padding: 3px;}
-div.campgroundShow > div.wrap > div.text {flex: 1 60%;background-color: #eaeaea;border-radius:  6px;padding:  20px;}
-div.campgroundShow > div.controls {margin: 10px 0 30px; text-align: right;}
-div.campgroundShow > div.commentWrap {border-radius: 6px; box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); overflow: hidden;}
-div.campgroundShow > div.commentWrap > div.comment {background-color: #e4e2e2; padding:20px;}
-div.campgroundShow > div.commentWrap > div.comment:nth-child(even) {background-color: #e4e2e2;}
-div.campgroundShow > div.commentWrap > div.comment:nth-child(odd) {background-color: #dedcdc;}
+#dashboard {display: flex; justify-content: space-between; flex-wrap: wrap;}
+#dashboard .item a {background: #252525; color: white; margin: 10px 0; display: block; text-decoration: none; font-size: 28px; border: 2px solid grey; padding: 50px; transition: ease-in 2s;}
 
 /* Form */
 form {max-width: 400px; margin: 0 auto; text-align: center; background-color: #e8e3e3; padding: 30px; box-shadow: 1px 1px 10px rgba(0,0,0,0.34);}
