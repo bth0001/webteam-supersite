@@ -29,16 +29,7 @@ body {background-color:#f3f3f3; }
 .login {background-color:#0085c4; border-radius:10px; color:#fff; margin:10px 0; padding:7px 15px;}
 .login:hover, .login:focus {background-color:#fff; border:1px solid #0085c4; color:#0085c4; border-radius:10px; text-decoration:none;}
 
-h1.pageHeader {text-align:center; font-family:monospace;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid orange; /* The typwriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em; /* Adjust as needed */
-  animation: 
-    typing 3.5s steps(30, end),
-    blink-caret .5s step-end infinite;
-}
+h1.pageHeader {text-align:center; font-family:monospace; overflow:hidden; /* Ensures the content is not revealed until the animation */ border-right:3px solid orange; /* The typwriter cursor */ white-space:nowrap; /* Keeps the content on a single line */ margin:0 auto; /* Gives that scrolling effect as the typing happens */ letter-spacing:1px; /* Adjust as needed */ animation:typing 3.5s steps(30, end), blink-caret .5s step-end infinite;}
 
 /* The typing effect */
 @keyframes typing {
@@ -52,7 +43,6 @@ h1.pageHeader {text-align:center; font-family:monospace;
   50% { border-color: orange }
 }
 
-
 /*Dashboard*/
 #dashboard {margin:50px 0;}
 #dashboardLinks, #stats {margin:0 auto; max-width:1100px;}
@@ -62,30 +52,30 @@ h1.pageHeader {text-align:center; font-family:monospace;
 
 #mainSection {display:flex; flex-wrap:wrap;}
 aside {flex:1; padding:20px;}
-aside#left ul {list-style:none; padding:0; margin:0;}
+aside#left ul {list-style:none; margin:0; padding:0;}
 aside#left ul li {padding:10px 10px 10px 0;}
-aside#left ul li a {text-decoration:none; padding:10px 10px 10px 0; color:#252525;}
-aside#left ul li a.active {color:white; text-decoration:none;  background-color:#535C6A;  border-radius:20px; padding:10px;}
+aside#left ul li a {color:#252525; padding:10px 10px 10px 0; text-decoration:none;}
+aside#left ul li a.active {background-color:#535C6A; border-radius:20px; color:white; padding:10px; text-decoration:none;}
 
 #main {flex:6;}
 #main nav.contentNav {display:flex; flex-wrap:nowrap; justify-content:space-around;}
 #main nav.contentNav a {padding:20px 0;}
-nav.contentNav a.active {color:#8AAEEA; box-shadow:0px 3px 0px 0px #8AAEEA;}
+nav.contentNav a.active {box-shadow:0 3px 0 0 #8AAEEA; color:#8AAEEA;}
 
 
 /* Form */
-form {max-width:400px; margin:0 auto; text-align:center; background-color:#e8e3e3; padding:30px; box-shadow:1px 1px 10px rgba(0,0,0,0.34);}
+form {background-color:#e8e3e3; box-shadow:1px 1px 10px rgba(0,0,0,0.34); max-width:400px; margin:0 auto; text-align:center; padding:30px;}
 form input {display:block; width:100%; margin:10px 0; padding:5px 10px;}
 form button, .trackerForm button {background-color:#252525; color:#fff; padding:5px 20px; cursor:pointer; border-radius:6px; border:0;}
 
-.trackerForm {max-width: 100%; margin: 0 auto; text-align: left; background-color: #e8e3e3; padding: 30px; box-shadow: 1px 1px 1px rgba(0,0,0,0.34);}
-.trackerForm label {width: 33%;}
-.trackerForm input, .trackerForm select {display: inline-block; width: 100%; margin: 10px 0; padding: 5px 10px;}
+.trackerForm {background-color:#e8e3e3; box-shadow:1px 1px 1px rgba(0,0,0,0.34); margin:0 auto; max-width:100%; padding:30px; text-align:left;}
+.trackerForm label {width:33%;}
+.trackerForm input, .trackerForm select {display:inline-block; margin:10px 0; padding:5px 10px; width:100%;}
 
-.labelNotes {display: flex; flex-wrap: wrap; width: 100% !important;}
-.labelNotes textarea {flex: 100%;}
+.labelNotes {display:flex; flex-wrap:wrap; width:100% !important;}
+.labelNotes textarea {flex:100%;}
 
 /* footer */
-#footer {background-color:#252525; bottom:0; padding:30px 0; margin:0; width:100%;}
+#footer {background-color:#252525; bottom:0; margin:0; padding:30px 0; width:100%;}
 #footer .container {max-width:85%;}
-#footer p {color:#fff; margin:0;  text-align:center;}
+#footer p {color:#fff; margin:0; text-align:center;}
