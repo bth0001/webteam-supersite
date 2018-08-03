@@ -30,12 +30,14 @@ router.get("/tracker", isLoggedIn, function(req, res){
 });
 
 router.post("/tracker", function(req, res){
-  const { acctNum, user, date, buildPkg, starterTemplate, specialFeatures, domain, server, note, }  = req.body;
-  var newTrack = {acctNum: acctNum, user: user, date: date, buildPkg: buildPkg, starterTemplate: starterTemplate, specialFeatures: specialFeatures, domain: domain, server: server, note: note};
+  const { acctNum, date, buildPkg, starterTemplate, specialFeatures, domain, server, note, }  = req.body;
+  const author = {id: req.user._id, firstName: req.user.firstName};
+  var newTrack = {acctNum: acctNum, author: author, date: date, buildPkg: buildPkg, starterTemplate: starterTemplate, specialFeatures: specialFeatures, domain: domain, server: server, note: note};
   TeamTracker.create(newTrack, function(err, newlyTracked){
     if(err){
       console.log(err)
     } else {
+      console.log(newlyTracked);
       res.redirect("/tracker");
     }
   });
