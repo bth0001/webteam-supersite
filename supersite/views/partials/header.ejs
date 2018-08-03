@@ -13,14 +13,18 @@
         <header id="header">
             <div class="container">
                 <div class="logo">
-                  <a href="/"><img src="https://raw.githubusercontent.com/haney2121/invictus-project/master/invictus-client/src/images/invictus-white-logo.png" alt="Invictus" /></a>
+                    <% if(!currentUser){ %>
+                        <a href="/"><img src="https://raw.githubusercontent.com/haney2121/invictus-project/master/invictus-client/src/images/invictus-white-logo.png" alt="Invictus" /></a>
+                    <% } else { %>
+                        <a href="/dashboard"><img src="https://raw.githubusercontent.com/haney2121/invictus-project/master/invictus-client/src/images/invictus-white-logo.png" alt="Invictus" /></a>
+                    <% } %>
                 </div><!--logo-->
                 <ul id="utilityNav">
                     <% if(!currentUser){ %>
                         <li><a href="/login">Login</a></li>
                         <li><a href="/signup">Sign Up</a></li>
                     <% } else { %>
-                        <li><span class="loggedIn">Logged in as: <strong><%= currentUser.firstName + " " + currentUser.lastName %></strong></span></li>
+                        <li><span class="loggedIn">Logged in as: <strong><%= currentUser.firstName + " " + currentUser.lastName %></strong><img src="<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" /></span></li>
                         <li><a href="/logout">Logout</a></li>
                     <% } %>
                 </ul>
