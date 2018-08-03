@@ -1,7 +1,26 @@
 <% include partials/header %>
+<style>
+  h3, .welcomeLinks{margin-top: 25px;font-size: 21px; text-align: center;
+    animation: fadein 7s;
+    -moz-animation: fadein 7s; /* Firefox */
+    -webkit-animation: fadein 7s; /* Safari and Chrome */
+}
+@keyframes fadein {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {opacity:0;}
+    to {opacity:1;}
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {opacity:0;}
+    to {opacity:1;}
+}
+</style>
 
 <div class="welcome">
-  <h1>Welcome to the new WebTeam SuperSite!</h1>
+  <h1 class="pageHeader">Welcome to the new WebTeam SuperSite!</h1>
   <h3>We know you'll find it to be a very useful tool.</h3>
 </div>
 <div class="welcomeLinks">
