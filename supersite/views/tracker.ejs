@@ -48,6 +48,7 @@
     <div class="trackerContainer">
         <!-- <% tracking.forEach(function(tracked){%> -->
             <%= JSON.stringify(tracking) %>
+            
         <!-- <% }); %> -->
         <!-- Trigger/Open The Modal -->
         <button id="myBtn">Track Something</button>
@@ -60,8 +61,8 @@
             <span class="close">&times;</span>
             <div>
             <form class="trackerForm" action="/tracker" method="POST">
-                <label name="user">Developer:
-                    <input type="text" name="user" value="<%= currentUser.firstName %>" />
+                <label name="username">Developer:
+                    <input type="text" name="username" value="<%= currentUser.firstName %>" />
                 </label>
                 <label name="date">Date:
                     <input type="date" name="date" />
