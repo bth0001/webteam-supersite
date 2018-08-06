@@ -54,10 +54,10 @@ app.use(function(req, res, next){
 // ----For Route Files----start
 app.use('/', [
   indexRouter,
-  trackerRoutes, 
   authRoutes
 ]);
 
+app.use('/tracker', trackerRoutes);
 app.use('/users', usersRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/idea-warehouse', ideaWarehouseRouter);

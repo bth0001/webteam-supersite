@@ -47,15 +47,15 @@
 <div id="tracker">
     <div class="trackerContainer">
 
-            <% tracking.forEach(function(tracked){ %>
+            <!--<% tracking.forEach(function(tracked){ %>
                 <div class="col-md-12">
                     <div class="container">
                         <div id="tracked">
-                             <p><strong><%= tracked.author.firstName %></strong> | <%= tracked.acctNum %> | <%= tracked.date %> | <%= tracked.specialFeatures %> | <%= tracked.domain %></p>
+                             <p><strong><%= tracked.author.firstName %></strong> | <%= tracked.buildPkg %> | <%= tracked.acctNum %> | <%= tracked.date %> | <%= tracked.specialFeatures %> | <%= tracked.domain %></p>
                         </div>
                     </div>
                 </div>
-            <% }); %>
+            <% }); %>-->
 
         <!-- Trigger/Open The Modal -->
         <button id="myBtn">Track Something</button>
@@ -77,8 +77,8 @@
                 <label name="acctNum" />Account Number:
                     <input type="number" name="acctNum" placeholder="######" >
                 </label>
-                <label name="package">Package:
-                    <select name="package">
+                <label name="buildPkg">Package:
+                    <select name="buildPkg">
                         <option value="Neverland Starter">Neverland Starter</option>
                         <option value="Atlantis Starter">Atlantis Starter</option>
                         <option value="Camelot Starter">Camelot Starter</option>

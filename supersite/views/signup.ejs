@@ -3,12 +3,12 @@
 <h1 class="pageHeader">First Time? Sign up now :)</h1>
 
 <form action="/signup" method="POST">
-    <input type="text" name="firstName" placeholder="First Name">
-    <input type="text" name="lastName" placeholder="Last Name">
-    <input type="password" name="password" placeholder="Password">
-    <input type="text" name="email" placeholder="Email">
+    <input type="text" name="firstName" placeholder="First Name" required>
+    <input type="text" name="lastName" placeholder="Last Name" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="text" name="email" placeholder="Email" required>
     <input type="text" name="profileImageUrl" placeholder="profileImageUrl">
-    <select name="team">
+    <select name="team" required>
         <option value="">Select Your Team</option>
         <option value="Developer">Developer</option>
         <option value="Designer">Designer</option>

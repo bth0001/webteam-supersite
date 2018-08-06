@@ -5,16 +5,9 @@ var User = require("../models/user");
 var TeamTracker = require("../models/teamTracker");
 var taskType = require("../models/taskType");
 
-// Index Route
 router.get("/", function(req, res){
   res.render("index");
 });
-
-
-
-
-
-
 
 //middleware
 function isLoggedIn(req, res, next){

@@ -13,6 +13,8 @@ body {background-color:#f3f3f3; }
 #utilityNav > li > a {color:#fff; font-size:20px; font-weight:700;}
 #utilityNav > li > a:hover, #utilityNav > li > a:focus {color:#0085c4;}
 #utilityNav span.loggedIn {color:#fff; font-size:20px;}
+#utilityNav span.loggedIn a {color:#fff; font-size:20px; opacity: 0.8; text-decoration: none;}
+#utilityNav span.loggedIn a:hover {opacity: 1; text-decoration: none;}
 #utilityNav span.loggedIn:after {content:" | "; margin:0 0 0 20px;}
 #utilityNav .loggedIn img {height:50px; width:50px; border-radius:50%; margin-left:10px;}
 
@@ -70,9 +72,11 @@ form {background-color:#e8e3e3; box-shadow:1px 1px 10px rgba(0,0,0,0.34); max-wi
 form input {display:block; width:100%; margin:10px 0; padding:5px 10px;}
 form button, .trackerForm button {background-color:#252525; color:#fff; padding:5px 20px; cursor:pointer; border-radius:6px; border:0;}
 
-.trackerForm {background-color:#e8e3e3; box-shadow:1px 1px 1px rgba(0,0,0,0.34); margin:0 auto; max-width:100%; padding:30px; text-align:left;}
+.trackerForm {background-color:#e8e3e3; box-shadow:1px 1px 10px rgba(0,0,0,0.34); margin:0 auto; max-width:100%; padding:30px; text-align:left;}
 .trackerForm label {width:33%;}
 .trackerForm input, .trackerForm select {display:inline-block; margin:10px 0; padding:5px 10px; width:100%;}
+
+.profileForm {background-color:#e8e3e3; box-shadow:1px 1px 10px rgba(0,0,0,0.34); margin:30px 10px; max-width:400px; padding:30px; text-align:left;}
 
 .labelNotes {display:flex; flex-wrap:wrap; width:100% !important;}
 .labelNotes textarea {flex:100%;}

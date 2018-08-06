@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
+var TeamTracker = require("../models/teamTracker");
 
 // Dashboard Index Route
 router.get("/", isLoggedIn, function(req, res){
-    res.render("dashboard");
+    TeamTracker.find({}, function(err, allTracks){
+      if(err){
+        console.log(err);
+      } else {
+        res.render("dashboard", {tracking: allTracks});
+      }
+    })
   });
 
   //middleware
