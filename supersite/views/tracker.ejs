@@ -1,5 +1,6 @@
 <% include partials/header %>
 
+
 <style>
         /* The Modal (background) */
     .modal {
@@ -12,32 +13,33 @@
         height: 100%; /* Full height */
         overflow: auto; /* Enable scroll if needed */
         background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
     }
     
     /* Modal Content/Box */
     .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto; /* 15% from the top and centered */
-        padding: 20px;
-        border: 1px solid #888;
+        background-color: transparent;
+        margin: 5% auto; /* 5% from the top and centered */
+        padding: 0;
+        border: none;
         width: 80%; /* Could be more or less, depending on screen size */
     }
     
     /* The Close Button */
     .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
+        color: rgba(255,255,255,0.7);
+        font-size: 48px;
         font-weight: bold;
+        text-align: right;
     }
     
     .close:hover,
     .close:focus {
-        color: black;
+        color: white;
         text-decoration: none;
         cursor: pointer;
     }
+    .close:not(:disabled):not(.disabled):focus, .close:not(:disabled):not(.disabled):hover {color:white}
     #myBtn {margin: 10px 0;}
     </style>
 
@@ -68,46 +70,111 @@
             <span class="close">&times;</span>
             <div>
             <form class="trackerForm" action="/tracker" method="POST">
-                <label name="username">Developer:
-                    <input type="text" name="username" value="<%= currentUser.firstName %>" />
-                </label>
+                <div class="form-group">
                 <label name="date">Date:
                     <input type="date" name="date" />
                 </label>
+
                 <label name="acctNum" />Account Number:
-                    <input type="number" name="acctNum" placeholder="######" >
+                <input type="number" name="acctNum" placeholder="######" >
+            </label>
+        </div> <!-- end of form-group -->
+
+             <div class="form-group">
+                <label name="username">Developer:
+                    <input type="text" name="username" value="<%= currentUser.firstName %>" />
                 </label>
+               </div> <!-- end of form-group -->
+                
+               <div class="form-group">
+                    <label name="designer">Designer:
+                            <select name="designer">
+                                    <option value="NA">N/A</option> <!-- If site is a Starter -->
+                                    <option value="Garo">Garo</option>
+                                    <option value="Jodi">Jodi</option>
+                                    <option value="Michael">Michael</option>
+                                    <option value="Nick">Nick</option>
+                                    <option value="Yogesh">Yogesh</option>
+                                </select>
+                    </label>
+    
+                    <label name="onboarder">On-Boarder:
+                            <select name="onboarder">
+                                    <option value="Rachel">Rachel</option>
+                                    <option value="Stacey">Stacey</option>
+                                    <option value="Denise">Denise</option>
+                                    
+                                </select>
+                    </label>
+                    </div> <!-- end of form-group -->
+
+                <div class="form-group">
                 <label name="buildPkg">Package:
-                    <select name="buildPkg">
-                        <option value="Neverland Starter">Neverland Starter</option>
-                        <option value="Atlantis Starter">Atlantis Starter</option>
-                        <option value="Camelot Starter">Camelot Starter</option>
-                        <option value="Olympus Starter">Olympus Starter</option>
-                        <option value="Essentials">Essentials</option>
+                    <select name="buildPkg" id="buildPkg">
+                            <option value="Select Build Package" selected>Select Build Package</option>
+                        <option value="Essential">Essential</option>
+                        <option value="Starter">Starter</option>
                     </select>
                 </label>
-                <label name="specialFeatures">Special Features:
-                    <input type="text" name="specialFeatures" placeholder="Special Features">
+
+                <label name="starterTemplate" class="ifStarter">Starter Template
+                    <select name="starterTemplate">
+                            <option value="Select Starter Template">Select Starter Template</option>
+                        <option value="Neverland">Neverland</option>
+                        <option value="Atlantis">Atlantis</option>
+                        <option value="Camelot">Camelot</option>
+                        <option value="Olympus">Olympus</option>
+                    </select>
                 </label>
+            </div> <!-- end of form-group -->
+
+            <div class="form-group">
+                    <label name="specialFeatures" class="ifEssential">Special Features:
+                            <select name="starterTemplate" multiple>
+                                    <option value="Breadcrumbs">Select as Many Special Features as Needed</option>
+                                <option value="Breadcrumbs">Breadcrumbs</option>
+                                <option value="Interior Featured Image">Interior Featured Image</option>
+                                <option value="Mega Menu">Mega Menu</option>
+                                <option value="Object Fit">Object Fit</option>
+                                <option value="Shrinky Header">Shrinky Header</option>
+                                <option value="Search Bar">Search Bar</option>
+                                <option value="Scroll Efects">Scroll Effects</option>
+                            </select>
+                        </label>
+                    </div> <!-- end of form-group -->
+<!-- 
+            <fieldset name="specialFeatures" class="ifEssential">
+                    <legend>Special Features:</legend>
+                    <label for="Breadcrumbs"> <input id="Breadcrumbs" name="Breadcrumbs" type="checkbox" value="Yes" />Breadcrumbs</label>
+                    <label for="Interior-Featured-Image"> <input id="Interior-Featured-Image" name="Interior-Featured-Image" type="checkbox" value="Yes" />Interior Featured Image</label>
+                    <label for="Mega-Menu"> <input id="Mega-Menue" name="Mega-Menu" type="checkbox" value="Yes" />Mega Menu</label>
+                    <label for="Object-Fit"> <input id="Object-Fit" name="Object-Fit" type="checkbox" value="Yes" />Object Fit</label>
+                    <label for="Shrinky-Header"> <input id="Shrinky-Header" name="Shrinky-Header" type="checkbox" value="Yes" />Shrinky Header</label>
+                    <label for="Search-Bar"> <input id="Search-Bar" name="Search-Bar" type="checkbox" value="Yes" />Search Bar</label>
+                    <label for="Scroll-Effects"> <input id="Scroll-Effects" name="Scroll-Effects" type="checkbox" value="Yes" />Scroll Effects</label>
+                    </fieldset>
+                </div> -->
+
+                <div class="form-group">
                 <label name="domain">Domain:
                     <input type="text" name="domain" placeholder="Domain">
                 </label>
-                <label name="designer">Designer:
-                    <input type="text" name="designer" placeholder="Logic coming later">
-                </label>
-                <label name="onboarder">On-Boarder:
-                    <input type="text" name="onboarder" placeholder="Logic coming later">
-                </label>
-            
-            <div>
+                </div> <!-- end of form-group -->
+
+              
+
+                <div class="form-group">
                 <label class="labelTask" name="taskType">Task:
                     <input type="text" name="taskType" placeholder="Logic coming later">
                 </label>
-            </div>
+                </div> <!-- end of form-group -->
+
+            <div class="form-group">
                 <label class="labelNotes" name="notes">Notes:
                     <textarea name="notes"></textarea>
                 </label>
-                
+            </div> <!-- end of form-group -->
+
                 <button>Submit</button>
             </form>
         </div>
@@ -143,5 +210,29 @@ window.onclick = function(event) {
     }
 }
 
+      $('.ifEssential').hide();
+        $('.ifStarter').hide();
+        
+        $(function() {
+        $('#buildPkg').on('change', function(){
+            if ($(this).val() === 'Essential'){
+            $('.ifEssential').show();
+        }  
+        
+        
+        else {
+            $('.ifEssential').hide();
+        }
+
+            if ($(this).val() === 'Starter'){
+            $('.ifStarter').show();
+        }  
+        
+        
+        else {
+            $('.ifStarter').hide();
+        }
+        });
+        });	
 </script>
 <% include partials/footer %>
