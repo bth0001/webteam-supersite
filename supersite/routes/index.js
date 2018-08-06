@@ -5,12 +5,6 @@ var User = require("../models/user");
 var TeamTracker = require("../models/teamTracker");
 var taskType = require("../models/taskType");
 
-var tracking = [
-  {accNum: 212},
-  {accNum: 213},
-  {accNum: 214}
-];
-
 router.get("/", function(req, res){
   res.render("index");
 });
@@ -120,6 +114,81 @@ router.get("/logout", function(req, res){
   res.redirect("/login");
 });
 //==============================================================================
+
+
+router.get("/edit-profile", function(req, res){
+  res.render("edit-profile");
+});
+
+
+router.post('/edit-profile', isLoggedIn, function(req, res, next){
+  // User.findById(req.user.id).then(function(sanitizedUser){
+  //     if (sanitizedUser){
+  //         sanitizedUser.setPassword(req.body.password, function(){
+  //             sanitizedUser.save();
+  //             res.status(200).json({message: 'password reset successful'});
+  //         });
+  //     } else {
+  //         res.status(500).json({message: 'This user does not exist'});
+  //     }
+  // },function(err){
+  //     console.error(err);
+  // });
+
+  User.findById(req.user.id, function (err, sanitizedUser) {
+
+      // todo: don't forget to handle err
+
+      if (!sanitizedUser) {
+          req.flash('error', 'No account found');
+          return res.redirect('/edit-profile');
+      }
+
+      // good idea to trim 
+      var email = req.body.email.trim();
+      var firstName = req.body.firstName.trim();
+      var lastName = req.body.lastName.trim();
+      var profileImageUrl = req.body.profileImageUrl.trim();
+      var team = req.body.team.trim();
+
+      // validate 
+      if (!email || !profileImageUrl || !firstName || !lastName || !team) { // simplified: '' is a falsey
+          req.flash('error', 'One or more fields are empty');
+          return res.redirect('/edit-profile'); // modified
+      }
+
+      // no need for else since you are returning early ^
+      sanitizedUser.email = email;
+      sanitizedUser.firstName = firstName;
+      sanitizedUser.lastName = lastName;
+      sanitizedUser.profileImageUrl = profileImageUrl;
+      sanitizedUser.team = team;
+
+      // don't forget to save!
+      sanitizedUser.setPassword(req.body.password, function(){
+        sanitizedUser.save(function(err){
+          if (err) {
+            if (err.name === 'MongoError' && err.code === 11000) {
+              req.flash("error", "Email already in use");
+              return res.redirect("/edit-profile");
+            }
+            // Some other error
+            return res.status(500).send(err);
+          }
+           req.flash("success", "Password reset Successful");
+           res.redirect('/dashboard');
+        });
+        // res.status(200).json({message: 'password reset successful'});
+      
+    });
+      // sanitizedUser.save(function (err) {
+
+      //     // todo: don't forget to handle err
+
+      //     res.redirect('/dashboard');
+      // });
+  });
+});
 
 //middleware
 function isLoggedIn(req, res, next){

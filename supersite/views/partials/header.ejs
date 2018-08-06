@@ -24,7 +24,7 @@
                         <li><a href="/login">Login</a></li>
                         <li><a href="/signup">Sign Up</a></li>
                     <% } else { %>
-                        <li><span class="loggedIn">Logged in as: <strong><%= currentUser.firstName + " " + currentUser.lastName %></strong><img src="<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" /></span></li>
+                        <li><span class="loggedIn">Logged in as: <a href="/edit-profile"><strong><%= currentUser.firstName + " " + currentUser.lastName %></strong><img src="<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" /></span></a></li>
                         <li><a href="/logout">Logout</a></li>
                     <% } %>
                 </ul>
