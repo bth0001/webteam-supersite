@@ -11,9 +11,11 @@
                         <div class="container">
                             <div id="tracked">
                                 <p><strong>Name:</strong> <%= tracked.author.firstName %></p>
-                                <p><strong>Package:</strong> <%= tracked.buildPkg %></p>
+                                <p><strong>Date:</strong> <%= tracked.date %></p>
                                 <p><strong>Acct #:</strong> <%= tracked.acctNum %></p>
                                 <p><strong>Completed:</strong> <%= tracked.date %></p>
+                                <p><strong>Package:</strong> <%= tracked.buildPkg %></p>
+                                <p><strong>Starter Template (if applicable):</strong> <%= tracked.starterTemplate %></p>
                                 <p><strong>Special Features:</strong> <%= tracked.specialFeatures %></p>
                                 <p><strong>Domain:</strong> <%= tracked.domain %></p>
                             </div>
