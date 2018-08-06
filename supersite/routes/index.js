@@ -10,7 +10,13 @@ router.get("/", function(req, res){
 });
 
 router.get("/dashboard", isLoggedIn, function(req, res){
-  res.render("dashboard");
+  TeamTracker.find({}, function(err, allTracks){
+    if(err){
+      console.log(err);
+    } else {
+      res.render("dashboard", {tracking: allTracks});
+    }
+  })
 });
 
 router.get("/tracker", isLoggedIn, function(req, res){
@@ -24,7 +30,7 @@ router.get("/tracker", isLoggedIn, function(req, res){
 });
 
 router.post("/tracker", function(req, res){
-  const { acctNum, date, buildPkg, starterTemplate, specialFeatures, domain, server, note, }  = req.body;
+  const { acctNum, date, buildPkg, starterTemplate, specialFeatures, domain, server, note }  = req.body;
   const author = {id: req.user._id, firstName: req.user.firstName};
   var newTrack = {acctNum: acctNum, author: author, date: date, buildPkg: buildPkg, starterTemplate: starterTemplate, specialFeatures: specialFeatures, domain: domain, server: server, note: note};
   TeamTracker.create(newTrack, function(err, newlyTracked){

@@ -21,7 +21,7 @@ const teamTrackerSchema = new mongoose.Schema({
   },
   taskType: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Task"
+    ref: "TaskType"
   },
   buildPkg: {
     type: String
