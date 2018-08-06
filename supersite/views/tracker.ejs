@@ -46,10 +46,17 @@
 <h3 class="pageHeader"><%= currentUser.firstName %>, this is where you will track any of your completed tasks.</h1>
 <div id="tracker">
     <div class="trackerContainer">
-        <!-- <% tracking.forEach(function(tracked){%> -->
-            <%= JSON.stringify(tracking) %>
-            
-        <!-- <% }); %> -->
+
+            <% tracking.forEach(function(tracked){ %>
+                <div class="col-md-12">
+                    <div class="container">
+                        <div id="tracked">
+                             <p><strong><%= tracked.author.firstName %></strong> | <%= tracked.acctNum %> | <%= tracked.date %> | <%= tracked.specialFeatures %> | <%= tracked.domain %></p>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+
         <!-- Trigger/Open The Modal -->
         <button id="myBtn">Track Something</button>
 
@@ -91,7 +98,7 @@
                 <label name="onboarder">On-Boarder:
                     <input type="text" name="onboarder" placeholder="Logic coming later">
                 </label>
-            </div>
+            
             <div>
                 <label class="labelTask" name="taskType">Task:
                     <input type="text" name="taskType" placeholder="Logic coming later">
@@ -103,6 +110,7 @@
                 
                 <button>Submit</button>
             </form>
+        </div>
         </div>
 
         </div>

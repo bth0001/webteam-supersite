@@ -62,6 +62,8 @@ aside#left ul li a.active {background-color:#535C6A; border-radius:20px; color:w
 #main nav.contentNav a {padding:20px 0;}
 nav.contentNav a.active {box-shadow:0 3px 0 0 #8AAEEA; color:#8AAEEA;}
 
+#tracked {border: 1px solid black; padding: 10px 5px;}
+#tracked p {margin: 0;}
 
 /* Form */
 form {background-color:#e8e3e3; box-shadow:1px 1px 10px rgba(0,0,0,0.34); max-width:400px; margin: 30px auto; text-align:center; padding:30px;}
