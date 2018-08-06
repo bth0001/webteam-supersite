@@ -5,6 +5,8 @@ body {background-color:#f3f3f3; }
 #header .container {max-width:85%;}
 #header h1 {color:#fff; margin:0;}
 #header h1 a {color:inherit; text-decoration:none;}
+#header .logo img {opacity: 0.8;}
+#header .logo img:hover {opacity: 1;}
 #header a img {width:35%;}
 #header > div.container {display:flex; align-items:center;}
 #header > div.container > div.logo {flex:1 auto;}
