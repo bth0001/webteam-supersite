@@ -43,10 +43,6 @@ router.post("/tracker", function(req, res){
   });
 });
 
-// router.get("/tracker/new", isLoggedIn, function(req, res){
-//     res.render("trackerNew");
-// })
-
 router.get("/idea-warehouse", function(req, res){
   res.render("idea-warehouse");
 })
@@ -121,55 +117,35 @@ router.get("/logout", function(req, res){
 });
 //==============================================================================
 
-
+//Edit Profile
 router.get("/edit-profile", function(req, res){
   res.render("edit-profile");
 });
 
-
 router.post('/edit-profile', isLoggedIn, function(req, res, next){
-  // User.findById(req.user.id).then(function(sanitizedUser){
-  //     if (sanitizedUser){
-  //         sanitizedUser.setPassword(req.body.password, function(){
-  //             sanitizedUser.save();
-  //             res.status(200).json({message: 'password reset successful'});
-  //         });
-  //     } else {
-  //         res.status(500).json({message: 'This user does not exist'});
-  //     }
-  // },function(err){
-  //     console.error(err);
-  // });
-
   User.findById(req.user.id, function (err, sanitizedUser) {
-
       // todo: don't forget to handle err
-
       if (!sanitizedUser) {
           req.flash('error', 'No account found');
           return res.redirect('/edit-profile');
       }
-
       // good idea to trim 
       var email = req.body.email.trim();
       var firstName = req.body.firstName.trim();
       var lastName = req.body.lastName.trim();
       var profileImageUrl = req.body.profileImageUrl.trim();
       var team = req.body.team.trim();
-
       // validate 
       if (!email || !profileImageUrl || !firstName || !lastName || !team) { // simplified: '' is a falsey
           req.flash('error', 'One or more fields are empty');
           return res.redirect('/edit-profile'); // modified
       }
-
       // no need for else since you are returning early ^
       sanitizedUser.email = email;
       sanitizedUser.firstName = firstName;
       sanitizedUser.lastName = lastName;
       sanitizedUser.profileImageUrl = profileImageUrl;
       sanitizedUser.team = team;
-
       // don't forget to save!
       sanitizedUser.setPassword(req.body.password, function(){
         sanitizedUser.save(function(err){
@@ -183,16 +159,8 @@ router.post('/edit-profile', isLoggedIn, function(req, res, next){
           }
            req.flash("success", "Password reset Successful");
            res.redirect('/dashboard');
-        });
-        // res.status(200).json({message: 'password reset successful'});
-      
+        });  
     });
-      // sanitizedUser.save(function (err) {
-
-      //     // todo: don't forget to handle err
-
-      //     res.redirect('/dashboard');
-      // });
   });
 });
 

@@ -5,22 +5,23 @@
     <div id="stats">
         <h3>View your stats from this month below:</h3><br />
         <div class="statsContainer">
-            <p>
-                <% tracking.forEach(function(tracked){ %>
-                    <div classs="col-md-12">
-                        <div class="container">
-                            <div id="tracked">
-                                <p><strong>Name:</strong> <%= tracked.author.firstName %></p>
-                                <p><strong>Package:</strong> <%= tracked.buildPkg %></p>
-                                <p><strong>Acct #:</strong> <%= tracked.acctNum %></p>
-                                <p><strong>Completed:</strong> <%= tracked.date %></p>
-                                <p><strong>Special Features:</strong> <%= tracked.specialFeatures %></p>
-                                <p><strong>Domain:</strong> <%= tracked.domain %></p>
+            <% if(currentUser){ %>
+                <p><% tracking.forEach(function(tracked){ %>
+                        <div classs="col-md-12">
+                            <div class="container">
+                                <div id="tracked">
+                                    <p><strong>Name:</strong> <%= tracked.author.firstName %></p>
+                                    <p><strong>Package:</strong> <%= tracked.buildPkg %></p>
+                                    <p><strong>Acct #:</strong> <%= tracked.acctNum %></p>
+                                    <p><strong>Completed:</strong> <%= tracked.date %></p>
+                                    <p><strong>Special Features:</strong> <%= tracked.specialFeatures %></p>
+                                    <p><strong>Domain:</strong> <%= tracked.domain %></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <% }); %>
-            </p>
+                    <% }); %>
+                </p>
+        <% }; %>
         </div>
     </div>
     <div id="dashboardLinks">
