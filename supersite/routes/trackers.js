@@ -21,7 +21,7 @@ router.post("/", function(req, res){
       console.log(err)
     } else {
       console.log(newlyTracked);
-      res.redirect("/");
+      res.redirect("/dashboard");
     }
   });
 });
