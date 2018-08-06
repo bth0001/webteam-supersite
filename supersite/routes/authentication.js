@@ -93,7 +93,7 @@ router.get("/signup", function(req, res){
               }
               return res.status(500).send(err);
             }
-             req.flash("success", "Password reset Successful");
+             req.flash("success", "Successful Updated Your Profile");
              res.redirect('/dashboard');
           });
       });
