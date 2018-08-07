@@ -19,10 +19,11 @@
     /* Modal Content/Box */
     .modal-content {
         background-color: transparent;
-        margin: 5% auto; /* 5% from the top and centered */
+        margin: 2% auto 4%; 
         padding: 0;
         border: none;
-        width: 80%; /* Could be more or less, depending on screen size */
+        max-width: 60%; /* Could be more or less, depending on screen size */
+        
     }
     
     /* The Close Button */
@@ -89,6 +90,7 @@
                <div class="form-group">
                     <label name="designer">Designer:
                             <select name="designer">
+                                    <option value="Select Designer" selected>Select Designer</option>
                                     <option value="NA">N/A</option> <!-- If site is a Starter -->
                                     <option value="Garo">Garo</option>
                                     <option value="Jodi">Jodi</option>
@@ -100,6 +102,7 @@
     
                     <label name="onboarder">On-Boarder:
                             <select name="onboarder">
+                                    <option value="Select On-Boarder" selected>Select On-Boarder</option>
                                     <option value="Rachel">Rachel</option>
                                     <option value="Stacey">Stacey</option>
                                     <option value="Denise">Denise</option>
@@ -109,7 +112,7 @@
                     </div> <!-- end of form-group -->
 
                 <div class="form-group">
-                <label name="buildPkg">Package:
+                <label name="buildPkg">Build Package:
                     <select name="buildPkg" id="buildPkg">
                             <option value="Select Build Package" selected>Select Build Package</option>
                         <option value="Essential">Essential</option>
@@ -117,9 +120,9 @@
                     </select>
                 </label>
 
-                <label name="starterTemplate" class="ifStarter">Starter Template
+                <label name="starterTemplate" class="ifStarter">Starter Template:
                     <select name="starterTemplate">
-                            <option value="Select Starter Template">Select Starter Template</option>
+                            <option value="Select Template">Select Template</option>
                         <option value="Neverland">Neverland</option>
                         <option value="Atlantis">Atlantis</option>
                         <option value="Camelot">Camelot</option>
@@ -131,7 +134,6 @@
             <div class="form-group">
                     <label name="specialFeatures" class="ifEssential">Special Features:
                             <select name="specialFeatures" multiple>
-                                    <option value="Breadcrumbs">Select as Many Special Features as Needed</option>
                                 <option value="Breadcrumbs">Breadcrumbs</option>
                                 <option value="Interior Featured Image">Interior Featured Image</option>
                                 <option value="Mega Menu">Mega Menu</option>
@@ -142,18 +144,7 @@
                             </select>
                         </label>
                     </div> <!-- end of form-group -->
-<!-- 
-            <fieldset name="specialFeatures" class="ifEssential">
-                    <legend>Special Features:</legend>
-                    <label for="Breadcrumbs"> <input id="Breadcrumbs" name="Breadcrumbs" type="checkbox" value="Yes" />Breadcrumbs</label>
-                    <label for="Interior-Featured-Image"> <input id="Interior-Featured-Image" name="Interior-Featured-Image" type="checkbox" value="Yes" />Interior Featured Image</label>
-                    <label for="Mega-Menu"> <input id="Mega-Menue" name="Mega-Menu" type="checkbox" value="Yes" />Mega Menu</label>
-                    <label for="Object-Fit"> <input id="Object-Fit" name="Object-Fit" type="checkbox" value="Yes" />Object Fit</label>
-                    <label for="Shrinky-Header"> <input id="Shrinky-Header" name="Shrinky-Header" type="checkbox" value="Yes" />Shrinky Header</label>
-                    <label for="Search-Bar"> <input id="Search-Bar" name="Search-Bar" type="checkbox" value="Yes" />Search Bar</label>
-                    <label for="Scroll-Effects"> <input id="Scroll-Effects" name="Scroll-Effects" type="checkbox" value="Yes" />Scroll Effects</label>
-                    </fieldset>
-                </div> -->
+
 
                 <div class="form-group">
                 <label name="domain">Domain:
@@ -161,7 +152,6 @@
                 </label>
                 </div> <!-- end of form-group -->
 
-              
 
                 <div class="form-group">
                 <label class="labelTask" name="taskType">Task:
