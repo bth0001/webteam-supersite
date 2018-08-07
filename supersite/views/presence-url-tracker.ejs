@@ -1,11 +1,28 @@
 <% include partials/header %>
 
+<style>
+#presenceTracker div.trackedurl {padding: 20px;border: 1px solid #252525;display:  flex; align-items: center;}
+#presenceTracker div.trackedurl:nth-of-type(even) {background-color: #eee;}
+#presenceTracker div.trackedurl:nth-of-type(odd) {background-color: #e6e4e4;}
+#presenceTracker div.trackedurl > div.left {flex: 1 50%; text-align: left;}
+#presenceTracker div.trackedurl > div.right {flex: 1 50%; text-align: right;}
+</style>
+
 <a href="/dashboard">&larr; Back to Dashboard</a><br /><br />
 
 <h3 class="pageHeader"><%= currentUser.firstName %>, this is the Presence URL Tracker for Essential builds.  This is the easiest way to keep up with site build URLs.</h1>
 <div id="presenceTracker">
-    <div class="presneceTrackerContainer">
-        <p>Presence URLs will go here.</p>
+    <a id="count"></a>
+    <div class="presenceTrackerContainer">
+        <% tracking.forEach(function(tracked){ %>
+            <div class="trackedurl">
+                <div class="left"><h4> Added by: <strong><%= tracked.author.firstName %></strong></h4>
+                    <p> Date: <em><%= tracked.date %></em></p></div>
+                <div class="right">
+                   <p><a href="http://<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></p>
+            </div>
+            </div>
+        <% }); %>
     </div>
 </div>
 
