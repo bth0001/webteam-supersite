@@ -19,28 +19,36 @@
     /* Modal Content/Box */
     .modal-content {
         background-color: transparent;
-        margin: 2% auto 4%; 
+        margin: 3% auto; 
         padding: 0;
         border: none;
         max-width: 60%; /* Could be more or less, depending on screen size */
         
     }
     
+    /* Exit form */
+    .form-exit {display: flex; font-size: 1em; margin: 0 0 10px;}
+
     /* The Close Button */
     .close {
-        color: rgba(255,255,255,0.7);
-        font-size: 48px;
+        opacity:1;
+        color: rgba(0,0,0,0.6);
+        font-size: 3em;
         font-weight: bold;
         text-align: right;
+        float:none;
+        width:100%;
+        line-height:.5em;   
+        text-shadow:none;
     }
     
     .close:hover,
     .close:focus {
-        color: white;
+        color: rgba(0,0,0,0.9);
         text-decoration: none;
         cursor: pointer;
     }
-    .close:not(:disabled):not(.disabled):focus, .close:not(:disabled):not(.disabled):hover {color:white}
+    .close:not(:disabled):not(.disabled):focus, .close:not(:disabled):not(.disabled):hover {color:rgba(0,0,0,0.9)}
     #myBtn {margin: 10px 0;}
     </style>
 
@@ -67,9 +75,12 @@
 
         <!-- Modal content -->
         <div class="modal-content">
-            <span class="close">&times;</span>
+            
             <div>
             <form class="trackerForm" action="/tracker" method="POST">
+
+               <div class="form-exit"> <span class="close">&times;</span></div>
+
                 <div class="form-group">
                 <label name="date">Date:
                     <input type="date" name="date" />
