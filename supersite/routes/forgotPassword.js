@@ -48,17 +48,17 @@ router.get('/forgot', function(req, res) {
           host: "smtp.gmail.com",
           auth: {
             type: "OAuth2",
-            user: 'haneyjustin39301@gmail.com',
-            clientId: "961175264707-1hgvgj6hrekhmvedrm20qhbi3j9jt1vj.apps.googleusercontent.com",
-            clientSecret: "bm8CRwSb2SxQ3pE_twA74LD_",
-            refreshToken: "1/vUk8ReSaxeZ_EB9hK-_EJc5K_4hlIvmQEeiyStX3Rxc"
+            user: 'televox17@gmail.com',
+            clientId: "97383977732-n0uib97f2pn1ahlt9vts8jt1hvkqfhc1.apps.googleusercontent.com",
+            clientSecret: "jhVxWCz8vtKj4x8tqg2xoqwn",
+            refreshToken: "1/22_T0sn9-4MR_gib7OSAbQv0AZlp1_YRsRT6d9NvtlVZcNxnciwUfDO9M1RAZ8-m"
           
           }
         });
         var mailOptions = {
           to: user.email,
-          from: 'haneyjustin39301@gmail.com',
-          subject: 'Node.js Password Reset',
+          from: 'televox17@gmail.com',
+          subject: 'WebTeam SuperSite Password Reset',
           text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
             'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
             'http://' + req.headers.host + '/reset/' + token + '\n\n' +
@@ -111,15 +111,15 @@ router.get('/forgot', function(req, res) {
           host: "smtp.gmail.com",
           auth: {
             type: "OAuth2",
-            user: 'haneyjustin39301@gmail.com',
-            clientId: "961175264707-1hgvgj6hrekhmvedrm20qhbi3j9jt1vj.apps.googleusercontent.com",
-            clientSecret: "bm8CRwSb2SxQ3pE_twA74LD_",
-            refreshToken: "1/vUk8ReSaxeZ_EB9hK-_EJc5K_4hlIvmQEeiyStX3Rxc"
+            user: 'televox17@gmail.com',
+            clientId: "97383977732-n0uib97f2pn1ahlt9vts8jt1hvkqfhc1.apps.googleusercontent.com",
+            clientSecret: "jhVxWCz8vtKj4x8tqg2xoqwn",
+            refreshToken: "1/22_T0sn9-4MR_gib7OSAbQv0AZlp1_YRsRT6d9NvtlVZcNxnciwUfDO9M1RAZ8-m"
           }
         });
         var mailOptions = {
           to: user.email,
-          from: 'haneyjustin39301@gmail.com',
+          from: 'televox17@gmail.com',
           subject: 'Your password has been changed',
           text: 'Hello,\n\n' +
             'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
