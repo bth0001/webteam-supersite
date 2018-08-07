@@ -35,6 +35,9 @@ const teamTrackerSchema = new mongoose.Schema({
   domain: {
     type: String
   },
+  cssPath: {
+    type: String
+  },
   server: {
     type: String
   },

@@ -19,9 +19,9 @@ router.get("/", isLoggedIn, function(req, res){
 });
 
 router.post("/", function(req, res){
-  const { acctNum, date, buildPkg, starterTemplate, specialFeatures, domain, server, note }  = req.body;
+  const { acctNum, date, buildPkg, starterTemplate, specialFeatures, domain, cssPath, server, note }  = req.body;
   const author = {id: req.user._id, firstName: req.user.firstName};
-  var newTrack = {acctNum: acctNum, author: author, date: date, buildPkg: buildPkg, starterTemplate: starterTemplate, specialFeatures: specialFeatures, domain: domain, server: server, note: note};
+  var newTrack = {acctNum: acctNum, author: author, date: date, buildPkg: buildPkg, starterTemplate: starterTemplate, specialFeatures: specialFeatures, domain: domain, cssPath: cssPath, server: server, note: note};
   TeamTracker.create(newTrack, function(err, newlyTracked){
     if(err){
       console.log(err)

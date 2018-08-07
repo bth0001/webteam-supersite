@@ -132,8 +132,8 @@
                 </label>
 
                 <label name="starterTemplate" class="ifStarter">Starter Template:
-                    <select name="starterTemplate">
-                            <option value="Select Template">Select Template</option>
+                    <select name="starterTemplate" class="starterClearInput">
+                        <option value="Select Template">Select Template</option>
                         <option value="Neverland">Neverland</option>
                         <option value="Atlantis">Atlantis</option>
                         <option value="Camelot">Camelot</option>
@@ -144,7 +144,7 @@
 
             <div class="form-group">
                     <label name="specialFeatures" class="ifEssential">Special Features:
-                            <select name="specialFeatures" multiple>
+                            <select name="specialFeatures" class="essentialClearInput" multiple>
                                 <option value="Breadcrumbs">Breadcrumbs</option>
                                 <option value="Interior Featured Image">Interior Featured Image</option>
                                 <option value="Mega Menu">Mega Menu</option>
@@ -161,8 +161,12 @@
                 <label name="domain">Domain:
                     <input type="text" name="domain" placeholder="Domain">
                 </label>
-                </div> <!-- end of form-group -->
 
+                <label name="cssPath" class="ifEssential">CSS Path:
+                        <input type="text" name="cssPath" placeholder="CSS Path" class="essentialClearInput">
+                </label>
+                </div> <!-- end of form-group -->
+        
 
                 <div class="form-group">
                 <label class="labelTask" name="taskType">Task:
@@ -210,27 +214,34 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-
-      $('.ifEssential').hide();
+        // Logic for hiding/showing tracker form fields
+        // Hide Special Features, Starter Template and CSS Path inputs initially
+        $('.ifEssential').hide();
         $('.ifStarter').hide();
         
         $(function() {
         $('#buildPkg').on('change', function(){
+            // If Build Package selection is "Essential" then show Special Features and CSS Path fields
+            // Reset to default selection for Starter Template dropdown
             if ($(this).val() === 'Essential'){
             $('.ifEssential').show();
+            $('.starterClearInput').prop('selectedIndex',0);
         }  
-        
-        
+         
         else {
+            // If "Essential" is not chosen then keep associated fields hidden
             $('.ifEssential').hide();
         }
 
+            // If Build Package selection is "Starter" then show Starter Template dropdown
+            // Reset to selections/input fields for Special Features and CSS Path
             if ($(this).val() === 'Starter'){
             $('.ifStarter').show();
+            $('.essentialClearInput').val("");
         }  
         
-        
         else {
+            // If "Starter" is not chosen then keep associated fields hidden
             $('.ifStarter').hide();
         }
         });
