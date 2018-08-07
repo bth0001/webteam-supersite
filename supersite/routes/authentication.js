@@ -51,11 +51,18 @@ router.get("/signup", function(req, res){
   //Logout route
   router.get("/logout", function(req, res){
     req.logout();
-    req.flash("success", "Logged you out!");
+    req.flash("success", "Your have successfully logged out!");
     res.redirect("/login");
   });
   //==============================================================================
   
+  // EDIT Task
+  router.get("/edit-task", isLoggedIn, function(req, res){
+    res.render("edit-task");
+  });
+
+  //==============================================================================
+
   // EDIT Profile
   router.get("/edit-profile", isLoggedIn, function(req, res){
     res.render("edit-profile");
@@ -89,12 +96,12 @@ router.get("/signup", function(req, res){
           sanitizedUser.save(function(err){
             if (err) {
               if (err.name === 'MongoError' && err.code === 11000) {
-                req.flash("error", "Email already in use");
+                req.flash("error", "This email address is already in use.");
                 return res.redirect("/edit-profile");
               }
               return res.status(500).send(err);
             }
-             req.flash("success", "Successful Updated Your Profile");
+             req.flash("success", "Your profile has successfully been updated.");
              res.redirect('/dashboard');
           });
       });
