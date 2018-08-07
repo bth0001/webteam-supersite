@@ -5,6 +5,7 @@ var localStrategy = require("passport-local");
 var session = require("express-session");
 var User = require("../models/user");
 
+
 //Register form route
 router.get("/signup", function(req, res){
     res.render("signup")
@@ -80,8 +81,8 @@ router.get("/signup", function(req, res){
         var profileImageUrl = req.body.profileImageUrl.trim();
         var team = req.body.team.trim();
         // validate 
-        if (!email || !profileImageUrl || !firstName || !lastName || !team) { // simplified: '' is a falsey
-            req.flash('error', 'One or more fields are empty.');
+        if (!email || !firstName || !lastName || !team) { // simplified: '' is a falsey
+            req.flash('error', 'One or more fields are empty');
             return res.redirect('/edit-profile'); // modified
         }
         // no need for else since you are returning early ^
@@ -107,13 +108,14 @@ router.get("/signup", function(req, res){
     });
   });
 
-  //middleware
-  function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
+  
+    //middleware
+    function isLoggedIn(req, res, next){
+      if(req.isAuthenticated()){
+          return next();
+      }
+      req.flash("error", "Please Login First!");
+      res.redirect("/login");
     }
-    req.flash("error", "Please log in first!");
-    res.redirect("/login");
-  }
-
-  module.exports = router;
+  
+    module.exports = router;

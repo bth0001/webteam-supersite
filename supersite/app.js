@@ -7,6 +7,13 @@ var bodyParser = require("body-parser");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var session = require("express-session");
+var nodemailer = require('nodemailer');
+var bcrypt = require('bcrypt-nodejs');
+var async = require('async');
+var crypto = require('crypto');
+var smtpTransport = require('nodemailer-smtp-transport');
+var xoauth2 = require('xoauth2');
+
 // Required Files
 var db = require("./models/index")
 var User = require("./models/user");
@@ -14,6 +21,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var trackerRoutes = require('./routes/trackers');
 var authRoutes = require('./routes/authentication');
+var resetRoutes = require('./routes/forgotPassword');
 var dashboardRouter = require('./routes/dashboard');
 var ideaWarehouseRouter = require('./routes/idea-warehouse');
 var hatsOffRouter = require('./routes/hats-off');
@@ -21,6 +29,8 @@ var presenceUrlTracker = require('./routes/presence-url-tracker');
 var blueprintGenerator = require('./routes/blueprint-generator');
 var checklist = require('./routes/checklist');
 var projectsTracker = require('./routes/projects-tracker');
+
+
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -37,11 +47,36 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(User.createStrategy({
-  passReqToCallback : true
+// passport.use(User.createStrategy({
+//   passReqToCallback : true
+// }));
+passport.use(User.createStrategy(function(email, password, done) {
+  User.findOne({ email: email }, function(err, user) {
+    if (err) return done(err);
+    if (!user) return done(null, false, { message: 'Incorrect email.' });
+    user.comparePassword(password, function(err, isMatch) {
+      if (isMatch) {
+        return done(null, user);
+      } else {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+    });
+  });
 }));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
+
+
+
 //==============================================================================
 
 app.use(function(req, res, next){
@@ -54,7 +89,8 @@ app.use(function(req, res, next){
 // ----For Route Files----start
 app.use('/', [
   indexRouter,
-  authRoutes
+  authRoutes,
+  resetRoutes
 ]);
 
 app.use('/tracker', trackerRoutes);
@@ -67,5 +103,12 @@ app.use('/blueprint-generator', blueprintGenerator);
 app.use('/checklist', checklist);
 app.use('/projects-tracker', projectsTracker);
 // ----For Route Files----end
+
+app.get('/forgot', function(req, res) {
+  res.render('forgot', {
+    user: req.user
+  });
+});
+
 
 module.exports = app;

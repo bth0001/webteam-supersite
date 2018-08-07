@@ -1,15 +1,21 @@
 var express = require("express");
 var router = express.Router({mergeParams: true});
 var TeamTracker = require("../models/teamTracker");
+var User = require("../models/user");
 
 router.get("/", isLoggedIn, function(req, res){
   TeamTracker.find({}, function(err, allTracks){
+    User.find({}, function(err, allUsers){
     if(err){
       console.log(err);
     } else {
-      res.render("tracker", {tracking: allTracks});
+      res.render("tracker", {
+        tracking: allTracks,
+        users: allUsers
+      });
     }
   })
+})
 });
 
 router.post("/", function(req, res){
