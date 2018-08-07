@@ -1,37 +1,32 @@
 <% include partials/header %>
 <div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="thumbnail">
-                <img onerror="this.src='http://webplus.televoxsites.com/projects/supersite/web.jpg'" style="border: 2px solid #252525;" src="<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName%>"/>
-                
-            </div>
-        </div>
-        <div class="col-md-9">
-            <h1>Edit Profile</h1>
-            <form class="profileForm" action="/edit-profile" method="POST">
-                <input type="text" name="firstName" placeholder="First Name" value="<%= currentUser.firstName %>">
-                <input type="text" name="lastName" placeholder="Last Name"  value="<%= currentUser.lastName %>">
-                <input type="password" name="password" placeholder="Password">
-                <input type="text" name="email" placeholder="Email"  value="<%= currentUser.email %>">
-                <input type="text" name="profileImageUrl" placeholder="profileImageUrl"  value="<%= currentUser.profileImageUrl %>">
-                <select name="team" >
-                    
-                    <option value="<%= currentUser.team %>"><%= currentUser.team %></option>
-                    <option value="Developer">Developer</option>
-                    <option value="Designer">Designer</option>
-                    <option value="Copy Writer">Copy Writer</option>
-                    <option value="On-Boarder">On-Boarder</option>
-                    <option value="Web Techs">Web Techs</option>
-                    <option value="Web CSI">Web CSI</option>
-                </select>
-                <button>Update Profile</button>
-            </form>
-        </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="thumbnail">
+        <img onerror="this.src='http://webplus.televoxsites.com/projects/supersite/web.jpg'" style="border: 2px solid #252525;" src="<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName%>"/>
+      </div>
     </div>
-
+    <div class="col-md-9">
+      <h1>Edit Profile</h1>
+      <form class="profileForm" action="/edit-profile" method="POST">
+        <input type="text" name="firstName" placeholder="First Name" value="<%= currentUser.firstName %>">
+        <input type="text" name="lastName" placeholder="Last Name"  value="<%= currentUser.lastName %>">
+        <input type="password" name="password" placeholder="Password">
+        <input type="text" name="email" placeholder="Email"  value="<%= currentUser.email %>">
+        <input type="text" name="profileImageUrl" placeholder="profileImageUrl"  value="<%= currentUser.profileImageUrl %>">
+        <select name="team" >
+          <option value="<%= currentUser.team %>"><%= currentUser.team %></option>
+          <option value="Developer">Developer</option>
+          <option value="Designer">Designer</option>
+          <option value="Copy Writer">Copy Writer</option>
+          <option value="On-Boarder">On-Boarder</option>
+          <option value="Web Techs">Web Techs</option>
+          <option value="Web CSI">Web CSI</option>
+        </select>
+        <button>Update Profile</button>
+      </form>
+    </div>
+  </div>
 </div>
-
-
 
 <% include partials/footer %>

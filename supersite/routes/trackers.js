@@ -26,11 +26,11 @@ router.post("/", function(req, res){
   });
 });
   
-  function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login")
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect("/login")
 }
 
-  module.exports = router;
+module.exports = router;
