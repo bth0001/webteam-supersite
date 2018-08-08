@@ -20,21 +20,22 @@
         <div class="form-group">
           <label name="designer">Designer:
             <select name="designer">
-              <option value="Select Designer" selected>Select Designer</option>
-              <option value="NA">N/A</option> <!-- If site is a Starter -->
-              <option value="Garo">Garo</option>
-              <option value="Jodi">Jodi</option>
-              <option value="Michael">Michael</option>
-              <option value="Nick">Nick</option>
-              <option value="Yogesh">Yogesh</option>
+              <option value="" selected>Select Designer</option>
+                  <% users.forEach(function(user){ %>
+                      <% if(user.team == 'Designer') { %>
+                          <option value="<%= user.firstName %>"><%= user.firstName %></option>
+                      <% } %>
+                  <% }); %>
             </select>
           </label>
           <label name="onboarder">On-Boarder:
             <select name="onboarder">
-              <option value="Select On-Boarder" selected>Select On-Boarder</option>
-              <option value="Rachel">Rachel</option>
-              <option value="Stacey">Stacey</option>
-              <option value="Denise">Denise</option>
+                <option value="" selected>Select On-Boarder</option>
+                <% users.forEach(function(user){ %>
+                  <% if(user.team == 'On-Boarder') { %>
+                      <option value="<%= user.firstName %>"><%= user.firstName %></option>
+                  <% } %>
+              <% }); %>
             </select>
           </label>
         </div> <!-- end of form-group -->
