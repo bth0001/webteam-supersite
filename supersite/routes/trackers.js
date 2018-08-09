@@ -22,11 +22,11 @@ router.get("/", isLoggedIn, function(req, res){
 
 //POST new teamTracked
 router.post("/", isLoggedIn, function(req, res){
-  var { acctNum, date, buildPkg, starterTemplate, specialFeatures, domain, cssPath, server, notes, onboarder, designer, tasks}  = req.body;
+  var { acctNum, date, buildPkg, starterTemplate, specialFeatures, domain, cssPath, server, notes, onboarder, designer, taskType}  = req.body;
   var author = {id: req.user._id, firstName: req.user.firstName};
   
   // const task = {id: req.taskType.id, taskName: req.taskType.name};
-  var newTrack = {acctNum: acctNum, author: author, date: date, buildPkg: buildPkg, starterTemplate: starterTemplate, specialFeatures: specialFeatures, domain: domain, cssPath: cssPath, server: server, notes: notes, onboarder: onboarder, designer: designer};
+  var newTrack = {acctNum: acctNum, author: author, date: date, buildPkg: buildPkg, starterTemplate: starterTemplate, specialFeatures: specialFeatures, domain: domain, cssPath: cssPath, server: server, notes: notes, onboarder: onboarder, designer: designer, taskType: taskType};
   TeamTracker.create(newTrack, function(err, newlyTracked){
     if(err){
       console.log(err)
@@ -50,7 +50,7 @@ router.get("/:id", isLoggedIn, function(req, res){
     TeamTracker.findById(req.params.id).exec(function(err, allTracks){
       User.find({}, function(err, allUsers){
        if(err) {
-           console.log(err);
+         console.log(err);
        } else {
            console.log(allTracks);
          //render show template with that campground

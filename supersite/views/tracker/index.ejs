@@ -37,7 +37,7 @@
 							</label>
 							<label name="acctNum" />
 							Account Number:
-							<input type="number" name="acctNum" placeholder="######" >
+							<input type="number" required name="acctNum" placeholder="######" >
 							</label>
 						</div>
 						<!-- end of form-group -->
@@ -122,10 +122,12 @@
 						</div>
 						<!-- end of form-group -->
 						
-						<div class="form-group">
+						<div class="form-group" id="task">
 							<label class="labelTask" name="taskType">Task:
+								<button type='button' id='addTask'>+</button>
 								<input type="text" name="taskType" placeholder="Logic coming later">
 							</label>
+							
 						</div>
 						<!-- end of form-group -->
 						
@@ -142,14 +144,15 @@
 			</div>
 		</div>
 	</div>
+	
 	<% function countEssential() { %>
 	<% var essCount = 0; var strCount = 0; %>
 	<% tracking.forEach(function(tracked){ %>
 	<% if(currentUser.firstName === tracked.author.firstName) { %>
-	<% if(tracked.buildPkg === "Starter"){ %>
+	<% if(tracked.buildPkg === "Starter" && tracked.taskType === "Site Build"){ %>
 	<% strCount++ %>
 	<% } %>
-	<% if(tracked.buildPkg === "Essential"){ %>
+	<% if(tracked.buildPkg === "Essential" && tracked.taskType === "Site Build"){ %>
 	<% essCount++ %>
 	<% } %>
 	<% } %>
@@ -282,5 +285,29 @@ else {
 }
 });
 });	
+$(document).ready(function(){
+    var counter = 2;
+    $("#addTask").click(function () {				
+		if(counter > 10){
+				alert("Only 10 textboxes allow");
+				return false;
+		}   
+		var newTaskInput = $(document.createElement('label'))
+			 .attr("id", '<% tracking.taskType %>');         
+		newTaskInput.after().html('<input type="text" name="taskType' + counter + 
+			  '" id="taskType' + counter + '" value="" >');   
+		newTaskInput.appendTo("#task");			
+		counter++;
+     });
+	
+     $("#removeButton").click(function () {
+		if(counter==1){
+		  alert("No more textbox to remove");
+		  return false;
+	   	}   
+		counter--;			
+		$("#TextBoxDiv" + counter).remove();
+	 });
+	});
 </script>
 <% include ../partials/footer %>

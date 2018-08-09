@@ -41,7 +41,7 @@
             <% var essCount = 0; var strCount = 0; %>
               <% tracking.forEach(function(tracked){ %>
                 <% if(currentUser.firstName === tracked.author.firstName) { %>
-                  <% if(tracked.buildPkg === "Starter"){ %>
+                  <% if(tracked.buildPkg === "Starter" && tracked.taskType === "Site Build"){ %>
                     <% strCount++ %>
                       <!-- <div classs="col-md-12">
                         <div class="container">
@@ -78,7 +78,7 @@
                       </div> -->
 
                     <% } %>
-                    <% if(tracked.buildPkg === "Essential"){ %>
+                    <% if(tracked.buildPkg === "Essential" && tracked.taskType === "Site Build"){ %>
                       <% essCount++ %>
                     <% } %>
                   <% } %>

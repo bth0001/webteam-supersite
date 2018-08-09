@@ -42,7 +42,7 @@
         </div> <!-- end of form-group -->
         <div class="form-group">
           <label name="tracking[buildPkg]">Build Package:
-            <select name="tracking[buildPkg]">
+            <select name="tracking[buildPkg]" id="buildPkg">
                 <option value="<%= tracking.buildPkg %>"><%= tracking.buildPkg %></option>
                 <% if(tracking.buildPkg === "Essential") { %>
                   <option value="Starter">Starter</option>
@@ -52,6 +52,7 @@
                 <% } %>
             </select>
           </label>
+          <% if(tracking.buildPkg === "Starter") { %>
           <label name="tracking[starterTemplate]" class="ifStarter">Starter Template:
             <select name="tracking[starterTemplate]">
               <option value="<%= tracking.starterTemplate %>"><%= tracking.starterTemplate %></option>
@@ -62,20 +63,23 @@
               <option value="Olympus">Olympus</option>
             </select>
           </label>
+          <% } %>
         </div> <!-- end of form-group -->
         <div class="form-group">
+          <% if(tracking.buildPkg === "Essential") { %>
           <label name="tracking[specialFeatures]" class="ifEssential">Special Features:
             <select name="tracking[specialFeatures]" multiple >
-              <option value="<%= tracking.specialFeatures %>"><%= tracking.specialFeatures %></option>
-              <option value="Breadcrumbs">Breadcrumbs</option>
-              <option value="Interior Featured Image">Interior Featured Image</option>
-              <option value="Mega Menu">Mega Menu</option>
-              <option value="Object Fit">Object Fit</option>
-              <option value="Shrinky Header">Shrinky Header</option>
-              <option value="Search Bar">Search Bar</option>
-              <option value="Scroll Efects">Scroll Effects</option>
+              <option value="<%= tracking.specialFeatures %>" selected><%= tracking.specialFeatures %></option>
+              <option value=" Breadcrumbs">Breadcrumbs</option>
+              <option value=" Interior Featured Image">Interior Featured Image</option>
+              <option value=" Mega Menu">Mega Menu</option>
+              <option value=" Object Fit">Object Fit</option>
+              <option value=" Shrinky Header">Shrinky Header</option>
+              <option value=" Search Bar">Search Bar</option>
+              <option value=" Scroll Efects">Scroll Effects</option>
             </select>
           </label>
+          <% } %>
         </div> <!-- end of form-group -->
         <div class="form-group">
           <label name="tracking[domain]">Domain:
@@ -97,5 +101,42 @@
     </div>
   </div>
 </div>
+<script>
+$(document).ready(function(){
 
+
+// Logic for hiding/showing tracker form fields
+// Hide Special Features, Starter Template and CSS Path inputs initially
+// $('.ifEssential').hide();
+// $('.ifStarter').hide();
+
+// $(function() {
+$('#buildPkg').on('change', function(){
+    // If Build Package selection is "Essential" then show Special Features and CSS Path fields
+    // Reset to default selection for Starter Template dropdown
+    if ($(this).val() === 'Essential'){
+    $('.ifEssential').show();
+    $('.starterClearInput').prop('selectedIndex',0);
+}  
+  
+else {
+    // If "Essential" is not chosen then keep associated fields hidden
+    $('.ifEssential').hide();
+}
+
+    // If Build Package selection is "Starter" then show Starter Template dropdown
+    // Reset to selections/input fields for Special Features and CSS Path
+    if ($(this).val() === 'Starter'){
+    $('.ifStarter').show();
+    $('.essentialClearInput').val("");
+}  
+
+else {
+    // If "Starter" is not chosen then keep associated fields hidden
+    $('.ifStarter').hide();
+}
+});
+});	
+// });
+</script>
 <% include ../partials/footer %>
