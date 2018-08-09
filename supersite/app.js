@@ -13,6 +13,7 @@ var async = require('async');
 var crypto = require('crypto');
 var smtpTransport = require('nodemailer-smtp-transport');
 var xoauth2 = require('xoauth2');
+var methodOverride = require("method-override");
 
 // Required Files
 var db = require("./models/index")
@@ -30,11 +31,11 @@ var blueprintGenerator = require('./routes/blueprint-generator');
 var checklist = require('./routes/checklist');
 var projectsTracker = require('./routes/projects-tracker');
 
-
-
 // view engine setup
 app.set('view engine', 'ejs');
+app.set('debug', true);
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(flash());

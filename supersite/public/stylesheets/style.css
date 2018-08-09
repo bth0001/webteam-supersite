@@ -1,4 +1,4 @@
-body {background-color:#f3f3f3; }
+body {background-color: #d0cdcd; }
 
 /*header */
 #header {background-color:#252525; padding:10px 0; margin:0 0 50px;}
@@ -51,7 +51,8 @@ h1.pageHeader {text-align:center; font-family:monospace; overflow:hidden; /* Ens
 #dashboard {margin:50px 0;}
 #dashboardLinks, #stats {margin:0 auto; max-width:1100px;}
 .dashboardLinksContainer, .statsContainer {display:flex; flex-flow:row wrap;}
-.dashboardLinksContainer a {flex:1 auto; max-width:50%; text-align:center;}
+.dashboardLinksContainer .galleryMenu {display: flex; flex-wrap: wrap; justify-content: center; align-content: center; flex: 1;}
+.dashboardLinksContainer .galleryMenu a {display: flex; flex-wrap: wrap; justify-content: center; text-align: center;}
 .dashboardLinksContainer a img {height:128px; width:128px;}
 
 #mainSection {display:flex; flex-wrap:wrap;}
@@ -68,6 +69,14 @@ nav.contentNav a.active {box-shadow:0 3px 0 0 #8AAEEA; color:#8AAEEA;}
 
 #tracked {border: 1px solid black; padding: 10px 5px;}
 #tracked p {margin: 0;}
+
+/*Tracker*/
+#tracker #stats {margin:0 auto; max-width:1100px; display: flex; flex-wrap: wrap;}
+#essTracked, #strTracked {flex: 1; margin: 10px 0 30px;}
+#tracker #tracked {margin: 10px 0;}
+
+#delete-form {background-color: transparent; box-shadow: none; padding: 0; margin: 0; display: inline-block;}
+#delete-form button {margin: 0;}
 
 /* Form */
 form {background-color:#e8e3e3; box-shadow:1px 1px 10px rgba(0,0,0,0.34); max-width:400px; margin: 30px auto; text-align:center; padding:30px;}

@@ -15,13 +15,17 @@
     <a id="count"></a>
     <div class="presenceTrackerContainer">
         <% tracking.forEach(function(tracked){ %>
+            <% if(tracked.buildPkg === "Essential"){ %>
             <div class="trackedurl">
                 <div class="left"><h4> Added by: <strong><%= tracked.author.firstName %></strong></h4>
-                    <p> Date: <em><%= tracked.date %></em></p></div>
+                    <p> Date: <em><%= tracked.date %></em></p>
+                    <p> CSS Path: <%= tracked.cssPath %></p>
+                </div>
                 <div class="right">
                    <p><a href="http://<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></p>
             </div>
             </div>
+            <% } %>
         <% }); %>
     </div>
 </div>

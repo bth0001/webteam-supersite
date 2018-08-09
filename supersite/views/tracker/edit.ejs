@@ -1,0 +1,101 @@
+<% include ../partials/header %>
+<div class="container">
+  <div class="row">
+      <p><a href="/tracker">&larr; Back to Tracker</a></p>
+    <div class="col-md-12">
+      <h1>Edit Task</h1>
+      <form class="trackerForm" action="/tracker/<%= tracking._id %>?_method=PUT" method="POST">
+        <div class="form-group">
+          <label name="date">Date:
+            <input type="date" name="tracking[date]" required value="<%= tracking.date %>" />
+          </label>
+          <label name="acctNum" />Account Number:
+            <input type="number" name="tracking[acctNum]" value="<%= tracking.acctNum %>" >
+          </label>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <label name="username">Developer:
+            <input type="text" name="tracking[username]" value="<%= currentUser.firstName %>" />
+          </label>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <label name="tracking[designer]">Designer:
+            <select name="tracking[designer]">
+                <option value="None">None</option>
+                 <% users.forEach(function(user){ %>
+                      <% if(user.team == 'Designer') { %>
+                          <option value="<%= user.firstName %>"><%= user.firstName %></option>
+                      <% } %>
+                  <% }); %>
+            </select>
+          </label>
+          <label name="tracking[onboarder]">On-Boarder:
+            <select name="tracking[onboarder]">
+                <option value="None">None</option>
+                <% users.forEach(function(user){ %>
+                  <% if(user.team == 'On-Boarder') { %>
+                      <option value="<%= user.firstName %>"><%= user.firstName %></option>
+                  <% } %>
+              <% }); %>
+            </select>
+          </label>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <label name="tracking[buildPkg]">Build Package:
+            <select name="tracking[buildPkg]">
+                <option value="<%= tracking.buildPkg %>"><%= tracking.buildPkg %></option>
+                <% if(tracking.buildPkg === "Essential") { %>
+                  <option value="Starter">Starter</option>
+                  <% } %>
+                <% if(tracking.buildPkg === "Starter") { %>
+                  <option value="Essential">Essential</option>
+                <% } %>
+            </select>
+          </label>
+          <label name="tracking[starterTemplate]" class="ifStarter">Starter Template:
+            <select name="tracking[starterTemplate]">
+              <option value="<%= tracking.starterTemplate %>"><%= tracking.starterTemplate %></option>
+              <option value="None">None</option>
+              <option value="Neverland">Neverland</option>
+              <option value="Atlantis">Atlantis</option>
+              <option value="Camelot">Camelot</option>
+              <option value="Olympus">Olympus</option>
+            </select>
+          </label>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <label name="tracking[specialFeatures]" class="ifEssential">Special Features:
+            <select name="tracking[specialFeatures]" multiple >
+              <option value="<%= tracking.specialFeatures %>"><%= tracking.specialFeatures %></option>
+              <option value="Breadcrumbs">Breadcrumbs</option>
+              <option value="Interior Featured Image">Interior Featured Image</option>
+              <option value="Mega Menu">Mega Menu</option>
+              <option value="Object Fit">Object Fit</option>
+              <option value="Shrinky Header">Shrinky Header</option>
+              <option value="Search Bar">Search Bar</option>
+              <option value="Scroll Efects">Scroll Effects</option>
+            </select>
+          </label>
+        </div> <!-- end of form-group -->
+        <div class="form-group">
+          <label name="tracking[domain]">Domain:
+            <input type="text" name="tracking[domain]" value="<%= tracking.domain %>">
+          </label>
+        </div> <!-- end of form-group -->
+        <!-- <div class="form-group">
+          <label class="labelTask" name="tracking[taskType]">Task:
+            <input type="text" name="tracking[taskType]" placeholder="Logic coming later">
+          </label>
+        </div> end of form-group -->
+        <div class="form-group">
+          <label class="labelNotes" name="tracking[notes]">Notes:
+            <textarea name="tracking[notes]" value="<%= tracking.notes %>"></textarea>
+          </label>
+        </div> <!-- end of form-group -->
+        <button>Update Task</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<% include ../partials/footer %>

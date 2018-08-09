@@ -1,4 +1,9 @@
 const mongoose = require("mongoose");
+const User = require("./user");
+const TaskType = require("./taskType");
+
+// var UserSchema = require('mongoose').model('User').schema;
+// var TaskTypeSchema = require('mongoose').model('TaskType').schema;
 
 const teamTrackerSchema = new mongoose.Schema({
   // user: {
@@ -13,30 +18,33 @@ const teamTrackerSchema = new mongoose.Schema({
     firstName: String
   },
   date: {
-    type: Date
+    type: String
   },
   acctNum: {
     type: Number,
     required: true
   },
   taskType: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "TaskType"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "TaskType"
   },
   buildPkg: {
     type: String
   },
   starterTemplate: {
-    type: String
+    type: String,
+    default: null
   },
   specialFeatures: {
-    type: String
+    type: String,
+    default: null
   },
   domain: {
     type: String
   },
   cssPath: {
-    type: String
+    type: String,
+    default: null
   },
   server: {
     type: String
@@ -45,12 +53,12 @@ const teamTrackerSchema = new mongoose.Schema({
     type: String
   },
   designer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
+      type: String,
+      ref: "User"
   },
   onboarder: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
+      type: String,
+      ref: "User"
   }
 });
 

@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+<div id="stats">
+    <p><a href="/tracker">&larr; Back to Tracker</a></p>
+<div class="statsContainer">
+    
+    <p>
+      <% if(currentUser.firstName === tracking.author.firstName) { %> 
+        <div classs="col-md-12" style="flex: 1">
+          <div class="container">
+              <div id="tracked">
+                  <p><strong>Name:</strong> <%= tracking.author.firstName %></p>
+                  <p><strong>Completed:</strong> <%= tracking.date %></p>
+                  <p><strong>Acct #:</strong> <%= tracking.acctNum %></p>
+                  <p><strong>On-Boarder:</strong> <%= tracking.onboarder %></p>
+                  <p><strong>Package:</strong> <%= tracking.buildPkg %></p>
+                  <p><strong>Designer:</strong> <%= tracking.designer %></p>
+                  <p><strong>Special Features:</strong> <%= tracking.specialFeatures %></p>
+                  <p><strong>CSS Path:</strong> <%= tracking.cssPath %></p>
+                  <p><strong>Domain:</strong> <%= tracking.domain %></p>
+                  <p><strong>Task:</strong> <%= tracking.taskType %></p>				
+                  <p><strong>Notes:</strong> <%= tracking.notes %></p>	
+                            <div>
+                                <a href="/tracker/<%= tracking._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
+                                <form id="delete-form" action="/tracker/<%= tracking._id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-xs btn-danger">Delete</button>
+                                </form>
+                            </div>  
+          </div>
+        </div>
+        
+        <% } %>
+      
+    </p>
+  </div>
+</div>
+<% include ../partials/footer %>
