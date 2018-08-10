@@ -38,52 +38,24 @@
         
         <p>
           <% function countEssential() { %>
-            <% var essCount = 0; var strCount = 0; %>
+            <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
               <% tracking.forEach(function(tracked){ %>
                 <% if(currentUser.firstName === tracked.author.firstName) { %>
-                  <% if(tracked.buildPkg === "Starter" && tracked.taskType === "Site Build"){ %>
+                  <% if(tracked.buildPkg === "Starter" && tracked.taskTypes[0].name === "Site Build"){ %>
                     <% strCount++ %>
-                      <!-- <div classs="col-md-12">
-                        <div class="container">
-                          <div id="tracked">
-                            <p>
-                              <strong>Name:</strong>
-                              <%= tracked.author.firstName %>
-                            </p>
-                            <p>
-                              <strong>Package:</strong>
-                              <%= tracked.buildPkg %>
-                            </p>
-                            <p>
-                              <strong>Acct #:</strong>
-                              <%= tracked.acctNum %>
-                            </p>
-                            <p>
-                              <strong>Completed:</strong>
-                              <%= tracked.date %>
-                            </p>
-                            <p>
-                              <strong>Special Features:</strong>
-                              <%= tracked.specialFeatures %>
-                            </p>
-                            <p>
-                              <strong>Domain:</strong>
-                              <%= tracked.domain %>
-                            </p>
-                            <p>
-                              <a href="/tracker/<%= tracked._id %>/edit">Edit Task</a>
-                            </p>
-                          </div>
-                        </div>
-                      </div> -->
-
                     <% } %>
-                    <% if(tracked.buildPkg === "Essential" && tracked.taskType === "Site Build"){ %>
+                    <% if(tracked.buildPkg === "Essential" && tracked.taskTypes[0].name === "Site Build"){ %>
                       <% essCount++ %>
+                    <% } %>
+                    <% if(tracked.taskTypes[0].name === "Production Change"){ %>
+                      <% prodCount++ %>
+                    <% } %>
+                    <% if(tracked.taskTypes[0].name === "T.LINK Branding"){ %>
+                      <% tlinkCount++ %>
                     <% } %>
                   <% } %>
                 <% }); %>
-                <h2>Essentials: <%= essCount %> | Starters: <%= strCount %></h2>
+                <h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
                 
             <% } %>
         </p>

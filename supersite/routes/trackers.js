@@ -22,11 +22,10 @@ router.get("/", isLoggedIn, function(req, res){
 
 //POST new teamTracked
 router.post("/", isLoggedIn, function(req, res){
-  var { acctNum, date, buildPkg, starterTemplate, specialFeatures, domain, cssPath, server, notes, onboarder, designer, taskType}  = req.body;
+
+  var { acctNum, date, buildPkg, starterTemplate, specialFeatures, domain, cssPath, server, notes, onboarder, designer, taskTypes}  = req.body;
   var author = {id: req.user._id, firstName: req.user.firstName};
-  
-  // const task = {id: req.taskType.id, taskName: req.taskType.name};
-  var newTrack = {acctNum: acctNum, author: author, date: date, buildPkg: buildPkg, starterTemplate: starterTemplate, specialFeatures: specialFeatures, domain: domain, cssPath: cssPath, server: server, notes: notes, onboarder: onboarder, designer: designer, taskType: taskType};
+  var newTrack = {acctNum: acctNum, author: author, date: date, buildPkg: buildPkg, starterTemplate: starterTemplate, specialFeatures: specialFeatures, domain: domain, cssPath: cssPath, server: server, notes: notes, onboarder: onboarder, designer: designer, taskTypes: [taskTypes]};
   TeamTracker.create(newTrack, function(err, newlyTracked){
     if(err){
       console.log(err)

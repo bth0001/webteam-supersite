@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 
 const taskTypeSchema = new mongoose.Schema({
-  name: {
-    type: String
-  },
-  quantity: {
-    type: String
-  },
-  notes: {
-    type: String
-  }
+   name: {
+      type: String
+    },
+    quantity: {
+      type: String
+    },
+    notes: {
+      type: String
+    }
 });
 
 

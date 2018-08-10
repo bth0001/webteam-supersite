@@ -125,19 +125,18 @@
 						<div class="form-group" id="task">
 							<label class="labelTask" name="taskType"><h3>Task:</h3></label>
 							<button type='button' id='addTask'>+</button>
-							
 							<div class="task">
-								<select name="taskType">
+								<select name="taskTypes[name]">
 									<option value="Site Build">Site Build</option>
 									<option value="Production Change">Production Change</option>
 									<option value="T.LINK Branding">T.LINK Branding</option>
 								</select>
-								<select name="taskType">
+								<select name="taskTypes[quantity]">
 									<option value="0 - 15">0 - 15</option>
 									<option value="16 - 35">16 - 35</option>
 									<option value="36+">36+</option>
 								</select>
-								<input type="text" name="taskType" placeholder="Notes">
+								<input type="text" name="taskTypes[notes]" placeholder="Notes">
 							</div>
 						</div>
 						<!-- end of form-group -->
@@ -157,22 +156,28 @@
 	</div>
 	
 	<% function countEssential() { %>
-	<% var essCount = 0; var strCount = 0; %>
+	<% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
 	<% tracking.forEach(function(tracked){ %>
 	<% if(currentUser.firstName === tracked.author.firstName) { %>
-	<% if(tracked.buildPkg === "Starter" && tracked.taskType === "Site Build"){ %>
+	<% if(tracked.buildPkg === "Starter" && tracked.taskTypes[0].name === "Site Build"){ %>
 	<% strCount++ %>
 	<% } %>
-	<% if(tracked.buildPkg === "Essential" && tracked.taskType === "Site Build"){ %>
+	<% if(tracked.buildPkg === "Essential" && tracked.taskTypes[0].name === "Site Build"){ %>
 	<% essCount++ %>
 	<% } %>
+	<% if(tracked.taskTypes[0].name === "Production Change"){ %>
+		<% prodCount++ %>
+	  <% } %>
+	  <% if(tracked.taskTypes[0].name === "T.LINK Branding"){ %>
+		<% tlinkCount++ %>
+	  <% } %>
 	<% } %>
 	<% }); %>
 	</p>
 	<h3>Edit your tracks from this month below:</h3>
 	<div id="stats">
+			<h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
 		<div id="essTracked">
-			<h4>Essentials: <%= essCount %></h4>
 			<% tracking.forEach(function(tracked){ %>
 			<% if(currentUser.firstName === tracked.author.firstName) { %>
 			<% if(tracked.buildPkg === "Essential"){ %>
@@ -187,7 +192,11 @@
 					<p><strong>Special Features:</strong> <%= tracked.specialFeatures %></p>
 					<p><strong>CSS Path:</strong> <%= tracked.cssPath %></p>
 					<p><strong>Domain:</strong> <%= tracked.domain %></p>
-					<p><strong>Task:</strong> <%= tracked.taskType %></p>				
+					<div><strong>Task:</strong> 
+						<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+							<p><%= tracked.taskTypes[i].name %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].notes %></p>
+						<% }; %>
+					</div>				 
 					<p><strong>Notes:</strong> <%= tracked.notes %></p>	
                     <div>
                         <a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
@@ -202,7 +211,6 @@
 			<% }); %>
 		</div>
 		<div id="strTracked">
-			<h4>Starters: <%= strCount %></h4>
 			<% tracking.forEach(function(tracked){ %>
 			<% if(currentUser.firstName === tracked.author.firstName) { %>
 			<% if(tracked.buildPkg === "Starter"){ %>
@@ -215,7 +223,11 @@
 						<p><strong>Package:</strong> <%= tracked.buildPkg %></p>
 						<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %></p>
 						<p><strong>Domain:</strong> <%= tracked.domain %></p>
-						<p><strong>Task:</strong> <%= tracked.taskType %></p>	
+						<div><strong>Task:</strong> 
+						<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+							<p><%= tracked.taskTypes[i].name %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].notes %></p>
+						<% }; %>
+						</div>
 						<p><strong>Notes:</strong> <%= tracked.notes %></p>	
                     <div>
                             <a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>

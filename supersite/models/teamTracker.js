@@ -24,10 +24,6 @@ const teamTrackerSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  taskType: {
-      type: String,
-      ref: "TaskType"
-  },
   buildPkg: {
     type: String
   },
@@ -59,7 +55,13 @@ const teamTrackerSchema = new mongoose.Schema({
   onboarder: {
       type: String,
       ref: "User"
-  }
+  },
+  taskTypes: 
+      {
+      type: [],
+      ref: "TaskType"
+    }
+  
 });
 
 
