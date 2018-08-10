@@ -123,11 +123,22 @@
 						<!-- end of form-group -->
 						
 						<div class="form-group" id="task">
-							<label class="labelTask" name="taskType">Task:
-								<button type='button' id='addTask'>+</button>
-								<input type="text" name="taskType" placeholder="Logic coming later">
-							</label>
+							<label class="labelTask" name="taskType"><h3>Task:</h3></label>
+							<button type='button' id='addTask'>+</button>
 							
+							<div class="task">
+								<select name="taskType">
+									<option value="Site Build">Site Build</option>
+									<option value="Production Change">Production Change</option>
+									<option value="T.LINK Branding">T.LINK Branding</option>
+								</select>
+								<select name="taskType">
+									<option value="0 - 15">0 - 15</option>
+									<option value="16 - 35">16 - 35</option>
+									<option value="36+">36+</option>
+								</select>
+								<input type="text" name="taskType" placeholder="Notes">
+							</div>
 						</div>
 						<!-- end of form-group -->
 						
@@ -286,26 +297,12 @@ else {
 });
 });	
 $(document).ready(function(){
-    var counter = 2;
     $("#addTask").click(function () {				
-		if(counter > 10){
-				alert("Only 10 textboxes allow");
-				return false;
-		}   
-		var newTaskInput = $(document.createElement('label'))
-			 .attr("id", '<% tracking.taskType %>');         
-		newTaskInput.after().html('<input type="text" name="taskType' + counter + 
-			  '" id="taskType' + counter + '" value="" >');   
-		newTaskInput.appendTo("#task");			
-		counter++;
+		var newTaskInput = $(".task:first")    
+		newTaskInput.clone().appendTo("#task");			
      });
 	
      $("#removeButton").click(function () {
-		if(counter==1){
-		  alert("No more textbox to remove");
-		  return false;
-	   	}   
-		counter--;			
 		$("#TextBoxDiv" + counter).remove();
 	 });
 	});

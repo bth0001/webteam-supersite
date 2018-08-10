@@ -96,6 +96,12 @@ fieldset legend {width: auto}
 fieldset input:first-of-type {margin:0 10px 0 0 !important}
 fieldset label {flex:1; margin: 0}
 
+/*task on form*/
+#task {display: flex; flex-wrap: wrap; justify-content: space-between;}
+#task label h3 {margin: 0;}
+div .task {display: flex; flex-wrap: wrap; justify-content: center; align-items: center; flex: 100%; margin: 5px 0px;}
+div .task > * {flex: 30%; margin: 0 10px;}
+
 /* hidden by default */
 
 
