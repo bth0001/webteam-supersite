@@ -90,7 +90,7 @@ form button, .trackerForm button {background-color:#252525; color:#fff; padding:
 .trackerForm input, .trackerForm select {display: inline-block; margin: 0; padding: 5px 10px; width: 100%;}
 
 /* fieldset */
-fieldset {width: 100%; border: 1px solid rgba(0,0,0,0.2); display: flex; padding:10px 10px 20px; mid-width:none; flex-flow: row wrap; align-items: flex-start; justify-content: space-between; text-align: center;}
+fieldset {width: 100%; border: 1px solid rgba(0,0,0,0.2); display: flex; padding:10px 10px 20px; min-width:none; flex-flow: row wrap; align-items: flex-start; justify-content: space-between; text-align: center;}
 fieldset input {width: auto !important; margin: 0 10px 0 20px !important}
 fieldset legend {width: auto}
 fieldset input:first-of-type {margin:0 10px 0 0 !important}
