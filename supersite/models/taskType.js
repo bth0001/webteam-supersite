@@ -1,15 +1,17 @@
 const mongoose = require("mongoose");
 
-const taskTypeSchema = new mongoose.Schema({
-   name: {
-      type: String
-    },
-    quantity: {
-      type: String
-    },
-    notes: {
-      type: String
-    }
+const taskTypeSchema = new mongoose.Schema({  
+     
+          taskTypeName: {
+            type: String
+          },
+          quantity: {
+            type: String
+          },
+          taskNotes: {
+            type: String
+          }
+       
 });
 
 

@@ -40,20 +40,24 @@
           <% function countEssential() { %>
             <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
               <% tracking.forEach(function(tracked){ %>
+                <% task.forEach(function(tasked){ %>
                 <% if(currentUser.firstName === tracked.author.firstName) { %>
-                  <% if(tracked.buildPkg === "Starter" && tracked.taskTypes[0].name === "Site Build"){ %>
+                <% if(tracked.buildPkg === "Starter" && tasked.taskTypeName === "Site Build"){ %>
                     <% strCount++ %>
                     <% } %>
-                    <% if(tracked.buildPkg === "Essential" && tracked.taskTypes[0].name === "Site Build"){ %>
+                  <% if(tracked.buildPkg === "Essential" && tasked.taskTypeName === "Site Build"){ %>
                       <% essCount++ %>
                     <% } %>
-                    <% if(tracked.taskTypes[0].name === "Production Change"){ %>
-                      <% prodCount++ %>
-                    <% } %>
-                    <% if(tracked.taskTypes[0].name === "T.LINK Branding"){ %>
-                      <% tlinkCount++ %>
-                    <% } %>
+                      
+                      <% if(tasked.taskTypeName === "Production Change"){ %>
+                        <% prodCount++ %>
+                      <% } %>
+                    <% if(tasked.taskTypeName === "T.LINK Branding"){ %>
+                        <% tlinkCount++ %>
+                      <% } %>
+                
                   <% } %>
+                  <% }); %>
                 <% }); %>
                 <h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
                 

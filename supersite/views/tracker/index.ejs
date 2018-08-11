@@ -123,20 +123,20 @@
 						<!-- end of form-group -->
 						
 						<div class="form-group" id="task">
-							<label class="labelTask" name="taskType"><h3>Task:</h3></label>
+							<label class="labelTask" name="taskTypeName"><h3>Task:</h3></label>
 							<button type='button' id='addTask'>+</button>
 							<div class="task">
-								<select name="taskTypes[name]">
+								<select name="taskTypeName">
 									<option value="Site Build">Site Build</option>
 									<option value="Production Change">Production Change</option>
 									<option value="T.LINK Branding">T.LINK Branding</option>
 								</select>
-								<select name="taskTypes[quantity]">
+								<select name="quantity">
 									<option value="0 - 15">0 - 15</option>
 									<option value="16 - 35">16 - 35</option>
 									<option value="36+">36+</option>
 								</select>
-								<input type="text" name="taskTypes[notes]" placeholder="Notes">
+								<input type="text" name="taskNotes" placeholder="Notes">
 							</div>
 						</div>
 						<!-- end of form-group -->
@@ -156,23 +156,26 @@
 	</div>
 	
 	<% function countEssential() { %>
-	<% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
-	<% tracking.forEach(function(tracked){ %>
-	<% if(currentUser.firstName === tracked.author.firstName) { %>
-	<% if(tracked.buildPkg === "Starter" && tracked.taskTypes[0].name === "Site Build"){ %>
-	<% strCount++ %>
-	<% } %>
-	<% if(tracked.buildPkg === "Essential" && tracked.taskTypes[0].name === "Site Build"){ %>
-	<% essCount++ %>
-	<% } %>
-	<% if(tracked.taskTypes[0].name === "Production Change"){ %>
-		<% prodCount++ %>
-	  <% } %>
-	  <% if(tracked.taskTypes[0].name === "T.LINK Branding"){ %>
-		<% tlinkCount++ %>
-	  <% } %>
-	<% } %>
-	<% }); %>
+		<% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
+		<% task.forEach(function(tasked){ %>
+			<% tracking.forEach(function(tracked){ %>
+				<% if(currentUser.firstName === tracked.author.firstName) { %>
+					<% if(tracked.buildPkg === "Starter" && tasked.taskTypeName === "Site Build"){ %>
+						<% strCount++ %>
+					<% } %>
+					<% if(tracked.buildPkg === "Essential" && tasked.taskTypeName === "Site Build" ){ %>
+						<% essCount++ %>
+					<% } %>
+			
+					<% if(tasked.taskTypeName === "Production Change"){ %>
+                        <% prodCount++ %>
+                      <% } %>
+                    <% if(tasked.taskTypeName === "T.LINK Branding"){ %>
+                        <% tlinkCount++ %>
+                      <% } %>
+				<% } %>
+				<% }) %>
+		<% }); %>
 	</p>
 	<h3>Edit your tracks from this month below:</h3>
 	<div id="stats">
@@ -194,9 +197,9 @@
 					<p><strong>Domain:</strong> <%= tracked.domain %></p>
 					<div><strong>Task:</strong> 
 						<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
-							<p><%= tracked.taskTypes[i].name %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].notes %></p>
+							<p><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></p>
 						<% }; %>
-					</div>				 
+					</div>	 
 					<p><strong>Notes:</strong> <%= tracked.notes %></p>	
                     <div>
                         <a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
@@ -224,10 +227,10 @@
 						<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %></p>
 						<p><strong>Domain:</strong> <%= tracked.domain %></p>
 						<div><strong>Task:</strong> 
-						<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
-							<p><%= tracked.taskTypes[i].name %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].notes %></p>
-						<% }; %>
-						</div>
+							<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+								<p><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></p>
+							<% }; %>
+						</div>	 
 						<p><strong>Notes:</strong> <%= tracked.notes %></p>	
                     <div>
                             <a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
