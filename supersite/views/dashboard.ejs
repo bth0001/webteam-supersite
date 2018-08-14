@@ -10,27 +10,34 @@
       <div class="dashboardLinksContainer">
         <div class="galleryMenu"><a href="/tracker">
           <img src="https://i.imgur.com/QDOoFQe.png" alt="Team Tracker" />
-          <p><%= currentUser.team %> Tracker</p></a></div>
+          <p><%= currentUser.team %> Tracker</p></a>
+        </div>
         <div class="galleryMenu"><a href="/projects-tracker">
           <img src="https://i.imgur.com/QDOoFQe.png" alt="Special Projects Tracker" />
-          <p>Special Projects Tracker</p></a></div>
+          <p>Special Projects Tracker</p></a>
+        </div>
         <div class="galleryMenu"><a href="/checklist">
           <img src="https://i.imgur.com/QDOoFQe.png" alt="Developer Checklist" />
-          <p><%= currentUser.team %> Checklist</p></a></div>
+          <p><%= currentUser.team %> Checklist</p></a>
+        </div>
         <div class="galleryMenu"><a href="/idea-warehouse">
           <img src="https://i.imgur.com/VOI6pdZ.jpg " alt="Idea Warehouse" />
-          <p>Idea Warehouse</p></a></div>
+          <p>Idea Warehouse</p></a>
+        </div>
         <div class="galleryMenu"><a href="/hats-off">
           <img src="https://i.imgur.com/GFi4LzV.png" alt="Hats Off" />
-          <p>Hats-Off</p></a></div>
+          <p>Hats-Off</p></a>
+        </div>
         <div class="galleryMenu"><a href="/blueprint-generator">
           <img src="https://i.imgur.com/03ZeeGp.jpg" alt="Blueprint Generator" />
-          <p>Blueprint Generator</p></a></div>
+          <p>Blueprint Generator</p></a>
+        </div>
         <div class="galleryMenu"><a href="/presence-url-tracker">
           <img src="https://i.imgur.com/QDOoFQe.png" alt="Presence URL Tracker" />
-          <p>Presence URL Tracker</p></a></div>
-      </div>
-    </div>
+          <p>Presence URL Tracker</p></a>
+        </div>
+      </div><!-- end dashboardLinksContainer -->
+    </div><!-- end dashboardLinks -->
     <div id="stats">
       <h3>View your stats from this month below:</h3>
       <br />
@@ -41,36 +48,32 @@
               <% tracking.forEach(function(tracked){ %>
                 <% task.forEach(function(tasked){ %>
                 <% if(currentUser.firstName === tracked.author.firstName) { %>
-                <% if(tracked.buildPkg === "Starter" && tasked.taskTypeName === "Site Build"){ %>
+                  <% if(tracked.buildPkg === "Starter" && tasked.taskTypeName === "Site Build"){ %>
                     <% strCount++ %>
-                    <% } %>
-                  <% if(tracked.buildPkg === "Essential" && tasked.taskTypeName === "Site Build"){ %>
-                      <% essCount++ %>
-                    <% } %>
-                      
-                      <% if(tasked.taskTypeName === "Production Change"){ %>
-                        <% prodCount++ %>
-                      <% } %>
-                    <% if(tasked.taskTypeName === "T.LINK Branding"){ %>
-                        <% tlinkCount++ %>
-                      <% } %>
-                
                   <% } %>
-                  <% }); %>
-                <% }); %>
-                <h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
-                <script>
-                    d3.select('.statsContainer')
-                      .selectAll('p')
-                      .append('p')
-                    </script>
-            <% } %>
+                  <% if(tracked.buildPkg === "Essential" && tasked.taskTypeName === "Site Build"){ %>
+                    <% essCount++ %>
+                  <% } %>
+                  <% if(tasked.taskTypeName === "Production Change"){ %>
+                    <% prodCount++ %>
+                  <% } %>
+                  <% if(tasked.taskTypeName === "T.LINK Branding"){ %>
+                    <% tlinkCount++ %>
+                  <% } %>
+                <% } %>
+              <% }); %>
+            <% }); %>
+            <h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
+            <script>
+              d3.select('.statsContainer')
+                .selectAll('p')
+                .append('p')
+            </script>
+          <% } %>
         </p>
-        <% countEssential(); %>
-        
-      </div>
-    </div>
-
-  </div>
+        <% countEssential(); %>    
+      </div><!-- end statsContainer -->
+    </div><!-- end stats -->
+  </div><!-- end dashboard -->
 
   <% include partials/footer %>
