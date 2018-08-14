@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.set("debug", true);
-mongoose.connect("mongodb://chase:test123@ds123929.mlab.com:23929/usertest", {
+mongoose.connect("mongodb://brad:Bees123@ds263791.mlab.com:63791/webteam-super-site", {
   keepAlive: true,
   useNewUrlParser: true 
 });
