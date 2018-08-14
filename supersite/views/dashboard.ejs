@@ -35,7 +35,6 @@
       <h3>View your stats from this month below:</h3>
       <br />
       <div class="statsContainer">
-        
         <p>
           <% function countEssential() { %>
             <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
@@ -60,7 +59,11 @@
                   <% }); %>
                 <% }); %>
                 <h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
-                
+                <script>
+                    d3.select('.statsContainer')
+                      .selectAll('p')
+                      .append('p')
+                    </script>
             <% } %>
         </p>
         <% countEssential(); %>
