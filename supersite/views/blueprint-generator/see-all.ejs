@@ -1,0 +1,73 @@
+<% include ../partials/header %>
+<style>
+/* See All Blueprints Page */
+div.blueprintContainer h4 {font-size: 14px;}
+div.blueprintContainer span {padding: 0 10px 0 20px; font-size: 18px;}
+div.blueprintContainer a.more {background-color: #4539ec; color: #fff; padding: 10px; display: flex; height: 30px; width: 30px; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid #fff;}
+div.blueprintContainer a.more:before {content: "\f067"; font-family: FontAwesome;}
+div.blueprintContainer a.more.open:before {content: "\f068"}
+div.blueprintContainer a.more.open {background-color: #07b532;}
+div.blueprintContainer {}
+div.blueprintContainer > div.top {display: flex; align-items: center; border: 1px solid #000; background-color: #f3f3f3;}
+div.blueprintContainer > div.top > div:not(:last-of-type) {border-right: 1px solid #000; flex: 1; padding: 10px;}
+div.blueprintContainer > div.top > div.seeMore {display: flex; padding: 5px;}
+div.blueprintContainer > div.top > div.seeMore a.more {display: block; display: flex; cursor: pointer; text-decoration: none;}
+div.blueprintContainer > div.top > div.seeMore a.more:hover {text-decoration: none; color: #fff;}
+div.blueprintContainer > div.bottom {visibility: hidden; max-height: 0; overflow: hidden; opacity: 0; padding: 0; transition: opacity 300ms ease; overflow: hidden; background-color: #fff; border-radius: 0 0 6px 6px; border: 1px solid #000; border-top: 0;}
+div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;opacity: 1;padding: 20px;margin:  0 0 20px;}
+</style>
+
+
+<div class="container">
+<h1>See All Blueprints Below:</h1>
+<% blueprints.forEach(function(blueprint){ %>
+<div class="blueprintContainer">
+    <div class="top">
+        <div class="practiceName">
+            <h4>Practice Name</h4>
+            <span><%= blueprint.practiceName %></span>
+        </div>
+        <div class="doctor">
+            <h4>Doctor Name</h4>
+            <span><%= blueprint.doctor %></span>
+        </div>
+        <div class="name">
+            <h4>Practice Name</h4>
+            <span><%= blueprint.practiceName %></span>
+        </div>
+        <div class="contactNumber">
+            <h4>Practice Name</h4>
+            <span><%= blueprint.contactNumber %></span>
+        </div>
+        <div class="seeMore">
+            <a class="more"></a>
+        </div>
+    </div><!--top-->
+    <div class="bottom">
+        <div>
+            <h4>Practice Name</h4>
+            <span><%= blueprint.practiceName %></span>
+        </div>
+        <div>
+            <h4>Onboarder</h4>
+            <span><%= blueprint.onboarder %></span>
+        </div>
+        <div>
+            <h4>Designer</h4>
+            <span><%= blueprint.designer %></span>
+        </div>
+        <div>
+            <h4>Home Screenshot:</h4>
+            <span><%= blueprint.homeScreenshot %></span>
+        </div>
+        <div>
+            <h4>Interior Screenshot:</h4>
+            <span><%= blueprint.interiorScreenshot %></span>
+        </div>
+    </div><!--bottom-->
+</div>
+<% }); %>
+
+</div>
+
+<% include ../partials/footer %>
