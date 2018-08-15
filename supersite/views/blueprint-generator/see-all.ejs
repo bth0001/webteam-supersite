@@ -71,3 +71,10 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
 </div>
 
 <% include ../partials/footer %>
+
+
+<hr />
+
+<% blueprints.forEach(function(blueprint){ %>
+<span><%= blueprint.siteArchitecture %></span>
+<% }); %>

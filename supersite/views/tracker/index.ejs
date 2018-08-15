@@ -33,25 +33,25 @@
 						<div class="form-exit"> <span class="close">&times;</span></div>
 						<div class="form-group">
 							<label name="date">Date:
-								<input type="date" name="date" />
+								<input type="date" name="teamTrack[date]" />
 							</label>
 							<label name="acctNum" />
 							Account Number:
-							<input type="number" required name="acctNum" placeholder="######" >
+							<input type="number" required name="teamTrack[acctNum]" placeholder="######" >
 							</label>
 						</div>
 						<!-- end of form-group -->
 						
 						<div class="form-group">
 							<label name="username">Developer:
-								<input type="text" name="username" value="<%= currentUser.firstName %>" />
+								<input type="text" name="teamTrack[username]" value="<%= currentUser.firstName %>" />
 							</label>
 						</div>
 						<!-- end of form-group -->
 						
 						<div class="form-group">
 							<label name="designer">Designer:
-								<select name="designer" id="designer">
+								<select name="teamTrack[designer]" id="designer">
 									<option value="Select Designer" selected>Select Designer</option>
 									<option value="">N/A</option>
 									<!-- If site is a Starter -->
@@ -63,7 +63,7 @@
 								</select>
 							</label>
 							<label name="onboarder">On-Boarder:
-								<select name="onboarder">
+								<select name="teamTrack[onboarder]">
 									<option value="Select On-Boarder" selected>Select On-Boarder</option>
 									<% users.forEach(function(user){ %>
 									<% if(user.team == 'On-Boarder') { %>
@@ -77,14 +77,14 @@
 						
 						<div class="form-group">
 							<label name="buildPkg">Build Package:
-								<select name="buildPkg" id="buildPkg">
+								<select name="teamTrack[buildPkg]" id="buildPkg">
 									<option value="" disabled selected>Select Build Package</option>
 									<option value="Essential">Essential</option>
 									<option value="Starter">Starter</option>
 								</select>
 							</label>
 							<label name="starterTemplate" class="ifStarter">Starter Template:
-								<select name="starterTemplate" class="starterClearInput">
+								<select name="teamTrack[starterTemplate]" class="starterClearInput">
 									<option value="" disabled>Select Template</option>
 									<option value="Neverland">Neverland</option>
 									<option value="Atlantis">Atlantis</option>
@@ -97,7 +97,7 @@
 						
 						<div class="form-group">
 							<label name="specialFeatures" class="ifEssential">Special Features:
-								<select name="specialFeatures" class="essentialClearInput" multiple>
+								<select name="teamTrack[specialFeatures]" class="essentialClearInput" multiple>
 									<option value="" disabled>Select Features</option>
 									<option value=" None">None</option>
 									<option value=" Breadcrumbs">Breadcrumbs</option>
@@ -114,29 +114,57 @@
 						
 						<div class="form-group">
 							<label name="domain">Domain:
-								<input type="text" name="domain" placeholder="Domain">
+								<input type="text" name="teamTrack[domain]" placeholder="Domain">
 							</label>
 							<label name="cssPath" class="ifEssential">CSS Path:
-								<input type="text" name="cssPath" placeholder="CSS Path" class="essentialClearInput">
+								<input type="text" name="teamTrack[cssPath]" placeholder="CSS Path" class="essentialClearInput">
 							</label>
 						</div>
 						<!-- end of form-group -->
 						
+<script>
+$(document).ready(function(){
+    var count = 0;
+    $("div.task:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+    $("div.task:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+    $("div.task:first-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+
+$("#addTask").click(function () {               
+        count++;        
+        var newTaskInput = $(".task:last-of-type"); 
+        newTaskInput.clone().appendTo("#task"); 
+    $("div.task:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+    $("div.task:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+    $("div.task:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+
+});
+
+});
+    
+</script>
+
+
+
+
+
+
+
+
 						<div class="form-group" id="task">
 							<label class="labelTask" name="taskTypeName"><h3>Task:</h3></label>
 							<button type='button' id='addTask'>+</button>
 							<div class="task">
-								<select name="taskTypeName">
+								<select class="taskType">
 									<option value="Site Build">Site Build</option>
 									<option value="Production Change">Production Change</option>
 									<option value="T.LINK Branding">T.LINK Branding</option>
 								</select>
-								<select name="quantity">
+								<select class="taskQuantity">
 									<option value="0 - 15">0 - 15</option>
 									<option value="16 - 35">16 - 35</option>
 									<option value="36+">36+</option>
 								</select>
-								<input type="text" name="taskNotes" placeholder="Notes">
+								<input class="taskNotes" type="text" placeholder="Notes">
 							</div>
 						</div>
 						<!-- end of form-group -->
@@ -310,16 +338,9 @@ else {
     $('.ifStarter').hide();
 }
 });
-});	
-$(document).ready(function(){
-    $("#addTask").click(function () {				
-		var newTaskInput = $(".task:first")    
-		newTaskInput.clone().appendTo("#task");			
-     });
-	
-     $("#removeButton").click(function () {
-		$("#TextBoxDiv" + counter).remove();
-	 });
-	});
+});
 </script>
+
+
+
 <% include ../partials/footer %>
