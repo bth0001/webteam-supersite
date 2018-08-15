@@ -2,29 +2,40 @@
 
 <style>
     form#blueprint {max-width: none;}
+    #pageTable a {display: inline-block; padding: 5px; border-radius: 6px; margin: 5px 0; cursor: pointer}
+
+#pageTable a.addSubpage {background-color: #4cc500; color: #fff; font-size: 11px;}
+#pageTable a.removeSubpage, #pageTable a.removeSpecificSubpage {background-color: #c50000; color: #fff; font-size: 11px;}
+#pageTable a.addParent {background-color: #605dff; color: #fff;}
+#pageTable a.removeParent, #pageTable a.removeAll {background-color: #1e1d6f; color: #fff;}
+
+#pageTable input {display: inline-block; width: auto;}
+#pageTable div.pageInput {padding: 10px 0;}
 </style>
 
 
 <a href="/dashboard">&larr; Back to Dashboard</a><br /><br />
 
 <h2>Blueprint Wizard</h2>
-<form id="blueprint" action="/blueprint-generator/new" method="POST">
+<form id="blueprint" onsubmit="assignNames()" action="/blueprint-generator/new" method="POST">
 
-    <select name="blueprint[onboarder]">
-      <option value="" disabled selected>Select Onboarder</option>
-      <option value="Denise">Denise</option>
-      <option value="Rachel">Rachel</option>
-      <option value="Stacey">Stacey</option>
-    </select><!--onboarder-->
+  <select name="blueprint[onboarder]">
+      <option value="Select Onboarder" disabled selected>Select Onboarder</option>
+      <% users.forEach(function(user){ %>
+        <% if(user.team == 'On-Boarder') { %>
+            <option value="<%= user.firstName %>"><%= user.firstName %></option>
+        <% } %>
+    <% }); %>
+  </select>
   
-    <select name="designer">
-      <option value="" disabled selected>Select Designer</option>
-      <option value="Jodi">Jodi</option>
-      <option value="Yogesh">Yogesh</option>
-      <option value="Michael">Michael</option>
-      <option value="Nick">Nick</option>
-      <option value="Garo">Garo</option>
-    </select><!--onboarder-->
+  <select name="blueprint[designer]">
+      <option value="Select Designer" disabled selected>Select Designer</option>
+      <% users.forEach(function(user){ %>
+        <% if(user.team == 'Designer') { %>
+            <option value="<%= user.firstName %>"><%= user.firstName %></option>
+        <% } %>
+    <% }); %>
+  </select>
  
     <input type="text" name="blueprint[homeScreenshot]" placeholder="Home Screenshot" />
     <input type="text" name="blueprint[interiorScreenshot]" placeholder="Interior Screenshot" />
@@ -81,28 +92,23 @@
     <textarea name="blueprint[developerNotes]" cols="100" rows="2"></textarea>
 <hr />
 
-<span>Home Page</span>
-<input type="text" name="blueprint[siteArchitecture][parentPageName]" placeholder="Parent Page Name" />
-<input type="text" name="blueprint[siteArchitecture][parentPageNotes]" placeholder="Parent Page Notes" />
-
-<span>Child Page</span>
-<input type="text" name="blueprint[siteArchitecture][subpage][0][childPageName]" placeholder="Child Page Name" />
-<input type="text" name="blueprint[siteArchitecture][subpage][0][childPageNotes]" placeholder="Child Page Notes" />
-
-<span>Child Page</span>
-<input type="text" name="blueprint[siteArchitecture][subpage][1][childPageName]" placeholder="Child Page Name" />
-<input type="text" name="blueprint[siteArchitecture][subpage][1][childPageNotes]" placeholder="Child Page Notes" />
-
-<span>Child Page</span>
-<input type="text" name="blueprint[siteArchitecture][subpage][2][childPageName]" placeholder="Child Page Name" />
-<input type="text" name="blueprint[siteArchitecture][subpage][2][childPageNotes]" placeholder="Child Page Notes" />
-
-<span>Child Page</span>
-<input type="text" name="blueprint[siteArchitecture][subpage][3][childPageName]" placeholder="Child Page Name" />
-<input type="text" name="blueprint[siteArchitecture][subpage][3][childPageNotes]" placeholder="Child Page Notes" />
+<div id="pageTable">
+    <div class="pageInput">
+      <div class="parent">
+        <span>Parent Page</span>
+        <input class="parentText" type="text" placeholder="Parent Page Name" value="" />
+        <input class="parentNotes" type="text" placeholder="Parent Page Notes" value="" />
+        <a class="removeAll">---</a>
+      </div>
+      <a class="addSubpage">+ Add Subpage</a> | <a class="removeSubpage">- Remove Subpage</a>
+    </div>
+    <a class="addParent">+ Add Parent</a> | <a class="removeParent">- Remove Parent</a>
+  </div>
   
-  <button>Submit</button>
+  <button id="submit">Submit</button>
 
 </form>
+
+<%= blueprint %>
 
 <% include ../partials/footer %>
