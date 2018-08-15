@@ -30,6 +30,26 @@ router.get("/", /*isLoggedIn,*/ function(req, res) {
     })
 });
 
+// See All Blueprints Page
+router.get("/see-all", /* isLoggedIn, */ function(req, res){
+    TeamTracker.find({}, function(err, allTracks){
+      User.find({}, function(err, allUsers){
+        Blueprint.find({}, function(err, allBlueprints) {
+      if(err){
+        console.log(err);
+      } else {
+        res.render("blueprint-generator/see-all", {
+          tracking: allTracks,
+          users: allUsers,
+          blueprints: allBlueprints
+        });
+      }
+    })
+    })
+  })
+  });
+
+
 // New Blueprint Page
 router.get("/new", /*isLoggedIn,*/ function(req, res) {
     TeamTracker.find({}, function(err, allTracks) {

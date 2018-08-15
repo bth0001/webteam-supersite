@@ -70,6 +70,25 @@ const blueprintWizardSchema = new mongoose.Schema({
       notes: {
           type: String
       }
+  },
+  developerNotes: {
+    type: String
+  },
+  siteArchitecture: {
+      parentPageName: {
+        type: String
+      },
+      parentPageNotes: {
+        type: String
+      },
+      subpage: [{
+        childPageName: {
+          type: String
+        },
+        childPageNotes: {
+          type: String
+        }
+      }]
   }
 });
 

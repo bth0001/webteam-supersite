@@ -56,13 +56,17 @@ const teamTrackerSchema = new mongoose.Schema({
       type: String,
       ref: "User"
   },
-  taskTypes: 
-      {
-      type: [],
-      ref: "TaskType"
+  taskTypes: [{
+    taskTypeName: {
+      type: String
+    },
+    quantity: {
+      type: String
+    },
+    taskNotes: {
+      type: String
     }
-        
-  
+  }]
 });
 
 

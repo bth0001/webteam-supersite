@@ -1,115 +1,11 @@
 <% include ../partials/header %>
 
-<style>
-form#blueprint {max-width: 100%; background-color: #fbfbfb}
-
-#blueprint div.formRow h4 {text-align: left;}
-#blueprint div.formRow > div.formElement {display: flex; align-items: center; margin: 0 0 10px;}
-#blueprint div.formRow > div.formElement label {margin: 0 10px 0 0; flex: 0 65px; text-align: left;}
-#blueprint div.formRow > div.formElement label:after {content: "*"; color: #ff0000; margin: 0 0 0 1px;}
-#blueprint div.formRow > div.formElement > section {flex: 1 1; display: flex; align-items: stretch; justify-content: center; border-radius: 5px; overflow: hidden; border: 1px solid #d5d1d1;}
-#blueprint div.formRow > div.formElement > section > input {margin: 0; border: 0;}
-#blueprint div.formRow > div.formElement > section > span {background-color: #0068d9; width: 35px; color: #f3f3f3; display: flex; align-items: center; justify-content: center;}
-#blueprint div.formRow > div.formElement > section > span:before {font-family: FontAwesome;}
-/*icons*/
-#blueprint span.homeScreenshot:before {content: "\f1c5"}
-#blueprint span.interiorScreenshot:before {content: "\f1c5"}
-
-form#blueprint button {background: #d4af7a; text-transform: uppercase; display: block; margin: 0 auto; width: 260px; height: 36px; border-radius: 30px; color: #fff; font-size: 15px; cursor: pointer;}
-</style>
-
-
 <a href="/dashboard">&larr; Back to Dashboard</a><br /><br />
 
-<h2>Blueprint Wizard</h2>
-<form id="blueprint" action="/blueprint-generator/new" method="POST">
-  
-  <h4>In-Office Contacts</h4>
-  <div class="formRow">
-    <select name="blueprint[onboarder]">
-      <option value="" disabled selected>Select Onboarder</option>
-      <option value="Denise">Denise</option>
-      <option value="Rachel">Rachel</option>
-      <option value="Stacey">Stacey</option>
-    </select><!--onboarder-->
-  
-    <select name="designer">
-      <option value="" disabled selected>Select Designer</option>
-      <option value="Jodi">Jodi</option>
-      <option value="Yogesh">Yogesh</option>
-      <option value="Michael">Michael</option>
-      <option value="Nick">Nick</option>
-      <option value="Garo">Garo</option>
-    </select><!--onboarder-->
-   </div><!--formRow-->
-  
-  <h4>Screenshots</h4>
-  <div class="formRow">
-    <h4>Screenshot URLs</h4>
-    <!-- <div class="formElement">
-        <label>Home:</label>
-        <section>
-            <span class="homeScreenshot"></span> -->
-            <input type="text" name="blueprint[homeScreenshot]" placeholder="" />
-        <!-- </section>
-    </div>
-    <div class="formElement">
-            <label>Interior:</label>
-            <section>
-                <span class="interiorScreenshot"></span> -->
-                <input type="text" name="blueprint[interiorScreenshot]" placeholder="" />
-            <!-- </section>
-    </div> -->
+<a href="/blueprint-generator/new">New Blueprint</a>
+<a href="/blueprint-generator/see-all">See All Blueprints</a>
 
-  </div><!--formRow-->
-  
-  <h4>Doctor Information</h4>
-    
-  <input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />
-  <select name="blueprint[howManyDoctors]">
-    <option value="" disabled selected>How many doctors?</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10+">10+</option>
-  </select><!--onboarder-->
-  
-  <input type="text" name="blueprint[practiceName]" placeholder="Practice Name" />
-  <input type="text" name="blueprint[contactName]" placeholder="Contact Name" />
-  <input type="text" name="blueprint[contactEmail]" placeholder="Contact Email" />
-  <input type="text" name="blueprint[contactNumber]" placeholder="Contact Number" />
-  <input type="text" name="blueprint[address]" placeholder="Address" />
-  
-  <select name="blueprint[howManyOffices">
-    <option value="" disabled selected>How many offices?</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10+">10+</option>
-  </select><!--onboarder-->
-  
-  <input type="text" name="blueprint[dearDoctorID]" placeholder="Dear Doctor ID" />
-  <input type="text" name="blueprint[practiceEmail]" placeholder="Practice Email" />
-  <input type="text" name="blueprint[currentSiteURL]" placeholder="Current Site Url" />
-  <input type="text" name="blueprint[clientUsername]" placeholder="Client Username" />
-  <input type="text" name="blueprint[clientPassword]" placeholder="Client Password" />
-  
-  <textarea name="copywriteNotes" cols="100" rows="10"></textarea>
-  
-  <button>Submit</button>
+<h1>Blueprint Home</h1>
 
-</form>
 
 <% include ../partials/footer %>
