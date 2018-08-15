@@ -40,25 +40,23 @@
           <% function countEssential() { %>
             <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
               <% tracking.forEach(function(tracked){ %>
-                <% task.forEach(function(tasked){ %>
                 <% if(currentUser.firstName === tracked.author.firstName) { %>
-                <% if(tracked.buildPkg === "Starter" && tasked.taskTypeName === "Site Build"){ %>
+                <% if(tracked.buildPkg === "Starter" && tracked.taskTypes.taskTypeName === "Site Build"){ %>
                     <% strCount++ %>
                     <% } %>
-                  <% if(tracked.buildPkg === "Essential" && tasked.taskTypeName === "Site Build"){ %>
+                  <% if(tracked.buildPkg === "Essential" && tracked.taskTypes.taskTypeName === "Site Build"){ %>
                       <% essCount++ %>
                     <% } %>
                       
-                      <% if(tasked.taskTypeName === "Production Change"){ %>
+                      <% if(tracked.taskTypes.taskTypeName === "Production Change"){ %>
                         <% prodCount++ %>
                       <% } %>
-                    <% if(tasked.taskTypeName === "T.LINK Branding"){ %>
+                    <% if(tracked.taskTypes.taskTypeName === "T.LINK Branding"){ %>
                         <% tlinkCount++ %>
                       <% } %>
                 
                   <% } %>
                   <% }); %>
-                <% }); %>
                 <h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
                 
             <% } %>
