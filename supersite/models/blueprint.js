@@ -70,17 +70,21 @@ const blueprintWizardSchema = new mongoose.Schema({
   },
   siteArchitecture: [{
       parentPageName: {
-        type: String
+        type: String, 
+        default: ""
       },
       parentPageNotes: {
-        type: String
+        type: String,
+        default: ""
       },
       subpage: [{
         childPageName: {
-          type: String
+          type: String,
+          default: ""
         },
         childPageNotes: {
-          type: String
+          type: String,
+          default: ""
         }
       }]
   }]

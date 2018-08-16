@@ -12,7 +12,7 @@ var User = require("../models/user");
 var Blueprint = require("../models/blueprint");
 
 // Dashboard Index Route
-router.get("/", /*isLoggedIn,*/ function(req, res) {
+router.get("/", function(req, res) {
     TeamTracker.find({}, function(eryr, allTracks) {
         User.find({}, function(err, allUsers) {
             Blueprint.find({}, function(err, allBlueprints) {
@@ -31,7 +31,7 @@ router.get("/", /*isLoggedIn,*/ function(req, res) {
 });
 
 // See All Blueprints Page
-router.get("/see-all", /* isLoggedIn, */ function(req, res){
+router.get("/see-all", function(req, res){
     TeamTracker.find({}, function(err, allTracks){
       User.find({}, function(err, allUsers){
         Blueprint.find({}, function(err, allBlueprints) {
@@ -51,7 +51,7 @@ router.get("/see-all", /* isLoggedIn, */ function(req, res){
 
 
 // New Blueprint Page
-router.get("/new", /*isLoggedIn,*/ function(req, res) {
+router.get("/new", function(req, res) {
     TeamTracker.find({}, function(err, allTracks) {
         User.find({}, function(err, allUsers) {
             Blueprint.find({}, function(err, allBlueprints) {
@@ -89,21 +89,52 @@ router.post("/new", function(req, res) {
                     type: 'nodebuffer'
                 });
             fs.writeFileSync(path.resolve(__dirname, 'word/blueprint_template_output.docx'), buf);
-            res.send("Success");
+            req.flash("success", "Your Blueprint has been created!");
+            res.redirect("/blueprint-generator");
         }
     });
 });
 
 
+router.route('/testpage').get(function(req, res){
+    res.send("test");
+});
 
-//middleware
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    req.flash("error", "Please Login First!");
-    res.redirect("/login");
-}
 
+
+  // define the home page route
+  router.post('/test', function (req, res) {
+    res.send('chaining test')
+  })
+
+
+
+
+// CREATE ROUTE
+router.get("/see-all/download/:id", function(req, res) {
+    var data = req.params.practiceName;
+    console.log(data);
+    res.send("test")
+});
+
+
+// New Blueprint Page
+router.get("/new", function(req, res) {
+    TeamTracker.find({}, function(err, allTracks) {
+        User.find({}, function(err, allUsers) {
+            Blueprint.find({}, function(err, allBlueprints) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.render("blueprint-generator/new", {
+                        tracking: allTracks,
+                        users: allUsers,
+                        blueprint: allBlueprints
+                    });
+                }
+            })
+        })
+    })
+});
 
 module.exports = router;

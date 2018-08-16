@@ -5,7 +5,7 @@ var User = require("../models/user");
 var TaskTypes = require("../models/taskType");
 
 // Dashboard Index Route
-router.get("/", isLoggedIn, function(req, res){
+router.get("/", function(req, res){
   TeamTracker.find({}, function(err, allTracks){
     User.find({}, function(err, allUsers){
       TaskTypes.find({}, function(err, allTask){
@@ -24,7 +24,7 @@ router.get("/", isLoggedIn, function(req, res){
 });
 
 // Edit task Route
-router.get("/edit-task", isLoggedIn, function(req, res){
+router.get("/edit-task", function(req, res){
   TeamTracker.find({}, function(err, allTracks){
     User.find({}, function(err, allUsers){
       if(err){
@@ -39,13 +39,4 @@ router.get("/edit-task", isLoggedIn, function(req, res){
   })
 });
 
-  //middleware
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }
-  req.flash("error", "Please Login First!");
-  res.redirect("/login");
-}
-  
 module.exports = router;
