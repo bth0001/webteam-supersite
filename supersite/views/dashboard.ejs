@@ -63,24 +63,8 @@
             <script src="https://d3js.org/d3.v3.min.js"></script>
             <script>
               /// d3 actionsssss		
-              var data=[
-                {
-                  "taskType":"Essentials",
-                  "totalTasks":5
-                },
-                {
-                  "taskType":"Starters",
-                  "totalTasks":2
-                },
-                {
-                  "taskType":"Content Entries",
-                  "totalTasks":6
-                },
-                {
-                  "taskType":"T.Link Brandings",
-                  "totalTasks":3
-                }
-              ];
+              var pieData=[{"taskType":"Essentials", "totalTasks":5}, {"taskType":"Starters","totalTasks":2}, {"taskType":"Content Entries", "totalTasks":6}, {"taskType":"T.Link Brandings", "totalTasks":3}];
+
 
               var width = 800,
                 height = 250,
@@ -106,14 +90,14 @@
                 .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
               var g = svg.selectAll(".arc")
-                .data(pie(data))
+                .data(pie(pieData))
                 .enter().append("g")
                 .attr("class", "arc");
 
               g.append("path")
                 .attr("d", arc)
                 .style("fill", function (d) {
-                return color(d.data.taskType);
+                return color(d.pieData.taskType);
               });
 
               g.append("text")
@@ -123,7 +107,7 @@
                 .attr("dy", ".35em")
                 .style("text-anchor", "middle")
                 .text(function (d) {
-                  return d.data.taskType;
+                  return d.pieData.taskType;
                 });
             </script>
           <% } %>
