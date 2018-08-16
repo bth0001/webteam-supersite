@@ -1,16 +1,88 @@
-body {background-color: #d0cdcd; }
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Raleway:300,400,700');
 
-.flexbox {display: flex; flex-wrap: wrap;}
+html {
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+*, *:before, *:after {
+	-moz-box-sizing:inherit;
+	box-sizing:inherit;
+}
+
+body {background-color:#f4f4f4; font-family: 'Roboto', sans-serif; font-size: 1rem; font-weight: 300;}
+
+.container {margin:0 auto; max-width: 1200px; padding: 0; width:calc(100% - 150px);}
+
+.flexbox {
+	display:-webkit-box;
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-wrap:wrap;
+	flex-wrap:wrap;
+}
+.flexLeft {
+	-webkit-box-pack:flex-start;
+	-ms-flex-pack:flex-start;
+	justify-content:flex-start;
+	-webkit-box-align:center;
+	-ms-flex-align:center;
+	align-items:center;
+}
+.flexRight {
+	-webkit-box-pack:flex-end;
+	-ms-flex-pack:flex-end;
+	justify-content:flex-end;
+	-webkit-box-align:center;
+	-ms-flex-align:center;
+	align-items:center;
+}
+.flexCenter {
+	-webkit-box-pack:center;
+	-ms-flex-pack:center;
+	justify-content:center;
+	-webkit-box-align:center;
+	-ms-flex-align:center;
+	align-items:center;
+}
+.flexJustify {
+	-webkit-box-align:center;
+	-ms-flex-align:center;
+	align-items:center;
+	-webkit-box-pack:justify;
+	-ms-flex-pack:justify;
+	justify-content:space-between;
+}
+.flexAround {
+	-webkit-box-pack:justify;
+	-ms-flex-pack:justify;
+	justify-content:space-around;
+}
+.center {text-align: center;}
+
+h1, h2, h3, h4, h5, h6 {color: #545454; line-height:1.35em; margin:0 0 .15em;}
+
+h1 {font-family: 'Raleway', sans-serif; font-size:2em; font-weight: 400; margin: 0 0 20px;}
+h2 {font-family: 'Raleway', sans-serif; font-size:1.5em; font-weight: 400; padding-bottom: 20px;}
+h3 {font-family: 'Raleway', sans-serif; font-size:1.25em;}
+h4 {font-size:1.125em; font-weight: 300; text-transform: uppercase;}
+h5 {font-size:1.05em;}
+h6 {font-size:1em;}
+
+p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0 0 1em;}
+.fas {padding: 0 0 0 15px;}
+#siteBody {min-height: 600px;}
 
 /*header */
-#adminBar {background-color:#323232; padding:10px 0;}
-#adminBar .container {max-width:85%;}
+#adminBar {background-color:#323232; padding:15px 0;}
 #adminBar a {color:inherit; text-decoration:none;}
-#adminBar .logo img {opacity: 0.8;}
-#adminBar .logo img:hover {opacity: 1;}
-#adminBar a img {width:35%;}
-#adminBar > div.container {display:flex; align-items:center;}
-#adminBar > div.container > div.logo {flex:1 auto;}
+#adminBar #logo img {max-width: 150px; opacity: 0.8;}
+#adminBar #logo img:hover {opacity: 1;}
+
+#profileBar .fas {color: #19B9E7;}
+.profileImage {margin: 0 10px 0;}
+.profileImage img {border-radius: 50%; border: 2px solid #19B9E7; max-width: 50px;}
+.profileText {text-align: center;}
+.profileText p {color: #fff; font-family: 'Raleway', sans-serif; font-size: .9em; font-weight: 300; margin: 0;}
 
 #navBar ul li {list-style: none;}
 #utilityNav {flex:1 auto; text-align:right; margin:0; padding:0;}
@@ -23,9 +95,17 @@ body {background-color: #d0cdcd; }
 #utilityNav span.loggedIn:after {content:" | "; margin:0 0 0 20px;}
 #utilityNav .loggedIn img {height:50px; width:50px; border-radius:50%; margin-left:10px;}
 
-#siteBody .container {max-width:85%; padding: 50px 0}
+#navBar {background: linear-gradient(135deg, rgba(38,55,176,1) 0%,rgba(35,150,163,1) 100%); padding: 30px 0 0;}
+#navBar a {color:#fff; display: block; font-family:'Roboto', sans-serif; font-size: 1em; font-weight: 300; padding: 15px; text-decoration: none; }
+#navBar a:hover {background:#fff; color:#2637B0;}
+#navBar ul {padding: 0; margin: 0;}
+
+.searchBox {background: rgba(255,255,255,.1); color: #fff; width: 250px; padding: 6px 15px;}
+
 
 /* Home */
+#overview {background: #fff; padding: 5vh 0;}
+
 .home {text-align:center;}
 .asideUser img { width:100%; border:3px solid #252525;}
 .asideUser h3 {border-bottom:2px solid #252525;}
@@ -114,6 +194,5 @@ div .task > * {flex: 30%; margin: 0 10px;}
 .labelNotes textarea {flex:100%;}
 
 /* footer */
-#footer {background-color:#252525; bottom:0; margin:0; padding:30px 0; width:100%;}
-#footer .container {max-width:85%;}
+#footer {background: linear-gradient(135deg, rgba(204,61,190,1) 0%,rgba(119,42,219,1) 100%); bottom:0; margin:0; padding:15px 0; width:100%;}
 #footer p {color:#fff; margin:0; text-align:center;}
