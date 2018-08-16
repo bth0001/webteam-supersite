@@ -2,18 +2,12 @@ const mongoose = require("mongoose");
 
 const blueprintWizardSchema = new mongoose.Schema({
   onboarder: {
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
-    },
-    role: String
-  },
+    type: String,
+    ref: "User"
+},
   designer: {
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "User"
-    },
-    role: String
   },
   homeScreenshot: {
     type: String
@@ -74,7 +68,7 @@ const blueprintWizardSchema = new mongoose.Schema({
   developerNotes: {
     type: String
   },
-  siteArchitecture: {
+  siteArchitecture: [{
       parentPageName: {
         type: String
       },
@@ -89,7 +83,7 @@ const blueprintWizardSchema = new mongoose.Schema({
           type: String
         }
       }]
-  }
+  }]
 });
 
 const BlueprintWizard = mongoose.model("BlueprintWizard", blueprintWizardSchema);
