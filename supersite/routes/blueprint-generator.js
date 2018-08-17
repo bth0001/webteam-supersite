@@ -75,6 +75,7 @@ router.post("/new", function(req, res) {
     // create blog and then redirect to the index
     Blueprint.create(req.body.blueprint, function(err, newBlueprint) {
         var data = req.body.blueprint;
+        console.log()
         if (err) {
             console.log(err);
         } else {
@@ -96,25 +97,28 @@ router.post("/new", function(req, res) {
 });
 
 
-router.route('/testpage').get(function(req, res){
-    res.send("test");
-});
-
-
-
-  // define the home page route
-  router.post('/test', function (req, res) {
-    res.send('chaining test')
-  })
-
-
-
-
-// CREATE ROUTE
+// Download Button
 router.get("/see-all/download/:id", function(req, res) {
-    var data = req.params.practiceName;
-    console.log(data);
-    res.send("test")
+    var data = req.params.id; //pull blueprint data from database
+    Blueprint.findById(data, function(err, findBlueprint) {
+        if (err) {
+            console.log(err);
+        } else {
+            var content = fs
+                .readFileSync(path.resolve(__dirname, 'word/blueprint_template.docx'), 'binary');
+            var zip = new JSZip(content);
+            var doc = new Docxtemplater();
+            doc.loadZip(zip);
+            doc.setData(findBlueprint).render();
+            var buf = doc.getZip()
+                .generate({
+                    type: 'nodebuffer'
+                });
+            fs.writeFileSync(path.resolve(__dirname, 'word/blueprint_template_output.docx'), buf);
+            req.flash("success", "Starting Download...");
+            res.redirect("/blueprint-generator/see-all");
+        }
+    });
 });
 
 
