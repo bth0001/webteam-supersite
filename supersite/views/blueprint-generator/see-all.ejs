@@ -3,16 +3,17 @@
 /* See All Blueprints Page */
 div.blueprintContainer h4 {font-size: 14px;}
 div.blueprintContainer span {padding: 0 10px 0 20px; font-size: 18px;}
-div.blueprintContainer a.more {background-color: #4539ec; color: #fff; padding: 10px; display: flex; height: 30px; width: 30px; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid #fff;}
+div.blueprintContainer a.more, div.blueprintContainer a.download {background-color: #4539ec; color: #fff; padding: 10px; display: flex; height: 30px; width: 30px; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid #fff;}
+div.blueprintContainer a.download {width: 100px;}
 div.blueprintContainer a.more:before {content: "\f067"; font-family: FontAwesome;}
 div.blueprintContainer a.more.open:before {content: "\f068"}
 div.blueprintContainer a.more.open {background-color: #07b532;}
-div.blueprintContainer {}
 div.blueprintContainer > div.top {display: flex; align-items: center; border: 1px solid #000; background-color: #f3f3f3;}
 div.blueprintContainer > div.top > div:not(:last-of-type) {border-right: 1px solid #000; flex: 1; padding: 10px;}
-div.blueprintContainer > div.top > div.seeMore {display: flex; padding: 5px;}
-div.blueprintContainer > div.top > div.seeMore a.more {display: block; display: flex; cursor: pointer; text-decoration: none;}
-div.blueprintContainer > div.top > div.seeMore a.more:hover {text-decoration: none; color: #fff;}
+div.blueprintContainer > div.top > div.seeMore {display: flex; padding: 5px; flex: 0 50px;}
+div.blueprintContainer > div.top > div.download {display: flex; padding: 5px; flex: 0 125px;}
+div.blueprintContainer a.more, div.blueprintContainer a.download {display: block; display: flex; cursor: pointer; text-decoration: none;}
+div.blueprintContainer a.more:hover, div.blueprintContainer a.download:hover {text-decoration: none; color: #fff;}
 div.blueprintContainer > div.bottom {visibility: hidden; max-height: 0; overflow: hidden; opacity: 0; padding: 0; transition: opacity 300ms ease; overflow: hidden; background-color: #fff; border-radius: 0 0 6px 6px; border: 1px solid #000; border-top: 0;}
 div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;opacity: 1;padding: 20px;margin:  0 0 20px;}
 </style>
@@ -42,6 +43,9 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
         <div class="seeMore">
             <a class="more"></a>
         </div>
+        <div class="download">
+                <a href="/blueprint-generator/see-all/download/<%= blueprint._id %>" class="download">Download</a>
+        </div>
     </div><!--top-->
     <div class="bottom">
         <div>
@@ -64,6 +68,28 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
             <h4>Interior Screenshot:</h4>
             <span><%= blueprint.interiorScreenshot %></span>
         </div>
+        <div>
+            <div class="siteArchitecture">
+                    <h3>Site Architecture:</h3>
+                    <ul class="parent">
+                        <% for (iParent = 0; iParent < blueprint.siteArchitecture.length; iParent++) { %>
+                            <li> <%= blueprint.siteArchitecture[iParent].parentPageName %> <%= blueprint.siteArchitecture[iParent].parentPageNotes %> 
+                                <% if (blueprint.siteArchitecture[iParent].subpage[0].childPageName != "") { %>
+                                    <% var iChild = 0; %>
+                                    <% for (iChild = iChild; iChild < blueprint.siteArchitecture.length; iChild++) { %>
+                                        <ul class="child">
+                                            <li>
+                                                <%# blueprint.siteArchitecture[iParent].subpage[iChild].childPageName %>
+                                                <%# blueprint.siteArchitecture[iParent].subpage[iChild].childPageNotes %>
+                                            </li>
+                                        </ul>
+                                    <% } %>
+                                <% } %>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+        </div>
     </div><!--bottom-->
 </div>
 <% }); %>
@@ -71,10 +97,3 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
 </div>
 
 <% include ../partials/footer %>
-
-
-<hr />
-
-<% blueprints.forEach(function(blueprint){ %>
-<span><%= blueprint.siteArchitecture %></span>
-<% }); %>

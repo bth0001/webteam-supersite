@@ -1,36 +1,93 @@
 <% include ../partials/header %>
 
-<style>
-    form#blueprint {max-width: none;}
-</style>
+  <style>
+    form#blueprint {
+      max-width: none;
+    }
 
+    #pageTable a {
+      display: inline-block;
+      padding: 5px;
+      border-radius: 6px;
+      margin: 5px 0;
+      cursor: pointer
+    }
 
-<a href="/dashboard">&larr; Back to Dashboard</a><br /><br />
+    #pageTable a.addSubpage {
+      background-color: #4cc500;
+      color: #fff;
+      font-size: 11px;
+    }
 
-<h2>Blueprint Wizard</h2>
-<form id="blueprint" action="/blueprint-generator/new" method="POST">
+    #pageTable a.removeSubpage,
+    #pageTable a.removeSpecificSubpage {
+      background-color: #c50000;
+      color: #fff;
+      font-size: 11px;
+    }
 
-    <select name="blueprint[onboarder]">
-      <option value="" disabled selected>Select Onboarder</option>
-      <option value="Denise">Denise</option>
-      <option value="Rachel">Rachel</option>
-      <option value="Stacey">Stacey</option>
-    </select><!--onboarder-->
-  
-    <select name="designer">
-      <option value="" disabled selected>Select Designer</option>
-      <option value="Jodi">Jodi</option>
-      <option value="Yogesh">Yogesh</option>
-      <option value="Michael">Michael</option>
-      <option value="Nick">Nick</option>
-      <option value="Garo">Garo</option>
-    </select><!--onboarder-->
- 
-    <input type="text" name="blueprint[homeScreenshot]" placeholder="Home Screenshot" />
-    <input type="text" name="blueprint[interiorScreenshot]" placeholder="Interior Screenshot" />
-    <input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />
-  
-    <select name="blueprint[howManyDoctors]">
+    #pageTable a.addParent {
+      background-color: #605dff;
+      color: #fff;
+    }
+
+    #pageTable a.removeParent,
+    #pageTable a.removeAll {
+      background-color: #1e1d6f;
+      color: #fff;
+    }
+
+    #pageTable input {
+      display: inline-block;
+      width: auto;
+    }
+
+    #pageTable div.pageInput {
+      padding: 10px 0;
+    }
+  </style>
+
+  <a href="/dashboard">&larr; Back to Dashboard</a><br /><br />
+
+  <h2>Blueprint Wizard</h2>
+  <form id="blueprint" onsubmit="assignNames()" action="/blueprint-generator/new" method="POST">
+
+    <div class="formField">
+      <label for="blueprint[onboarder]">Onboarder:</label>
+      <select name="blueprint[onboarder]">
+        <option value="Select Onboarder" disabled selected>Select Onboarder</option>
+        <% users.forEach(function(user){ %>
+          <% if(user.team == 'On-Boarder') { %>
+              <option value="<%= user.firstName %>"><%= user.firstName %></option>
+          <% } %>
+      <% }); %>
+    </select>
+    </div>
+
+    <div class="formField">
+      <label for="blueprint[onboarder]">Designer:</label>
+      <select name="blueprint[designer]">
+      <option value="Select Designer" disabled selected>Select Designer</option>
+      <% users.forEach(function(user){ %>
+        <% if(user.team == 'Designer') { %>
+            <option value="<%= user.firstName %>"><%= user.firstName %></option>
+        <% } %>
+    <% }); %>
+  </select>
+    </div>
+
+    <div class="formField">
+      <input type="text" name="blueprint[homeScreenshot]" placeholder="Home Screenshot" />
+    </div>
+    <div class="formField">
+      <input type="text" name="blueprint[interiorScreenshot]" placeholder="Interior Screenshot" />
+    </div>
+    <div class="formField">
+      <input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />
+    </div>
+
+    <div class="formField">
+      <select name="blueprint[howManyDoctors]">
     <option value="" disabled selected>How many doctors?</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -42,67 +99,92 @@
     <option value="8">8</option>
     <option value="9">9</option>
     <option value="10+">10+</option>
-  </select><!--onboarder-->
-  
-  <input type="text" name="blueprint[practiceName]" placeholder="Practice Name" />
-  <input type="text" name="blueprint[contactName]" placeholder="Contact Name" />
-  <input type="text" name="blueprint[contactEmail]" placeholder="Contact Email" />
-  <input type="text" name="blueprint[contactNumber]" placeholder="Contact Number" />
-  <input type="text" name="blueprint[address]" placeholder="Address" />
-  
-  <select name="blueprint[howManyOffices">
-    <option value="" disabled selected>How many offices?</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10+">10+</option>
-  </select><!--onboarder-->
-  
-  <input type="text" name="blueprint[dearDoctorID]" placeholder="Dear Doctor ID" />
-  <input type="text" name="blueprint[practiceEmail]" placeholder="Practice Email" />
-  <input type="text" name="blueprint[currentSiteURL]" placeholder="Current Site Url" />
-  <input type="text" name="blueprint[clientUsername]" placeholder="Client Username" />
-  <input type="text" name="blueprint[clientPassword]" placeholder="Client Password" />
-  
-  <hr />
-    <label for="copywriteNotes">Copywrite Notes:</label> 
-    <textarea name="blueprint[copywriteNotes]" cols="100" rows="2"></textarea>
+  </select>
+      <!--onboarder-->
+    </div>
 
-    <label for="designerNotes">Designer Notes:</label> 
-    <textarea name="blueprint[designerNotes]" cols="100" rows="2"></textarea>
+    <div class="formField">
+      <input type="text" name="blueprint[practiceName]" placeholder="Practice Name" />
+    </div>
+    <div class="formField">
+      <input type="text" name="blueprint[contactName]" placeholder="Contact Name" />
+    </div>
+    <div class="formField">
+      <input type="text" name="blueprint[contactEmail]" placeholder="Contact Email" />
+    </div>
+    <div class="formField">
+      <input type="text" name="blueprint[contactNumber]" placeholder="Contact Number" />
+    </div>
+    <div class="formField">
+      <input type="text" name="blueprint[address]" placeholder="Address" />
+    </div>
 
-    <label for="developerNotes">Developer Notes</label> 
-    <textarea name="blueprint[developerNotes]" cols="100" rows="2"></textarea>
-<hr />
+    <div class="formField">
+      <select name="blueprint[howManyOffices">
+        <option value="" disabled selected>How many offices?</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10+">10+</option>
+      </select>
+      <!--onboarder-->
+    </div>
 
-<span>Home Page</span>
-<input type="text" name="blueprint[siteArchitecture][parentPageName]" placeholder="Parent Page Name" />
-<input type="text" name="blueprint[siteArchitecture][parentPageNotes]" placeholder="Parent Page Notes" />
+    <div class="formField">
+      <input type="text" name="blueprint[dearDoctorID]" placeholder="Dear Doctor ID" />
+    </div>
+    <div class="formField">
+      <input type="text" name="blueprint[practiceEmail]" placeholder="Practice Email" />
+    </div>
+    <div class="formField">
+      <input type="text" name="blueprint[currentSiteURL]" placeholder="Current Site Url" />
+    </div>
+    <div class="formField">
+      <input type="text" name="blueprint[clientUsername]" placeholder="Client Username" />
+    </div>
+    <div class="formField">
+      <input type="text" name="blueprint[clientPassword]" placeholder="Client Password" />
+    </div>
 
-<span>Child Page</span>
-<input type="text" name="blueprint[siteArchitecture][subpage][0][childPageName]" placeholder="Child Page Name" />
-<input type="text" name="blueprint[siteArchitecture][subpage][0][childPageNotes]" placeholder="Child Page Notes" />
+    <div class="formField">
+      <label for="copywriteNotes">Copywrite Notes:</label>
+      <textarea name="blueprint[copywriteNotes]" cols="100" rows="2"></textarea>
+    </div>
 
-<span>Child Page</span>
-<input type="text" name="blueprint[siteArchitecture][subpage][1][childPageName]" placeholder="Child Page Name" />
-<input type="text" name="blueprint[siteArchitecture][subpage][1][childPageNotes]" placeholder="Child Page Notes" />
+    <div class="formField">
+      <label for="designerNotes">Designer Notes:</label>
+      <textarea name="blueprint[designerNotes]" cols="100" rows="2"></textarea>
+    </div>
 
-<span>Child Page</span>
-<input type="text" name="blueprint[siteArchitecture][subpage][2][childPageName]" placeholder="Child Page Name" />
-<input type="text" name="blueprint[siteArchitecture][subpage][2][childPageNotes]" placeholder="Child Page Notes" />
+    <div class="formField">
+      <label for="developerNotes">Developer Notes</label>
+      <textarea name="blueprint[developerNotes]" cols="100" rows="2"></textarea>
+    </div>
 
-<span>Child Page</span>
-<input type="text" name="blueprint[siteArchitecture][subpage][3][childPageName]" placeholder="Child Page Name" />
-<input type="text" name="blueprint[siteArchitecture][subpage][3][childPageNotes]" placeholder="Child Page Notes" />
-  
-  <button>Submit</button>
+    <div id="pageTable">
+      <div class="pageInput">
+        <div class="parent">
+          <span>Parent Page</span>
+          <input class="parentText" type="text" placeholder="Parent Page Name" value="" />
+          <input class="parentNotes" type="text" placeholder="Parent Page Notes" value="" />
+          <a class="removeAll">---</a>
+        </div>
+        <a class="addSubpage">+ Add Subpage</a> | <a class="removeSubpage">- Remove Subpage</a>
+      </div>
+      <a class="addParent">+ Add Parent</a> | <a class="removeParent">- Remove Parent</a>
+    </div>
 
-</form>
+    <div class="formButtons">
+      <button id="submit">Submit</button>
+    </div>
+  </form>
 
-<% include ../partials/footer %>
+  <%= blueprint %>
+
+    <% include ../partials/footer %>
