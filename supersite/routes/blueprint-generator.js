@@ -74,25 +74,36 @@ router.get("/new", function(req, res) {
 router.post("/new", function(req, res) {
     // create blog and then redirect to the index
     Blueprint.create(req.body.blueprint, function(err, newBlueprint) {
-        var data = req.body.blueprint;
-        console.log()
+
+    // TEMP CODE 
         if (err) {
             console.log(err);
         } else {
-            var content = fs
-                .readFileSync(path.resolve(__dirname, 'word/blueprint_template.docx'), 'binary');
-            var zip = new JSZip(content);
-            var doc = new Docxtemplater();
-            doc.loadZip(zip);
-            doc.setData(data).render();
-            var buf = doc.getZip()
-                .generate({
-                    type: 'nodebuffer'
-                });
-            fs.writeFileSync(path.resolve(__dirname, 'word/blueprint_template_output.docx'), buf);
-            req.flash("success", "Your Blueprint has been created!");
+            req.flash("success", "Your blueprint has been created!");
             res.redirect("/blueprint-generator");
         }
+
+    // ADJUST THIS CODE AT A LATER DATE==========================
+        // var data = req.body.blueprint;
+        // console.log()
+        // if (err) {
+        //     console.log(err);
+        // } else {
+        //     var content = fs
+        //         .readFileSync(path.resolve(__dirname, 'word/blueprint_template.docx'), 'binary');
+        //     var zip = new JSZip(content);
+        //     var doc = new Docxtemplater();
+        //     doc.loadZip(zip);
+        //     doc.setData(data).render();
+        //     var buf = doc.getZip()
+        //         .generate({
+        //             type: 'nodebuffer'
+        //         });
+        //     fs.writeFileSync(path.resolve(__dirname, 'word/blueprint_template_output.docx'), buf);
+        //     req.flash("success", "Your Blueprint has been created!");
+        //     res.redirect("/blueprint-generator");
+        // }
+    //============================================================
     });
 });
 
