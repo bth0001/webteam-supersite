@@ -30,12 +30,17 @@ router.post("/", function(req, res){
   var teamTrack = req.body.teamTrack;
   const newTrack = Object.assign(teamTrack, {author: author});
     TeamTracker.create(newTrack, function(err, newlyTracked){
+      newlyTracked.taskTypes.forEach(function(data) {
+        return TaskTypes.create(data, function(err, newlyTasked){
+          
+      });
       console.log(author.firstName);
       if(err){
       console.log(err)
     } else {
       res.redirect("/dashboard");
     }
+  });
     });
 });
 
@@ -77,6 +82,13 @@ router.get("/:id/edit", function(req, res){
 router.put("/:id", function(req, res){
    //find and update correct tracker
    TeamTracker.findByIdAndUpdate(req.params.id, req.body.tracking, function(err, updatedTracker){
+    
+    updatedTracker.taskTypes.forEach(function(data) {
+      console.log("================================");
+      console.log(data._id);
+    });
+    console.log("================================");
+
        if(err){
         console.log()
           req.flash("error", err.message);
