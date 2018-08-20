@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const taskTypeSchema = new mongoose.Schema({  
-     
+       
           taskTypeName: {
             type: String
           },
