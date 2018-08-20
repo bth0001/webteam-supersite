@@ -6,7 +6,7 @@ var TaskTypes = require("../models/taskType");
 
 
 //Index route
-router.get("/", isLoggedIn, function(req, res){
+router.get("/", function(req, res){
   TeamTracker.find({}, function(err, allTracks){
     User.find({}, function(err, allUsers){
       TaskTypes.find({}, function(err, allTask){
@@ -25,17 +25,22 @@ router.get("/", isLoggedIn, function(req, res){
 });
 
 //POST new teamTracked
-router.post("/", isLoggedIn, function(req, res){
+router.post("/", function(req, res){
   var author = {id: req.user._id, firstName: req.user.firstName};
   var teamTrack = req.body.teamTrack;
   const newTrack = Object.assign(teamTrack, {author: author});
     TeamTracker.create(newTrack, function(err, newlyTracked){
+      newlyTracked.taskTypes.forEach(function(data) {
+        return TaskTypes.create(data, function(err, newlyTasked){
+          
+      });
       console.log(author.firstName);
       if(err){
       console.log(err)
     } else {
       res.redirect("/dashboard");
     }
+  });
     });
 });
 
@@ -43,7 +48,7 @@ router.post("/", isLoggedIn, function(req, res){
 //==============================================================================
 
 //SHOW - show more info about one campground
-router.get("/:id", isLoggedIn, function(req, res){
+router.get("/:id", function(req, res){
     //find the campground with provided ID - .populate("comments")
     TeamTracker.findById(req.params.id).exec(function(err, allTracks){
       User.find({}, function(err, allUsers){
@@ -62,7 +67,7 @@ router.get("/:id", isLoggedIn, function(req, res){
 });
 
 //edit tracker route
-router.get("/:id/edit", isLoggedIn , function(req, res){
+router.get("/:id/edit", function(req, res){
   TeamTracker.findById(req.params.id, function(err, foundTracked){
     User.find({}, function(err, allUsers){
       res.render("tracker/edit", {
@@ -74,9 +79,16 @@ router.get("/:id/edit", isLoggedIn , function(req, res){
 });
 
 //update tracker route
-router.put("/:id", isLoggedIn, function(req, res){
+router.put("/:id", function(req, res){
    //find and update correct tracker
    TeamTracker.findByIdAndUpdate(req.params.id, req.body.tracking, function(err, updatedTracker){
+    
+    updatedTracker.taskTypes.forEach(function(data) {
+      console.log("================================");
+      console.log(data._id);
+    });
+    console.log("================================");
+
        if(err){
         console.log()
           req.flash("error", err.message);
@@ -90,7 +102,7 @@ router.put("/:id", isLoggedIn, function(req, res){
 
 
 //Destroy Route
-router.delete("/:id", isLoggedIn, function(req, res){
+router.delete("/:id", function(req, res){
     TeamTracker.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/tracker");
@@ -99,13 +111,5 @@ router.delete("/:id", isLoggedIn, function(req, res){
         }
     });
 });
-//Delete Route
-
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }
-  res.redirect("/login")
-}
 
 module.exports = router;

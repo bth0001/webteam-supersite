@@ -79,7 +79,6 @@ passport.deserializeUser(function(id, done) {
 
 
 //==============================================================================
-
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
   res.locals.error = req.flash("error");
@@ -94,6 +93,7 @@ app.use('/', [
   resetRoutes
 ]);
 
+app.all("*", isLoggedIn); // For Authentication 
 app.use('/tracker', trackerRoutes);
 app.use('/users', usersRouter);
 app.use('/dashboard', dashboardRouter);
@@ -111,5 +111,12 @@ app.get('/forgot', function(req, res) {
   });
 });
 
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+      return next();
+  }
+  req.flash("error", "Please Login First!");
+  res.redirect("/login");
+}
 
 module.exports = app;

@@ -4,7 +4,7 @@
       <p><a href="/tracker">&larr; Back to Tracker</a></p>
     <div class="col-md-12">
       <h1>Edit Task</h1>
-      <form class="trackerForm" action="/tracker/<%= tracking._id %>?_method=PUT" method="POST">
+      <form onsubmit="countTaskTypes();" class="trackerForm" action="/tracker/<%= tracking._id %>?_method=PUT" method="POST">
         <div class="form-group">
           <label name="date">Date:
             <input type="date" name="tracking[date]" required value="<%= tracking.date %>" />
@@ -41,59 +41,140 @@
           </label>
         </div> <!-- end of form-group -->
         <div class="form-group">
-          <label name="tracking[buildPkg]">Build Package:
-            <select name="tracking[buildPkg]" id="buildPkg">
-                <option value="<%= tracking.buildPkg %>"><%= tracking.buildPkg %></option>
-                <% if(tracking.buildPkg === "Essential") { %>
-                  <option value="Starter">Starter</option>
+            <label name="tracking[buildPkg]">Build Package:
+              <select name="tracking[buildPkg]" id="buildPkg">
+                  <% if(tracking.buildPkg === "Essential") { %>
+                    <option selected value="Essential">Essential</option>
+                    <option value="Starter">Starter</option>
+                    <% } %>
+                  <% if(tracking.buildPkg === "Starter") { %>
+                    <option value="Essential">Essential</option>
+                    <option selected value="Starter">Starter</option>
                   <% } %>
-                <% if(tracking.buildPkg === "Starter") { %>
-                  <option value="Essential">Essential</option>
-                <% } %>
-            </select>
-          </label>
-          <% if(tracking.buildPkg === "Starter") { %>
-          <label name="tracking[starterTemplate]" class="ifStarter">Starter Template:
-            <select name="tracking[starterTemplate]">
-              <option value="<%= tracking.starterTemplate %>"><%= tracking.starterTemplate %></option>
-              <option value="None">None</option>
-              <option value="Neverland">Neverland</option>
-              <option value="Atlantis">Atlantis</option>
-              <option value="Camelot">Camelot</option>
-              <option value="Olympus">Olympus</option>
-            </select>
-          </label>
-          <% } %>
-        </div> <!-- end of form-group -->
-        <div class="form-group">
+              </select>
+            </label>
+            <% if(tracking.buildPkg === "Starter") { %>
+            <label name="tracking[starterTemplate]" class="ifStarter">Starter Template:
+              <select name="tracking[starterTemplate]">
+                <option value="<%= tracking.starterTemplate %>"><%= tracking.starterTemplate %></option>
+                <option value="None">None</option>
+                <option value="Neverland">Neverland</option>
+                <option value="Atlantis">Atlantis</option>
+                <option value="Camelot">Camelot</option>
+                <option value="Olympus">Olympus</option>
+              </select>
+            </label>
+          </div>
+            <div class="form-group" style="display: none;">
+                  <label name="tracking[specialFeatures]" class="ifEssential">Special Features:
+                    <select name="tracking[specialFeatures]" multiple >
+                      <option value="<%= tracking.specialFeatures %>" selected><%= tracking.specialFeatures %></option>
+                      <option value=" Breadcrumbs">Breadcrumbs</option>
+                      <option value=" Interior Featured Image">Interior Featured Image</option>
+                      <option value=" Mega Menu">Mega Menu</option>
+                      <option value=" Object Fit">Object Fit</option>
+                      <option value=" Shrinky Header">Shrinky Header</option>
+                      <option value=" Search Bar">Search Bar</option>
+                      <option value=" Scroll Efects">Scroll Effects</option>
+                    </select>
+                  </label>
+                  
+                </div> <!-- end of form-group -->
+                <div class="form-group">
+                      <label name="tracking[domain]">Domain:
+                        <input type="text" name="tracking[domain]" value="<%= tracking.domain %>">
+                      </label>
+                      <label style="display: none" name="cssPath" class="ifEssential toggleEssential">CSS Path:
+                            <input type="text" name="tracking[cssPath]" value="<%= tracking.cssPath %>" class="essentialClearInput">
+                          </label>
+                    </div> <!-- end of form-group -->
+            <% } %>
           <% if(tracking.buildPkg === "Essential") { %>
-          <label name="tracking[specialFeatures]" class="ifEssential">Special Features:
-            <select name="tracking[specialFeatures]" multiple >
-              <option value="<%= tracking.specialFeatures %>" selected><%= tracking.specialFeatures %></option>
-              <option value=" Breadcrumbs">Breadcrumbs</option>
-              <option value=" Interior Featured Image">Interior Featured Image</option>
-              <option value=" Mega Menu">Mega Menu</option>
-              <option value=" Object Fit">Object Fit</option>
-              <option value=" Shrinky Header">Shrinky Header</option>
-              <option value=" Search Bar">Search Bar</option>
-              <option value=" Scroll Efects">Scroll Effects</option>
-            </select>
-          </label>
-          <% } %>
-        </div> <!-- end of form-group -->
-        <div class="form-group">
-          <label name="tracking[domain]">Domain:
-            <input type="text" name="tracking[domain]" value="<%= tracking.domain %>">
-          </label>
-        </div> <!-- end of form-group -->
-        <!-- <div class="form-group">
-          <label class="labelTask" name="tracking[taskType]">Task:
-            <input type="text" name="tracking[taskType]" placeholder="Logic coming later">
-          </label>
-        </div> end of form-group -->
+              <label name="tracking[starterTemplate]" class="ifStarter" style="display: none;">Starter Template:
+                      <select name="tracking[starterTemplate]">
+                        <option value="<%= tracking.starterTemplate %>"><%= tracking.starterTemplate %></option>
+                        <option value="None">None</option>
+                        <option value="Neverland">Neverland</option>
+                        <option value="Atlantis">Atlantis</option>
+                        <option value="Camelot">Camelot</option>
+                        <option value="Olympus">Olympus</option>
+                      </select>
+                    </label>
+                  </div>
+          <div class="form-group">
+            <label name="tracking[specialFeatures]" class="ifEssential">Special Features:
+              <select name="tracking[specialFeatures]" multiple >
+                <option value="<%= tracking.specialFeatures %>" selected><%= tracking.specialFeatures %></option>
+                <option value=" Breadcrumbs">Breadcrumbs</option>
+                <option value=" Interior Featured Image">Interior Featured Image</option>
+                <option value=" Mega Menu">Mega Menu</option>
+                <option value=" Object Fit">Object Fit</option>
+                <option value=" Shrinky Header">Shrinky Header</option>
+                <option value=" Search Bar">Search Bar</option>
+                <option value=" Scroll Efects">Scroll Effects</option>
+              </select>
+            </label>
+            
+          </div> <!-- end of form-group -->
+          <div class="form-group">
+                  <label name="tracking[domain]">Domain:
+                    <input type="text" name="tracking[domain]" value="<%= tracking.domain %>">
+                  </label>
+                  <label name="cssPath" class="ifEssential toggleEssential">CSS Path:
+                        <input type="text" name="tracking[cssPath]" value="<%= tracking.cssPath %>" class="essentialClearInput">
+                      </label>
+                </div> <!-- end of form-group -->
+        <% } %>
+
+        
+        <div class="form-group" id="task">
+            <label class="labelTask"><h3>Task:</h3></label>
+            <button type='button' id='addTask'>+</button>
+            <% for (i=0; i < tracking.taskTypes.length; i++) { %>
+            <div class="task">
+                <select class="taskType">
+                    <% if (tracking.taskTypes[i].taskTypeName === "Site Build") { %>
+                      <option selected value="Site Build">Site Build</option>
+                    <% } else { %>
+                      <option value="Site Build">Site Build</option>
+                    <% } %>
+                    <% if (tracking.taskTypes[i].taskTypeName === "Production Change") { %>
+                      <option selected value="Production Change">Production Change</option>
+                    <% } else { %>
+                      <option value="Production Change">Production Change</option>
+                      <% } %>
+                    <% if (tracking.taskTypes[i].taskTypeName === "T.LINK Branding") { %>
+                      <option selected value="T.LINK Branding">T.LINK Branding</option>
+                    <% } else { %>
+                      <option value="T.LINK Branding">T.LINK Branding</option>
+                    <% } %>
+                  </select>
+                  <select class="taskQuantity">
+                      <% if (tracking.taskTypes[i].quantity === "0 - 15") { %>
+                        <option selected value="0 - 15">0 - 15</option>
+                      <% } else { %>
+                        <option value="0 - 15">0 - 15</option>
+                      <% } %>
+                      <% if (tracking.taskTypes[i].quantity === "16 - 35") { %>
+                        <option selected value="16 - 35">16 - 35</option>
+                      <% } else { %>
+                        <option value="16 - 35">16 - 35</option>
+                        <% } %>
+                      <% if (tracking.taskTypes[i].quantity === "36+") { %>
+                        <option selected value="36+">36+</option>
+                      <% } else { %>
+                        <option value="36+">36+</option>
+                      <% } %>
+                    </select>
+              <input class="taskNotes" type="text" value="<%= tracking.taskTypes[i].taskNotes %>">
+            </div>
+            <% } %>
+            </div>
+          <!-- end of form-group -->
+        
         <div class="form-group">
           <label class="labelNotes" name="tracking[notes]">Notes:
-            <textarea name="tracking[notes]" value="<%= tracking.notes %>"></textarea>
+            <textarea name="tracking[notes]"><%= tracking.notes %></textarea>
           </label>
         </div> <!-- end of form-group -->
         <button>Update Task</button>
@@ -137,6 +218,18 @@ else {
 }
 });
 });	
+
+// Counts task types on form submit
+function countTaskTypes(){
+  var count = 0;
+  $("div.task").each(function(){
+    $(this).find(".taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+    $(this).find(".taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+    $(this).find(".taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+    count++;
+  });
+}
+
 // });
 </script>
 <% include ../partials/footer %>

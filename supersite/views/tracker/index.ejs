@@ -114,23 +114,26 @@
 							</label>
 						</div><!-- end of form-group -->
 						
-						<script>
-							$(document).ready(function(){
-								var count = 0;
-								$("div.task:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
-								$("div.task:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
-								$("div.task:first-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+<script>
+$(document).ready(function(){
+    var count = 0;
+    $("div.task:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+    $("div.task:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+    $("div.task:first-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
 
-								$("#addTask").click(function () {
-									count++;
-									var newTaskInput = $(".task:last-of-type");
-									newTaskInput.clone().appendTo("#task");
-									$("div.task:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
-									$("div.task:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
-									$("div.task:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
-								});
-							});
-						</script>
+$("#addTask").click(function () {               
+        count++;        
+        var newTaskInput = $(".task:last-of-type"); 
+        newTaskInput.clone().appendTo("#task"); 
+    $("div.task:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+    $("div.task:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+    $("div.task:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+
+});
+
+});
+    
+</script>
 
 						<div class="form-group" id="task">
 							<label class="labelTask" name="taskTypeName"><h3>Task:</h3></label>
@@ -153,7 +156,7 @@
 						
 						<div class="form-group">
 							<label class="labelNotes" name="notes">Notes:
-								<textarea name="notes"></textarea>
+								<textarea name="teamTrack[notes]"></textarea>
 							</label>
 						</div>
 						<!-- end of form-group -->

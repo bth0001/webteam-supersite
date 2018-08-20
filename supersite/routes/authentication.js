@@ -57,19 +57,19 @@ router.get("/signup", function(req, res){
   //==============================================================================
   
   // EDIT Task
-  router.get("/edit-task", isLoggedIn, function(req, res){
+  router.get("/edit-task", function(req, res){
     res.render("edit-task");
   });
 
   //==============================================================================
 
   // EDIT Profile
-  router.get("/edit-profile", isLoggedIn, function(req, res){
+  router.get("/edit-profile", function(req, res){
     res.render("edit-profile");
   });
   
   
-  router.post('/edit-profile', isLoggedIn, function(req, res, next){
+  router.post('/edit-profile', function(req, res, next){
     User.findById(req.user.id, function (err, sanitizedUser) {
         if (!sanitizedUser) {
             req.flash('error', 'No account found');
@@ -108,14 +108,4 @@ router.get("/signup", function(req, res){
     });
   });
 
-  
-    //middleware
-    function isLoggedIn(req, res, next){
-      if(req.isAuthenticated()){
-          return next();
-      }
-      req.flash("error", "Please Login First!");
-      res.redirect("/login");
-    }
-  
     module.exports = router;

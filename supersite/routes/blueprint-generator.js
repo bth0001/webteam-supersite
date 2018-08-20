@@ -12,7 +12,7 @@ var User = require("../models/user");
 var Blueprint = require("../models/blueprint");
 
 // Dashboard Index Route
-router.get("/", /*isLoggedIn,*/ function(req, res) {
+router.get("/", function(req, res) {
     TeamTracker.find({}, function(eryr, allTracks) {
         User.find({}, function(err, allUsers) {
             Blueprint.find({}, function(err, allBlueprints) {
@@ -31,7 +31,7 @@ router.get("/", /*isLoggedIn,*/ function(req, res) {
 });
 
 // See All Blueprints Page
-router.get("/see-all", /* isLoggedIn, */ function(req, res){
+router.get("/see-all", function(req, res){
     TeamTracker.find({}, function(err, allTracks){
       User.find({}, function(err, allUsers){
         Blueprint.find({}, function(err, allBlueprints) {
@@ -51,7 +51,7 @@ router.get("/see-all", /* isLoggedIn, */ function(req, res){
 
 
 // New Blueprint Page
-router.get("/new", /*isLoggedIn,*/ function(req, res) {
+router.get("/new", function(req, res) {
     TeamTracker.find({}, function(err, allTracks) {
         User.find({}, function(err, allUsers) {
             Blueprint.find({}, function(err, allBlueprints) {
@@ -74,7 +74,44 @@ router.get("/new", /*isLoggedIn,*/ function(req, res) {
 router.post("/new", function(req, res) {
     // create blog and then redirect to the index
     Blueprint.create(req.body.blueprint, function(err, newBlueprint) {
-        var data = req.body.blueprint;
+
+    // TEMP CODE 
+        if (err) {
+            console.log(err);
+        } else {
+            req.flash("success", "Your blueprint has been created!");
+            res.redirect("/blueprint-generator");
+        }
+
+    // ADJUST THIS CODE AT A LATER DATE==========================
+        // var data = req.body.blueprint;
+        // console.log()
+        // if (err) {
+        //     console.log(err);
+        // } else {
+        //     var content = fs
+        //         .readFileSync(path.resolve(__dirname, 'word/blueprint_template.docx'), 'binary');
+        //     var zip = new JSZip(content);
+        //     var doc = new Docxtemplater();
+        //     doc.loadZip(zip);
+        //     doc.setData(data).render();
+        //     var buf = doc.getZip()
+        //         .generate({
+        //             type: 'nodebuffer'
+        //         });
+        //     fs.writeFileSync(path.resolve(__dirname, 'word/blueprint_template_output.docx'), buf);
+        //     req.flash("success", "Your Blueprint has been created!");
+        //     res.redirect("/blueprint-generator");
+        // }
+    //============================================================
+    });
+});
+
+
+// Download Button
+router.get("/see-all/download/:id", function(req, res) {
+    var data = req.params.id; //pull blueprint data from database
+    Blueprint.findById(data, function(err, findBlueprint) {
         if (err) {
             console.log(err);
         } else {
@@ -83,27 +120,36 @@ router.post("/new", function(req, res) {
             var zip = new JSZip(content);
             var doc = new Docxtemplater();
             doc.loadZip(zip);
-            doc.setData(data).render();
+            doc.setData(findBlueprint).render();
             var buf = doc.getZip()
                 .generate({
                     type: 'nodebuffer'
                 });
             fs.writeFileSync(path.resolve(__dirname, 'word/blueprint_template_output.docx'), buf);
-            res.send("Success");
+            req.flash("success", "Starting Download...");
+            res.redirect("/blueprint-generator/see-all");
         }
     });
 });
 
 
-
-//middleware
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    req.flash("error", "Please Login First!");
-    res.redirect("/login");
-}
-
+// New Blueprint Page
+router.get("/new", function(req, res) {
+    TeamTracker.find({}, function(err, allTracks) {
+        User.find({}, function(err, allUsers) {
+            Blueprint.find({}, function(err, allBlueprints) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.render("blueprint-generator/new", {
+                        tracking: allTracks,
+                        users: allUsers,
+                        blueprint: allBlueprints
+                    });
+                }
+            })
+        })
+    })
+});
 
 module.exports = router;
