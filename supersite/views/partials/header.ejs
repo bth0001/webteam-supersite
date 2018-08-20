@@ -17,6 +17,14 @@
                         document.getElementById('userProfile').src = "http://webplus.televoxsites.com/projects/supersite/web.jpg";
                     }
                 }
+                $( document ).ready(function() {
+                    $('#profileBar .fa-angle-down').on('mouseover', function(){
+                        $(this).find('.dropdown').stop().slideDown(300);
+                        }).on('mouseout', function(){
+
+                        $(this).find('.dropdown').stop().slideUp(600);
+                    });
+                });
             </script>
             <!-- <script>
                 function startTime() {
@@ -61,7 +69,15 @@
                                         <div class="profileText">
                                             <p><%= currentUser.firstName + " " + currentUser.lastName %></p>
                                         </div>
-                                        <i class="fas fa-angle-down"></i>
+                                        <i class="fas fa-angle-down">
+                                                <div class="dropdown">
+                                                        <a href="/edit-profile">My Settings</a>
+                                                        <a href="/logout">Log Out</a>
+                                                </div>
+                                        </i>
+
+                                       
+
                                     </div>                 
                                     <!-- <div class=""><a href="/logout">Logout</a></div> -->
                                 <% } %>
