@@ -40,9 +40,7 @@ router.post("/", function(req, res){
   });
 });
 
-
 //==============================================================================
-
 //SHOW - show more info about one campground
 router.get("/:id", function(req, res){
     //find the campground with provided ID - .populate("comments")

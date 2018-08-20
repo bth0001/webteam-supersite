@@ -84,6 +84,12 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 .profileText {text-align: center;}
 .profileText p {color: #fff; font-family: 'Raleway', sans-serif; font-size: .9em; font-weight: 300; margin: 0;}
 
+#profileBar {position:relative;}
+#profileBar .dropdown {background: #323232; display:none; position: absolute; min-width: 150px; padding: 10px 0; right: 0; left: auto; z-index: 1; top: 55px;}
+#profileBar .dropdown a {color: #adadad; display: block; font-size: .85em; font-family: 'Roboto', sans-serif; font-weight: 400; padding: 8px 15px; text-decoration: none; transition: color .25s ease-in-out;}
+#profileBar .dropdown a:hover, #profileBar .dropdown a:focus {background-color: #19B9E7; color: #fff;}
+#profileBar .fa-angle-down {cursor: pointer}
+
 #navBar ul li {list-style: none;}
 #utilityNav {flex:1 auto; text-align:right; margin:0; padding:0;}
 #utilityNav > li {display:inline-block; margin:0 0 0 20px;}

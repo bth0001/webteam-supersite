@@ -1,12 +1,200 @@
 <% include partials/header %>
+<script>
+        $( document ).ready(function() {
+            $("#checklistEssential").hide();
+        
+            $("#btnEssential").on("click", function(){
+                $("#checklistEssential").slideToggle();
+            });
+
+              $("#btnStarter").on("click", function(){
+                $("#checklistEssential").hide();
+            });
+        });
+</script>
+
+<style>
+form {max-width:100%; padding:0; box-shadow:none; background-color: transparent}
+form input {display:inline-block; width: auto;}
+.checklistForm input[type="radio"], .checklistForm input[type="radio"] {margin: 0 8px 0 0}
+.form-group{margin:0}
+#whichPackage {text-align:center; margin: 30px 0}  
+
+.checklistContainer {max-width:80%; margin: 0 auto; }  
+.checklistForm {margin: 30px 0}
+.checklistForm span {width: auto; padding:20px;align-self:stretch; display:flex; align-items:center; color:#fff;  border-left:1px solid #fff}
+.checklistForm .form-group span:last-of-type {border-right: 1px solid #fff}
+
+.checklistForm label {width: 100%;margin:0; display: flex; flex-wrap:wrap; align-items: center;justify-content: space-between; border-bottom: 1px solid #fff}
+.checklistForm .form-group:first-of-type label {border-top:1px solid #fff}
+.checklistForm textarea {width:100%; height:50px; padding:5px}
+
+.taskName {flex: 3; text-align:left; background:#2392A4; align-self:center; font-weight:700}
+.taskComplete {flex: 1; background:#2479A7;}
+.taskNA {flex: 1; background: #2566AA}
+.taskNotes {flex:2; background:#2550AD;}
+
+#checklistEssential {margin:20px 0 0}
+
+
+@media screen and (max-width:768px) {
+    .checklistForm label {flex-direction: column; border-bottom:none}
+    .checklistForm .form-group {border:1px solid #fff; margin: 0 0 15px}
+    .checklistForm span.taskName {border-bottom: 1px solid #fff}
+    .checklistForm span, .checklistForm .form-group:first-of-type label, .checklistForm .form-group span:last-of-type  {border:none}
+}
+
+</style>
 
 <a href="/dashboard">&larr; Back to Dashboard</a><br /><br />
 
-<h3 class="pageHeader"><%= currentUser.firstName %>, this is the checklist for the <%= currentUser.team %> team. This will make completing a checklist a breeze!</h1>
-<div id="checklist">
+
+    <div id="checklist">
     <div class="checklistContainer">
-        <p>The checklist will go here.</p>
+            <h3 class="pageHeader"><%= currentUser.firstName %>, this is the checklist for the <%= currentUser.team %> team. This will make completing a checklist a breeze!</h1>
+
+                <div id="whichPackage">Select Package: &nbsp; <button id="btnEssential" class="btn btn-md btn-primary">Essential</button> <button id="btnStarter" class="btn btn-md btn-primary">Starter</button></div>
+  
+
+        <form class="checklistForm" action="/checklist" method="POST">
+           <!-- <div class="form-exit"> <span class="close">&times;</span></div> -->
+           
+            <div class="form-group">
+                <label name="browserPermissions"><span class="taskName">Guest Browser Permissions</span> 
+                        <span class="taskComplete"><input type="radio" name="browserPermissions" value="Complete"> Complete</span> 
+                        <span class="taskNA"><input type="radio" name="browserPermissions" value="N/A"> N/A</span>
+                        <span class="taskNotes"><textarea name="browserPermissionsNotes" placeholder="Additional Notes"></textarea></span>
+                </label>
+            </div> <!-- end of form-group-->
+
+            <div class="form-group">
+                    <label name="linkPermissions"><span class="taskName">Published Links Permissions</span> 
+                            <span class="taskComplete"><input type="radio" name="linkPermissions" value="Complete"> Complete</span> 
+                            <span class="taskNA"><input type="radio" name="linkPermissions" value="N/A"> N/A</span>
+                            <span class="taskNotes"><textarea name="linkPermissions" placeholder="Additional Notes"></textarea></span>
+                    </label>
+                </div> <!-- end of form-group-->
+
+                <div class="form-group">
+                        <label name="clientAccCreated"><span class="taskName">Client Account Created</span> 
+                                <span class="taskComplete"><input type="radio" name="clientAccCreated" value="Complete"> Complete</span> 
+                                <span class="taskNA"><input type="radio" name="clientAccCreated" value="N/A"> N/A</span>
+                                <span class="taskNotes"><textarea name="clientAccCreated" placeholder="Additional Notes"></textarea></span>
+                        </label>
+                    </div> <!-- end of form-group-->
+
+                    <div class="form-group">
+                            <label name="formsThankYou"><span class="taskName">Forms Imported &amp; Thank You Message</span> 
+                                    <span class="taskComplete"><input type="radio" name="formsThankYou" value="Complete"> Complete</span> 
+                                    <span class="taskNA"><input type="radio" name="formsThankYou" value="N/A"> N/A</span>
+                                    <span class="taskNotes"><textarea name="formsThankYou" placeholder="Additional Notes"></textarea></span>
+                            </label>
+                        </div> <!-- end of form-group-->
+
+                        <div class="form-group">
+                                <label name="formPW"><span class="taskName">Form Password</span> 
+                                        <span class="taskComplete"><input type="radio" name="formPW" value="Complete"> Complete</span> 
+                                        <span class="taskNA"><input type="radio" name="formPW" value="N/A"> N/A</span>
+                                        <span class="taskNotes"><textarea name="formPW" placeholder="Additional Notes"></textarea></span>
+                                </label>
+                            </div> <!-- end of form-group-->
+
+                            <div class="form-group">
+                                    <label name="contentComplete"><span class="taskName">Content Entry Marked Complete</span> 
+                                            <span class="taskComplete"><input type="radio" name="contentComplete" value="Complete"> Complete</span> 
+                                            <span class="taskNA"><input type="radio" name="contentComplete" value="N/A"> N/A</span>
+                                            <span class="taskNotes"><textarea name="contentComplete" placeholder="Additional Notes"></textarea></span>
+                                    </label>
+                                </div> <!-- end of form-group-->
+
+                                <div class="form-group">
+                                        <label name="lockIA"><span class="taskName">Lock Informative Animations Portlets</span> 
+                                                <span class="taskComplete"><input type="radio" name="lockIA" value="Complete"> Complete</span> 
+                                                <span class="taskNA"><input type="radio" name="lockIA" value="N/A"> N/A</span>
+                                                <span class="taskNotes"><textarea name="lockIA" placeholder="Additional Notes"></textarea></span>
+                                        </label>
+                                    </div> <!-- end of form-group-->
+
+                                <div class="form-group">
+                                        <label name="stockPhotos"><span class="taskName">Stock Photography</span> 
+                                                <span class="taskComplete"><input type="radio" name="stockPhotos" value="Complete"> Complete</span> 
+                                                <span class="taskNA"><input type="radio" name="stockPhotos" value="N/A"> N/A</span>
+                                                <span class="taskNotes"><textarea name="stockPhotos" placeholder="Additional Notes"></textarea></span>
+                                        </label>
+                                </div> <!-- end of form-group-->
+
+                                <div class="form-group">
+                                        <label name="genSitemap"><span class="taskName">Generate XML Site Map</span> 
+                                                <span class="taskComplete"><input type="radio" name="genSitemap" value="Complete"> Complete</span> 
+                                                <span class="taskNA"><input type="radio" name="genSitemap" value="N/A"> N/A</span>
+                                                <span class="taskNotes"><textarea name="genSitemap" placeholder="Additional Notes"></textarea></span>
+                                        </label>
+                                </div> <!-- end of form-group-->
+
+                                <div class="form-group">
+                                        <label name="301s"><span class="taskName">Complete 301s | Enable Auto 301s | Redirect Home to /</span> 
+                                                <span class="taskComplete"><input type="radio" name="301s" value="Complete"> Complete</span> 
+                                                <span class="taskNA"><input type="radio" name="301s" value="N/A"> N/A</span>
+                                                <span class="taskNotes"><textarea name="301s" placeholder="Additional Notes"></textarea></span>
+                                        </label>
+                                </div> <!-- end of form-group-->
+
+                                <div class="form-group">
+                                        <label name="tlinkBranding"><span class="taskName">T.LINK Branding</span> 
+                                                <span class="taskComplete"><input type="radio" name="tlinkBranding" value="Complete"> Complete</span> 
+                                                <span class="taskNA"><input type="radio" name="tlinkBranding" value="N/A"> N/A</span>
+                                                <span class="taskNotes"><textarea name="tlinkBranding" placeholder="Additional Notes"></textarea></span>
+                                        </label>
+                                </div> <!-- end of form-group-->
+
+                 <div id="checklistEssential">
+                    <div class="form-group">
+                        <label name="phoneMobile"><span class="taskName">Phone Number on Mobile</span> 
+                            <span class="taskComplete"><input type="radio" name="phoneMobile" value="Complete"> Complete</span> 
+                            <span class="taskNA"><input type="radio" name="phoneMobile" value="N/A"> N/A</span>
+                            <span class="taskNotes"><textarea name="phoneMobile" placeholder="Additional Notes"></textarea></span>
+                        </label>
+                    </div> <!-- end of form-group-->
+
+                    <div class="form-group">
+                            <label name="styleToMatch"><span class="taskName">Forms, Galleries, IAs Styled to Match Site</span> 
+                                <span class="taskComplete"><input type="radio" name="styleToMatch" value="Complete"> Complete</span> 
+                                <span class="taskNA"><input type="radio" name="styleToMatch" value="N/A"> N/A</span>
+                                <span class="taskNotes"><textarea name="styleToMatch" placeholder="Additional Notes"></textarea></span>
+                            </label>
+                        </div> <!-- end of form-group-->
+
+                        <div class="form-group">
+                                <label name="focusHover"><span class="taskName">Focus to Hover States</span> 
+                                    <span class="taskComplete"><input type="radio" name="focusHover" value="Complete"> Complete</span> 
+                                    <span class="taskNA"><input type="radio" name="focusHover" value="N/A"> N/A</span>
+                                    <span class="taskNotes"><textarea name="focusHover" placeholder="Additional Notes"></textarea></span>
+                                </label>
+                        </div> <!-- end of form-group-->
+                    
+                        <div class="form-group">
+                                <label name="checkBrowsers"><span class="taskName">Check Site in Browsers</span> 
+                                    <span class="taskComplete"><input type="radio" name="checkBrowsers" value="Complete"> Complete</span> 
+                                    <span class="taskNA"><input type="radio" name="checkBrowsers" value="N/A"> N/A</span>
+                                    <span class="taskNotes"><textarea name="checkBrowsers" placeholder="Additional Notes"></textarea></span>
+                                </label>
+                        </div> <!-- end of form-group-->
+
+                        <div class="form-group">
+                                <label name="metaDesc"><span class="taskName">Meta Descriptions</span> 
+                                    <span class="taskComplete"><input type="radio" name="metaDesc" value="Complete"> Complete</span> 
+                                    <span class="taskNA"><input type="radio" name="metaDesc" value="N/A"> N/A</span>
+                                    <span class="taskNotes"><textarea name="metaDesc" placeholder="Additional Notes"></textarea></span>
+                                </label>
+                        </div> <!-- end of form-group-->
+
+                </div>
+               
+
+            </form> <!-- end of form -->
     </div>
 </div>
+
+
 
 <% include partials/footer %>
