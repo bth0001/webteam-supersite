@@ -1,19 +1,15 @@
 <% include partials/header %>
 
-<div id="overview" class="center">
-    <h1>
-        <%= currentUser.team %> Dashboard</h1>
-        <div class="flexbox flexCenter">
-          <h4>August</h4><i class="fas fa-angle-down"></i>
-            </div>
-  
+  <div id="overview" class="center">
+    <h1><%= currentUser.team %> Dashboard</h1>
+    <div class="flexbox flexCenter">
+      <h4>August</h4><i class="fas fa-angle-down"></i>
+    </div>
   </div>
  
   <div id="dashboard">
-
     <div id="stats">
-      <h3>View your stats from this month below:</h3>
-      <br />
+      <h3>View your stats from this month below:</h3><br />
       <div class="statsContainer">
         <p>
           <% function countEssential() { %>
@@ -34,13 +30,17 @@
                   <% } %>
                 <% } %>
               <% }); %>
-              <h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
+              <h4>Essentials: <span id="essCount"><%= essCount %> </span> | Starters: <span id="strCount"><%= strCount %></span> | Prod Change: <span id="prodCount"><%= prodCount %></span> | T.LINK Branding: <span id="tlinkCount"><%= tlinkCount %></span></h4> 
                            
             <script src="https://d3js.org/d3.v3.min.js"></script>
             
             <script>
-              
-            var data=[{"taskType":"Essentials", "totalTasks":5}, {"taskType":"Starters","totalTasks":1}, {"taskType":"Content Entries", "totalTasks":1}, {"taskType":"T.Link Brandings", "totalTasks":1}]
+            var essCount = parseInt($("#essCount").text());
+            var strCount = parseInt($("#strCount").text());
+            var prodCount = parseInt($("#prodCount").text());
+            var tlinkCount = parseInt($("#tlinkCount").text());
+            
+            var data=[{"taskType":"Essentials", "totalTasks":essCount}, {"taskType":"Starters","totalTasks":strCount}, {"taskType":"Content Entries", "totalTasks":prodCount}, {"taskType":"T.Link Brandings", "totalTasks":tlinkCount}];
             
               var width = 800,
                 height = 250,
@@ -56,8 +56,8 @@
               var pie = d3.layout.pie()
                 .sort(null)
                 .value(function (d) {
-                return d.totalTasks;
-              });
+                  return d.totalTasks;
+                });
 
               var svg = d3.select(".statsContainer").append("svg")
                 .attr("width", width)
@@ -73,12 +73,11 @@
               g.append("path")
                 .attr("d", arc)
                 .style("fill", function (d) {
-                return color(d.data.taskType);
-              });
+                  return color(d.data.taskType);
+                });
 
-              g.append("text")
-                .attr("transform", function (d) {
-                return "translate(" + arc.centroid(d) + ")";
+              g.append("text").attr("transform", function (d) {
+                  return "translate(" + arc.centroid(d) + ")";
                 })
                 .attr("dy", ".35em")
                 .style("text-anchor", "middle")
@@ -93,5 +92,4 @@
       </div><!-- end statsContainer -->
     </div><!-- end stats -->
   </div><!-- end dashboard -->
-
-  <% include partials/footer %>
+<% include partials/footer %>
