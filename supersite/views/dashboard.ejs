@@ -95,37 +95,83 @@
       <h3>View your stats from this month below:</h3>
       <br />
       <div class="statsContainer">
-        
         <p>
           <% function countEssential() { %>
             <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
               <% tracking.forEach(function(tracked){ %>
                 <% if(currentUser.firstName === tracked.author.firstName) { %>
-                <% if(tracked.buildPkg === "Starter" && tracked.taskTypes.taskTypeName === "Site Build"){ %>
+                  <% if(tracked.buildPkg === "Starter" && tracked.taskTypes[0].taskTypeName === "Site Build"){ %>
                     <% strCount++ %>
-                    <% } %>
-                  <% if(tracked.buildPkg === "Essential" && tracked.taskTypes.taskTypeName === "Site Build"){ %>
-                      <% essCount++ %>
-                    <% } %>
-                      
-                      <% if(tracked.taskTypes.taskTypeName === "Production Change"){ %>
-                        <% prodCount++ %>
-                      <% } %>
-                    <% if(tracked.taskTypes.taskTypeName === "T.LINK Branding"){ %>
-                        <% tlinkCount++ %>
-                      <% } %>
-                
+                  <% } %> 
+                  <% if(tracked.buildPkg === "Essential" && tracked.taskTypes[0].taskTypeName === "Site Build"){ %>
+                    <span id="essentialCount"><% essCount++ %></span>
                   <% } %>
-                  <% }); %>
-                <h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
-                
-            <% } %>
+                  <% if(tracked.taskTypes[0].taskTypeName === "Production Change"){ %>
+                    <% prodCount++ %>
+                  <% } %>
+                  <% if(tracked.taskTypes[0].taskTypeName === "T.LINK Branding"){ %>
+                    <% tlinkCount++ %>
+                  <% } %>
+                <% } %>
+              <% }); %>
+              <h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
+                           
+            <script src="https://d3js.org/d3.v3.min.js"></script>
+            
+            <script>
+              
+            var data=[{"taskType":"Essentials", "totalTasks":5}, {"taskType":"Starters","totalTasks":1}, {"taskType":"Content Entries", "totalTasks":1}, {"taskType":"T.Link Brandings", "totalTasks":1}]
+            
+              var width = 800,
+                height = 250,
+                radius = Math.min(width, height) / 2;
+
+              var color = d3.scale.ordinal()
+              .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+              var arc = d3.svg.arc()
+                .outerRadius(radius - 10)
+                .innerRadius(radius - 70);
+
+              var pie = d3.layout.pie()
+                .sort(null)
+                .value(function (d) {
+                return d.totalTasks;
+              });
+
+              var svg = d3.select(".statsContainer").append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+              var g = svg.selectAll(".arc")
+                .data(pie(data))
+                .enter().append("g")
+                .attr("class", "arc");
+
+              g.append("path")
+                .attr("d", arc)
+                .style("fill", function (d) {
+                return color(d.data.taskType);
+              });
+
+              g.append("text")
+                .attr("transform", function (d) {
+                return "translate(" + arc.centroid(d) + ")";
+                })
+                .attr("dy", ".35em")
+                .style("text-anchor", "middle")
+                .text(function (d) {
+                  return d.data.taskType;
+                });
+            </script>
+          <% } %>
         </p>
         <% countEssential(); %>
-        
-      </div>
-    </div>
 
-  </div>
+      </div><!-- end statsContainer -->
+    </div><!-- end stats -->
+  </div><!-- end dashboard -->
 
   <% include partials/footer %>
