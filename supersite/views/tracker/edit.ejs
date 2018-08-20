@@ -132,7 +132,8 @@
             <button type='button' id='addTask'>+</button>
             <% for (i=0; i < tracking.taskTypes.length; i++) { %>
             <div class="task">
-                <select class="taskType">
+                <select class="taskType" name="tracking[taskTypes][i].taskTypeName">
+                  <option value="none">None</option>
                     <% if (tracking.taskTypes[i].taskTypeName === "Site Build") { %>
                       <option selected value="Site Build">Site Build</option>
                     <% } else { %>
