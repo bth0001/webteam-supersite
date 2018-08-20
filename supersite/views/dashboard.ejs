@@ -8,86 +8,69 @@
   </div>
  
   <div id="dashboard">
-     <div class="container">
-					<div class="developer flexbox flexLeft">
-			<h4>Elizabeth</h4><i class="fas fa-angle-down"></i>
-				</div>
-					
-				<div id="topRow" class="flexbox">
-               <div class="col-1">
-						<div class="widget">
-							
-							<h2>Site Builds</h2>
-			
-						
-<div class="tablex tablex--columns" data-columns="2" data-gutter="2">
-  <!-- Column 1 -->
-  <div class="tablex__item tablex__item--head"><span class="circle">2</span></div>
-  <div class="tablex__item center">Essentials</div>
-  
-  <!-- Column 2 -->
-  <div class="tablex__item tablex__item--head"><span class="circle">3</span></div>
-  <div class="tablex__item center">Starters</div>
-</div>
-							</div>
-</div>
-					
-     <div class="col-2">
-		 <div class="widget">
-<div class="tablex tablex--rows tablex--bordered" data-columns="2" data-gutter="3">
-  <!-- Column 1 -->
-  <div class="tablex__item tablex__item--head">Prod Changes</div>
-  <div class="tablex__item right">21</div>
-  
-  <!-- Column 2 -->
-  <div class="tablex__item tablex__item--head">T.LINK</div>
-  <div class="tablex__item right">4</div>
-  
-  <!-- Column 3 -->
-  <div class="tablex__item tablex__item--head">Other</div>
-  <div class="tablex__item right">2</div>
-</div>
-		 </div>
-</div>
-				
-</div><!-- End topRow -->
-					
-					<div id="bottomRow" class="flexbox">
-						<div class="col-full">
-							
-		 <div class="widget">
-			 <h2>Essential Builds</h2>
-<div class="tablex tablex--rows tablex--bordered" data-columns="6" data-gutter="3">
-  <!-- Column 1 -->
-  <div class="tablex__item tablex__item--head"><a href="#">http://nordortho.televox.west.com</a></div>
-  <div class="tablex__item right">107026</div>
-	<div class="tablex__item right">Jodi</div>
-	<div class="tablex__item right">Denise</div>
-	<div class="tablex__item right">8/5/2018</div>
-	<div class="tablex__item right"><i class="fas fa-angle-down"></i></div>
-  
-  <!-- Column 2 -->
-  <div class="tablex__item tablex__item--head"><a href="#">http://hechler.televox.west.com</a></div>
-  <div class="tablex__item right">105940</div>
-	<div class="tablex__item right">Yogesh</div>
-	<div class="tablex__item right">Rachel</div>
-	<div class="tablex__item right">8/1/2018</div>
-	<div class="tablex__item right"><i class="fas fa-angle-down"></i></div>
-	
-	
-	
+    <div class="container">
+			<div class="developer flexbox flexLeft">
+			  <h4>Elizabeth</h4><i class="fas fa-angle-down"></i>
+      </div>
+      <div id="topRow" class="flexbox">
+        <div class="col-1">
+          <div class="widget">
+            <h2>Site Builds</h2>
+            <div class="tablex tablex--columns" data-columns="2" data-gutter="2">
+              <!-- Column 1 -->
+              <div class="tablex__item tablex__item--head"><span class="circle">2</span></div>
+              <div class="tablex__item center">Essentials</div>
 
-  
-
-</div>
-		 </div>
-</div>
-					</div>
-					
-					
-					
-			</div>
-
+              <!-- Column 2 -->
+              <div class="tablex__item tablex__item--head"><span class="circle">3</span></div>
+              <div class="tablex__item center">Starters</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="widget">
+            <div class="tablex tablex--rows tablex--bordered" data-columns="2" data-gutter="3">
+              <!-- Column 1 -->
+              <div class="tablex__item tablex__item--head">Prod Changes</div>
+              <div class="tablex__item right">21</div>
+              
+              <!-- Column 2 -->
+              <div class="tablex__item tablex__item--head">T.LINK</div>
+              <div class="tablex__item right">4</div>
+              
+              <!-- Column 3 -->
+              <div class="tablex__item tablex__item--head">Other</div>
+              <div class="tablex__item right">2</div>
+            </div>
+          </div>
+        </div>
+      </div><!-- End topRow -->
+                      
+      <div id="bottomRow" class="flexbox">
+        <div class="col-full">
+          <div class="widget">
+            <h2>Essential Builds</h2>
+            <div class="tablex tablex--rows tablex--bordered" data-columns="6" data-gutter="3">
+              <!-- Column 1 -->
+              <div class="tablex__item tablex__item--head"><a href="#">http://nordortho.televox.west.com</a></div>
+              <div class="tablex__item right">107026</div>
+              <div class="tablex__item right">Jodi</div>
+              <div class="tablex__item right">Denise</div>
+              <div class="tablex__item right">8/5/2018</div>
+              <div class="tablex__item right"><i class="fas fa-angle-down"></i></div>
+              
+              <!-- Column 2 -->
+              <div class="tablex__item tablex__item--head"><a href="#">http://hechler.televox.west.com</a></div>
+              <div class="tablex__item right">105940</div>
+              <div class="tablex__item right">Yogesh</div>
+              <div class="tablex__item right">Rachel</div>
+              <div class="tablex__item right">8/1/2018</div>
+              <div class="tablex__item right"><i class="fas fa-angle-down"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div id="stats">
       <h3>View your stats from this month below:</h3><br />
@@ -116,60 +99,59 @@
             <script src="https://d3js.org/d3.v3.min.js"></script>
             
             <script>
-            var essCount = parseInt($("#essCount").text());
-            var strCount = parseInt($("#strCount").text());
-            var prodCount = parseInt($("#prodCount").text());
-            var tlinkCount = parseInt($("#tlinkCount").text());
-            
-            var data=[{"taskType":"Essentials", "totalTasks":essCount}, {"taskType":"Starters","totalTasks":strCount}, {"taskType":"Content Entries", "totalTasks":prodCount}, {"taskType":"T.Link Brandings", "totalTasks":tlinkCount}];
-            
-              var width = 800,
-                height = 250,
-                radius = Math.min(width, height) / 2;
+              var essCount = parseInt($("#essCount").text());
+              var strCount = parseInt($("#strCount").text());
+              var prodCount = parseInt($("#prodCount").text());
+              var tlinkCount = parseInt($("#tlinkCount").text());
+              
+              var data=[{"taskType":"Essentials", "totalTasks":essCount}, {"taskType":"Starters","totalTasks":strCount}, {"taskType":"Content Entries", "totalTasks":prodCount}, {"taskType":"T.Link Brandings", "totalTasks":tlinkCount}];
+              
+                var width = 800,
+                  height = 250,
+                  radius = Math.min(width, height) / 2;
 
-              var color = d3.scale.ordinal()
-              .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+                var color = d3.scale.ordinal()
+                .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
-              var arc = d3.svg.arc()
-                .outerRadius(radius - 10)
-                .innerRadius(radius - 70);
+                var arc = d3.svg.arc()
+                  .outerRadius(radius - 10)
+                  .innerRadius(radius - 70);
 
-              var pie = d3.layout.pie()
-                .sort(null)
-                .value(function (d) {
-                  return d.totalTasks;
-                });
+                var pie = d3.layout.pie()
+                  .sort(null)
+                  .value(function (d) {
+                    return d.totalTasks;
+                  });
 
-              var svg = d3.select(".statsContainer").append("svg")
-                .attr("width", width)
-                .attr("height", height)
-                .append("g")
-                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                var svg = d3.select(".statsContainer").append("svg")
+                  .attr("width", width)
+                  .attr("height", height)
+                  .append("g")
+                  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-              var g = svg.selectAll(".arc")
-                .data(pie(data))
-                .enter().append("g")
-                .attr("class", "arc");
+                var g = svg.selectAll(".arc")
+                  .data(pie(data))
+                  .enter().append("g")
+                  .attr("class", "arc");
 
-              g.append("path")
-                .attr("d", arc)
-                .style("fill", function (d) {
-                  return color(d.data.taskType);
-                });
+                g.append("path")
+                  .attr("d", arc)
+                  .style("fill", function (d) {
+                    return color(d.data.taskType);
+                  });
 
-              g.append("text").attr("transform", function (d) {
-                  return "translate(" + arc.centroid(d) + ")";
-                })
-                .attr("dy", ".35em")
-                .style("text-anchor", "middle")
-                .text(function (d) {
-                  return d.data.taskType;
-                });
-            </script>
-          <% } %>
-        </p>
+                g.append("text").attr("transform", function (d) {
+                    return "translate(" + arc.centroid(d) + ")";
+                  })
+                  .attr("dy", ".35em")
+                  .style("text-anchor", "middle")
+                  .text(function (d) {
+                    return d.data.taskType;
+                  });
+              </script>
+            <% } %>
+          </p>
         <% countEssential(); %>
-
       </div><!-- end statsContainer -->
     </div><!-- end stats -->
   </div><!-- end dashboard -->
