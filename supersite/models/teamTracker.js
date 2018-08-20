@@ -6,10 +6,6 @@ const TaskType = require("./taskType");
 // var TaskTypeSchema = require('mongoose').model('TaskType').schema;
 
 const teamTrackerSchema = new mongoose.Schema({
-  // user: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User"
-  // },
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,

@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Vast+Shadow');
+
+body {margin: 0; padding: 0; font-family: sans-serif; background: #e6ecf0;}
+
+.navbar {margin-bottom: 1rem;}
+.navbar a {font-weight: 700; color: white !important;}
+.navbar a:hover {color: #535C6A !important; text-decoration: none; cursor: pointer; background: none;}
+.navbar-nav>li>a {line-height: 75px; font-size: 18px;}
+
+.navbar-brand > img {display: inline-block; width: 50%; margin: 0 5px 2px 15px;}
+
+ul.nav.navbar-nav li {margin: 0 0.5rem;}
+
+.onboarding > .navbar {background-color: #535C6A; height: 105px;}
+
+.home-hero{width: 100vw; height: 100vh; position: absolute; top: 0; left: 0; display: flex; align-items: center; justify-content: center; z-index: -1; text-align: center; padding: 1em; background-image: url("./images/coding-white.jpg"); background-position: center center; background-size: cover; flex-direction: column; text-shadow: 0 0 8px #535C6A; color: #fff; font-family: "Vast Shadow"}
+
+.hero-caption {padding: 50px; background: rgba(83, 92, 106, 0.7); width: 50%; border-radius: 20px; border: 2px solid #535C6A;}
+
+.row.justify-content.text-center {display: flex; justify-content: center;}
+
+#messages .list-group-item {display: flex; align-items: flex-start; padding: 7px 20px 12px;}
+#messages:not(.no-hover) .list-group-item:hover {background-color: #e6ecf0;}
+button {margin-top: 20px;}
+
+.timeline-image {border-radius: 50px; height: 48px; width: 48px; margin: 2px 30px 10px 10px;}
+  
+.btn:hover {cursor: pointer;}
+  
+a.btn.btn-danger, a.btn.btn-danger:hover {color: white;}
+  
+
+  

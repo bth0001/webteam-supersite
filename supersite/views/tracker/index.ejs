@@ -214,8 +214,9 @@ $("#addTask").click(function () {               
 							<p><strong>Notes:</strong> <%= tracked.notes %></p>	
 							<div>
 								<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
+								<a href="#"><button type="button" class="btn btn-xs btn-danger delete">delete</button></a>
 								<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
-									<button class="btn btn-xs btn-danger">Delete</button>
+									<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 								</form>
 							</div>  
 						</div>
@@ -245,10 +246,17 @@ $("#addTask").click(function () {               
 								<p><strong>Notes:</strong> <%= tracked.notes %></p>	
 								<div>
 									<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
+									<a href="#"><button type="button" class="btn btn-xs btn-danger delete">Confirm Delete</button></a>
 									<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
-										<button class="btn btn-xs btn-danger">Delete</button>
+										<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 									</form>
 								</div>  
+								<script>
+									$('.delete').on("click", function(event){	
+										event.defaultPrevented();									
+											$("[name='realDelete']").attr('disabled', false);
+									});
+								</script>
 							</div>
 						</div>
 					<% } %>
