@@ -79,6 +79,7 @@ router.get("/:id/edit", function(req, res){
 //update tracker route
 router.put("/:id", function(req, res){
    //find and update correct tracker
+   var author = {id: req.user._id, firstName: req.user.firstName};
    var teamTracking = req.body.tracking;
    var taskTrack = req.body.teamTrack;
    const newTrack = Object.assign(teamTracking, {author: author}, taskTrack);
@@ -86,6 +87,11 @@ router.put("/:id", function(req, res){
     console.log("test");
       if(err){
           req.flash("error", err.message);
+          res.redirect("/tracker");
+       } else {
+           req.flash("success", "You have successfully updated the Task");
+           res.redirect("/tracker/" + req.params.id);
+       }
    });
   });
 
