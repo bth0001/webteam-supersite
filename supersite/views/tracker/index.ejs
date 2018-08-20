@@ -11,7 +11,7 @@
     .close:hover, .close:focus {color: rgba(0,0,0,0.9); text-decoration: none; cursor: pointer;}
     .close:not(:disabled):not(.disabled):focus, .close:not(:disabled):not(.disabled):hover {color:rgba(0,0,0,0.9)}
     #myBtn {margin: 10px 0;}
-    </style>
+	</style>
 
 <a href="/dashboard">&larr; Back to Dashboard</a><br />
 <br />
@@ -294,18 +294,18 @@ $('.ifEssential').hide();
 $('.ifStarter').hide();
 
 $(function() {
-$('#buildPkg').on('change', function(){
-    // If Build Package selection is "Essential" then show Special Features and CSS Path fields
-    // Reset to default selection for Starter Template dropdown
-    if ($(this).val() === 'Essential'){
-    $('.ifEssential').show();
-    $('.starterClearInput').prop('selectedIndex',0);
-}  
+	$('#buildPkg').on('change', function(){
+		// If Build Package selection is "Essential" then show Special Features and CSS Path fields
+		// Reset to default selection for Starter Template dropdown
+		if ($(this).val() === 'Essential'){
+			$('.ifEssential').show();
+			$('.starterClearInput').prop('selectedIndex',0);
+		}
   
-else {
-    // If "Essential" is not chosen then keep associated fields hidden
-    $('.ifEssential').hide();
-}
+		else {
+			// If "Essential" is not chosen then keep associated fields hidden
+			$('.ifEssential').hide();
+		}
 
     // If Build Package selection is "Starter" then show Starter Template dropdown
     // Reset to selections/input fields for Special Features and CSS Path

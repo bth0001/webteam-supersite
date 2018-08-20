@@ -24,7 +24,7 @@
                     <% strCount++ %>
                   <% } %> 
                   <% if(tracked.buildPkg === "Essential" && tracked.taskTypes[0].taskTypeName === "Site Build"){ %>
-                    <% essCount++ %>
+                    <span id="essentialCount"><% essCount++ %></span>
                   <% } %>
                   <% if(tracked.taskTypes[0].taskTypeName === "Production Change"){ %>
                     <% prodCount++ %>
@@ -35,12 +35,12 @@
                 <% } %>
               <% }); %>
               <h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
-              
+                           
             <script src="https://d3js.org/d3.v3.min.js"></script>
-            ome.west.com
             
             <script>
-            var data=[{"taskType":"Essentials", "totalTasks":4}, {"taskType":"Starters","totalTasks":2}, {"taskType":"Content Entries", "totalTasks":6}, {"taskType":"T.Link Brandings", "totalTasks":3}]
+              
+            var data=[{"taskType":"Essentials", "totalTasks":5}, {"taskType":"Starters","totalTasks":1}, {"taskType":"Content Entries", "totalTasks":1}, {"taskType":"T.Link Brandings", "totalTasks":1}]
             
               var width = 800,
                 height = 250,
