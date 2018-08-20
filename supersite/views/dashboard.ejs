@@ -20,28 +20,28 @@
             <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
               <% tracking.forEach(function(tracked){ %>
                 <% if(currentUser.firstName === tracked.author.firstName) { %>
-                  <% if(tracked.buildPkg === "Starter" && tracked.taskTypes.taskTypeName === "Site Build"){ %>
+                  <% if(tracked.buildPkg === "Starter" && tracked.taskTypes[0].taskTypeName === "Site Build"){ %>
                     <% strCount++ %>
-                  <% } %>
-                  <% if(tracked.buildPkg === "Essential" && tracked.taskTypes.taskTypeName === "Site Build"){ %>
+                  <% } %> 
+                  <% if(tracked.buildPkg === "Essential" && tracked.taskTypes[0].taskTypeName === "Site Build"){ %>
                     <% essCount++ %>
                   <% } %>
-                  <% if(tracked.taskTypes.taskTypeName === "Production Change"){ %>
+                  <% if(tracked.taskTypes[0].taskTypeName === "Production Change"){ %>
                     <% prodCount++ %>
                   <% } %>
-                  <% if(tracked.taskTypes.taskTypeName === "T.LINK Branding"){ %>
+                  <% if(tracked.taskTypes[0].taskTypeName === "T.LINK Branding"){ %>
                     <% tlinkCount++ %>
                   <% } %>
                 <% } %>
               <% }); %>
               <h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
-
+              
             <script src="https://d3js.org/d3.v3.min.js"></script>
+            ome.west.com
+            
             <script>
-              /// d3 actionsssss		
-              var pieData=[{"taskType":"Essentials", "totalTasks":5}, {"taskType":"Starters","totalTasks":2}, {"taskType":"Content Entries", "totalTasks":6}, {"taskType":"T.Link Brandings", "totalTasks":3}];
-
-
+            var data=[{"taskType":"Essentials", "totalTasks":4}, {"taskType":"Starters","totalTasks":2}, {"taskType":"Content Entries", "totalTasks":6}, {"taskType":"T.Link Brandings", "totalTasks":3}]
+            
               var width = 800,
                 height = 250,
                 radius = Math.min(width, height) / 2;
@@ -66,14 +66,14 @@
                 .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
               var g = svg.selectAll(".arc")
-                .data(pie(pieData))
+                .data(pie(data))
                 .enter().append("g")
                 .attr("class", "arc");
 
               g.append("path")
                 .attr("d", arc)
                 .style("fill", function (d) {
-                return color(d.pieData.taskType);
+                return color(d.data.taskType);
               });
 
               g.append("text")
@@ -83,7 +83,7 @@
                 .attr("dy", ".35em")
                 .style("text-anchor", "middle")
                 .text(function (d) {
-                  return d.pieData.taskType;
+                  return d.data.taskType;
                 });
             </script>
           <% } %>

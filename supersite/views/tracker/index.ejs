@@ -17,7 +17,7 @@
 <br />
 <h3 class="pageHeader">
 <%= currentUser.firstName %>, this is where you will track any of your completed tasks.
-</h1>
+</h3>
 <div id="tracker">
 	<div class="trackerContainer"> 
 		<!-- Trigger/Open The Modal -->
@@ -25,7 +25,6 @@
 		
 		<!-- The Modal -->
 		<div id="myModal" class="modal"> 
-			
 			<!-- Modal content -->
 			<div class="modal-content">
 				<div>
@@ -35,19 +34,16 @@
 							<label name="date">Date:
 								<input type="date" name="teamTrack[date]" />
 							</label>
-							<label name="acctNum" />
-							Account Number:
-							<input type="number" required name="teamTrack[acctNum]" placeholder="######" >
+							<label name="acctNum" />Account Number:
+								<input type="number" required name="teamTrack[acctNum]" placeholder="######" >
 							</label>
-						</div>
-						<!-- end of form-group -->
+						</div><!-- end of form-group -->
 						
 						<div class="form-group">
 							<label name="username">Developer:
 								<input type="text" name="teamTrack[username]" value="<%= currentUser.firstName %>" />
 							</label>
-						</div>
-						<!-- end of form-group -->
+						</div><!-- end of form-group -->
 						
 						<div class="form-group">
 							<label name="designer">Designer:
@@ -56,9 +52,9 @@
 									<option value="">N/A</option>
 									<!-- If site is a Starter -->
 									<% users.forEach(function(user){ %>
-									<% if(user.team == 'Designer') { %>
-									<option name="designer" value="<%= user.firstName %>"><%= user.firstName %></option>
-									<% } %>
+										<% if(user.team == 'Designer') { %>
+											<option name="designer" value="<%= user.firstName %>"><%= user.firstName %></option>
+										<% } %>
 									<% }); %>
 								</select>
 							</label>
@@ -66,14 +62,13 @@
 								<select name="teamTrack[onboarder]">
 									<option value="Select On-Boarder" selected>Select On-Boarder</option>
 									<% users.forEach(function(user){ %>
-									<% if(user.team == 'On-Boarder') { %>
-									<option name="onboarder" value="<%= user.firstName %>"><%= user.firstName %></option>
-									<% } %>
+										<% if(user.team == 'On-Boarder') { %>
+											<option name="onboarder" value="<%= user.firstName %>"><%= user.firstName %></option>
+										<% } %>
 									<% }); %>
 								</select>
 							</label>
-						</div>
-						<!-- end of form-group -->
+						</div><!-- end of form-group -->
 						
 						<div class="form-group">
 							<label name="buildPkg">Build Package:
@@ -92,8 +87,7 @@
 									<option value="Olympus">Olympus</option>
 								</select>
 							</label>
-						</div>
-						<!-- end of form-group -->
+						</div><!-- end of form-group -->
 						
 						<div class="form-group">
 							<label name="specialFeatures" class="ifEssential">Special Features:
@@ -109,8 +103,7 @@
 									<option value=" Scroll Efects">Scroll Effects</option>
 								</select>
 							</label>
-						</div>
-						<!-- end of form-group -->
+						</div><!-- end of form-group -->
 						
 						<div class="form-group">
 							<label name="domain">Domain:
@@ -119,36 +112,25 @@
 							<label name="cssPath" class="ifEssential">CSS Path:
 								<input type="text" name="teamTrack[cssPath]" placeholder="CSS Path" class="essentialClearInput">
 							</label>
-						</div>
-						<!-- end of form-group -->
+						</div><!-- end of form-group -->
 						
-<script>
-$(document).ready(function(){
-    var count = 0;
-    $("div.task:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
-    $("div.task:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
-    $("div.task:first-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+						<script>
+							$(document).ready(function(){
+								var count = 0;
+								$("div.task:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+								$("div.task:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+								$("div.task:first-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
 
-$("#addTask").click(function () {               
-        count++;        
-        var newTaskInput = $(".task:last-of-type"); 
-        newTaskInput.clone().appendTo("#task"); 
-    $("div.task:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
-    $("div.task:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
-    $("div.task:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
-
-});
-
-});
-    
-</script>
-
-
-
-
-
-
-
+								$("#addTask").click(function () {
+									count++;
+									var newTaskInput = $(".task:last-of-type");
+									newTaskInput.clone().appendTo("#task");
+									$("div.task:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+									$("div.task:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+									$("div.task:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+								});
+							});
+						</script>
 
 						<div class="form-group" id="task">
 							<label class="labelTask" name="taskTypeName"><h3>Task:</h3></label>
@@ -175,7 +157,6 @@ $("#addTask").click(function () {               
 							</label>
 						</div>
 						<!-- end of form-group -->
-						
 						<button>Submit</button>
 					</form>
 				</div>
@@ -185,98 +166,95 @@ $("#addTask").click(function () {               
 	
 	<% function countEssential() { %>
 		<% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
-		<% task.forEach(function(tasked){ %>
 			<% tracking.forEach(function(tracked){ %>
 				<% if(currentUser.firstName === tracked.author.firstName) { %>
-					<% if(tracked.buildPkg === "Starter" && tasked.taskTypeName === "Site Build"){ %>
+					<% if(tracked.buildPkg === "Starter" && tracked.taskTypes[0].taskTypeName === "Site Build"){ %>
 						<% strCount++ %>
-					<% } %>
-					<% if(tracked.buildPkg === "Essential" && tasked.taskTypeName === "Site Build" ){ %>
+					<% } %> 
+					<% if(tracked.buildPkg === "Essential" && tracked.taskTypes[0].taskTypeName === "Site Build"){ %>
 						<% essCount++ %>
 					<% } %>
-			
-					<% if(tasked.taskTypeName === "Production Change"){ %>
-                        <% prodCount++ %>
-                      <% } %>
-                    <% if(tasked.taskTypeName === "T.LINK Branding"){ %>
-                        <% tlinkCount++ %>
-                      <% } %>
+					<% if(tracked.taskTypes[0].taskTypeName === "Production Change"){ %>
+						<% prodCount++ %>
+					<% } %>
+					<% if(tracked.taskTypes[0].taskTypeName === "T.LINK Branding"){ %>
+						<% tlinkCount++ %>
+					<% } %>
 				<% } %>
-				<% }) %>
-		<% }); %>
+			<% }); %>
 	</p>
 	<h3>Edit your tracks from this month below:</h3>
 	<div id="stats">
 			<h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %></h4>
 		<div id="essTracked">
 			<% tracking.forEach(function(tracked){ %>
-			<% if(currentUser.firstName === tracked.author.firstName) { %>
-			<% if(tracked.buildPkg === "Essential"){ %>
-			<div class="col-md-12">
-				<div id="tracked">
-					<p><strong>Name:</strong> <%= tracked.author.firstName %></p>
-					<p><strong>Completed:</strong> <%= tracked.date %></p>
-					<p><strong>Acct #:</strong> <%= tracked.acctNum %></p>
-					<p><strong>On-Boarder:</strong> <%= tracked.onboarder %></p>
-					<p><strong>Package:</strong> <%= tracked.buildPkg %></p>
-					<p><strong>Designer:</strong> <%= tracked.designer %></p>
-					<p><strong>Special Features:</strong> <%= tracked.specialFeatures %></p>
-					<p><strong>CSS Path:</strong> <%= tracked.cssPath %></p>
-					<p><strong>Domain:</strong> <%= tracked.domain %></p>
-					<div><strong>Task:</strong> 
-						<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
-							<p><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></p>
-						<% }; %>
-					</div>	 
-					<p><strong>Notes:</strong> <%= tracked.notes %></p>	
-                    <div>
-                        <a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
-                        <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
-                            <button class="btn btn-xs btn-danger">Delete</button>
-                        </form>
-                    </div>  
-				</div>
-			</div>
-			<% } %>
-			<% } %>
+				<% if(currentUser.firstName === tracked.author.firstName) { %>
+					<% if(tracked.buildPkg === "Essential"){ %>
+					<div class="col-md-12">
+						<div id="tracked">
+							<p><strong>Name:</strong> <%= tracked.author.firstName %></p>
+							<p><strong>Completed:</strong> <%= tracked.date %></p>
+							<p><strong>Acct #:</strong> <%= tracked.acctNum %></p>
+							<p><strong>On-Boarder:</strong> <%= tracked.onboarder %></p>
+							<p><strong>Package:</strong> <%= tracked.buildPkg %></p>
+							<p><strong>Designer:</strong> <%= tracked.designer %></p>
+							<p><strong>Special Features:</strong> <%= tracked.specialFeatures %></p>
+							<p><strong>CSS Path:</strong> <%= tracked.cssPath %></p>
+							<p><strong>Domain:</strong> <%= tracked.domain %></p>
+							<div><strong>Task:</strong> 
+								<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+									<p><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></p>
+								<% }; %>
+							</div>	 
+							<p><strong>Notes:</strong> <%= tracked.notes %></p>	
+							<div>
+								<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
+								<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+									<button class="btn btn-xs btn-danger">Delete</button>
+								</form>
+							</div>  
+						</div>
+					</div>
+					<% } %>
+				<% } %>
 			<% }); %>
 		</div>
 		<div id="strTracked">
 			<% tracking.forEach(function(tracked){ %>
-			<% if(currentUser.firstName === tracked.author.firstName) { %>
-			<% if(tracked.buildPkg === "Starter"){ %>
-			<div class="col-md-12">
-				<div id="tracked">
-						<p><strong>Name:</strong> <%= tracked.author.firstName %></p>
-						<p><strong>Completed:</strong> <%= tracked.date %></p>
-						<p><strong>Acct #:</strong> <%= tracked.acctNum %></p>
-						<p><strong>On-Boarder:</strong> <%= tracked.onboarder %></p>
-						<p><strong>Package:</strong> <%= tracked.buildPkg %></p>
-						<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %></p>
-						<p><strong>Domain:</strong> <%= tracked.domain %></p>
-						<div><strong>Task:</strong> 
-							<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
-								<p><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></p>
-							<% }; %>
-						</div>	 
-						<p><strong>Notes:</strong> <%= tracked.notes %></p>	
-                    <div>
-                            <a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
-                            <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
-                                <button class="btn btn-xs btn-danger">Delete</button>
-                            </form>
-                        </div>  
-				</div>
-			</div>
-			<% } %>
-			<% } %>
+				<% if(currentUser.firstName === tracked.author.firstName) { %>
+					<% if(tracked.buildPkg === "Starter"){ %>
+						<div class="col-md-12">
+							<div id="tracked">
+								<p><strong>Name:</strong> <%= tracked.author.firstName %></p>
+								<p><strong>Completed:</strong> <%= tracked.date %></p>
+								<p><strong>Acct #:</strong> <%= tracked.acctNum %></p>
+								<p><strong>On-Boarder:</strong> <%= tracked.onboarder %></p>
+								<p><strong>Package:</strong> <%= tracked.buildPkg %></p>
+								<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %></p>
+								<p><strong>Domain:</strong> <%= tracked.domain %></p>
+								<div><strong>Task:</strong> 
+									<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+										<p><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></p>
+									<% }; %>
+								</div>	 
+								<p><strong>Notes:</strong> <%= tracked.notes %></p>	
+								<div>
+									<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
+									<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+										<button class="btn btn-xs btn-danger">Delete</button>
+									</form>
+								</div>  
+							</div>
+						</div>
+					<% } %>
+				<% } %>
 			<% }); %>
 		</div>
 		<% } %>
 		<% countEssential(); %>
 	</div>
 </div>
-</div>
+
 <script>
 // Get the tracker modal
 var modal = document.getElementById('myModal');

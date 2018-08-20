@@ -9,17 +9,17 @@ router.get("/", isLoggedIn, function(req, res){
   TeamTracker.find({}, function(err, allTracks){
     User.find({}, function(err, allUsers){
       TaskTypes.find({}, function(err, allTask){
-    if(err){
-      console.log(err);
-    } else {
-      res.render("dashboard", {
-        tracking: allTracks,
-        users: allUsers,
-        task: allTask
-      });
-    }
-  })
-})
+        if(err){
+          console.log(err);
+        } else {
+          res.render("dashboard", {
+            tracking: allTracks,
+            users: allUsers,
+            task: allTask
+          });
+        }
+      })
+    })
   })
 });
 
