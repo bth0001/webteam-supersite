@@ -7,10 +7,31 @@
     </div>
   </div>
  
+  <% function countEssential() { %>
+    <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
+      <% tracking.forEach(function(tracked){ %>
+        <%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
+        <% if(currentUser.firstName === tracked.author.firstName) { %>
+          <% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build"){ %>
+            <% strCount++ %>
+          <% } %> 
+          <% if(tracked.buildPkg === "Essential" && tracked.taskTypes[i].taskTypeName === "Site Build"){ %>
+           <% essCount++ %> 
+          <% } %>
+          <% if(tracked.taskTypes[i].taskTypeName === "Production Change"){ %>
+            <% prodCount++ %>
+          <% } %>
+          <% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding"){ %>
+            <% tlinkCount++ %>
+          <% } %>
+        <% } %>
+        <% } %>
+      <% }); %>
+
   <div id="dashboard">
     <div class="container">
 			<div class="developer flexbox flexLeft">
-			  <h4>Elizabeth</h4><i class="fas fa-angle-down"></i>
+			  <h4><%= currentUser.firstName %></h4><i class="fas fa-angle-down"></i>
       </div>
       <div id="topRow" class="flexbox">
         <div class="col-1">
@@ -18,11 +39,11 @@
             <h2>Site Builds</h2>
             <div class="tablex tablex--columns" data-columns="2" data-gutter="2">
               <!-- Column 1 -->
-              <div class="tablex__item tablex__item--head"><span class="circle">2</span></div>
+              <div class="tablex__item tablex__item--head"><span class="circle"><%= essCount++ %></span></div>
               <div class="tablex__item center">Essentials</div>
 
               <!-- Column 2 -->
-              <div class="tablex__item tablex__item--head"><span class="circle">3</span></div>
+              <div class="tablex__item tablex__item--head"><span class="circle"><%= strCount %></span></div>
               <div class="tablex__item center">Starters</div>
             </div>
           </div>
@@ -32,15 +53,15 @@
             <div class="tablex tablex--rows tablex--bordered" data-columns="2" data-gutter="3">
               <!-- Column 1 -->
               <div class="tablex__item tablex__item--head">Prod Changes</div>
-              <div class="tablex__item right">21</div>
+              <div class="tablex__item right"><%= prodCount %></div>
               
               <!-- Column 2 -->
               <div class="tablex__item tablex__item--head">T.LINK</div>
-              <div class="tablex__item right">4</div>
+              <div class="tablex__item right"><%= tlinkCount %></div>
               
               <!-- Column 3 -->
               <div class="tablex__item tablex__item--head">Other</div>
-              <div class="tablex__item right">2</div>
+              <div class="tablex__item right">TBD</div>
             </div>
           </div>
         </div>
@@ -78,26 +99,7 @@
       <h3>View your stats from this month below:</h3><br />
       <div class="statsContainer">
         <p>
-          <% function countEssential() { %>
-            <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
-              <% tracking.forEach(function(tracked){ %>
-                <%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
-                <% if(currentUser.firstName === tracked.author.firstName) { %>
-                  <% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build"){ %>
-                    <% strCount++ %>
-                  <% } %> 
-                  <% if(tracked.buildPkg === "Essential" && tracked.taskTypes[i].taskTypeName === "Site Build"){ %>
-                    <span id="essentialCount"><% essCount++ %></span>
-                  <% } %>
-                  <% if(tracked.taskTypes[i].taskTypeName === "Production Change"){ %>
-                    <% prodCount++ %>
-                  <% } %>
-                  <% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding"){ %>
-                    <% tlinkCount++ %>
-                  <% } %>
-                <% } %>
-                <% } %>
-              <% }); %>
+         
               <h4>Essentials: <span id="essCount"><%= essCount %> </span> | Starters: <span id="strCount"><%= strCount %></span> | Prod Change: <span id="prodCount"><%= prodCount %></span> | T.LINK Branding: <span id="tlinkCount"><%= tlinkCount %></span></h4> 
                            
             <script src="https://d3js.org/d3.v3.min.js"></script>
