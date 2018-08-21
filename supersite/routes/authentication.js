@@ -4,7 +4,28 @@ var passport = require("passport");
 var localStrategy = require("passport-local");
 var session = require("express-session");
 var User = require("../models/user");
-
+//----Image Upload Start
+var multer = require('multer');
+var storage = multer.diskStorage({
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname); // sets file name
+  },
+   destination: function (req, file, cb) {
+    cb(null, "uploads"); //file upload destination
+  }
+});
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+var upload = multer({ // options
+    storage: storage,
+    fileFilter: imageFilter
+})
+//----Image Upload End
 
 //Register form route
 router.get("/signup", function(req, res){
@@ -12,7 +33,8 @@ router.get("/signup", function(req, res){
   });
   
   //handles signup route
-  router.post("/signup", function(req, res){
+  router.post("/signup", upload.single('image'), function(req, res){
+    req.body.profileImageUrl = req.file.path; //grabs file path and assigns to profileImageUrl
     const newUser = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,

@@ -108,6 +108,8 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 
 .searchBox {background: rgba(255,255,255,.1); color: #fff; width: 250px; padding: 6px 15px;}
 
+/* Alert Message */
+#alertMessage {position: fixed; top: 10px; left: 50%; bottom: auto; right: auto; transform: translateX(-50%)}
 
 /* Home */
 #overview {background: #fff; padding: 5vh 0;}

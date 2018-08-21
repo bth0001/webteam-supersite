@@ -14,6 +14,7 @@ var crypto = require('crypto');
 var smtpTransport = require('nodemailer-smtp-transport');
 var xoauth2 = require('xoauth2');
 var methodOverride = require("method-override");
+var multer = require('multer');
 
 // Required Files
 var db = require("./models/index")
@@ -35,6 +36,8 @@ var projectsTracker = require('./routes/projects-tracker');
 app.set('view engine', 'ejs');
 app.set('debug', true);
 app.use(express.static("public"));
+app.use(express.static("routes/word"));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(methodOverride("_method"));
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({extended: true}));
