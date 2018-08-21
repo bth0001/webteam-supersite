@@ -90,9 +90,9 @@ router.get("/signup", function(req, res){
     res.render("edit-profile");
   });
   
-  
-  router.post('/edit-profile', function(req, res, next){
+  router.post('/edit-profile', upload.single('image'), function(req, res, next){
     User.findById(req.user.id, function (err, sanitizedUser) {
+      req.body.profileImageUrl = req.file.path; //grabs file path and assigns to profileImageUrl
         if (!sanitizedUser) {
             req.flash('error', 'No account found');
             return res.redirect('/edit-profile');
