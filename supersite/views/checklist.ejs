@@ -1,15 +1,20 @@
 <% include partials/header %>
 <script>
         $( document ).ready(function() {
-            $("#checklistEssential").hide();
+            $("#startEssWrap, #checklistEssential").hide();
         
-            $("#btnEssential").on("click", function(){
-                $("#checklistEssential").slideToggle();
-            });
+            $('#buildPkg').on('change', function(){
+             if ($(this).val() === 'Essential'){
+                $("#startEssWrap").show("slow");
+                $("#checklistStarter, #checklistEssential").show();
+             }
 
-              $("#btnStarter").on("click", function(){
+             if ($(this).val() === 'Starter'){
+                $("#startEssWrap").show("slow");
+                $("#checklistStarter").show();
                 $("#checklistEssential").hide();
-            });
+              }
+        });
         });
 </script>
 
@@ -18,7 +23,7 @@ form {max-width:100%; padding:0; box-shadow:none; background-color: transparent}
 form input {display:inline-block; width: auto;}
 .checklistForm input[type="radio"], .checklistForm input[type="radio"] {margin: 0 8px 0 0}
 .form-group{margin:0}
-#whichPackage {text-align:center; margin: 30px 0}  
+#startEssWrap {display:none; margin: 30px 0 0}
 
 .checklistContainer {max-width:80%; margin: 0 auto; }  
 .checklistForm {margin: 30px 0}
@@ -28,6 +33,7 @@ form input {display:inline-block; width: auto;}
 .checklistForm label {width: 100%;margin:0; display: flex; flex-wrap:wrap; align-items: center;justify-content: space-between; border-bottom: 1px solid #fff}
 .checklistForm .form-group:first-of-type label {border-top:1px solid #fff}
 .checklistForm textarea {width:100%; height:50px; padding:5px}
+.checklistForm #submit {margin: 20px 0 0}
 
 .taskName {flex: 3; text-align:left; background:#2392A4; align-self:center; font-weight:700}
 .taskComplete {flex: 1; background:#2479A7;}
@@ -36,6 +42,11 @@ form input {display:inline-block; width: auto;}
 
 #checklistEssential {margin:20px 0 0}
 
+#checklistHeaderInfo {display:flex; justify-content: space-between; flex-wrap:wrap; flex-direction:row; margin: 0 -10px}
+#checklistHeaderInfo label {border:none; flex:1; margin: 0 10px}
+#checklistHeaderInfo .domain {flex: 2}
+#checklistHeaderInfo input, #checklistHeaderInfo select {width: 100%; height:2.5em; margin: 10px 0 0}
+#checklistHeaderInfo select {padding: 0 10px}
 
 @media screen and (max-width:768px) {
     .checklistForm label {flex-direction: column; border-bottom:none}
@@ -53,12 +64,28 @@ form input {display:inline-block; width: auto;}
     <div class="checklistContainer">
             <h3 class="pageHeader"><%= currentUser.firstName %>, this is the checklist for the <%= currentUser.team %> team. This will make completing a checklist a breeze!</h1>
 
-                <div id="whichPackage">Select Package: &nbsp; <button id="btnEssential" class="btn btn-md btn-primary">Essential</button> <button id="btnStarter" class="btn btn-md btn-primary">Starter</button></div>
-  
-
         <form class="checklistForm" action="/checklist" method="POST">
            <!-- <div class="form-exit"> <span class="close">&times;</span></div> -->
-           
+
+        <div class="form-group" id="checklistHeaderInfo">
+              <label name="buildPkg">Build Package:
+              <select name="teamTrack[buildPkg]" id="buildPkg">
+                  <option value="" disabled selected>Select Build Package</option>
+                  <option value="Essential">Essential</option>
+                  <option value="Starter">Starter</option>
+              </select>
+              </label>
+
+              <label name="username" class="teamMember">Developer:
+                  <input type="text" name="teamTrack[username]" value="<%= currentUser.firstName %>" />
+              </label>
+              <label name="domain" class="domain">Domain:
+                        <input type="text" name="teamTrack[domain]" placeholder="Domain">
+                </label>
+        </div> <!-- end of form-group -->
+
+        <div id="startEssWrap">
+           <div id="checklistStarter"> 
             <div class="form-group">
                 <label name="browserPermissions"><span class="taskName">Guest Browser Permissions</span> 
                         <span class="taskComplete"><input type="radio" name="browserPermissions" value="Complete"> Complete</span> 
@@ -146,6 +173,7 @@ form input {display:inline-block; width: auto;}
                                                 <span class="taskNotes"><textarea name="tlinkBranding" placeholder="Additional Notes"></textarea></span>
                                         </label>
                                 </div> <!-- end of form-group-->
+                                </div> <!-- end of checklistStarter-->
 
                  <div id="checklistEssential">
                     <div class="form-group">
@@ -189,8 +217,9 @@ form input {display:inline-block; width: auto;}
                         </div> <!-- end of form-group-->
 
                 </div>
-               
-
+                <button id="submit" class="btn btn-md btn-primary">Submit Checklist</button>
+        </div> <!-- end startEssWrap -->
+                
             </form> <!-- end of form -->
     </div>
 </div>

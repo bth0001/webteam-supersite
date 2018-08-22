@@ -1,131 +1,132 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>WebTeam SuperSite</title>
-            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" />
-            <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/solid.css" integrity="sha384-wnAC7ln+XN0UKdcPvJvtqIH3jOjs9pnKnq9qX68ImXvOGz2JuFoEiCjT8jyZQX2z" crossorigin="anonymous">
-            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-            <script src="https://d3js.org/d3.v5.min.js"></script>
-            <script src="/scripts/site.js"></script>
-            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />           <script>
-                function defaultImg(){
-                    if(profileImageUrl === ""){
-                        document.getElementById('userProfile').src = "http://webplus.televoxsites.com/projects/supersite/web.jpg";
-                    }
-                }
-                $( document ).ready(function() {
-                    $('#profileBar .fa-angle-down').on('mouseover', function(){
-                        $(this).find('.dropdown').stop().slideDown(300);
-                        }).on('mouseout', function(){
 
-                        $(this).find('.dropdown').stop().slideUp(600);
-                    });
-                });
-            </script>
-            <!-- <script>
-                function startTime() {
-                    var today = new Date();
-                    var h = today.getHours();
-                    var m = today.getMinutes();
-                    var s = today.getSeconds();
-                    m = checkTime(m);
-                    s = checkTime(s);
-                    document.getElementById('clockDisplay').innerHTML =
-                    h + ":" + m + ":" + s;
-                    var t = setTimeout(startTime, 500);
-                }
-                function checkTime(i) {
-                    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-                    return i;
-                }
-                onload="startTime()"
-            </script> -->
-    </head>
-    <body>
-        <header id="header">
-                <div id="adminBar">
-                    <div class="container flexbox flexJustify">
-                            <div id="logo">
-                                    <% if(!currentUser){ %>
-                                        <a href="/"><img class="logo" src="https://i.imgur.com/HyykWbI.png" alt="TeleVox" /></a>
-                                    <% } else { %>
-                                        <a href="/dashboard"><img class="logo" src="https://i.imgur.com/HyykWbI.png" alt="TeleVox" /></a>
-                                    <% } %>
-                                </div><!--logo-->
-                            <div id="profileBar">
-                                
-                                <% if(!currentUser){ %>
-                                    <div class=""><a href="/login">Login</a></div>
-                                    <div class=""><a href="/signup">Sign Up</a></div>
-                                <% } else { %>
-                                    <div class="flexbox flexRight">
-                                        <div class="profileImage">
-                                            <a href="/edit-profile"><img onerror="this.src='http://webplus.televoxsites.com/projects/supersite/web.jpg'" class="" id="userProfile" src="<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" /></a>
-                                        </div>
-                                        <div class="profileText">
-                                            <p><a href="/edit-profile"><%= currentUser.firstName + " " + currentUser.lastName %></a></p>
-                                        </div>
-                                        <i class="fas fa-angle-down">
-                                                <div class="dropdown">
-                                                        <a href="/edit-profile">My Settings</a>
-                                                        <a href="/logout">Log Out</a>
-                                                </div>
-                                        </i>
+<head>
+	<title>WebTeam SuperSite</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/solid.css" integrity="sha384-wnAC7ln+XN0UKdcPvJvtqIH3jOjs9pnKnq9qX68ImXvOGz2JuFoEiCjT8jyZQX2z" crossorigin="anonymous">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="/scripts/site.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+	<script>
+		function defaultImg() {
+			if (profileImageUrl === "") {
+				document.getElementById('userProfile').src = "http://webplus.televoxsites.com/projects/supersite/web.jpg";
+			}
+		}
+		$(document).ready(function () {
+			$('#profileBar .fa-angle-down').on('mouseover', function () {
+				$(this).find('.dropdown').stop().slideDown(300);
+			}).on('mouseout', function () {
+				$(this).find('.dropdown').stop().slideUp(600);
+			});
+		});
+	</script>
+	<!-- <script>
+		function startTime() {
+			var today = new Date();
+			var h = today.getHours();
+			var m = today.getMinutes();
+			var s = today.getSeconds();
+			m = checkTime(m);
+			s = checkTime(s);
+			document.getElementById('clockDisplay').innerHTML =
+			h + ":" + m + ":" + s;
+			var t = setTimeout(startTime, 500);
+		}
+		function checkTime(i) {
+			if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+			return i;
+		}
+		onload="startTime()"
+	</script> -->
+</head>
 
-                                       
+<body>
+	<header id="header">
+		<div id="adminBar">
+			<div class="container flexbox flexJustify">
 
-                                    </div>                 
-                                    <!-- <div class=""><a href="/logout">Logout</a></div> -->
-                                <% } %>
-                            </div>
+				<div id="logo">
+					<% if(!currentUser){ %>
+						<a href="/"><img class="logo" src="https://i.imgur.com/HyykWbI.png" alt="TeleVox" /></a>
+					<% } else { %>
+						<a href="/dashboard"><img class="logo" src="https://i.imgur.com/HyykWbI.png" alt="TeleVox" /></a>
+					<% } %>
+				</div><!--logo-->
 
-                    </div>
-                </div>
-                <div id="navBar">
-                    <div class="container flexbox flexJustify">
-                        <ul class="flexbox">
-                            <li><a href="/dashboard"><span>Dashboard</span></a></li>
-                            <li><a href="/tracker"><span>Tracker</span></a></li>
-                            <li><a href="/projects-tracker"><span>Projects</span></a></li>
-                            <li><a href="/checklist"><span>Checklist</span></a></li>
-                            <li><a href="/idea-warehouse"><span>Idea Warehouse</span></a></li>
-                            <li><a href="/hats-off"><span>Hats-Off</span></a></li>
-                            <li><a href="/blueprint-generator"><span>Blueprint</span></a></li>
-                            <li><a href="/presence-url-tracker"><span>Presence URL</span></a></li>
-                        </ul>
-                 
-                    <div class="searchBox flexbox flexJustify">
-                            <div class="searchText">Custom Search</div>
-                                <div class="searchIcon"><i class="fas fa-search"></i></div>
-                            
-                          </div>
-                        </div>   
-                </div>
-                
-                
-                <!-- <div id="clockDisplay" class="clockStyle"></div> -->
-             
-            <!-- </div> -->
-            <!--container-->
-           
-        </header>
-        <div class="container">
-            <% if(error && error.length > 0){ %>
-            <div class="alert alert-danger" role="alert">
-                <%= error %>    
-            </div> 
-            <% } %>  
-            <% if(success && success.length > 0){ %>
-            <div class="alert alert-success" role="alert">
-                <%= success %>    
-            </div>     
-            <% } %>  
-        </div>
-        <section id="siteBody">
-                
-         <!--closing tag in footer file-->
-            
+				<div id="profileBar">
+					<% if(!currentUser){ %>
+						<div class=""><a href="/login">Login</a></div>
+						<div class=""><a href="/signup">Sign Up</a></div>
+					<% } else { %>
+						<div class="flexbox flexRight">
+							<div class="profileImage">
+								<a href="/edit-profile">
+									<img onerror="this.src='http://webplus.televoxsites.com/projects/supersite/web.jpg'" class="" id="userProfile" src="<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" />
+								</a>
+							</div>
+							<div class="profileText">
+								<p><a href="/edit-profile"><%= currentUser.firstName + " " + currentUser.lastName %></a></p>
+							</div>
+							<i class="fas fa-angle-down">
+								<div class="dropdown">
+									<a href="/edit-profile">My Profile</a>
+									<a href="/logout">Log Out</a>
+								</div>
+							</i>
+						</div>
+						<!-- <div class=""><a href="/logout">Logout</a></div> -->
+					<% } %>
+				</div><!-- profileBar -->
+			</div><!-- adminBar container -->
+		</div><!-- adminBar -->
+
+		<div id="navBar">
+			<div class="container flexbox flexJustify">
+				<ul class="flexbox">
+					<li><a href="/dashboard"><span>Dashboard</span></a></li>
+					<li><a href="/tracker"><span>Tracker</span></a></li>
+					<li><a href="/projects-tracker"><span>Projects</span></a></li>
+					<li><a href="/checklist"><span>Checklist</span></a></li>
+					<li><a href="/idea-warehouse"><span>Idea Warehouse</span></a></li>
+					<li><a href="/hats-off"><span>Hats-Off</span></a></li>
+					<li><a href="/blueprint-generator"><span>Blueprint</span></a></li>
+					<li><a href="/presence-url-tracker"><span>Presence URL</span></a></li>
+				</ul>
+
+				<div class="searchBox flexbox flexJustify">
+					<div class="searchText">Custom Search</div>
+					<div class="searchIcon"><i class="fas fa-search"></i></div>
+				</div>
+
+			</div><!-- navBar container-->
+		</div><!-- navBar -->
+
+		<!-- <div id="clockDisplay" class="clockStyle"></div> -->
+		<!-- </div> -->
+		<!--container-->
+
+	</header><!-- end header -->
+
+	<div class="container">
+		<% if(error && error.length > 0){ %>
+			<div class="alert alert-danger" role="alert">
+				<%= error %>
+			</div>
+		<% } %>
+		<% if(success && success.length > 0){ %>
+			<div class="alert alert-success" role="alert">
+				<%= success %>
+			</div>
+		<% } %>
+	</div>
+		
+	<section id="siteBody">
+
+	<!--closing tag in footer file-->

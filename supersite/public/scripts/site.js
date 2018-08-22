@@ -1,3 +1,7 @@
+setTimeout(function() {
+  $("#alertMessage").fadeOut("slow");
+}, 3000);
+
 /* For Blueprint See All Page */
 $(document).ready(function(){
     $("div.blueprintContainer a.more").click(function(){
