@@ -37,13 +37,13 @@
         <div class="col-1">
           <div class="widget">
             <h2>Site Builds</h2>
-            <div class="tablex tablex--columns" data-columns="2" data-gutter="2">
+            <div id="bob" class="tablex tablex--columns" data-columns="2" data-gutter="2">
               <!-- Column 1 -->
-              <div class="tablex__item tablex__item--head"><span class="circle"><%= essCount++ %></span></div>
+              <div class="tablex__item tablex__item--head"><span data-id="1" class="circle"><%= essCount++ %></span></div>
               <div class="tablex__item center">Essentials</div>
 
               <!-- Column 2 -->
-              <div class="tablex__item tablex__item--head"><span class="circle"><%= strCount %></span></div>
+              <div class="tablex__item tablex__item--head"><span data-id="2" class="circle"><%= strCount %></span></div>
               <div class="tablex__item center">Starters</div>
             </div>
           </div>
@@ -66,36 +66,45 @@
           </div>
         </div>
       </div><!-- End topRow -->
-                      
-      <div id="bottomRow" class="flexbox">
-        <div class="col-full">
-          <div class="widget">
-            <h2>Essential Builds</h2>
+<div id="bottomRow" class="flexbox">
+    <div class="col-full">        
+          <div class="widgetDisplay widget" id="1" style="display: none;">
+              <h2>Essential Builds</h2>
+           <% tracking.forEach(function(tracked){ %>
+            <% if(currentUser.firstName === tracked.author.firstName) { %>
+              <% if(tracked.buildPkg === "Essential"){ %> 
             <div class="tablex tablex--rows tablex--bordered" data-columns="6" data-gutter="3">
-              <!-- Column 1 -->
-              <div class="tablex__item tablex__item--head"><a href="#">http://nordortho.televox.west.com</a></div>
-              <div class="tablex__item right">107026</div>
-              <div class="tablex__item right">Jodi</div>
-              <div class="tablex__item right">Denise</div>
-              <div class="tablex__item right">8/5/2018</div>
-              <div class="tablex__item right"><i class="fas fa-angle-down"></i></div>
-              
-              <!-- Column 2 -->
-              <div class="tablex__item tablex__item--head"><a href="#">http://hechler.televox.west.com</a></div>
-              <div class="tablex__item right">105940</div>
-              <div class="tablex__item right">Yogesh</div>
-              <div class="tablex__item right">Rachel</div>
-              <div class="tablex__item right">8/1/2018</div>
-              <div class="tablex__item right"><i class="fas fa-angle-down"></i></div>
+              <div class="tablex__item tablex__item--head"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+              <div class="tablex__item right"><%= tracked.acctNum %></div>
+              <div class="tablex__item right"><%= tracked.designer %></div>
+              <div class="tablex__item right"><%= tracked.onboarder %></div>
+              <div class="tablex__item right"><%= tracked.author.firstName %></div>
+              <div class="tablex__item right"><i class="fas fa-angle-down"></i></div>            
             </div>
+              <% } %>
+            <% } %>
+          <% }); %> 
           </div>
-        </div>
-      </div>
-    </div>
-
-    <p>&nbsp;</p>
-
-    <div id="stats">
+          <div class="widgetDisplay widget" id="2" style="display: none;">
+              <h2>Starter Builds</h2>
+           <% tracking.forEach(function(tracked){ %>
+            <% if(currentUser.firstName === tracked.author.firstName) { %>
+              <% if(tracked.buildPkg === "Starter"){ %> 
+            <div class="tablex tablex--rows tablex--bordered" data-columns="6" data-gutter="3">
+              <div class="tablex__item tablex__item--head"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+              <div class="tablex__item right"><%= tracked.acctNum %></div>
+              <div class="tablex__item right"><%= tracked.starterTemplate %></div>
+              <div class="tablex__item right"><%= tracked.onboarder %></div>
+              <div class="tablex__item right"><%= tracked.author.firstName %></div>
+              <div class="tablex__item right"><i class="fas fa-angle-down"></i></div>            
+            </div>
+              <% } %>
+            <% } %>
+          <% }); %> 
+          </div>
+      </div> 
+</div>
+    <!-- <div id="stats">
       <h3>View your stats from this month below:</h3><br />
       <div class="statsContainer">
         <p>
@@ -154,11 +163,25 @@
                   .text(function (d) {
                     return d.data.taskType;
                   });
-              </script>
+              </script> -->
             <% } %>
-          </p>
+          <!-- </p> -->
         <% countEssential(); %>
       </div><!-- end statsContainer -->
     </div><!-- end stats -->
   </div><!-- end dashboard -->
+  <script>
+      $(document).ready(function () {
+        $('#bob span').click(function (event) {
+            event.preventDefault();
+            $('.widgetDisplay').hide();
+            var id = $(this).data("id");
+            $('#' + id).fadeIn(function () {
+                $(this).css({
+                    'display': 'block'
+                }, 1000);
+            });
+        });
+      });
+    </script>
 <% include partials/footer %>
