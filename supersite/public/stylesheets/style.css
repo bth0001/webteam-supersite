@@ -90,6 +90,10 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 #profileBar .dropdown a:hover, #profileBar .dropdown a:focus {background-color: #19B9E7; color: #fff;}
 #profileBar .fa-angle-down {cursor: pointer}
 
+/* Image preview on signup and edit profile pages */
+#imagePreview {max-width: 100%; display: block;}
+#imagePreview[src="#"] {display: none;}
+
 #navBar ul li {list-style: none;}
 #utilityNav {flex:1 auto; text-align:right; margin:0; padding:0;}
 #utilityNav > li {display:inline-block; margin:0 0 0 20px;}

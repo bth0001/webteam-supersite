@@ -43,6 +43,12 @@ setTimeout(function() {
       $(this).parent().parent().remove();
     }
   });
+
+  // For image uploader preview 1 of 2
+  $("#image").change(function() {
+    readURL(this);
+  });
+
   });//End document ready
   
   function assignNames() {
@@ -65,4 +71,17 @@ setTimeout(function() {
       });
       parentCount++;
     });
+  }
+
+  // For image uploader preview 2 of 2
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+  
+      reader.onload = function(e) {
+        $('#imagePreview').attr('src', e.target.result);
+      }
+  
+      reader.readAsDataURL(input.files[0]);
+    }
   }
