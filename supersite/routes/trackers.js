@@ -45,6 +45,7 @@ router.post("/", function(req, res){
 router.get("/:id", function(req, res){
     //find the campground with provided ID - .populate("comments")
     TeamTracker.findById(req.params.id).exec(function(err, allTracks){
+      console.log(allTracks.archive)
       User.find({}, function(err, allUsers){
        if(err) {
          console.log(err);
@@ -82,7 +83,7 @@ router.put("/:id", function(req, res){
    var taskTrack = req.body.teamTrack;
    const newTrack = Object.assign(teamTracking, {author: author}, taskTrack);
    TeamTracker.findByIdAndUpdate(req.params.id, newTrack, function(err, updatedTracker){
-    console.log("test");
+     console.log(updatedTracker.archive)
       if(err){
           req.flash("error", err.message);
           res.redirect("/tracker");
