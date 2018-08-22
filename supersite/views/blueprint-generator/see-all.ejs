@@ -50,6 +50,11 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
       <div class="download">
         <a href="/blueprint-generator/see-all/download/<%= blueprint._id %>" class="download">Download</a>
       </div>
+      <div class="delete">
+          <form id="delete-form" action="/blueprint-generator/see-all/delete/<%= blueprint._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-xs btn-danger">Delete</button>
+        </form>
+        </div>
     </div>
     <!--top-->
     <div class="bottom">

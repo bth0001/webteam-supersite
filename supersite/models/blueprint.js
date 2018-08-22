@@ -15,12 +15,15 @@ const blueprintWizardSchema = new mongoose.Schema({
   interiorScreenshot: {
     type: String
   },
-  doctor: {
-    type: String
-  },
   howManyDoctors: {
     type: Number
   },
+  doctors: [{
+    doctorName: {
+      type: String, 
+      default: ""
+    }
+  }],
   practiceName: {
     type: String
   },

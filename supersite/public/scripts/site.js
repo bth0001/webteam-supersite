@@ -1,15 +1,16 @@
+$(document).ready(function(){
+// Removes alert message after 3 seconds
 setTimeout(function() {
   $("#alertMessage").fadeOut("slow");
 }, 3000);
 
-/* For Blueprint See All Page */
-$(document).ready(function(){
+// For Blueprint See All Page
     $("div.blueprintContainer a.more").click(function(){
         $(this).toggleClass("open");
         $(this).parent().parent().next().toggleClass("open");
     });
 
-  /* Assigns names to textboxes for blueprint wizard */
+// Assigns names to textboxes for blueprint wizard
   var parentCount = 0;
   var htmlChild = '<div class="child"> <span>Child Page</span> <input type="text" placeholder="Child Page Name" value=""/> <input type="text" placeholder="Child Page Notes" value=""/><a onclick="this.parentNode.remove()" class="removeSpecificSubpage">---</a> </div>';
   $("#pageTable a.addSubpage").click(function () {
@@ -42,7 +43,8 @@ $(document).ready(function(){
       $(this).parent().parent().remove();
     }
   });
-  });
+  });//End document ready
+  
   function assignNames() {
     var parentCount = 0;
     var childCount = 0;

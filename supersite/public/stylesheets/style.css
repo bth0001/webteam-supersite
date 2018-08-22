@@ -113,6 +113,7 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 
 /* Home */
 #overview {background: #fff; padding: 5vh 0;}
+.col-full {flex: 100%;}
 
 .home {text-align:center;}
 .asideUser img { width:100%; border:3px solid #252525;}
