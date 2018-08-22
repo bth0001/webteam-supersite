@@ -115,38 +115,51 @@
 						</div><!-- end of form-group -->
 						
 <script>
-$(document).ready(function(){
-    var count = 0;
-    $("div.task:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
-    $("div.task:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
-    $("div.task:first-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+	$(document).ready(function(){
+	    var count = 0;
+	    $("div.task:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+	    $("div.task:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+	    $("div.task:first-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
 
-$("#addTask").click(function () {               
-        count++;        
-        var newTaskInput = $(".task:last-of-type"); 
-        newTaskInput.clone().appendTo("#task"); 
-    $("div.task:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
-    $("div.task:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
-    $("div.task:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+		$("#addTask").click(function () {               
+	        count++;        
+	        var newTaskInput = $(".task:last-of-type"); 
+	        newTaskInput.clone().appendTo("#task"); 
+		    $("div.task:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+		    $("div.task:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+		    $("div.task:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+		});
 
-});
-
-});
-    
+		$("#removeTask").click(function () {
+			var taskCount = $("div.task").length;
+			if (taskCount === 1) {
+				alert("You cannot remove the only task");
+			} else {
+		    var newTaskInput = $(".task:last-of-type");
+			newTaskInput.remove();
+			};
+		});
+	});
 </script>
 						<div class="form-group" id="task">
 							<label class="labelTask" name="taskTypeName"><h3>Task:</h3></label>
 							<button type='button' id='addTask'>+</button>
+							<button type='button' id='removeTask'>-</button>
 							<div class="task">
 								<select class="taskType">
-									<option value="Site Build">Site Build</option>
+									<option value="T.LINK Branding">Content Entry</option>
 									<option value="Production Change">Production Change</option>
-									<option value="T.LINK Branding">T.LINK Branding</option>
+									<option value="Site Build">Site Build</option>
+									<option value="T.LINK Branding">T.LINK Branding</option>									
 								</select>
 								<select class="taskQuantity">
-									<option value="0 - 15">0 - 15</option>
-									<option value="16 - 35">16 - 35</option>
-									<option value="36+">36+</option>
+									<option value="N/A">N/A</option>
+									<option value="0 - 15">0 - 5</option>
+									<option value="6 - 15">6 - 10</option>
+									<option value="11 - 15">11 - 15</option>
+									<option value="16 - 20">16 - 20</option>
+									<option value="21 - 25">21 - 25</option>
+									<option value="26+">26+</option>
 								</select>
 								<input class="taskNotes" type="text" placeholder="Notes">
 							</div>
