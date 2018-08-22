@@ -1,6 +1,16 @@
 const mongoose = require("mongoose");
 
 const developerChecklistSchema = new mongoose.Schema({
+  buildPkg:{
+    type: String
+  },
+developer: {
+  type: String
+},
+  domain: {
+    type: String
+  },
+
   taskName: {
    type: String 
 },
