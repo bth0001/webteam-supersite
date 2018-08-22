@@ -20,12 +20,10 @@
 			}
 		}
 		$(document).ready(function () {
-			$('#profileBar .fa-angle-down').on('mouseover', function () {
-				$(this).find('.dropdown').stop().slideDown(300);
-			}).on('mouseout', function () {
-				$(this).find('.dropdown').stop().slideUp(600);
-			});
+			$('#profileBar .fa-angle-down').on('click', function(){
+				$('#profileBar .dropdown').slideToggle();
 		});
+	});
 	</script>
 	<!-- <script>
 		function startTime() {
