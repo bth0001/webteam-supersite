@@ -206,7 +206,7 @@
 		<div id="essTracked">
 			<% tracking.forEach(function(tracked){ %>
 				<% if(currentUser.firstName === tracked.author.firstName) { %>
-					<% if(tracked.buildPkg === "Essential"){ %>
+					<% if(tracked.buildPkg === "Essential" && tracked.archive == !true){ %>
 					<div class="col-md-12">
 						<div id="tracked">
 							<p><strong>Name:</strong> <%= tracked.author.firstName %></p>
@@ -243,7 +243,7 @@
 		<div id="strTracked">
 			<% tracking.forEach(function(tracked){ %>
 				<% if(currentUser.firstName === tracked.author.firstName) { %>
-					<% if(tracked.buildPkg === "Starter"){ %>
+					<% if(tracked.buildPkg === "Starter" && tracked.archive == !true){ %>
 						<div class="col-md-12">
 							<div id="tracked">
 								<p><strong>Name:</strong> <%= tracked.author.firstName %></p>
@@ -264,7 +264,7 @@
 									<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
 									
 									<form id="delete-form" onsubmit="archiveUpdate()" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
-										<input id="archiveButton" value="Archive" name="tracking[archive]" type="submit"/>		
+										<input class="archiveButton" value="Archive" name="tracking[archive]" type="submit"/>		
 									  </form>
 									<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 									<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
@@ -273,7 +273,7 @@
 								<script>
 
 									function archiveUpdate() {
-										$("#archiveButton").attr("value", true);	
+										$(".archiveButton").attr("value", true);	
 									}
 								</script>
 							</div>

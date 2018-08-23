@@ -74,11 +74,15 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 
 /*header */
 #adminBar {background-color:#323232; padding:15px 0;}
-#adminBar a {color:inherit; text-decoration:none;}
+#adminBar a {color:#fff; text-decoration:none;}
+
 #adminBar #logo img {max-width: 150px; opacity: 0.8;}
 #adminBar #logo img:hover {opacity: 1;}
 
 #profileBar .fas {color: #19B9E7;}
+#profileBar {position: relative; display: flex; flex: 1; justify-content: flex-end;}
+#profileBar > div {margin: 0 20px;}
+
 .profileImage {margin: 0 10px 0;}
 .profileImage img {border-radius: 50%; border: 2px solid #19B9E7; max-width: 50px;}
 .profileText {text-align: center;}

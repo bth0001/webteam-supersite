@@ -8,21 +8,24 @@
   </div>
  
   <% function countEssential() { %>
-    <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
+    <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; var contentCount = 0; %>
       <% tracking.forEach(function(tracked){ %>
         <%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
         <% if(currentUser.firstName === tracked.author.firstName) { %>
-          <% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build"){ %>
+          <% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
             <% strCount++ %>
           <% } %> 
-          <% if(tracked.buildPkg === "Essential" && tracked.taskTypes[i].taskTypeName === "Site Build"){ %>
+          <% if(tracked.buildPkg === "Essential" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
            <% essCount++ %> 
           <% } %>
-          <% if(tracked.taskTypes[i].taskTypeName === "Production Change"){ %>
+          <% if(tracked.taskTypes[i].taskTypeName === "Production Change" && tracked.archive == !true){ %>
             <% prodCount++ %>
           <% } %>
-          <% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding"){ %>
+          <% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding" && tracked.archive == !true){ %>
             <% tlinkCount++ %>
+          <% } %>
+          <% if(tracked.taskTypes[i].taskTypeName === "Content Entry" && tracked.archive == !true){ %>
+            <% contentCount++ %>
           <% } %>
         <% } %>
         <% } %>
@@ -72,8 +75,8 @@
                 <div class="cell taskNumber"><%= tlinkCount %></div>
               </div>
               <div class="row flexbox">
-                <div class="cell task">Other</div>
-                <div class="cell taskNumber">TBD</div>
+                <div class="cell task">Content Entry</div>
+                <div class="cell taskNumber"><%= contentCount %></div>
               </div>
             </div>
           </div><!-- End rightCol --> 
@@ -99,7 +102,7 @@
                   <div id="accordion">   
            <% tracking.forEach(function(tracked){ %>
             <% if(currentUser.firstName === tracked.author.firstName) { %>
-              <% if(tracked.buildPkg === "Essential"){ %> 
+              <% if(tracked.buildPkg === "Essential" && tracked.archive == !true){ %> 
                 <div class="row flexbox">
                     <div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
                     <div class="cell actNumber"><%= tracked.acctNum %></div>
@@ -140,7 +143,7 @@
                   <div id="accordion">
            <% tracking.forEach(function(tracked){ %>
             <% if(currentUser.firstName === tracked.author.firstName) { %>
-              <% if(tracked.buildPkg === "Starter"){ %> 
+              <% if(tracked.buildPkg === "Starter" && tracked.archive == !true){ %> 
                     <div class="row flexbox">
                         <div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
                         <div class="cell actNumber"><%= tracked.acctNum %></div>
