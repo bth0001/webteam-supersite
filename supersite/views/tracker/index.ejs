@@ -14,6 +14,9 @@
 	</style>
 
 <a href="/dashboard">&larr; Back to Dashboard</a><br />
+<% if(currentUser.team === "Developer") { %>
+<a href="/tracker/archive">To Archive (developer only)</a><br />
+<% } %>
 <br />
 <h3 class="pageHeader">
 	<%= currentUser.firstName %>, this is where you will track any of your completed tasks.
@@ -230,9 +233,18 @@
 								<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 									<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 								</form> -->
-								<form id="delete-form" onsubmit="archiveUpdate()" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
-									<input id="archiveButton" value="Archive" name="tracking[archive]" type="submit"/>			
-								  </form>
+								<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+									<button class="archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+								   </form> 
+								   <script> 
+									$(document).ready(function(){
+										$("#delete-form button.archiveButton").click(function(){
+											$("#delete-form button.archiveButton").each(function(){
+												$(this).val("true");
+											});
+										});
+									}); 
+								</script>
 							</div>  
 						</div>
 					</div>
@@ -262,20 +274,23 @@
 								<p><%= tracked.archive %></p>
 								<div>
 									<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
-									
-									<form id="delete-form" onsubmit="archiveUpdate()" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
-										<input class="archiveButton" value="Archive" name="tracking[archive]" type="submit"/>		
-									  </form>
-									<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
-									<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
-								</form> -->
-								</div>  
-								<script>
-
-									function archiveUpdate() {
-										$(".archiveButton").attr("value", true);	
-									}
-								</script>
+									<a href="/tracker/<%= tracked._id %>/archive"><button class="btn btn-xs btn-primary">Archive</button></a>
+									<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+										<button class="archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>            
+									   </form> 
+									   <!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+										   <button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+									   </form> --> 
+									   </div>  
+									   <script> 
+										$(document).ready(function(){
+											$("#delete-form button.archiveButton").click(function(){
+												$("#delete-form button.archiveButton").each(function(){
+													$(this).val("true");
+												});
+											});
+										}); 
+									</script>
 							</div>
 						</div>
 					<% } %>

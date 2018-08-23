@@ -23,6 +23,24 @@ router.get("/", function(req, res){
   })
 })
 });
+//archive route
+router.get("/archive", function(req, res){
+  TeamTracker.find({}, function(err, allTracks){
+    User.find({}, function(err, allUsers){
+      TaskTypes.find({}, function(err, allTask){
+    if(err){
+      console.log(err);
+    } else {
+      res.render("tracker/archive", {
+        tracking: allTracks,
+        users: allUsers,
+        task: allTask
+      });
+    }
+  })
+  })
+})
+});
 
 //POST new teamTracked
 router.post("/", function(req, res){
