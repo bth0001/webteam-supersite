@@ -69,7 +69,7 @@ form input {display:inline-block; width: auto;}
 
         <div class="form-group" id="checklistHeaderInfo">
               <label name="buildPkg">Build Package:
-              <select name="teamTrack[buildPkg]" id="buildPkg">
+              <select name="checklist[buildPkg]" id="buildPkg">
                   <option value="" disabled selected>Select Build Package</option>
                   <option value="Essential">Essential</option>
                   <option value="Starter">Starter</option>
@@ -77,45 +77,41 @@ form input {display:inline-block; width: auto;}
               </label>
 
               <label name="username" class="teamMember">Developer:
-                  <input type="text" name="teamTrack[username]" value="<%= currentUser.firstName %>" />
+                  <input type="text" name="checklist[username]" value="<%= currentUser.firstName %>" />
               </label>
               <label name="domain" class="domain">Domain:
-                        <input type="text" name="teamTrack[domain]" placeholder="Domain">
+                        <input type="text" name="checklist[domain]" placeholder="Domain">
                 </label>
         </div> <!-- end of form-group -->
 
         <div id="startEssWrap">
            <div id="checklistStarter"> 
             <div class="form-group">
-                <label name="browserPermissions"><span class="taskName">Guest Browser Permissions</span> 
-                        <span class="taskComplete"><input type="radio" name="browserPermissions" value="Complete"> Complete</span> 
-                        <span class="taskNA"><input type="radio" name="browserPermissions" value="N/A"> N/A</span>
-                        <span class="taskNotes"><textarea name="browserPermissionsNotes" placeholder="Additional Notes"></textarea></span>
-                </label>
+                    <span><input class="checkName" value="Guest Browser Permissions" type="text" /></span>
+                    <span class="taskComplete"><input class="checkStatus" type="radio" value="Complete"> Complete</span> 
+                    <span class="taskNA"><input class="checkStatus" type="radio" value="N/A"> N/A</span>
+                    <span class="taskNotes"><textarea class="checkNotes" placeholder="Additional Notes"></textarea></span>
             </div> <!-- end of form-group-->
 
             <div class="form-group">
-                    <label name="linkPermissions"><span class="taskName">Published Links Permissions</span> 
-                            <span class="taskComplete"><input type="radio" name="linkPermissions" value="Complete"> Complete</span> 
-                            <span class="taskNA"><input type="radio" name="linkPermissions" value="N/A"> N/A</span>
-                            <span class="taskNotes"><textarea name="linkPermissions" placeholder="Additional Notes"></textarea></span>
-                    </label>
+                                <span><input class="checkName" value="Published Link Permissions" type="text" /></span>
+                                <span class="taskComplete"><input class="checkStatus" type="radio" value="Complete"> Complete</span> 
+                                <span class="taskNA"><input class="checkStatus" type="radio" value="N/A"> N/A</span>
+                                <span class="taskNotes"><textarea class="checkNotes" placeholder="Additional Notes"></textarea></span>
                 </div> <!-- end of form-group-->
 
                 <div class="form-group">
-                        <label name="clientAccCreated"><span class="taskName">Client Account Created</span> 
-                                <span class="taskComplete"><input type="radio" name="clientAccCreated" value="Complete"> Complete</span> 
-                                <span class="taskNA"><input type="radio" name="clientAccCreated" value="N/A"> N/A</span>
-                                <span class="taskNotes"><textarea name="clientAccCreated" placeholder="Additional Notes"></textarea></span>
-                        </label>
+                                        <span><input class="checkName" value="Client Account Created" type="text" /></span>
+                                        <span class="taskComplete"><input class="checkStatus" type="radio" value="Complete"> Complete</span> 
+                                        <span class="taskNA"><input class="checkStatus" type="radio" value="N/A"> N/A</span>
+                                        <span class="taskNotes"><textarea class="checkNotes" placeholder="Additional Notes"></textarea></span>
                     </div> <!-- end of form-group-->
 
                     <div class="form-group">
-                            <label name="formsThankYou"><span class="taskName">Forms Imported &amp; Thank You Message</span> 
-                                    <span class="taskComplete"><input type="radio" name="formsThankYou" value="Complete"> Complete</span> 
-                                    <span class="taskNA"><input type="radio" name="formsThankYou" value="N/A"> N/A</span>
-                                    <span class="taskNotes"><textarea name="formsThankYou" placeholder="Additional Notes"></textarea></span>
-                            </label>
+                                        <span><input class="checkName" value="Forms Input &amp; Thank You Message" type="text" /></span>
+                                        <span class="taskComplete"><input class="checkStatus" type="radio" value="Complete"> Complete</span> 
+                                        <span class="taskNA"><input class="checkStatus" type="radio" value="N/A"> N/A</span>
+                                        <span class="taskNotes"><textarea class="checkNotes" placeholder="Additional Notes"></textarea></span>
                         </div> <!-- end of form-group-->
 
                         <div class="form-group">
@@ -223,7 +219,29 @@ form input {display:inline-block; width: auto;}
             </form> <!-- end of form -->
     </div>
 </div>
-
+<script>
+$("form.checklistForm").submit(function () {   
+    var count = 0;        
+    if(!$("#checklistEssential").css("display","none") === true){
+        $("#startEssWrap div.form-group").each(function(){
+            $(this).children().find(".checkName").attr("name", "checklist[checklistTask][" + count + "][taskName]");
+            $(this).children().find(".checkStatus").attr("name", "checklist[checklistTask][" + count + "][taskStatus]");
+            $(this).children().find(".checkNotes").attr("name", "checklist[checklistTask][" + count + "][additionalNotes]");
+            count++;        
+        });
+    } else {
+        $("#checklistStarter div.form-group").each(function(){
+            $(this).children().find(".checkName").attr("name", "checklist[checklistTask][" + count + "][taskName]");
+            $(this).children().find(".checkStatus").attr("name", "checklist[checklistTask][" + count + "][taskStatus]");
+            $(this).children().find(".checkNotes").attr("name", "checklist[checklistTask][" + count + "][additionalNotes]");
+            count++;        
+        });
+    } 
+    });
+</script>
 
 
 <% include partials/footer %>
+
+
+
