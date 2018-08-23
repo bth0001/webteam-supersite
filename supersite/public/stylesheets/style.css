@@ -70,7 +70,7 @@ h6 {font-size:1em;}
 
 p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0 0 1em;}
 .fas {padding: 0 0 0 15px;}
-#siteBody {min-height: 600px;}
+#siteBody {min-height: 600px; }
 
 /*header */
 #adminBar {background-color:#323232; padding:15px 0;}
@@ -84,9 +84,10 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 #profileBar > div {margin: 0 20px;}
 
 .profileImage {margin: 0 10px 0;}
-.profileImage img {border-radius: 50%; border: 2px solid #19B9E7; max-width: 50px;}
+.profileImage img {border-radius: 50%; border: 2px solid #19B9E7; object-fit:cover; width: 50px; height:50px; max-height:50px; min-height:50px; }
 .profileText {text-align: center;}
 .profileText p {color: #fff; font-family: 'Raleway', sans-serif; font-size: .9em; font-weight: 300; margin: 0;}
+.profile-thumbnail img { object-fit: cover; width: 15em; border: none; height: 15em;}
 
 #profileBar {position:relative;}
 #profileBar .dropdown {background: #323232; display:none; position: absolute; min-width: 150px; padding: 10px 0; right: 0; left: auto; z-index: 1; top: 50px;}
@@ -111,7 +112,7 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 
 #navBar {background: linear-gradient(135deg, rgba(38,55,176,1) 0%,rgba(35,150,163,1) 100%); padding: 30px 0 0;}
 #navBar a {color:#fff; display: block; font-family:'Roboto', sans-serif; font-size: 1em; font-weight: 300; padding: 15px; text-decoration: none; }
-#navBar a:hover {background:#fff; color:#2637B0;}
+#navBar a:hover, #navBar a:focus, #navBar a.is-active {background:#fff; color:#2637B0;}
 #navBar ul {padding: 0; margin: 0;}
 
 .searchBox {background: rgba(255,255,255,.1); color: #fff; width: 250px; padding: 6px 15px;}
