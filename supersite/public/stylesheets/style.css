@@ -68,6 +68,8 @@ h4 {font-size:1.125em; font-weight: 300; text-transform: uppercase;}
 h5 {font-size:1.05em;}
 h6 {font-size:1em;}
 
+h2.brand {padding: 0; margin: 0; color: #f3f3f3; font-weight: 700; letter-spacing: 3.2px;}
+
 p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0 0 1em;}
 .fas {padding: 0 0 0 15px;}
 #siteBody {min-height: 600px; }
@@ -207,6 +209,7 @@ nav.contentNav a.active {box-shadow:0 3px 0 0 #8AAEEA; color:#8AAEEA;}
 
 /* expanded accordion */
 #bottomRow #accordion .expanded {width: 100%;	padding: 20px 40px;}
+div#accordion p {margin: 0;}
 
 /* tables*/
 .table.graph {padding: 0 0 25px;}
