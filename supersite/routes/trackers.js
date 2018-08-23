@@ -50,8 +50,10 @@ router.post("/", function(req, res){
   TaskTypes.create(teamTrack.taskTypes, function(err, newlyTask){
     TeamTracker.create(newTrack, function(err, newlyTracked){
     if(err){
-      console.log(err)
+      req.flash("error", err.message);
+      res.redirect("/");
     } else {
+      req.flash("success", "Successful Tracker Added");
       res.redirect("/dashboard");
     }
    });
@@ -101,7 +103,6 @@ router.put("/:id", function(req, res){
    var taskTrack = req.body.teamTrack;
    const newTrack = Object.assign(teamTracking, {author: author}, taskTrack);
    TeamTracker.findByIdAndUpdate(req.params.id, newTrack, function(err, updatedTracker){
-     console.log(updatedTracker.archive)
       if(err){
           req.flash("error", err.message);
           res.redirect("/tracker");

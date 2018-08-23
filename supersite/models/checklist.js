@@ -4,27 +4,34 @@ const developerChecklistSchema = new mongoose.Schema({
   buildPkg:{
     type: String
   },
-developer: {
-  type: String
-},
+  date: {
+    type: Date
+  },
+  author: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    firstName: String
+  },
+  
   domain: {
     type: String
   },
 
+checklistTask: [{
   taskName: {
-   type: String 
-},
-
-  taskStatus: {
-  type: String,
-},
-
-additionalNotes: {
     type: String
-}
-    
+  },
+  taskStatus: {
+    type: String
+  },
+  additionalNotes: {
+    type: String
+  }
+}]
+
 });
+const DeveloperChecklist = mongoose.model("developerChecklist", developerChecklistSchema);
 
-const developerChecklist = mongoose.model("developerChecklist", developerChecklistSchema);
-
-module.exports = developerChecklist;
+module.exports = DeveloperChecklist;

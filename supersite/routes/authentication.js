@@ -56,15 +56,15 @@ router.get("/signup", function(req, res){
   //==============================================================================
   
   //Show Login Form
-  router.get("/login", function(req, res){
-    res.render("login", {});
+  router.get("/", function(req, res){
+    res.render("index", {});
   });
   
   //handling login logic
-  router.post("/login", passport.authenticate("local", 
+  router.post("/", passport.authenticate("local", 
     {
         successRedirect: "/dashboard", 
-        failureRedirect: "/login",
+        failureRedirect: "/",
         failureFlash: true
     }), function(req, res){
   });
@@ -74,7 +74,7 @@ router.get("/signup", function(req, res){
   router.get("/logout", function(req, res){
     req.logout();
     req.flash("success", "Your have successfully logged out!");
-    res.redirect("/login");
+    res.redirect("/");
   });
   //==============================================================================
   

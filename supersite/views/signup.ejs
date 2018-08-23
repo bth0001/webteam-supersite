@@ -1,25 +1,190 @@
-<% include partials/header %>
+<style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700|Roboto+Condensed:300,400,700|Raleway:300,400,600');
+        
+        /* ====== Base Styles ====== */
+        html {
+            -webkit-box-sizing:border-box;
+                    box-sizing:border-box; height: 100%; /* Overrides browser default. Width and height now includes content, padding and border. */
+        }
+        *, *:before, *:after {
+            -webkit-box-sizing:inherit;
+                    box-sizing:inherit;
+        }
+        body {
+            margin:0;
+            padding:0;
+        }
+        
+        
+        a {text-decoration:none;}
+        
+        /* ====== Layout Classes ====== */
+        .container {
+            width:calc(100% - 150px);
+            margin:0 auto;
+        }
+        .flexbox {
+            display:-webkit-box;
+            display:-ms-flexbox;
+            display:flex;
+            -ms-flex-wrap:wrap;
+            flex-wrap:wrap;
+        }
+        .flexLeft {
+            -webkit-box-pack:flex-start;
+            -ms-flex-pack:flex-start;
+            justify-content:flex-start;
+            -webkit-box-align:center;
+            -ms-flex-align:center;
+            align-items:center;
+        }
+        .flexRight {
+            -webkit-box-pack:flex-end;
+            -ms-flex-pack:flex-end;
+            justify-content:flex-end;
+            -webkit-box-align:center;
+            -ms-flex-align:center;
+            align-items:center;
+        }
+        .flexCenter {
+            -webkit-box-pack:center;
+            -ms-flex-pack:center;
+            justify-content:center;
+            -webkit-box-align:center;
+            -ms-flex-align:center;
+            align-items:center;
+        }
+        .flexJustify {
+            -webkit-box-align:center;
+            -ms-flex-align:center;
+            align-items:center;
+            -webkit-box-pack:justify;
+            -ms-flex-pack:justify;
+            justify-content:space-between;
+        }
+        .flexAround {
+            -webkit-box-pack:justify;
+            -ms-flex-pack:justify;
+            justify-content:space-around;
+        }
+        .center {text-align: center;}
+        
+        /* ====== Template ====== */
+        #template.login {background-image: -webkit-gradient(linear, left top, right bottom, from(#2638b0), color-stop(#0060c8), color-stop(#007fcb), color-stop(#0099c2), to(#00b0b7));background-image: linear-gradient(to right bottom, #2638b0, #0060c8, #007fcb, #0099c2, #00b0b7); height: 100%;}
+        #template.login .container {-webkit-box-align: center;-ms-flex-align: center;align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; height: 100%;}
+        
+        input::-moz-placeholder,
+        input:-moz-placeholder {color:#ada9bb; font-family: 'Roboto Condensed', sans-serif; font-size: 1.125em; opacity: 1;}
+        #login {max-width: 500px; text-align: center;}
+        #login .form {background: rgba(50,10,100,.2); padding: 2.5em;}
+        #login input {border: none; max-width: 60%; padding: 15px; width: 100%;}
+        #login .email input {border-bottom: 1px solid #ada9bb;}
+        #login .signUp {background: rgba(50,10,100,.4); color: #fff; padding: 2.5em;}
+        #login .wrapper {-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;}
+        #login .wrapper > div {-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center; width: 100%;}
+        #login .title,
+        #login .subtitle,
+        #login .subtext {color: #fff;}
+        
+        #login .title {font-family: 'Raleway', sans-serif; font-size: 2.25em; font-weight: 400; margin: 10px 0;}
+        #login .subtitle {font-family: 'Roboto Condensed', sans-serif; font-size: 1.375em; font-weight: 400;}
+        #login .subtext {font-family: 'Roboto Condensed', sans-serif; font-size: 1.025em; font-weight: 400; margin: 1em 0 2.5em;}
+        
+        #login button,
+        #login legend {border: none; color: #fff; font-family: 'Roboto Condensed', sans-serif; font-size: 1.25em; font-weight: 700; max-width: 32%; padding: 15px; width: 100%; -webkit-transition: background 0.3s; transition: background 0.3s;}
+        #login button {background: #00C49B; margin: 0 5px;}
+        #login legend {background: #00B0B7;}
+        #login legend a, #login button a {color: #fff;}
+        #login .signUp button {background: none; border: 1px solid #C7FCEB; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px;}
+        #login .signUp button {color: #000;}
+        
+        #login button:hover {background:none; -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0, 196, 155, 1); box-shadow: inset 0px 0px 0px 1px rgba(0, 196, 155, 1);}
+        #login legend:hover {background:none; -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0, 176, 183, 1); box-shadow: inset 0px 0px 0px 1px rgba(0, 176, 183, 1);}
+        #login .signUp button:hover {background:#C7FCEB; -webkit-box-shadow: none; box-shadow: none;}
+        #login .signUp button:hover a {color: #1456A0;}
 
-<h1 class="pageHeader">First Time? Sign up now :)</h1>
-
-<form action="/signup" method="POST" enctype="multipart/form-data">
-    <input type="text" name="firstName" placeholder="First Name" required>
-    <input type="text" name="lastName" placeholder="Last Name" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="text" name="email" placeholder="Email" required>
-    <label for="image">Image:</label>
-    <input type="file" id="image" name="image" accept="image/*" required>
-    <img id="imagePreview" src="#" alt="your image" />
-    <select name="team" required>
-        <option value="">Select Your Team</option>
-        <option value="Developer">Developer</option>
-        <option value="Designer">Designer</option>
-        <option value="Copy Writer">Copy Writer</option>
-        <option value="On-Boarder">On-Boarder</option>
-        <option value="Web Techs">Web Techs</option>
-        <option value="Web CSI">Web CSI</option>
-    </select>
-    <button>Sign Up</button>
-</form>
-
-<% include partials/footer %>
+        /* Image preview on signup and edit profile pages */
+        #imagePreview {max-width: 50%; display: block; margin: 0 0 10px; border: 1px solid white;}
+        #imagePreview[src="#"] {display: none;}
+        input[type="file" i] {color: white;}
+        </style>
+        
+        
+        <!doctype html>
+        <html>
+        <head>
+        <meta charset="utf-8">
+        <title>Login  |  Mobile, AL 36609</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://root.televox.west.com/common/resources/designportfolio/televox/CommonLib/favicons/default.ico" />
+        <script src="https://use.fontawesome.com/be4f3ddb0b.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/solid.css" integrity="sha384-wnAC7ln+XN0UKdcPvJvtqIH3jOjs9pnKnq9qX68ImXvOGz2JuFoEiCjT8jyZQX2z" crossorigin="anonymous">
+        <script src="//code.jquery.com/jquery.min.js"></script>
+      	<script src="/scripts/site.js"></script>
+	
+        </head>
+        
+        <body>
+        <div id="template" class="login">
+          <div class="container flexbox">
+            <div id="login">
+                <form class="form" action="/signup" method="POST" enctype="multipart/form-data">
+                  <div class="subtitle">Welcome to the new</div>
+                  <div class="title">WebTeam SuperSite</div>
+              <div class="subtext">We know you'll find it to be a very useful tool.</div>
+                <div class="wrapper flexbox">
+                <div class="email flexbox">  
+                  <input name="firstName" placeholder="First Name" type="text" required>
+                </div>
+                <div class="email flexbox">  
+                    <input name="lastName" placeholder="Last Name" type="text" required>
+                </div>
+                <div class="email flexbox">
+                  <input name="password" placeholder="Password" type="password" required>
+                </div>
+                <div class="email flexbox">  
+                    <input name="email" placeholder="Email" type="text" required>
+                </div>
+                <div class="flexbox">
+                  <label for="image"><div class="subtitle">Image</div></label>
+                </div>
+                <div class="flexbox">
+                  <input type="file" id="image" name="image" accept="image/*" required>
+                </div>
+                <div class="flexbox">
+                  
+                  <img id="imagePreview" src="#" alt="Your Profile Image" />
+                 
+                </div>
+                <select class="email flexbox" name="team" required>
+                    <option value="">Select Your Team</option>
+                    <option value="Developer">Developer</option>
+                    <option value="Designer">Designer</option>
+                    <option value="Copy Writer">Copy Writer</option>
+                    <option value="On-Boarder">On-Boarder</option>
+                    <option value="Web Techs">Web Techs</option>
+                    <option value="Web CSI">Web CSI</option>
+                </select>
+                <button class="login">Sign Up</button>
+                <!-- <legend class="forgot"><a href="/forgot">Forgot Password?</a></legend> -->
+                        </div>
+              </form>
+        
+            </div>
+          <!-- End login --> 
+          
+        </div>
+        <!-- End wrapper -->
+        
+        </div>
+        <!-- End template -->
+        
+        <div id="back-to-top" ></div>
+        
+        <!--- JavaScript ---> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+       
+        </body>
+        </html>
+        
