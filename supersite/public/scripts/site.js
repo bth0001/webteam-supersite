@@ -1,11 +1,16 @@
-/* For Blueprint See All Page */
 $(document).ready(function(){
+// Removes alert message after 3 seconds
+setTimeout(function() {
+  $("#alertMessage").fadeOut("slow");
+}, 3000);
+
+// For Blueprint See All Page
     $("div.blueprintContainer a.more").click(function(){
         $(this).toggleClass("open");
         $(this).parent().parent().next().toggleClass("open");
     });
 
-  /* Assigns names to textboxes for blueprint wizard */
+// Assigns names to textboxes for blueprint wizard
   var parentCount = 0;
   var htmlChild = '<div class="child"> <span>Child Page</span> <input type="text" placeholder="Child Page Name" value=""/> <input type="text" placeholder="Child Page Notes" value=""/><a onclick="this.parentNode.remove()" class="removeSpecificSubpage">---</a> </div>';
   $("#pageTable a.addSubpage").click(function () {
@@ -38,7 +43,14 @@ $(document).ready(function(){
       $(this).parent().parent().remove();
     }
   });
+
+  // For image uploader preview 1 of 2
+  $("#image").change(function() {
+    readURL(this);
   });
+
+  });//End document ready
+  
   function assignNames() {
     var parentCount = 0;
     var childCount = 0;
@@ -59,4 +71,17 @@ $(document).ready(function(){
       });
       parentCount++;
     });
+  }
+
+  // For image uploader preview 2 of 2
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+  
+      reader.onload = function(e) {
+        $('#imagePreview').attr('src', e.target.result);
+      }
+  
+      reader.readAsDataURL(input.files[0]);
+    }
   }

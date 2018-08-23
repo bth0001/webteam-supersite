@@ -152,4 +152,16 @@ router.get("/new", function(req, res) {
     })
 });
 
+//Destroy Route
+router.delete("/see-all/delete/:id", function(req, res){
+    Blueprint.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/blueprint-generator/see-all");
+        } else {
+            req.flash("success", "Blueprint has been deleted!");
+            res.redirect("/blueprint-generator/see-all");
+        }
+    });
+});
+
 module.exports = router;

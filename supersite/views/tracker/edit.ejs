@@ -21,6 +21,7 @@
         <div class="form-group">
           <label name="tracking[designer]">Designer:
             <select name="tracking[designer]">
+                <option value="<%= tracking.designer %>"><%= tracking.designer %></option>
                 <option value="None">None</option>
                  <% users.forEach(function(user){ %>
                       <% if(user.team == 'Designer') { %>
@@ -31,6 +32,7 @@
           </label>
           <label name="tracking[onboarder]">On-Boarder:
             <select name="tracking[onboarder]">
+                <option value="<%= tracking.onboarder %>"><%= tracking.onboarder %></option>
                 <option value="None">None</option>
                 <% users.forEach(function(user){ %>
                   <% if(user.team == 'On-Boarder') { %>
@@ -126,10 +128,37 @@
                 </div> <!-- end of form-group -->
         <% } %>
 
-        
+        <script>
+            $(document).ready(function(){
+                var count = 0;
+                $("div.task:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+                $("div.task:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+                $("div.task:first-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+          
+              $("#addTask").click(function () {               
+                    count++;        
+                    var newTaskInput = $(".task:last-of-type"); 
+                    newTaskInput.clone().appendTo("#task"); 
+                  $("div.task:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+                  $("div.task:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+                  $("div.task:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+              });
+          
+              $("#removeTask").click(function () {
+                var taskCount = $("div.task").length;
+                if (taskCount === 1) {
+                  alert("You cannot remove the only task");
+                } else {
+                  var newTaskInput = $(".task:last-of-type");
+                newTaskInput.remove();
+                };
+              });
+            });
+          </script>
         <div class="form-group" id="task">
             <label class="labelTask"><h3>Task:</h3></label>
             <button type='button' id='addTask'>+</button>
+            <button type='button' id='removeTask'>-</button>
             <% for (i=0; i < tracking.taskTypes.length; i++) { %>
             <div class="task">
                 <select class="taskType" name="tracking[taskTypes][i].taskTypeName">
@@ -168,6 +197,7 @@
                       <% } %>
                     </select>
               <input class="taskNotes" type="text" value="<%= tracking.taskTypes[i].taskNotes %>">
+              
             </div>
             <% } %>
             </div>
@@ -180,6 +210,7 @@
         </div> <!-- end of form-group -->
         <button>Update Task</button>
       </form>
+      
     </div>
   </div>
 </div>

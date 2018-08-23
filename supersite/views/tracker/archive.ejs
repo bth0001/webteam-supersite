@@ -1,0 +1,98 @@
+<% include ../partials/header %>	
+	<% function countEssential() { %>
+		<% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; var contentCount = 0; %>
+			<% tracking.forEach(function(tracked){ %>
+				<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
+				<% if(currentUser.firstName === tracked.author.firstName) { %>
+					<% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == true){ %>
+						<% strCount++ %>
+					<% } %> 
+					<% if(tracked.buildPkg === "Essential" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == true){ %>
+						<% essCount++ %>
+					<% } %>
+					<% if(tracked.taskTypes[i].taskTypeName === "Production Change" && tracked.archive == true){ %>
+						<% prodCount++ %>
+					<% } %>
+					<% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding" && tracked.archive == true){ %>
+						<% tlinkCount++ %>
+                    <% } %>
+                    <% if(tracked.taskTypes[i].taskTypeName === "Content Entry" && tracked.archive == true){ %>
+						<% countCount++ %>
+					<% } %>
+				<% } %>
+				<% } %>
+			<% }); %>
+<h3>Welcome to the Archive Section - please proceed with caution</h3>
+	<div id="stats">
+			<h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %> | Content Entry: <%= contentCount %></h4>
+		<div id="essTracked">
+			<% tracking.forEach(function(tracked){ %>
+					<% if(tracked.buildPkg === "Essential"){ %>
+					<div class="col-md-12">
+						<div id="tracked">
+							<p><strong>Name:</strong> <%= tracked.author.firstName %></p>
+							<p><strong>Completed:</strong> <%= tracked.date %></p>
+							<p><strong>Acct #:</strong> <%= tracked.acctNum %></p>
+							<p><strong>On-Boarder:</strong> <%= tracked.onboarder %></p>
+							<p><strong>Package:</strong> <%= tracked.buildPkg %></p>
+							<p><strong>Designer:</strong> <%= tracked.designer %></p>
+							<p><strong>Special Features:</strong> <%= tracked.specialFeatures %></p>
+							<p><strong>CSS Path:</strong> <%= tracked.cssPath %></p>
+							<p><strong>Domain:</strong> <%= tracked.domain %></p>
+							<div><strong>Task:</strong> 
+								<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+									<p><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></p>
+								<% }; %>
+							</div>	 
+							<p><strong>Notes:</strong> <%= tracked.notes %></p>	
+							<div>
+								<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
+								<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+									<button type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+								</form>
+							</div>  
+						</div>
+					</div>
+					<% } %>
+				
+			<% }); %>
+		</div>
+		<div id="strTracked">
+			<% tracking.forEach(function(tracked){ %>
+				
+					<% if(tracked.buildPkg === "Starter" && tracked.archive == true){ %>
+						<div class="col-md-12">
+							<div id="tracked">
+								<p><strong>Name:</strong> <%= tracked.author.firstName %></p>
+								<p><strong>Completed:</strong> <%= tracked.date %></p>
+								<p><strong>Acct #:</strong> <%= tracked.acctNum %></p>
+								<p><strong>On-Boarder:</strong> <%= tracked.onboarder %></p>
+								<p><strong>Package:</strong> <%= tracked.buildPkg %></p>
+								<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %></p>
+								<p><strong>Domain:</strong> <%= tracked.domain %></p>
+								<div><strong>Task:</strong> 
+									<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+										<p><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></p>
+									<% }; %>
+								</div>	 
+								<p><strong>Notes:</strong> <%= tracked.notes %></p>	
+								<p><%= tracked.archive %></p>
+								<div>
+									<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
+									<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+									   <button type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+									</form>
+								</div>  
+							</div>
+						</div>
+					<% } %>
+				
+			<% }); %>
+		</div>
+		<% } %>
+		<% countEssential(); %>
+	</div>
+</div>
+
+
+<% include ../partials/footer %>

@@ -18,14 +18,24 @@
 			if (profileImageUrl === "") {
 				document.getElementById('userProfile').src = "http://webplus.televoxsites.com/projects/supersite/web.jpg";
 			}
+
 		}
+		
+			// if on the home page, remove active classes
+			if (window.location.pathname === "/") {
+			document.getElementsByTagName('a').classList.remove('is-active');
+			}
+
+
 		$(document).ready(function () {
-			$('#profileBar .fa-angle-down').on('mouseover', function () {
-				$(this).find('.dropdown').stop().slideDown(300);
-			}).on('mouseout', function () {
-				$(this).find('.dropdown').stop().slideUp(600);
-			});
+			$('#profileBar .fa-angle-down').on('click', function(){
+				$('#profileBar .dropdown').slideToggle();
 		});
+			
+		
+		// add active class to parent menu item when you're on its page
+		$('#navBar a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('is-active');
+	});
 	</script>
 	<!-- <script>
 		function startTime() {
@@ -68,7 +78,7 @@
 						<div class="flexbox flexRight">
 							<div class="profileImage">
 								<a href="/edit-profile">
-									<img onerror="this.src='http://webplus.televoxsites.com/projects/supersite/web.jpg'" class="" id="userProfile" src="<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" />
+									<img src="/<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" />
 								</a>
 							</div>
 							<div class="profileText">
@@ -116,17 +126,16 @@
 
 	<div class="container">
 		<% if(error && error.length > 0){ %>
-			<div class="alert alert-danger" role="alert">
+			<div id="alertMessage" class="alert alert-danger" role="alert">
 				<%= error %>
 			</div>
 		<% } %>
 		<% if(success && success.length > 0){ %>
-			<div class="alert alert-success" role="alert">
+			<div id="alertMessage" class="alert alert-success" role="alert">
 				<%= success %>
 			</div>
 		<% } %>
 	</div>
 		
 	<section id="siteBody">
-
 	<!--closing tag in footer file-->

@@ -2,18 +2,19 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <div class="thumbnail">
-        <img onerror="this.src='http://webplus.televoxsites.com/projects/supersite/web.jpg'" style="border: 2px solid #252525;" src="<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName%>"/>
+      <div class="profile-thumbnail">
+        <img onerror="this.src='http://webplus.televoxsites.com/projects/supersite/web.jpg'" src="<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName%>"/>
       </div>
     </div>
     <div class="col-md-9">
       <h1>Edit Profile</h1>
-      <form class="profileForm" action="/edit-profile" method="POST">
+      <form class="profileForm" action="/edit-profile" method="POST" enctype="multipart/form-data">
         <input type="text" name="firstName" placeholder="First Name" value="<%= currentUser.firstName %>">
         <input type="text" name="lastName" placeholder="Last Name"  value="<%= currentUser.lastName %>">
         <input type="password" name="password" placeholder="Password">
         <input type="text" name="email" placeholder="Email"  value="<%= currentUser.email %>">
-        <input type="text" name="profileImageUrl" placeholder="profileImageUrl"  value="<%= currentUser.profileImageUrl %>">
+        <input type="file" id="image" name="image" accept="image/*" value="<%= currentUser.profileImageUrl %>" />
+        <img id="imagePreview" src="#" alt="your image" />
         <select name="team" >
           <option value="<%= currentUser.team %>"><%= currentUser.team %></option>
           <option value="Developer">Developer</option>

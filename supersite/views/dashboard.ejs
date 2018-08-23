@@ -8,22 +8,24 @@
   </div>
  
   <% function countEssential() { %>
-    <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; %>
+    <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; var contentCount = 0; %>
       <% tracking.forEach(function(tracked){ %>
         <%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
-          <% if(currentUser.firstName === tracked.author.firstName) { %>
-            <% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build"){ %>
-              <% strCount++ %>
-            <% } %> 
-            <% if(tracked.buildPkg === "Essential" && tracked.taskTypes[i].taskTypeName === "Site Build"){ %>
-              <% essCount++ %> 
-            <% } %>
-            <% if(tracked.taskTypes[i].taskTypeName === "Production Change"){ %>
-              <% prodCount++ %>
-            <% } %>
-            <% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding"){ %>
-              <% tlinkCount++ %>
-            <% } %>
+        <% if(currentUser.firstName === tracked.author.firstName) { %>
+          <% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
+            <% strCount++ %>
+          <% } %> 
+          <% if(tracked.buildPkg === "Essential" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
+           <% essCount++ %> 
+          <% } %>
+          <% if(tracked.taskTypes[i].taskTypeName === "Production Change" && tracked.archive == !true){ %>
+            <% prodCount++ %>
+          <% } %>
+          <% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding" && tracked.archive == !true){ %>
+            <% tlinkCount++ %>
+          <% } %>
+          <% if(tracked.taskTypes[i].taskTypeName === "Content Entry" && tracked.archive == !true){ %>
+            <% contentCount++ %>
           <% } %>
         <% } %>
       <% }); %>
@@ -31,71 +33,141 @@
   <div id="dashboard">
     <div class="container">
 			<div class="developer flexbox flexLeft">
-			  <h4><%= currentUser.firstName %></h4><i class="fas fa-angle-down"></i>
+        <div class="selectTeamMember">
+       <h4><%= currentUser.firstName %></h4> <i class="fas fa-angle-down"></i>
+            <ul id="allTeamMembers"> 
+                <li><a href="#">All</a></li>
+            <% users.forEach(function(user){ %>
+              <% if(user.team == 'Developer' && user.firstName !== currentUser.firstName) { %>
+                <li><a href="#"><%= user.firstName %></a></li>
+              <% } %>
+            <% }); %>
+              </ul> 
+              </div>
       </div>
+
       <div id="topRow" class="flexbox">
-        <div class="col-1">
-          <div class="widget">
-            <h2>Site Builds</h2>
-            <div class="tablex tablex--columns" data-columns="2" data-gutter="2">
-              <!-- Column 1 -->
-              <div class="tablex__item tablex__item--head"><span class="circle"><%= essCount++ %></span></div>
-              <div class="tablex__item center">Essentials</div>
+          <div class="widget leftCol">
+            <div class="table graph">
+              <h2>Site Builds</h2>
+              <div class="wrapper flexbox">
+                <div class="column flexbox">
+                  <div class="cell graph"><span class="circle showEssentials"><%= essCount++ %></span></div>
+                  <div class="cell build">Essentials</div>
+                </div>
+                <div class="column flexbox">
+                  <div class="cell graph"><span class="circle showStarter"><%= strCount %></span></div>
+                  <div class="cell build">Starters</div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End leftCol -->
+               
+          <div class="widget rightCol tasks">
+            <div class="table">
+              <div class="row flexbox">
+                <div class="cell task">Prod Change</div>
+                <div class="cell taskNumber"><%= prodCount %></div>
+              </div>
+              <div class="row flexbox">
+                <div class="cell task">T.LINK</div>
+                <div class="cell taskNumber"><%= tlinkCount %></div>
+              </div>
+              <div class="row flexbox">
+                <div class="cell task">Content Entry</div>
+                <div class="cell taskNumber"><%= contentCount %></div>
+              </div>
+            </div>
+          </div><!-- End rightCol --> 
+          
+          
+        </div> <!-- End topRow -->
 
-              <!-- Column 2 -->
-              <div class="tablex__item tablex__item--head"><span class="circle"><%= strCount %></span></div>
-              <div class="tablex__item center">Starters</div>
+      
+<div id="bottomRow" class="flexbox" style="display:none">
+    <div class="widget fullCol">   
+      <div id="dashEssential">      
+              <h2>Essential Builds</h2>
+              <div class="table">   
+                  <div class="row title flexbox">
+                    <div class="cell url">Website URL</div>
+                    <div class="cell actNumber">Account Number</div>
+                    <div class="cell name">Designer</div>
+                    <div class="cell name">OnBoarder</div>
+                    <div class="cell date">Date</div>
+                    <div class="cell arrow"></div>
+                  </div>
+
+                  <div id="accordion">   
+           <% tracking.forEach(function(tracked){ %>
+            <% if(currentUser.firstName === tracked.author.firstName) { %>
+              <% if(tracked.buildPkg === "Essential" && tracked.archive == !true){ %> 
+                <div class="row flexbox">
+                    <div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+                    <div class="cell actNumber"><%= tracked.acctNum %></div>
+                    <div class="cell name"><%= tracked.designer %></div>
+                    <div class="cell name"><%= tracked.onboarder %></div>
+                    <div class="cell date"><%= tracked.date %></div>
+                    <div class="cell arrow" data-panel-id="panel1"><i class="fas fa-angle-down"></i></div> 
+                    
+                    <div class="expanded" style="display:none">
+                        <p><strong>Special Features:</strong> <%= tracked.specialFeatures %> <br>
+                          <strong>CSS Path:</strong> <%= tracked.cssPath %> <br>
+                            <strong>Task:</strong> <% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+                              <%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %>
+                             <% }; %>  <br>
+                              <strong>Notes:</strong> <%= tracked.notes %> <br></p>
+                    </div> <!-- end of expanded -->
+
             </div>
+              <% } %>
+            <% } %>
+          <% }); %> 
           </div>
-        </div>
-        <div class="col-2">
-          <div class="widget">
-            <div class="tablex tablex--rows tablex--bordered" data-columns="2" data-gutter="3">
-              <!-- Column 1 -->
-              <div class="tablex__item tablex__item--head">Prod Changes</div>
-              <div class="tablex__item right"><%= prodCount %></div>
-              
-              <!-- Column 2 -->
-              <div class="tablex__item tablex__item--head">T.LINK</div>
-              <div class="tablex__item right"><%= tlinkCount %></div>
-              
-              <!-- Column 3 -->
-              <div class="tablex__item tablex__item--head">Other</div>
-              <div class="tablex__item right">TBD</div>
-            </div>
           </div>
-        </div>
-      </div><!-- End topRow -->
+          </div> <!-- end of dashEssential -->
+   
+          <div id="dashStarter">  
+              <h2>Starter Builds</h2>
+              <div class="table">   
+                  <div class="row title flexbox">
+                    <div class="cell url">Website URL</div>
+                    <div class="cell actNumber">Account Number</div>
+                    <div class="cell name">Designer</div>
+                    <div class="cell name">OnBoarder</div>
+                    <div class="cell date">Date</div>
+                    <div class="cell arrow"></div>
+                  </div>
+
+                  <div id="accordion">
+           <% tracking.forEach(function(tracked){ %>
+            <% if(currentUser.firstName === tracked.author.firstName) { %>
+              <% if(tracked.buildPkg === "Starter" && tracked.archive == !true){ %> 
+                    <div class="row flexbox">
+                        <div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+                        <div class="cell actNumber"><%= tracked.acctNum %></div>
+                        <div class="cell name"><%= tracked.designer %></div>
+                        <div class="cell name"><%= tracked.onboarder %></div>
+                        <div class="cell date"><%= tracked.date %></div>
+                        <div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>  
+
+                        <div class="expanded" style="display:none">
+                            <p><strong>Starter Template:</strong> <%= tracked.starterTemplate %> <br>
+                              <strong>Task:</strong> <% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+                               <%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %>
+                              <% }; %> <br>
+                              <strong>Notes:</strong> <%= tracked.notes %> <br></p>
+                        </div> <!-- end of expanded -->
                       
-      <div id="bottomRow" class="flexbox">
-        <div class="col-full">
-          <div class="widget">
-            <h2>Essential Builds</h2>
-            <div class="tablex tablex--rows tablex--bordered" data-columns="6" data-gutter="3">
-              <!-- Column 1 -->
-              <div class="tablex__item tablex__item--head"><a href="#">http://nordortho.televox.west.com</a></div>
-              <div class="tablex__item right">107026</div>
-              <div class="tablex__item right">Jodi</div>
-              <div class="tablex__item right">Denise</div>
-              <div class="tablex__item right">8/5/2018</div>
-              <div class="tablex__item right"><i class="fas fa-angle-down"></i></div>
-              
-              <!-- Column 2 -->
-              <div class="tablex__item tablex__item--head"><a href="#">http://hechler.televox.west.com</a></div>
-              <div class="tablex__item right">105940</div>
-              <div class="tablex__item right">Yogesh</div>
-              <div class="tablex__item right">Rachel</div>
-              <div class="tablex__item right">8/1/2018</div>
-              <div class="tablex__item right"><i class="fas fa-angle-down"></i></div>
             </div>
+              <% } %>
+            <% } %>
+          <% }); %> 
           </div>
-        </div>
-      </div>
-    </div>
-
-    <p>&nbsp;</p>
-
-    <div id="stats">
+      </div> 
+      </div> <!-- end of dashStarter -->
+</div>
+    <!-- <div id="stats">
       <h3>View your stats from this month below:</h3><br />
       <div class="statsContainer">
         <p>
@@ -154,11 +226,51 @@
                   .text(function (d) {
                     return d.data.taskType;
                   });
-              </script>
+              </script> -->
             <% } %>
-          </p>
+          <!-- </p> -->
         <% countEssential(); %>
       </div><!-- end statsContainer -->
     </div><!-- end stats -->
   </div><!-- end dashboard -->
+  <script>
+      $(document).ready(function () {
+        $('#bob span').click(function (event) {
+            event.preventDefault();
+            $('.widgetDisplay').hide();
+            var id = $(this).data("id");
+            $('#' + id).fadeIn(function () {
+                $(this).css({
+                    'display': 'block'
+                }, 1000);
+            });
+        });
+
+        //if(window.location.href.match('/dashboard')){
+       // $("body").addClass("dashboard");
+        // }
+
+          // list of team members drop down when you click the purple arrow beside your name
+          $('.selectTeamMember .fa-angle-down').click(function() {
+              $('#allTeamMembers').slideToggle();
+          });
+
+          // when you click the purple arrow beside a task it expands for further info
+          $('#accordion .fa-angle-down').click(function() {
+           $(this).parent().next('.expanded').slideToggle();
+          });
+
+          // when you click on essentials circle it shows tracked essential tasks
+          $('.showEssentials').click(function() {
+            $('#dashStarter').hide();
+            $('#bottomRow, #dashEssential').fadeIn("slow");
+          });
+
+          // when you click on essentials circle it shows tracked starter tasks
+           $('.showStarter').click(function() {
+            $('#dashEssential').hide();
+            $('#bottomRow, #dashStarter').fadeIn("slow");
+          });
+      });
+    </script>
 <% include partials/footer %>

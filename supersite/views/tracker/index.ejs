@@ -14,6 +14,9 @@
 	</style>
 
 <a href="/dashboard">&larr; Back to Dashboard</a><br />
+<% if(currentUser.team === "Developer") { %>
+<a href="/tracker/archive">To Archive (developer only)</a><br />
+<% } %>
 <br />
 <h3 class="pageHeader">
 	<%= currentUser.firstName %>, this is where you will track any of your completed tasks.
@@ -115,39 +118,51 @@
 						</div><!-- end of form-group -->
 						
 <script>
-$(document).ready(function(){
-    var count = 0;
-    $("div.task:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
-    $("div.task:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
-    $("div.task:first-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+	$(document).ready(function(){
+	    var count = 0;
+	    $("div.task:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+	    $("div.task:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+	    $("div.task:first-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
 
-$("#addTask").click(function () {               
-        count++;        
-        var newTaskInput = $(".task:last-of-type"); 
-        newTaskInput.clone().appendTo("#task"); 
-    $("div.task:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
-    $("div.task:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
-    $("div.task:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+		$("#addTask").click(function () {               
+	        count++;        
+	        var newTaskInput = $(".task:last-of-type"); 
+	        newTaskInput.clone().appendTo("#task"); 
+		    $("div.task:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
+		    $("div.task:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
+		    $("div.task:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+		});
 
-});
-
-});
-    
+		$("#removeTask").click(function () {
+			var taskCount = $("div.task").length;
+			if (taskCount === 1) {
+				alert("You cannot remove the only task");
+			} else {
+		    var newTaskInput = $(".task:last-of-type");
+			newTaskInput.remove();
+			};
+		});
+	});
 </script>
-
 						<div class="form-group" id="task">
 							<label class="labelTask" name="taskTypeName"><h3>Task:</h3></label>
 							<button type='button' id='addTask'>+</button>
+							<button type='button' id='removeTask'>-</button>
 							<div class="task">
 								<select class="taskType">
-									<option value="Site Build">Site Build</option>
+									<option value="T.LINK Branding">Content Entry</option>
 									<option value="Production Change">Production Change</option>
-									<option value="T.LINK Branding">T.LINK Branding</option>
+									<option value="Site Build">Site Build</option>
+									<option value="T.LINK Branding">T.LINK Branding</option>									
 								</select>
 								<select class="taskQuantity">
-									<option value="0 - 15">0 - 15</option>
-									<option value="16 - 35">16 - 35</option>
-									<option value="36+">36+</option>
+									<option value="N/A">N/A</option>
+									<option value="0 - 15">0 - 5</option>
+									<option value="6 - 15">6 - 10</option>
+									<option value="11 - 15">11 - 15</option>
+									<option value="16 - 20">16 - 20</option>
+									<option value="21 - 25">21 - 25</option>
+									<option value="26+">26+</option>
 								</select>
 								<input class="taskNotes" type="text" placeholder="Notes">
 							</div>
@@ -194,7 +209,7 @@ $("#addTask").click(function () {               
 		<div id="essTracked">
 			<% tracking.forEach(function(tracked){ %>
 				<% if(currentUser.firstName === tracked.author.firstName) { %>
-					<% if(tracked.buildPkg === "Essential"){ %>
+					<% if(tracked.buildPkg === "Essential" && tracked.archive == !true){ %>
 					<div class="col-md-12">
 						<div id="tracked">
 							<p><strong>Name:</strong> <%= tracked.author.firstName %></p>
@@ -214,10 +229,22 @@ $("#addTask").click(function () {               
 							<p><strong>Notes:</strong> <%= tracked.notes %></p>	
 							<div>
 								<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
-								<a href="#"><button type="button" class="btn btn-xs btn-danger delete">delete</button></a>
-								<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+								
+								<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 									<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
-								</form>
+								</form> -->
+								<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+									<button class="archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+								   </form> 
+								   <script> 
+									$(document).ready(function(){
+										$("#delete-form button.archiveButton").click(function(){
+											$("#delete-form button.archiveButton").each(function(){
+												$(this).val("true");
+											});
+										});
+									}); 
+								</script>
 							</div>  
 						</div>
 					</div>
@@ -228,7 +255,7 @@ $("#addTask").click(function () {               
 		<div id="strTracked">
 			<% tracking.forEach(function(tracked){ %>
 				<% if(currentUser.firstName === tracked.author.firstName) { %>
-					<% if(tracked.buildPkg === "Starter"){ %>
+					<% if(tracked.buildPkg === "Starter" && tracked.archive == !true){ %>
 						<div class="col-md-12">
 							<div id="tracked">
 								<p><strong>Name:</strong> <%= tracked.author.firstName %></p>
@@ -244,19 +271,26 @@ $("#addTask").click(function () {               
 									<% }; %>
 								</div>	 
 								<p><strong>Notes:</strong> <%= tracked.notes %></p>	
+								<p><%= tracked.archive %></p>
 								<div>
 									<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
-									<a href="#"><button type="button" class="btn btn-xs btn-danger delete">Confirm Delete</button></a>
-									<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
-										<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
-									</form>
-								</div>  
-								<script>
-									$('.delete').on("click", function(event){	
-										event.defaultPrevented();									
-											$("[name='realDelete']").attr('disabled', false);
-									});
-								</script>
+									<a href="/tracker/<%= tracked._id %>/archive"><button class="btn btn-xs btn-primary">Archive</button></a>
+									<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+										<button class="archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>            
+									   </form> 
+									   <!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+										   <button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+									   </form> --> 
+									   </div>  
+									   <script> 
+										$(document).ready(function(){
+											$("#delete-form button.archiveButton").click(function(){
+												$("#delete-form button.archiveButton").each(function(){
+													$(this).val("true");
+												});
+											});
+										}); 
+									</script>
 							</div>
 						</div>
 					<% } %>

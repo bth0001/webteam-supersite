@@ -20,79 +20,96 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
 
 
 <div class="container">
-<h1>See All Blueprints Below:</h1>
-<% blueprints.forEach(function(blueprint){ %>
-<div class="blueprintContainer">
+  <h1>See All Blueprints Below:</h1>
+  <% blueprints.forEach(function(blueprint){ %>
+  <div class="blueprintContainer">
     <div class="top">
-        <div class="practiceName">
-            <h4>Practice Name</h4>
-            <span><%= blueprint.practiceName %></span>
+      <div class="practiceName">
+        <h4>Practice Name</h4>
+        <span>
+          <%= blueprint.practiceName %></span>
+      </div>
+      <div class="doctor">
+        <h4>Doctor Name</h4>
+        <span>
+          <%= blueprint.doctor %></span>
+      </div>
+      <div class="name">
+        <h4>Practice Name</h4>
+        <span>
+          <%= blueprint.practiceName %></span>
+      </div>
+      <div class="contactNumber">
+        <h4>Practice Name</h4>
+        <span>
+          <%= blueprint.contactNumber %></span>
+      </div>
+      <div class="seeMore">
+        <a class="more"></a>
+      </div>
+      <div class="download">
+        <a href="/blueprint-generator/see-all/download/<%= blueprint._id %>" class="download">Download</a>
+      </div>
+      <div class="delete">
+          <form id="delete-form" action="/blueprint-generator/see-all/delete/<%= blueprint._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-xs btn-danger">Delete</button>
+        </form>
         </div>
-        <div class="doctor">
-            <h4>Doctor Name</h4>
-            <span><%= blueprint.doctor %></span>
-        </div>
-        <div class="name">
-            <h4>Practice Name</h4>
-            <span><%= blueprint.practiceName %></span>
-        </div>
-        <div class="contactNumber">
-            <h4>Practice Name</h4>
-            <span><%= blueprint.contactNumber %></span>
-        </div>
-        <div class="seeMore">
-            <a class="more"></a>
-        </div>
-        <div class="download">
-                <a href="/blueprint-generator/see-all/download/<%= blueprint._id %>" class="download">Download</a>
-        </div>
-    </div><!--top-->
+    </div>
+    <!--top-->
     <div class="bottom">
-        <div>
-            <h4>Practice Name</h4>
-            <span><%= blueprint.practiceName %></span>
+      <div>
+        <h4>Practice Name</h4>
+        <span>
+          <%= blueprint.practiceName %></span>
+      </div>
+      <div>
+        <h4>Onboarder</h4>
+        <span>
+          <%= blueprint.onboarder %></span>
+      </div>
+      <div>
+        <h4>Designer</h4>
+        <span>
+          <%= blueprint.designer %></span>
+      </div>
+      <div>
+        <h4>Home Screenshot:</h4>
+        <span>
+          <%= blueprint.homeScreenshot %></span>
+      </div>
+      <div>
+        <h4>Interior Screenshot:</h4>
+        <span>
+          <%= blueprint.interiorScreenshot %></span>
+      </div>
+      <div>
+        <div class="siteArchitecture">
+          <h3>Site Architecture:</h3>
+          <ul class="parent">
+            <% for (iParent = 0; iParent < blueprint.siteArchitecture.length; iParent++) { %>
+            <li>
+              <%= blueprint.siteArchitecture[iParent].parentPageName %>
+              <%= blueprint.siteArchitecture[iParent].parentPageNotes %>
+              <% if (blueprint.siteArchitecture[iParent].subpage[0].childPageName != "") { %>
+              <% for (iChild = 0; iChild < blueprint.siteArchitecture[iParent].subpage.length; iChild++) { %>
+              <ul class="child">
+                <li>
+                  <%= blueprint.siteArchitecture[iParent].subpage[iChild].childPageName %>
+                  <%= blueprint.siteArchitecture[iParent].subpage[iChild].childPageNotes %>
+                </li>
+              </ul>
+              <% } %>
+              <% } %>
+            </li>
+            <% } %>
+          </ul>
         </div>
-        <div>
-            <h4>Onboarder</h4>
-            <span><%= blueprint.onboarder %></span>
-        </div>
-        <div>
-            <h4>Designer</h4>
-            <span><%= blueprint.designer %></span>
-        </div>
-        <div>
-            <h4>Home Screenshot:</h4>
-            <span><%= blueprint.homeScreenshot %></span>
-        </div>
-        <div>
-            <h4>Interior Screenshot:</h4>
-            <span><%= blueprint.interiorScreenshot %></span>
-        </div>
-        <div>
-            <div class="siteArchitecture">
-                    <h3>Site Architecture:</h3>
-                    <ul class="parent">
-                        <% for (iParent = 0; iParent < blueprint.siteArchitecture.length; iParent++) { %>
-                            <li> <%= blueprint.siteArchitecture[iParent].parentPageName %> <%= blueprint.siteArchitecture[iParent].parentPageNotes %> 
-                                <% if (blueprint.siteArchitecture[iParent].subpage[0].childPageName != "") { %>
-                                    <% var iChild = 0; %>
-                                    <% for (iChild = iChild; iChild < blueprint.siteArchitecture.length; iChild++) { %>
-                                        <ul class="child">
-                                            <li>
-                                                <%# blueprint.siteArchitecture[iParent].subpage[iChild].childPageName %>
-                                                <%# blueprint.siteArchitecture[iParent].subpage[iChild].childPageNotes %>
-                                            </li>
-                                        </ul>
-                                    <% } %>
-                                <% } %>
-                            </li>
-                        <% } %>
-                    </ul>
-                </div>
-        </div>
-    </div><!--bottom-->
-</div>
-<% }); %>
+      </div>
+    </div>
+    <!--bottom-->
+  </div>
+  <% }); %>
 
 </div>
 
