@@ -18,11 +18,23 @@
 			if (profileImageUrl === "") {
 				document.getElementById('userProfile').src = "http://webplus.televoxsites.com/projects/supersite/web.jpg";
 			}
+
 		}
+		
+			// if on the home page, remove active classes
+			if (window.location.pathname === "/") {
+			document.getElementsByTagName('a').classList.remove('is-active');
+			}
+
+
 		$(document).ready(function () {
 			$('#profileBar .fa-angle-down').on('click', function(){
 				$('#profileBar .dropdown').slideToggle();
 		});
+			
+		
+		// add active class to parent menu item when you're on its page
+		$('#navBar a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('is-active');
 	});
 	</script>
 	<!-- <script>
@@ -126,5 +138,4 @@
 	</div>
 		
 	<section id="siteBody">
-
 	<!--closing tag in footer file-->
