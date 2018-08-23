@@ -178,8 +178,14 @@
                     <% } else { %>
                       <option value="T.LINK Branding">T.LINK Branding</option>
                     <% } %>
+                    <% if (tracking.taskTypes[i].taskTypeName === "Content Entry") { %>
+                      <option selected value="Content Entry">Content Entry</option>
+                    <% } else { %>
+                      <option value="Content Entry">Content Entry</option>
+                    <% } %>
                   </select>
                   <select class="taskQuantity">
+                      <option selected value="<%= tracking.taskTypes[i].quantity %>"><%= tracking.taskTypes[i].quantity %></option>
                       <% if (tracking.taskTypes[i].quantity === "0 - 15") { %>
                         <option selected value="0 - 15">0 - 15</option>
                       <% } else { %>

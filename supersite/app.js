@@ -119,7 +119,7 @@ function isLoggedIn(req, res, next) {
       return next();
   }
   req.flash("error", "Please Login First!");
-  res.redirect("/login");
+  res.redirect("/");
 }
 
 module.exports = app;
