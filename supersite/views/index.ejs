@@ -102,6 +102,8 @@ input:-moz-placeholder {color:#ada9bb; font-family: 'Roboto Condensed', sans-ser
 #login legend:hover {background:none; -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0, 176, 183, 1); box-shadow: inset 0px 0px 0px 1px rgba(0, 176, 183, 1);}
 #login .signUp button:hover {background:#C7FCEB; -webkit-box-shadow: none; box-shadow: none;}
 #login .signUp button:hover a {color: #1456A0;}
+
+#alertMessage {position: fixed; top: 10px; left: 50%; bottom: auto; right: auto; transform: translateX(-50%)}
 </style>
 
 
@@ -115,13 +117,25 @@ input:-moz-placeholder {color:#ada9bb; font-family: 'Roboto Condensed', sans-ser
 <script src="https://use.fontawesome.com/be4f3ddb0b.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/solid.css" integrity="sha384-wnAC7ln+XN0UKdcPvJvtqIH3jOjs9pnKnq9qX68ImXvOGz2JuFoEiCjT8jyZQX2z" crossorigin="anonymous">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" />
 <script src="//code.jquery.com/jquery.min.js"></script>
+<script src="/scripts/site.js"></script>
 <link href="dist/css/styles.css" rel="stylesheet" >
 </head>
 
 <body>
 <div id="template" class="login">
   <div class="container flexbox">
+		<% if(error && error.length > 0){ %>
+			<div id="alertMessage" class="alert alert-danger" role="alert">
+				<%= error %>
+			</div>
+		<% } %>
+		<% if(success && success.length > 0){ %>
+			<div id="alertMessage" class="alert alert-success" role="alert">
+				<%= success %>
+			</div>
+		<% } %>
     <div id="login">
       <form class="form" action="/" method="POST">
 		  <div class="subtitle">Welcome to the new</div>
