@@ -1,10 +1,17 @@
 const mongoose = require("mongoose");
 
 const blueprintWizardSchema = new mongoose.Schema({
+  author: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    firstName: String
+  },
   onboarder: {
     type: String,
     ref: "User"
-},
+  },
   designer: {
       type: String,
       ref: "User"
