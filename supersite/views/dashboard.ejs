@@ -153,14 +153,14 @@
 								<div class="cell date"><%= tracked.date %></div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
-									<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %> <br>
-										<strong>Task:</strong>
-										<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
-										<%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %>
-										<% }; %>
-										<br>
-										<strong>Notes:</strong> <%= tracked.notes %> <br>
-									</p>
+									<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %></p>
+										<p><strong>Task:</strong></p>
+										<ul>
+											<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+											<li><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></li>
+											<% }; %>
+										</ul>
+										<p><strong>Notes:</strong> <%= tracked.notes %></p>
 								</div>
 								<!-- end of expanded --> 
 								
@@ -196,14 +196,15 @@
 								<div class="cell date"><%= tracked.date %></div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
-									<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %> <br>
-										<strong>Task:</strong>
-										<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
-										<%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %>
-										<% }; %>
-										<br>
-										<strong>Notes:</strong> <%= tracked.notes %> <br>
-									</p>
+										<p><strong>Build Package:</strong> <%= tracked.buildPkg %></p>	
+										<p><strong>Server:</strong> <%= tracked.server %></p>
+										<p><strong>Task:</strong></p>
+										<ul>
+											<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+											<li><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></li>
+											<% }; %>
+										</ul>
+										<p><strong>Notes:</strong> <%= tracked.notes %></p>
 								</div>
 								<!-- end of expanded --> 
 								
@@ -240,14 +241,15 @@
 								<div class="cell date"><%= tracked.date %></div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
-									<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %> <br>
-										<strong>Task:</strong>
-										<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
-										<%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %>
-										<% }; %>
-										<br>
-										<strong>Notes:</strong> <%= tracked.notes %> <br>
-									</p>
+										<p><strong>Build Package:</strong> <%= tracked.buildPkg %></p>	
+										<p><strong>Server:</strong> <%= tracked.server %></p>
+										<p><strong>Task:</strong></p>
+										<ul>
+											<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+											<li><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></li>
+											<% }; %>
+										</ul>
+										<p><strong>Notes:</strong> <%= tracked.notes %></p>
 								</div>
 								<!-- end of expanded --> 
 								
@@ -284,14 +286,15 @@
 								<div class="cell date"><%= tracked.date %></div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
-									<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %> <br>
-										<strong>Task:</strong>
-										<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
-										<%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %>
-										<% }; %>
-										<br>
-										<strong>Notes:</strong> <%= tracked.notes %> <br>
-									</p>
+										<p><strong>Build Package:</strong> <%= tracked.buildPkg %></p>	
+										<p><strong>Server:</strong> <%= tracked.server %></p>
+										<p><strong>Task:</strong></p>
+										<ul>
+											<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+											<li><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></li>
+											<% }; %>
+										</ul>
+										<p><strong>Notes:</strong> <%= tracked.notes %></p>
 								</div>
 								<!-- end of expanded --> 
 								

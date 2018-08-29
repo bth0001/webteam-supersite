@@ -71,7 +71,8 @@ router.get('/forgot', function(req, res) {
       }
     ], function(err) {
       if (err) return next(err);
-      res.redirect('/forgot');
+      req.flash("success", "Email will be sent soon");
+      res.redirect('/');
     });
   });
   
@@ -133,14 +134,5 @@ router.get('/forgot', function(req, res) {
       res.redirect('/');
     });
   });
-
-  //middleware
-  function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    req.flash("error", "Please Login First!");
-    res.redirect("/login");
-  }
 
   module.exports = router;

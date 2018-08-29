@@ -46,12 +46,20 @@
 							<label name="username">Developer:
 								<input type="text" name="teamTrack[username]" value="<%= currentUser.firstName %>" />
 							</label>
+							<label name="server">Server:
+									<select name="teamTrack[server]" id="server">
+											<option value="" selected>Select Server</option>
+											<option value="Presence">Presence</option>
+											<option value="DNN">DNN</option>
+											<option value="T.LINK">T.LINK</option>
+										</select>
+								</label>
 						</div><!-- end of form-group -->
 						
 						<div class="form-group">
 							<label name="designer">Designer:
 								<select name="teamTrack[designer]" id="designer">
-									<option value="Select Designer" selected>Select Designer</option>
+									<option value="" selected>Select Designer</option>
 									<option value="">N/A</option>
 									<!-- If site is a Starter -->
 									<% users.forEach(function(user){ %>
