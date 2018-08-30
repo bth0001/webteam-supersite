@@ -1,5 +1,15 @@
 <% include partials/header %>
-
+<style>
+		/* General dropdown styles */       
+		.dropdown dd, .dropdown dt, .dropdown ul { margin:0px; padding:0px; }
+				
+		.dropdown dt a span {cursor:pointer; display:block; padding:5px;}
+		/* UL styles */
+		/* .dropdown dd ul {display:none; list-style:none; padding:5px 0px; position:absolute; left:0px; top:2px; width:auto; min-width:170px;} */
+		.dropdown span.value { display:none;}
+		.dropdown dd ul li a { padding:5px; display:block;}
+		.selectTeamMember a:hover {text-decoration: none;}
+		</style>
 <div id="overview" class="center">
 	<h1><%= currentUser.team %> Dashboard</h1>
 	<div class="flexbox flexCenter">
@@ -33,18 +43,25 @@
 	<div class="container">
 		<div class="developer flexbox flexLeft">
 			<div class="selectTeamMember">
-				<h4><%= currentUser.firstName %></h4>
-				<i class="fas fa-angle-down"></i>
-				<ul id="allTeamMembers">
-					<li><a href="#">All</a></li>
-					<% users.forEach(function(user){ %>
-					<% if(user.team == 'Developer' && user.firstName !== currentUser.firstName) { %>
-					<li><a href="#"><%= user.firstName %></a></li>
-					<% } %>
-					<% }); %>
-				</ul>
+				<dl class="dropdown">
+					<dt>
+						<a href="#"><h4 class="activeUser"><%= currentUser.firstName %></h4>
+							<i class="fas fa-angle-down"></i>
+						</a>
+					</dt>					
+					<dd>
+						<ul id="allTeamMembers">
+							<li><a href="#">All</a></li>
+							<% users.forEach(function(user){ %>
+							<% if(user.team == 'Developer') { %>
+							<li><a href="#"><%= user.firstName %></a></li>
+							<% } %>
+							<% }); %>
+						</ul>
+					</dd>
+				</dl>
 			</div>
-		</div>
+		</div> 
 		<div id="topRow" class="flexbox">
 			<div class="widget leftCol">
 				<div class="table graph">
@@ -80,9 +97,9 @@
 				</div>
 			</div>
 			<!-- End rightCol --> 
-			
 		</div>
 		<!-- End topRow -->
+		
 		
 		<div id="bottomRow" class="flexbox" style="display:none">
 			<div class="widget fullCol">
