@@ -69,6 +69,7 @@ h5 {font-size:1.05em;}
 h6 {font-size:1em;}
 
 h2.brand {padding: 0; margin: 0; color: #f3f3f3; font-weight: 700; letter-spacing: 3.2px;}
+#footer a {text-decoration: none; padding: 0; margin: 0; color: #f3f3f3; font-weight: 700; letter-spacing: 3.2px;}
 
 p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0 0 1em;}
 .fas {padding: 0 0 0 15px;}
@@ -112,7 +113,7 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 #utilityNav span.loggedIn:after {content:" | "; margin:0 0 0 20px;}
 #utilityNav .loggedIn img {height:50px; width:50px; border-radius:50%; margin-left:10px;}
 
-#navBar {background: linear-gradient(135deg, rgba(38,55,176,1) 0%,rgba(35,150,163,1) 100%); padding: 30px 0 0;}
+#navBar {background: linear-gradient(to right, #2638b0, #0060c8, #007fcb, #0099c2, #00b0b7); padding: 30px 0 0;}
 #navBar a {color:#fff; display: block; font-family:'Roboto', sans-serif; font-size: 1em; font-weight: 300; padding: 15px; text-decoration: none; }
 #navBar a:hover, #navBar a:focus, #navBar a.is-active {background:#fff; color:#2637B0;}
 #navBar ul {padding: 0; margin: 0;}
