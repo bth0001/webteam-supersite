@@ -146,18 +146,6 @@ h1.pageHeader {text-align:center; font-family:monospace; overflow:hidden; /* Ens
 #allTeamMembers a {color: #adadad; display: block; font-size: .85em; font-family: 'Roboto', sans-serif; font-weight: 400; padding: 8px 15px; text-decoration: none; transition: color .25s ease-in-out;}
 #allTeamMembers a:hover, #allTeamMembers a:focus {background-color: #19B9E7; color: #fff;}
 
-/* The typing effect */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange }
-}
-
 /*Dashboard*/
 #dashboard {margin:50px 0;}
 #dashboardLinks, #stats {margin:0 auto; max-width:1100px;}
@@ -220,7 +208,7 @@ div#accordion p {margin: 0;}
 
 .rightCol .table .row {justify-content: space-between;}
 
-.table .row.title {background: #C6C1C8; border-top: none; color: #42313A; font-weight: 500;}
+.table .row.title {background: #484554; border-top: none; color: #ada9bb; font-weight: 500;}
 .table .row {border-top: solid 1px #E6E7EF; margin:0; justify-content: flex-end; width: 100%;}
 .table .row:last-child {border-bottom: solid 1px #E6E7EF;}
 .table .row .cell {padding: 15px; text-align: right; margin:0}

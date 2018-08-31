@@ -45,16 +45,16 @@
 			<div class="selectTeamMember">
 				<dl class="dropdown">
 					<dt>
-						<a href="#"><h4 class="activeUser"><%= currentUser.firstName %></h4>
+						<a><h4 class="activeUser"><%= currentUser.firstName %></h4>
 							<i class="fas fa-angle-down"></i>
 						</a>
 					</dt>					
 					<dd>
 						<ul id="allTeamMembers">
-							<li><a href="#">All</a></li>
+							<li><a>All</a></li>
 							<% users.forEach(function(user){ %>
 							<% if(user.team == 'Developer') { %>
-							<li><a href="#"><%= user.firstName %></a></li>
+							<li><a><%= user.firstName %></a></li>
 							<% } %>
 							<% }); %>
 						</ul>
