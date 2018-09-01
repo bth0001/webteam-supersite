@@ -11,7 +11,8 @@ const teamTrackerSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
     },
-    firstName: String
+    firstName: String,
+    email: String
   },
   date: {
     type: String

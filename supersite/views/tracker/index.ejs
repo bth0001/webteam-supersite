@@ -27,7 +27,7 @@
 			<% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; var contentCount = 0; %>
 				<% tracking.forEach(function(tracked){ %>
 					<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
-						<% if(currentUser.firstName === tracked.author.firstName) { %>
+						<% if(currentUser.email === tracked.author.email) { %>
 							<% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
 								<% strCount++ %>
 							<% } %>
@@ -86,7 +86,7 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.firstName === tracked.author.firstName) { %>
+							<% if(currentUser.email === tracked.author.email) { %>
 							<% if(tracked.buildPkg === "Essential" && tracked.archive == !true){ %>
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
@@ -147,7 +147,7 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.firstName === tracked.author.firstName) { %>
+							<% if(currentUser.email === tracked.author.email) { %>
 							<% if(tracked.buildPkg === "Starter" && tracked.archive == !true){ %>
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
@@ -207,7 +207,7 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.firstName === tracked.author.firstName) { %>
+							<% if(currentUser.email === tracked.author.email) { %>
 							<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "Production Change" && tracked.archive == !true){ %>
 							<div class="row flexbox">
@@ -270,7 +270,7 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.firstName === tracked.author.firstName) { %>
+							<% if(currentUser.email === tracked.author.email) { %>
 							<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding" && tracked.archive == !true){ %>
 							<div class="row flexbox">
@@ -333,7 +333,7 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.firstName === tracked.author.firstName) { %>
+							<% if(currentUser.email === tracked.author.email) { %>
 							<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "Content Entry" && tracked.archive == !true){ %>
 							<div class="row flexbox">
@@ -507,7 +507,7 @@
 						<button type='button' id='removeTask'>-</button>
 						<div class="task">
 							<select class="taskType">
-								<option value="T.LINK Branding">Content Entry</option>
+								<option value="Content Entry">Content Entry</option>
 								<option value="Production Change">Production Change</option>
 								<option value="Site Build">Site Build</option>
 								<option value="T.LINK Branding">T.LINK Branding</option>

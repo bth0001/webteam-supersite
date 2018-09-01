@@ -9,6 +9,7 @@ router.get("/", function(req, res){
   TeamTracker.find({}, function(err, allTracks){
     User.find({}, function(err, allUsers){
       TaskTypes.find({}, function(err, allTask){
+        
     if(err){
       console.log(err);
     } else {
@@ -43,7 +44,7 @@ router.get("/archive", function(req, res){
 
 //POST new teamTracked
 router.post("/", function(req, res){
-  var author = {id: req.user._id, firstName: req.user.firstName};
+  var author = {id: req.user._id, firstName: req.user.firstName, email: req.user.email};
   var teamTrack = req.body.teamTrack;
   const newTrack = Object.assign(teamTrack, {author: author});
   TaskTypes.create(teamTrack.taskTypes, function(err, newlyTask){
@@ -96,7 +97,7 @@ router.get("/:id/edit", function(req, res){
 //update tracker route
 router.put("/:id", function(req, res){
    //find and update correct tracker
-   var author = {id: req.user._id, firstName: req.user.firstName};
+   var author = {id: req.user._id, firstName: req.user.firstName, email: req.user.email};
    var teamTracking = req.body.tracking;
    var taskTrack = req.body.teamTrack;
    const newTrack = Object.assign(teamTracking, {author: author}, taskTrack);
