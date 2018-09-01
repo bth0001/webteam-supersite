@@ -46,14 +46,11 @@
       padding: 10px 0;
     }
   </style>
-
+<div id="overview" class="center">
+    <h1>New Blueprint Wizard</h1>
+  </div>
 <div class="container">
-
-  <a href="/dashboard">&larr; Back to Dashboard</a><br /><br />
-
-  <h2>Blueprint Wizard</h2>
   <form id="blueprint" onsubmit="assignNames()" action="/blueprint-generator/new" method="POST">
-
     <div class="formField">
       <label for="blueprint[onboarder]">Onboarder:</label>
       <select name="blueprint[onboarder]">

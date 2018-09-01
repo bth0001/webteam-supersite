@@ -57,10 +57,9 @@ input.checkName {width: 100%; background: none; border: none; color: #fff; font-
 }
 
 </style>
-
-<a href="/dashboard">&larr; Back to Dashboard</a><br /><br />
-
-
+<div id="overview" class="center">
+	<h1><%= currentUser.team %> Checklist</h1>
+  </div>
     <div id="checklist">
     <div class="checklistContainer">
             <h3 class="pageHeader"><%= currentUser.firstName %>, this is the checklist for the <%= currentUser.team %> team. This will make completing a checklist a breeze!</h1>

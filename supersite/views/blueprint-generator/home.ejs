@@ -1,12 +1,14 @@
 <% include ../partials/header %>
+<div id="overview" class="center">
+	<h1>Blueprint Wizard</h1>
+</div>
 <div class="container">
+    <h3 class="pageHeader"><%= currentUser.firstName %>, this is the Presence URL Tracker for Essential builds.  This is the easiest way to keep up with site build URLs.</h3>
+    <div class="wrapper" style="text-align: center; margin: 10px 0;">
+      <a href="/blueprint-generator/new"><button class="btn archive">New Blueprint</button></a>
+      <a href="/blueprint-generator/see-all"><button class="btn archive">See All Blueprints</button></a>
+  </div>
 
-<a href="/dashboard">&larr; Back to Dashboard</a><br /><br />
-
-<a href="/blueprint-generator/new">New Blueprint</a>
-<a href="/blueprint-generator/see-all">See All Blueprints</a>
-
-<h1>Blueprint Home</h1>
 
 
 </div><!--container-->

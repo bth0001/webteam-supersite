@@ -19,9 +19,10 @@ div.blueprintContainer > div.bottom {visibility: hidden; max-height: 0; overflow
 div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;opacity: 1;padding: 20px;margin:  0 0 20px;}
 </style>
 
-
-<div class="container">
-  <h1>See All Blueprints Below:</h1>
+<div id="overview" class="center">
+    <h1>All Current Blueprints</h1>
+  </div>
+<div class="container" style="margin: 30px auto;">
   <% blueprints.forEach(function(blueprint){ %>
   <div class="blueprintContainer">
     <div class="top">
@@ -92,16 +93,7 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
             <li>
               <%= blueprint.siteArchitecture[iParent].parentPageName %>
               <%= blueprint.siteArchitecture[iParent].parentPageNotes %>
-              <%# if (blueprint.siteArchitecture[iParent].subpage[0].childPageName != "") { %>
-              <% for (iChild = 0; iChild < blueprint.siteArchitecture[iParent].subpage.length; iChild++) { %>
-              <ul class="child">
-                <li>
-                  <%= blueprint.siteArchitecture[iParent].subpage[iChild].childPageName %>
-                  <%= blueprint.siteArchitecture[iParent].subpage[iChild].childPageNotes %>
-                </li>
-              </ul>
-              <% } %>
-              <% } #%>
+             
             </li>
             <% } %>
           </ul>

@@ -4,7 +4,6 @@ var TeamTracker = require("../models/teamTracker");
 var User = require("../models/user");
 var TaskTypes = require("../models/taskType");
 
-
 //Index route
 router.get("/", function(req, res){
   TeamTracker.find({}, function(err, allTracks){
@@ -60,23 +59,22 @@ router.post("/", function(req, res){
   });
 });
 
-//==============================================================================
-//SHOW - show more info about one campground
 router.get("/:id", function(req, res){
-    //find the campground with provided ID - .populate("comments")
     TeamTracker.findById(req.params.id).exec(function(err, allTracks){
-      console.log(allTracks.archive)
-      User.find({}, function(err, allUsers){
+      TaskTypes.find({}, function(err, allTasks){
+        User.find({}, function(err, allUsers){
        if(err) {
          console.log(err);
        } else {
          //render show template with that campground
          res.render("tracker/show", {
           tracking: allTracks,
-          users: allUsers
+          users: allUsers,
+          task: allTasks
         });
       }
     })
+  })
   })
 });
 
@@ -112,8 +110,6 @@ router.put("/:id", function(req, res){
        }
    });
   });
-
-
 
 //Destroy Route
 router.delete("/:id", function(req, res){

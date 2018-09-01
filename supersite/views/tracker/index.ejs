@@ -151,7 +151,7 @@
 							<% if(tracked.buildPkg === "Starter" && tracked.archive == !true){ %>
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
-								<div class="cell actNumber"><%= tracked.acctNum %></div>
+								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
 								<div class="cell date"><%= tracked.date %></div>
@@ -212,7 +212,7 @@
 							<% if(tracked.taskTypes[i].taskTypeName === "Production Change" && tracked.archive == !true){ %>
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
-								<div class="cell actNumber"><%= tracked.acctNum %></div>
+								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
 								<div class="cell date"><%= tracked.date %></div>
@@ -275,7 +275,7 @@
 							<% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding" && tracked.archive == !true){ %>
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
-								<div class="cell actNumber"><%= tracked.acctNum %></div>
+								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
 								<div class="cell date"><%= tracked.date %></div>
@@ -338,7 +338,7 @@
 							<% if(tracked.taskTypes[i].taskTypeName === "Content Entry" && tracked.archive == !true){ %>
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
-								<div class="cell actNumber"><%= tracked.acctNum %></div>
+								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
 								<div class="cell date"><%= tracked.date %></div>

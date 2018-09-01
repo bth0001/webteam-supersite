@@ -1,4 +1,7 @@
 <% include ../partials/header %>	
+<div id="overview" class="center">
+	<h1>Archived Page</h1>
+  </div>
 	<% function countEssential() { %>
 		<% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; var contentCount = 0; %>
 			<% tracking.forEach(function(tracked){ %>
@@ -22,6 +25,7 @@
 				<% } %>
 				<% } %>
 			<% }); %>
+<div class="container">
 <h3>Welcome to the Archive Section - please proceed with caution</h3>
 	<div id="stats">
 			<h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %> | Content Entry: <%= contentCount %></h4>
@@ -116,6 +120,6 @@
 		<% countEssential(); %>
 	</div>
 </div>
-
+</div>
 
 <% include ../partials/footer %>
