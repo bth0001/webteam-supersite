@@ -1,4 +1,7 @@
 <% include partials/header %>
+<div id="overview" class="center">
+  <h1><%= currentUser.firstName %>'s Profile</h1>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -11,7 +14,7 @@
       <form class="profileForm" action="/edit-profile" method="POST" enctype="multipart/form-data">
         <input type="text" name="firstName" placeholder="First Name" value="<%= currentUser.firstName %>">
         <input type="text" name="lastName" placeholder="Last Name"  value="<%= currentUser.lastName %>">
-        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="password" placeholder="Password" required>
         <input type="text" name="email" placeholder="Email"  value="<%= currentUser.email %>">
         <input type="file" id="image" name="image" accept="image/*" value="<%= currentUser.profileImageUrl %>" />
         <img id="imagePreview" src="#" alt="your image" />

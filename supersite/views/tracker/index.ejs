@@ -47,7 +47,7 @@
 					<% } %>
 		<% }); %>
 		<div class="container">
-			<h3 class="pageHeader" style="text-align: center;"> <%= currentUser.firstName %>, this is where you will track any of your completed tasks. </h3>
+			<h3 class="pageHeader" style="text-align: center; margin-top: 10px;"> <%= currentUser.firstName %>, this is where you will track any of your completed tasks. </h3>
 			<h4 style="text-align: center;"><span class="showEssentials">Essentials:</span> <%= essCount %> | <span class="showStarter">Starters:</span> <%= strCount %> | <span class="showProd">Prod Change:</span> <%= prodCount %> | <span class="showTlink">T.LINK Branding:</span> <%= tlinkCount %> | <span class="showContent">Content Entry:</span> <%= contentCount %></h4>
 		</div>
 <div id="dashboard">
@@ -89,8 +89,8 @@
 							<% if(currentUser.firstName === tracked.author.firstName) { %>
 							<% if(tracked.buildPkg === "Essential" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
-								<div class="cell actNumber"><%= tracked.acctNum %></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
+								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
 								<div class="cell date"><%= tracked.date %></div>
@@ -105,21 +105,25 @@
 										<% }; %>
 									</ul>
 									<p><strong>Notes:</strong> <%= tracked.notes %></p>
-									<a href="/tracker/<%= tracked._id %>/edit">
-										<button class="btn btn-xs btn-primary">Edit Task</button>
-										</a> 
-										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"></form>
-											<button class="archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
-										</form>
-										<script> 
-												$(document).ready(function(){
-													$("#delete-form button.archiveButton").click(function(){
-														$("#delete-form button.archiveButton").each(function(){
-															$(this).val("true");
-														});
+									<div id="trackerBtn">
+										<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+										
+										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+										</form> -->
+										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+										   </form> 
+										   <script> 
+											$(document).ready(function(){
+												$("#delete-form button.archiveButton").click(function(){
+													$("#delete-form button.archiveButton").each(function(){
+														$(this).val("true");
 													});
-												}); 
-											</script> 
+												});
+											}); 
+										</script>
+									</div> 
 								</div>
 								<!-- end of expanded --> 								
 							</div>
@@ -146,7 +150,7 @@
 							<% if(currentUser.firstName === tracked.author.firstName) { %>
 							<% if(tracked.buildPkg === "Starter" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -161,6 +165,25 @@
 										<% }; %>
 									</ul>
 									<p><strong>Notes:</strong> <%= tracked.notes %></p>
+									<div id="trackerBtn">
+										<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+										
+										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+										</form> -->
+										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+										   </form> 
+										   <script> 
+											$(document).ready(function(){
+												$("#delete-form button.archiveButton").click(function(){
+													$("#delete-form button.archiveButton").each(function(){
+														$(this).val("true");
+													});
+												});
+											}); 
+										</script>
+									</div> 
 								</div>
 								<!-- end of expanded --> 
 							</div>
@@ -188,7 +211,7 @@
 							<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "Production Change" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -204,6 +227,25 @@
 										<% }; %>
 									</ul>
 									<p><strong>Notes:</strong> <%= tracked.notes %></p>
+									<div id="trackerBtn">
+										<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+										
+										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+										</form> -->
+										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+										   </form> 
+										   <script> 
+											$(document).ready(function(){
+												$("#delete-form button.archiveButton").click(function(){
+													$("#delete-form button.archiveButton").each(function(){
+														$(this).val("true");
+													});
+												});
+											}); 
+										</script>
+									</div> 
 								</div>
 								<!-- end of expanded --> 
 							</div>
@@ -232,7 +274,7 @@
 							<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -248,6 +290,25 @@
 										<% }; %>
 									</ul>
 									<p><strong>Notes:</strong> <%= tracked.notes %></p>
+									<div id="trackerBtn">
+										<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+										
+										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+										</form> -->
+											<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+												<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+										   </form> 
+										   <script> 
+											$(document).ready(function(){
+												$("#delete-form button.archiveButton").click(function(){
+													$("#delete-form button.archiveButton").each(function(){
+														$(this).val("true");
+													});
+												});
+											}); 
+										</script>
+									</div> 
 								</div>
 								<!-- end of expanded --> 
 							</div>
@@ -276,7 +337,7 @@
 							<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "Content Entry" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -292,6 +353,25 @@
 										<% }; %>
 									</ul>
 									<p><strong>Notes:</strong> <%= tracked.notes %></p>
+									<div id="trackerBtn">
+										<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+										
+										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+										</form> -->
+										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+										   </form> 
+										   <script> 
+											$(document).ready(function(){
+												$("#delete-form button.archiveButton").click(function(){
+													$("#delete-form button.archiveButton").each(function(){
+														$(this).val("true");
+													});
+												});
+											}); 
+										</script>
+									</div> 
 								</div>
 								<!-- end of expanded --> 
 								
@@ -532,14 +612,7 @@ $(function() {
         }
     });
 });
-//Archive Function on click
-$(document).ready(function(){
-    $("#delete-form button.archiveButton").click(function(){
-        $("#delete-form button.archiveButton").each(function(){
-            $(this).val("true");
-        });
-    });
-}); 
+
 
 // list of team members drop down when you click the purple arrow beside your name
 $('.selectTeamMember .fa-angle-down').click(function() {

@@ -27,7 +27,7 @@
 			<h4>Essentials: <%= essCount %> | Starters: <%= strCount %> | Prod Change: <%= prodCount %> | T.LINK Branding: <%= tlinkCount %> | Content Entry: <%= contentCount %></h4>
 		<div id="essTracked">
 			<% tracking.forEach(function(tracked){ %>
-					<% if(tracked.buildPkg === "Essential"){ %>
+					<% if(tracked.buildPkg === "Essential" && tracked.archive === true){ %>
 					<div class="col-md-12">
 						<div id="tracked">
 							<p><strong>Name:</strong> <%= tracked.author.firstName %></p>
@@ -46,10 +46,22 @@
 							</div>	 
 							<p><strong>Notes:</strong> <%= tracked.notes %></p>	
 							<div>
-								<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
+								<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
 								<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
-									<button type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+									<button type="submit" class="btn delete">Delete</button>
 								</form>
+								<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+									<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Un-Archive</button>
+							   </form> 
+							   <script> 
+								$(document).ready(function(){
+									$("#delete-form button.archiveButton").click(function(){
+										$("#delete-form button.archiveButton").each(function(){
+											$(this).val("false");
+										});
+									});
+								}); 
+							</script>
 							</div>  
 						</div>
 					</div>
@@ -59,7 +71,6 @@
 		</div>
 		<div id="strTracked">
 			<% tracking.forEach(function(tracked){ %>
-				
 					<% if(tracked.buildPkg === "Starter" && tracked.archive == true){ %>
 						<div class="col-md-12">
 							<div id="tracked">
@@ -78,10 +89,22 @@
 								<p><strong>Notes:</strong> <%= tracked.notes %></p>	
 								<p><%= tracked.archive %></p>
 								<div>
-									<a href="/tracker/<%= tracked._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
+									<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
 									<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
-									   <button type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+									   <button type="submit" class="btn delete">Delete</button>
 									</form>
+									<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+										<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Un-Archive</button>
+								   </form> 
+								   <script> 
+									$(document).ready(function(){
+										$("#delete-form button.archiveButton").click(function(){
+											$("#delete-form button.archiveButton").each(function(){
+												$(this).val("false");
+											});
+										});
+									}); 
+								</script>
 								</div>  
 							</div>
 						</div>

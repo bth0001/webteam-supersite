@@ -1,10 +1,9 @@
 <% include ../partials/header %>
+<div id="overview" class="center">
+    <h1><%= currentUser.team %> Tracker Show Page</h1>
+  </div>
 <div id="stats">
-    <p><a href="/tracker">&larr; Back to Tracker</a></p>
-<div class="statsContainer">
-    
-    <p>
-      <% if(currentUser.firstName === tracking.author.firstName) { %> 
+    <% if(currentUser.firstName === tracking.author.firstName) { %> 
         <div classs="col-md-12" style="flex: 1">
           <div class="container">
               <div id="tracked">
@@ -19,19 +18,27 @@
                   <p><strong>Domain:</strong> <%= tracking.domain %></p>
                   <p><strong>Task:</strong> <%= tracking.taskType %></p>				
                   <p><strong>Notes:</strong> <%= tracking.notes %></p>	
-                            <div>
-                                <a href="/tracker/<%= tracking._id %>/edit"><button class="btn btn-xs btn-primary">Edit Task</button></a>
-                                <form id="delete-form" action="/tracker/<%= tracking._id %>?_method=DELETE" method="POST">
-                                    <button class="btn btn-xs btn-danger">Delete</button>
-                                </form>
-                                
-                            </div>  
+            <div id="trackerBtn">
+                <a href="/tracker/<%= tracking._id %>/edit"><button class="btn edit">Edit Task</button></a>
+                <form id="delete-form" action="/tracker/<%= tracking._id %>?_method=DELETE" method="POST">
+                    <button class="btn delete">Delete</button>
+                </form>
+                <form id="delete-form" class="trackerForm" action="/tracker/<%= tracking._id %>?_method=PUT" method="POST"> 
+                    <button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Un-Archive</button>
+                </form> 
+                <script> 
+                $(document).ready(function(){
+                    $("#delete-form button.archiveButton").click(function(){
+                        $("#delete-form button.archiveButton").each(function(){
+                            $(this).val("false");
+                        });
+                    });
+                }); 
+            </script>
+            </div>  
           </div>
         </div>
         
         <% } %>
-      
-    </p>
-  </div>
 </div>
 <% include ../partials/footer %>
