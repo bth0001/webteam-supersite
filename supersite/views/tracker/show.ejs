@@ -18,7 +18,7 @@
 						</div>
 						<div id="accordion">				
 							<% if(currentUser.firstName === tracking.author.firstName) { %>
-							<% if(tracking.archive == !true){ %>
+
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracking.domain %>" target="_blank"><%= tracking.domain %></a></div>
 								<div class="cell actNumber"><%= tracking.acctNum %></div>
@@ -44,16 +44,29 @@
 										<% }; %>
 									</ul>
 									<p><strong>Notes:</strong> <%= tracking.notes %></p>
+									<p><strong>Archived:</strong> <%= tracking.archive %></p>
 									<div id="trackerBtn">
 										<a href="/tracker/<%= tracking._id %>/edit"><button class="btn edit">Edit Task</button></a>
+										<% if(tracking.archive === !true) { %>
 										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracking._id %>?_method=PUT" method="POST"> 
 											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 									   </form> 
+									   <% } %>
+									   <% if(tracking.archive === true) { %>
+										<form id="archive-form" class="trackerForm" action="/tracker/<%= tracking._id %>?_method=PUT" method="POST"> 
+											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">un-Archive</button>
+									   </form> 
+									   <% } %>
 									   <script> 
 										$(document).ready(function(){
 									    	$("#delete-form button.archiveButton").click(function(){
 										    	$("#delete-form button.archiveButton").each(function(){
 											    	$(this).val("true");
+												});
+											});
+											$("#archive-form button.archiveButton").click(function(){
+											$("#archive-form button.archiveButton").each(function(){
+													$(this).val("false");
 												});
 											});
 										}); 
@@ -62,7 +75,7 @@
 								</div>
 								<!-- end of expanded --> 								
 							</div>
-							<% } %>
+							
 							<% } %>	
 						</div>
 					</div>

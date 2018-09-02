@@ -195,7 +195,7 @@ nav.contentNav a.active {box-shadow:0 3px 0 0 #8AAEEA; color:#8AAEEA;}
 #essTracked, #strTracked {flex: 1; margin: 10px 0 30px;}
 #tracker #tracked {margin: 10px 0;}
 
-#delete-form {background-color: transparent; box-shadow: none; padding: 0; margin: 0; display: inline-block;}
+#delete-form, #archive-form {background-color: transparent; box-shadow: none; padding: 0; margin: 0; display: inline-block;}
 
 .showEssentials,  .showStarter,  .showProd,  .showTlink, .showContent {cursor: pointer;} 
 

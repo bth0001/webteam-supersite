@@ -119,7 +119,7 @@
 							<% if(currentUser.email === tracked.author.email) { %>
 							<% if(tracked.buildPkg === "Essential" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -163,7 +163,7 @@
 							<% if(currentUser.email === tracked.author.email) { %>
 							<% if(tracked.buildPkg === "Starter" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -206,7 +206,7 @@
 								<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "Production Change" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -251,7 +251,7 @@
 								<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -296,7 +296,7 @@
 								<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "Content Entry" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
