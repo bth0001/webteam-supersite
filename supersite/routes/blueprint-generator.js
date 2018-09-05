@@ -95,7 +95,8 @@ router.get("/see-all/download/:id", function(req, res) {
       });
       fs.writeFileSync(path.resolve(__dirname, 'word/blueprint_template_output.docx'), buf);
       req.flash("success", "Starting Download...");
-      res.redirect("/blueprint-generator/see-all");
+      var file = path.join(__dirname + '/word/blueprint_template_output.docx');
+      res.download(file, findBlueprint.practiceName + " Blueprint.docx");
     }
   });
 });
