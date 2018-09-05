@@ -10,17 +10,19 @@ div.blueprintContainer a.more.open:before {content: "\f068"}
 div.blueprintContainer a.more.open {background-color: #07b532;}
 div.blueprintContainer > div.top {display: flex; align-items: center; border: 1px solid #000; background-color: #f3f3f3;}
 div.blueprintContainer > div.top > div:not(:last-of-type) {border-right: 1px solid #000; flex: 1; padding: 10px;}
-div.blueprintContainer > div.top > div.seeMore {display: flex; padding: 5px; flex: 0 50px;}
-div.blueprintContainer > div.top > div.download {display: flex; padding: 5px; flex: 0 125px;}
+div.blueprintContainer > div.top > .delete {margin:0 10px;}
+div.blueprintContainer > div.top > div.seeMore {display: flex; padding: 5px; flex: 0 50px; justify-content: center;}
+div.blueprintContainer > div.top > div.download {display: flex; padding: 5px; flex: 0 125px; justify-content: center;}
 div.blueprintContainer a.more, div.blueprintContainer a.download {display: block; display: flex; cursor: pointer; text-decoration: none;}
 div.blueprintContainer a.more:hover, div.blueprintContainer a.download:hover {text-decoration: none; color: #fff;}
 div.blueprintContainer > div.bottom {visibility: hidden; max-height: 0; overflow: hidden; opacity: 0; padding: 0; transition: opacity 300ms ease; overflow: hidden; background-color: #fff; border-radius: 0 0 6px 6px; border: 1px solid #000; border-top: 0;}
 div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;opacity: 1;padding: 20px;margin:  0 0 20px;}
 </style>
 
-
-<div class="container">
-  <h1>See All Blueprints Below:</h1>
+<div id="overview" class="center">
+    <h1>All Current Blueprints</h1>
+  </div>
+<div class="container" style="margin: 30px auto;">
   <% blueprints.forEach(function(blueprint){ %>
   <div class="blueprintContainer">
     <div class="top">
@@ -48,11 +50,11 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
         <a class="more"></a>
       </div>
       <div class="download">
-        <a href="/blueprint-generator/see-all/download/<%= blueprint._id %>" class="download">Download</a>
+        <a href="/blueprint-generator/see-all/download/<%= blueprint._id %>" class="btn download">Download</a>
       </div>
       <div class="delete">
           <form id="delete-form" action="/blueprint-generator/see-all/delete/<%= blueprint._id %>?_method=DELETE" method="POST">
-            <button class="btn btn-xs btn-danger">Delete</button>
+            <button class="btn delete">Delete</button>
         </form>
         </div>
     </div>
@@ -91,16 +93,7 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
             <li>
               <%= blueprint.siteArchitecture[iParent].parentPageName %>
               <%= blueprint.siteArchitecture[iParent].parentPageNotes %>
-              <% if (blueprint.siteArchitecture[iParent].subpage[0].childPageName != "") { %>
-              <% for (iChild = 0; iChild < blueprint.siteArchitecture[iParent].subpage.length; iChild++) { %>
-              <ul class="child">
-                <li>
-                  <%= blueprint.siteArchitecture[iParent].subpage[iChild].childPageName %>
-                  <%= blueprint.siteArchitecture[iParent].subpage[iChild].childPageNotes %>
-                </li>
-              </ul>
-              <% } %>
-              <% } %>
+             
             </li>
             <% } %>
           </ul>

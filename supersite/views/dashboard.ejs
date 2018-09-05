@@ -1,5 +1,15 @@
 <% include partials/header %>
-
+<style>
+		/* General dropdown styles */       
+		.dropdown dd, .dropdown dt, .dropdown ul { margin:0px; padding:0px; }
+				
+		.dropdown dt a span {cursor:pointer; display:block; padding:5px;}
+		/* UL styles */
+		/* .dropdown dd ul {display:none; list-style:none; padding:5px 0px; position:absolute; left:0px; top:2px; width:auto; min-width:170px;} */
+		.dropdown span.value { display:none;}
+		.dropdown dd ul li a { padding:5px; display:block;}
+		.selectTeamMember a:hover {text-decoration: none;}
+		</style>
 <div id="overview" class="center">
 	<h1><%= currentUser.team %> Dashboard</h1>
 	<div class="flexbox flexCenter">
@@ -10,7 +20,7 @@
 <% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; var contentCount = 0; %>
 <% tracking.forEach(function(tracked){ %>
 <%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
-<% if(currentUser.firstName === tracked.author.firstName) { %>
+<% if(currentUser.email === tracked.author.email) { %>
 <% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
 <% strCount++ %>
 <% } %>
@@ -33,18 +43,25 @@
 	<div class="container">
 		<div class="developer flexbox flexLeft">
 			<div class="selectTeamMember">
-				<h4><%= currentUser.firstName %></h4>
-				<i class="fas fa-angle-down"></i>
-				<ul id="allTeamMembers">
-					<li><a href="#">All</a></li>
-					<% users.forEach(function(user){ %>
-					<% if(user.team == 'Developer' && user.firstName !== currentUser.firstName) { %>
-					<li><a href="#"><%= user.firstName %></a></li>
-					<% } %>
-					<% }); %>
-				</ul>
+				<dl class="dropdown">
+					<dt>
+						<a><h4 class="activeUser"><%= currentUser.firstName %></h4>
+							<i class="fas fa-angle-down"></i>
+						</a>
+					</dt>					
+					<dd>
+						<ul id="allTeamMembers">
+							<li><a>All</a></li>
+							<% users.forEach(function(user){ %>
+							<% if(user.team == 'Developer') { %>
+							<li><a><%= user.firstName %></a></li>
+							<% } %>
+							<% }); %>
+						</ul>
+					</dd>
+				</dl>
 			</div>
-		</div>
+		</div> 
 		<div id="topRow" class="flexbox">
 			<div class="widget leftCol">
 				<div class="table graph">
@@ -80,9 +97,9 @@
 				</div>
 			</div>
 			<!-- End rightCol --> 
-			
 		</div>
 		<!-- End topRow -->
+		
 		
 		<div id="bottomRow" class="flexbox" style="display:none">
 			<div class="widget fullCol">
@@ -99,10 +116,10 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.firstName === tracked.author.firstName) { %>
+							<% if(currentUser.email === tracked.author.email) { %>
 							<% if(tracked.buildPkg === "Essential" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -143,10 +160,10 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.firstName === tracked.author.firstName) { %>
+							<% if(currentUser.email === tracked.author.email) { %>
 							<% if(tracked.buildPkg === "Starter" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -185,11 +202,11 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.firstName === tracked.author.firstName) { %>
+							<% if(currentUser.email === tracked.author.email) { %>
 								<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "Production Change" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -230,11 +247,11 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.firstName === tracked.author.firstName) { %>
+							<% if(currentUser.email === tracked.author.email) { %>
 								<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>
@@ -275,11 +292,11 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.firstName === tracked.author.firstName) { %>
+							<% if(currentUser.email === tracked.author.email) { %>
 								<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(tracked.taskTypes[i].taskTypeName === "Content Entry" && tracked.archive == !true){ %>
 							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>"><%= tracked.domain %></a></div>
+								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 								<div class="cell actNumber"><%= tracked.acctNum %></div>
 								<div class="cell name"><%= tracked.designer %></div>
 								<div class="cell name"><%= tracked.onboarder %></div>

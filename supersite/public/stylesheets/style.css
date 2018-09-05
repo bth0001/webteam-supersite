@@ -61,6 +61,21 @@ body {background-color:#f4f4f4; font-family: 'Roboto', sans-serif; font-size: 1r
 
 h1, h2, h3, h4, h5, h6 {color: #545454; line-height:1.35em; margin:0 0 .15em;}
 
+#myBtn {background: none; cursor: pointer; padding: 6px 20px; font-family: 'Roboto Condensed', sans-serif; font-weight: 400; outline: none; position: relative; -webkit-transition: all 0.3s;
+transition: all 0.3s; border-radius: 0; background: #fff; border: #2637B0 2px solid; color:#2637B0}
+#myBtn:hover, #myBtn:focus {background: #2637B0; color:#fff}
+#myBtn:hover .fas,  #myBtn:focus .fas {color: #fff;}
+.btn {background: none; cursor: pointer; padding: 6px 20px; font-family: 'Roboto Condensed', sans-serif; font-weight: 400; outline: none; position: relative; -webkit-transition: all 0.3s;
+transition: all 0.3s; border-radius: 0;}
+#trackerBtn {text-align: right;}
+.btn {border-radius: 0 !important;}
+.btn.edit {background: #EAF9FB; border: 1px solid #2395A3; color: #2395A3;}
+.btn.edit:hover {background: #2395A3; color: #fff;}
+.btn.archive {background: #e3dff0; border: 1px solid #484554; color: #484554;}
+.btn.archive:hover {background: #484554; color: #fff;}
+.btn.delete {background: #FBECF0; border: 1px solid #CC3359; color: #CC3359;}
+.btn.delete:hover {background: #CC3359; color: #fff;}
+
 h1 {font-family: 'Raleway', sans-serif; font-size:2em; font-weight: 400; margin: 0 0 20px;}
 h2 {font-family: 'Raleway', sans-serif; font-size:1.5em; font-weight: 400; padding-bottom: 20px;}
 h3 {font-family: 'Raleway', sans-serif; font-size:1.25em;}
@@ -68,7 +83,9 @@ h4 {font-size:1.125em; font-weight: 300; text-transform: uppercase;}
 h5 {font-size:1.05em;}
 h6 {font-size:1em;}
 
-h2.brand {padding: 0; margin: 0; color: #f3f3f3; font-weight: 700; letter-spacing: 3.2px;}
+h2.brand, h2.brand a {padding: 0; margin: 0; color: #f3f3f3; font-weight: 700; letter-spacing: 3.2px; opacity: 0.8;}
+h2.brand:hover {opacity: 1;}
+#footer a {text-decoration: none;}
 
 p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0 0 1em;}
 .fas {padding: 0 0 0 15px;}
@@ -112,7 +129,7 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 #utilityNav span.loggedIn:after {content:" | "; margin:0 0 0 20px;}
 #utilityNav .loggedIn img {height:50px; width:50px; border-radius:50%; margin-left:10px;}
 
-#navBar {background: linear-gradient(135deg, rgba(38,55,176,1) 0%,rgba(35,150,163,1) 100%); padding: 30px 0 0;}
+#navBar {background: linear-gradient(to right, #2638b0, #0060c8, #007fcb, #0099c2, #00b0b7); padding: 30px 0 0;}
 #navBar a {color:#fff; display: block; font-family:'Roboto', sans-serif; font-size: 1em; font-weight: 300; padding: 15px; text-decoration: none; }
 #navBar a:hover, #navBar a:focus, #navBar a.is-active {background:#fff; color:#2637B0;}
 #navBar ul {padding: 0; margin: 0;}
@@ -136,7 +153,7 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 .login {background-color:#0085c4; border-radius:10px; color:#fff; margin:10px 0; padding:7px 15px;}
 .login:hover, .login:focus {background-color:#fff; border:1px solid #0085c4; color:#0085c4; border-radius:10px; text-decoration:none;}
 
-h1.pageHeader {text-align:center; font-family:monospace; overflow:hidden; /* Ensures the content is not revealed until the animation */ border-right:3px solid orange; /* The typwriter cursor */ white-space:nowrap; /* Keeps the content on a single line */ margin:0 auto; /* Gives that scrolling effect as the typing happens */ letter-spacing:1px; /* Adjust as needed */ animation:typing 3.5s steps(30, end), blink-caret .5s step-end infinite;}
+h3.pageHeader {text-align:center; margin: 10px 0 5px;}
 
 /* dashboard - select team member */
 .selectTeamMember {position:relative;}
@@ -145,18 +162,6 @@ h1.pageHeader {text-align:center; font-family:monospace; overflow:hidden; /* Ens
 #allTeamMembers {background: #323232; position: absolute;  display:none; list-style-type:none; min-width: 150px; padding: 10px 0; right:auto; left: 0; z-index: 1; top: 35px;}
 #allTeamMembers a {color: #adadad; display: block; font-size: .85em; font-family: 'Roboto', sans-serif; font-weight: 400; padding: 8px 15px; text-decoration: none; transition: color .25s ease-in-out;}
 #allTeamMembers a:hover, #allTeamMembers a:focus {background-color: #19B9E7; color: #fff;}
-
-/* The typing effect */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange }
-}
 
 /*Dashboard*/
 #dashboard {margin:50px 0;}
@@ -190,8 +195,9 @@ nav.contentNav a.active {box-shadow:0 3px 0 0 #8AAEEA; color:#8AAEEA;}
 #essTracked, #strTracked {flex: 1; margin: 10px 0 30px;}
 #tracker #tracked {margin: 10px 0;}
 
-#delete-form {background-color: transparent; box-shadow: none; padding: 0; margin: 0; display: inline-block;}
-#delete-form button {margin: 0;}
+#delete-form, #archive-form {background-color: transparent; box-shadow: none; padding: 0; margin: 0; display: inline-block;}
+
+.showEssentials,  .showStarter,  .showProd,  .showTlink, .showContent {cursor: pointer;} 
 
 /* top row */
 #topRow {margin: 0 -15px}
@@ -220,7 +226,7 @@ div#accordion p {margin: 0;}
 
 .rightCol .table .row {justify-content: space-between;}
 
-.table .row.title {background: #C6C1C8; border-top: none; color: #42313A; font-weight: 500;}
+.table .row.title {background: #484554; border-top: none; color: #ada9bb; font-weight: 500;}
 .table .row {border-top: solid 1px #E6E7EF; margin:0; justify-content: flex-end; width: 100%;}
 .table .row:last-child {border-bottom: solid 1px #E6E7EF;}
 .table .row .cell {padding: 15px; text-align: right; margin:0}

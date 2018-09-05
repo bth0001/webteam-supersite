@@ -4,12 +4,12 @@ var TeamTracker = require("../models/teamTracker");
 var User = require("../models/user");
 var TaskTypes = require("../models/taskType");
 
-
 //Index route
 router.get("/", function(req, res){
   TeamTracker.find({}, function(err, allTracks){
     User.find({}, function(err, allUsers){
       TaskTypes.find({}, function(err, allTask){
+        
     if(err){
       console.log(err);
     } else {
@@ -44,7 +44,7 @@ router.get("/archive", function(req, res){
 
 //POST new teamTracked
 router.post("/", function(req, res){
-  var author = {id: req.user._id, firstName: req.user.firstName};
+  var author = {id: req.user._id, firstName: req.user.firstName, email: req.user.email};
   var teamTrack = req.body.teamTrack;
   const newTrack = Object.assign(teamTrack, {author: author});
   TaskTypes.create(teamTrack.taskTypes, function(err, newlyTask){
@@ -60,23 +60,22 @@ router.post("/", function(req, res){
   });
 });
 
-//==============================================================================
-//SHOW - show more info about one campground
 router.get("/:id", function(req, res){
-    //find the campground with provided ID - .populate("comments")
     TeamTracker.findById(req.params.id).exec(function(err, allTracks){
-      console.log(allTracks.archive)
-      User.find({}, function(err, allUsers){
+      TaskTypes.find({}, function(err, allTasks){
+        User.find({}, function(err, allUsers){
        if(err) {
          console.log(err);
        } else {
          //render show template with that campground
          res.render("tracker/show", {
           tracking: allTracks,
-          users: allUsers
+          users: allUsers,
+          task: allTasks
         });
       }
     })
+  })
   })
 });
 
@@ -98,7 +97,7 @@ router.get("/:id/edit", function(req, res){
 //update tracker route
 router.put("/:id", function(req, res){
    //find and update correct tracker
-   var author = {id: req.user._id, firstName: req.user.firstName};
+   var author = {id: req.user._id, firstName: req.user.firstName, email: req.user.email};
    var teamTracking = req.body.tracking;
    var taskTrack = req.body.teamTrack;
    const newTrack = Object.assign(teamTracking, {author: author}, taskTrack);
@@ -112,8 +111,6 @@ router.put("/:id", function(req, res){
        }
    });
   });
-
-
 
 //Destroy Route
 router.delete("/:id", function(req, res){
