@@ -10,7 +10,7 @@ router.get("/", function(req, res){
   res.render("index");
 });
 
-router.get("/search", function(req, res){y
+router.get("/search", function(req, res){
   if (req.query.search){
     const regex = new RegExp(escapeRegex(req.query.search), '');
     
