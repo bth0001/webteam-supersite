@@ -81,25 +81,29 @@
     <div class="formField">
       <input type="text" name="blueprint[interiorScreenshot]" placeholder="Interior Screenshot" />
     </div>
-    <div class="formField">
-      <input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />
-    </div>
+    
+<style>
+  #howManyDoctorsContainer input{background-color: rgb(243,243,102)}
+</style>
+
+<script>
+$(document).ready(function(){
+  $('<input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />').appendTo("#howManyDoctorsContainer");
+  $("#howManyDoctors").bind('keyup mouseup', function () {
+    $("#howManyDoctorsContainer").empty();
+    for(i = 0; i < $(this).val(); i++) {
+      $('<input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />').appendTo("#howManyDoctorsContainer");
+    }
+});
+});
+</script>
 
     <div class="formField">
-      <select name="blueprint[howManyDoctors]">
-    <option value="" disabled selected>How many doctors?</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10+">10+</option>
-  </select>
-      <!--onboarder-->
+      <label>How many Doctors?</label><input type="number" name="blueprint[howManyDoctors]" min="1" max="20" value="1" id="howManyDoctors">
+    </div>
+
+    <div class="formField" id="howManyDoctorsContainer">
+      <!--inserted with script-->
     </div>
 
     <div class="formField">
