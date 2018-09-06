@@ -4,8 +4,7 @@
 </div>
 <div class="container">
 <div id="bottomRow" class="flexbox">
-    <% if(currentUser.firstName === tracking.author.firstName) { %> 
-        <div class="widget fullCol">
+         <div class="widget fullCol">
 				<div id="dashEssentials">			
 					<div class="table">
 						<div class="row title flexbox">
@@ -17,7 +16,6 @@
 							<div class="cell arrow"></div>
 						</div>
 						<div id="accordion">				
-							<% if(currentUser.firstName === tracking.author.firstName) { %>
 
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracking.domain %>" target="_blank"><%= tracking.domain %></a></div>
@@ -76,12 +74,10 @@
 								<!-- end of expanded --> 								
 							</div>
 							
-							<% } %>	
 						</div>
 					</div>
 				</div>
             </div>
-        <% } %>
 </div>
 </div>
 <script>

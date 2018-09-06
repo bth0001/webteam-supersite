@@ -1,0 +1,38 @@
+<% include partials/header %>
+
+<div class="container">
+
+<% if (tracking.length > 0){ %>
+
+    <h3>Showing search results for <strong><%= searchWord %></strong>...</h3>
+    <hr />
+    <% tracking.forEach(function(tracked){ %>
+
+    <p><strong>Created By:</strong> <%= tracked.author.firstName %></p>
+    <p><strong>Onboarder:</strong> <%= tracked.onboarder %></p>
+    <% if (tracked.buildPkg === "Essential") { %>
+        <p><strong>Build Package:</strong> <%= tracked.buildPkg %></p>
+        <p><strong>Designer:</strong> <%= tracked.designer %></p>
+        <p><strong>CSS Path:</strong> <%= tracked.cssPath %></p>
+    <% } %>
+    <% if (tracked.buildPkg === "Starter") { %>
+        <p><strong>Build Package:</strong> <%= tracked.buildPkg %></p>
+        <p><strong>Build Package:</strong> <%= tracked.starterTemplate %></p>
+    <% } %>
+    <p><strong>Domain:</strong> <%= tracked.domain %></p>
+    <p><strong>Notes:</strong> <%= tracked.notes %></p>
+    <a href="/tracker/<%= tracked._id %>"><button class="btn edit">See More</button></a>
+
+
+    <%= tracked %>
+
+    <hr />
+    <% }); %>
+<% } else { %>
+
+    <h3>No Results Found for <strong><%= searchWord %></strong>.</h3>
+
+<% } %>
+
+</div><!--container-->
+<% include partials/footer %>
