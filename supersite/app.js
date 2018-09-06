@@ -36,7 +36,7 @@ var projectsTracker = require('./routes/projects-tracker');
 app.set('view engine', 'ejs');
 app.set('debug', true);
 app.use(express.static("public"));
-app.use(express.static("routes/word"));
+app.use('/downloads', express.static('routes/word'))
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(methodOverride("_method"));
 app.use(bodyParser());

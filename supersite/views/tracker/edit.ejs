@@ -1,4 +1,7 @@
 <% include ../partials/header %>
+<div id="overview" class="center">
+  <h1><%= currentUser.team %> Tracker Edit Page</h1>
+</div>
 <div class="container">
   <div class="row">
       <p><a href="/tracker">&larr; Back to Tracker</a></p>
@@ -16,6 +19,24 @@
         <div class="form-group">
           <label name="username">Developer:
             <input type="text" name="tracking[username]" value="<%= currentUser.firstName %>" />
+          </label>
+            <label name="server">Server:
+                <select name="tracking[server]" id="server">
+                    <option value="<%= tracking.server %>" selected><%= tracking.server %></option>
+                    <% if(tracking.server === "Presence") { %>
+                      <option value="DNN">DNN</option>
+                      <option value="T.LINK">T.LINK</option>
+                      <% } %>
+                      <% if(tracking.server === "DNN") { %>
+                    <option value="Presence">Presence</option>
+                    <option value="T.LINK">T.LINK</option>
+                    <% } %>
+                    <% if(tracking.server === "T.LINK") { %>
+                      <option value="Presence">Presence</option>
+                      <option value="DNN">DNN</option>
+                      <% } %>
+                  </select>
+              
           </label>
         </div> <!-- end of form-group -->
         <div class="form-group">

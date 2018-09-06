@@ -53,7 +53,10 @@ router.get('/forgot', function(req, res) {
             clientSecret: "jhVxWCz8vtKj4x8tqg2xoqwn",
             refreshToken: "1/22_T0sn9-4MR_gib7OSAbQv0AZlp1_YRsRT6d9NvtlVZcNxnciwUfDO9M1RAZ8-m"
           
-          }
+          }, 
+          tls: {
+            rejectUnauthorized: false
+        }
         });
         var mailOptions = {
           to: user.email,
@@ -71,7 +74,8 @@ router.get('/forgot', function(req, res) {
       }
     ], function(err) {
       if (err) return next(err);
-      res.redirect('/forgot');
+      req.flash("success", "Email will be sent soon");
+      res.redirect('/');
     });
   });
   
@@ -79,6 +83,7 @@ router.get('/forgot', function(req, res) {
   router.get('/reset/:token', function(req, res) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
       if (!user) {
+        console.log(err);
         req.flash('error', 'Password reset token is invalid or has expired.');
         return res.redirect('/forgot');
       }
@@ -92,6 +97,7 @@ router.get('/forgot', function(req, res) {
       function(done) {
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
+            console.log(err);
             req.flash('error', 'Password reset token is invalid or has expired.');
             return res.redirect('back');
           }
@@ -133,14 +139,5 @@ router.get('/forgot', function(req, res) {
       res.redirect('/');
     });
   });
-
-  //middleware
-  function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    req.flash("error", "Please Login First!");
-    res.redirect("/login");
-  }
 
   module.exports = router;

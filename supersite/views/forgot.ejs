@@ -115,31 +115,46 @@
         <html>
         <head>
         <meta charset="utf-8">
-        <title>Login  |  Mobile, AL 36609</title>
+        <title>Forgot Password  |  Mobile, AL 36609</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="https://root.televox.west.com/common/resources/designportfolio/televox/CommonLib/favicons/default.ico" />
         <script src="https://use.fontawesome.com/be4f3ddb0b.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/solid.css" integrity="sha384-wnAC7ln+XN0UKdcPvJvtqIH3jOjs9pnKnq9qX68ImXvOGz2JuFoEiCjT8jyZQX2z" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" />
         <script src="//code.jquery.com/jquery.min.js"></script>
-      	<script src="/scripts/site.js"></script>
-	
+        <script src="/scripts/site.js"></script>
+        <link href="dist/css/styles.css" rel="stylesheet" >
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
         </head>
         
         <body>
+            
         <div id="template" class="login">
           <div class="container flexbox">
+                <% if(error && error.length > 0){ %>
+                    <div id="alertMessage" class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                <% } %>
+                <% if(success && success.length > 0){ %>
+                    <div id="alertMessage" class="alert alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                <% } %>
             <div id="login">
-                <form class="form" action="/forgot" method="POST" enctype="multipart/form-data">
+                <form class="form" action="/forgot" method="POST">
                   <div class="subtitle">Forgot your password?</div>
                   <div class="title">Email</div>
               <div class="subtext">Enter your email below.</div>
                 <div class="wrapper flexbox">
                 <div class="email flexbox">  
-                  <input name="email" placeholder="Email" type="text" required autofocus>
+                  <input name="email" type="text" required autofocus>
                 </div>
                
                 <button class="login">Reset Password</button>
+                <legend class="forgot"><a href="/">Login</a></legend>
                 </div>
               </form>
         

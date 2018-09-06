@@ -8,6 +8,7 @@ router.get("/", function(req, res){
     res.render("checklist");
   });
 
+
 //POST new checklist
 router.post("/", function(req, res){
   var author = {id: req.user._id, firstName: req.user.firstName};
@@ -23,5 +24,5 @@ router.post("/", function(req, res){
    });
   });
 
-  
+
   module.exports = router;
