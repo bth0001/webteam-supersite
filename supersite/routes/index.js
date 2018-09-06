@@ -12,7 +12,7 @@ router.get("/", function(req, res){
 
 router.get("/search", function(req, res){
   if (req.query.search){
-    const regex = new RegExp(escapeRegex(req.query.search), '');
+    //const regex = new RegExp(escapeRegex(req.query.search), '');
     
     const escapedString = escapeStringRegexp(req.query.search);
     //console.log(escapedString);
