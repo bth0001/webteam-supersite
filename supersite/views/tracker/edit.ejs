@@ -65,9 +65,32 @@
         </div>
           </section>
           <section>
-              <label name="tracking[domain]"><span>Domain:</span>
+              <div class="selectBox flexbox flexJustify alignCenter">
+              <label class="flexItem" name="tracking[domain]"><span>Domain:</span>
                   <input type="text" name="tracking[domain]" value="<%= tracking.domain %>">
                 </label>
+                <label class="flexItem" for="Server">
+                  <div class="flexbox alignCenter"><span>Server:</span>
+                    <div class="customSelect">
+                    <select name="tracking[server]" id="server">
+                      <option value="<%= tracking.server %>" selected><%= tracking.server %></option>
+                      <% if(tracking.server === "Presence") { %>
+                        <option value="DNN">DNN</option>
+                        <option value="T.LINK">T.LINK</option>
+                        <% } %>
+                        <% if(tracking.server === "DNN") { %>
+                      <option value="Presence">Presence</option>
+                      <option value="T.LINK">T.LINK</option>
+                      <% } %>
+                      <% if(tracking.server === "T.LINK") { %>
+                        <option value="Presence">Presence</option>
+                        <option value="DNN">DNN</option>
+                        <% } %>
+                    </select>
+                    </div>
+                    </div>
+              </label>
+              </div>
                 <div class="selectBox flexbox flexJustify alignCenter">
                     <label class="flexItem" for="buildPkg">
                     <div class="flexbox alignCenter"> <span>Build Package:</span>
@@ -87,7 +110,7 @@
                           </label>
                           <% if(tracking.buildPkg === "Starter") { %>
                             <label class="flexItem ifStarter" for="buildPkg">
-                                <div class="flexbox alignCenter"> <span>Starter Template:</span>
+                                <div class="flexbox alignCenter"><span>Starter Template:</span>
                                     <div class="customSelect">
                                   <select name="tracking[starterTemplate]">
                                     <option value="<%= tracking.starterTemplate %>"><%= tracking.starterTemplate %></option>
@@ -103,6 +126,7 @@
                           <label style="display: none;" name="tracking[specialFeatures]" class="ifEssential">Special Features:
                               <select name="tracking[specialFeatures]" multiple >
                                 <option value="<%= tracking.specialFeatures %>" selected><%= tracking.specialFeatures %></option>
+                                <option value="None">None</option>
                                 <option value=" Breadcrumbs">Breadcrumbs</option>
                                 <option value=" Interior Featured Image">Interior Featured Image</option>
                                 <option value=" Mega Menu">Mega Menu</option>
@@ -117,7 +141,7 @@
                             </label>
                                <% } %>
                               <% if(tracking.buildPkg === "Essential") { %>
-                                  <label name="tracking[starterTemplate]" class="ifStarter" style="display: none;">Starter Template:
+                                  <label name="tracking[starterTemplate]" class="ifStarter flexItem" style="display: none;">Starter Template:
                                           <select name="tracking[starterTemplate]">
                                             <option value="<%= tracking.starterTemplate %>"><%= tracking.starterTemplate %></option>
                                             <option value="None">None</option>
@@ -126,12 +150,16 @@
                                             <option value="Camelot">Camelot</option>
                                             <option value="Olympus">Olympus</option>
                                           </select>
-                                        </label>
-                                      </div>
+                                  </label>                                     
+                                  <label name="cssPath" class="ifEssential toggleEssential flexItem">CSS Path:
+                                        <input type="text" name="tracking[cssPath]" value="<%= tracking.cssPath %>" class="essentialClearInput">
+                                  </label>
+                </div>
                               <div class="form-group">
                                 <label name="tracking[specialFeatures]" class="ifEssential">Special Features:
                                   <select name="tracking[specialFeatures]" multiple >
                                     <option value="<%= tracking.specialFeatures %>" selected><%= tracking.specialFeatures %></option>
+                                    <option value="None">None</option>
                                     <option value=" Breadcrumbs">Breadcrumbs</option>
                                     <option value=" Interior Featured Image">Interior Featured Image</option>
                                     <option value=" Mega Menu">Mega Menu</option>
@@ -141,57 +169,9 @@
                                     <option value=" Scroll Efects">Scroll Effects</option>
                                   </select>
                                 </label>
-                                
-                              </div> <!-- end of form-group -->
-                              <div class="form-group">
-                                      <label name="tracking[domain]">Domain:
-                                        <input type="text" name="tracking[domain]" value="<%= tracking.domain %>">
-                                      </label>
-                                      <label name="cssPath" class="ifEssential toggleEssential">CSS Path:
-                                            <input type="text" name="tracking[cssPath]" value="<%= tracking.cssPath %>" class="essentialClearInput">
-                                          </label>
-                                    </div> <!-- end of form-group -->
+                              
                             <% } %>
-
-
-          <label name="server">
-              <div class="flexbox alignCenter"><span>Server:</span>
-              <select name="tracking[server]" id="server">
-                  <option value="<%= tracking.server %>" selected><%= tracking.server %></option>
-                  <% if(tracking.server === "Presence") { %>
-                    <option value="DNN">DNN</option>
-                    <option value="T.LINK">T.LINK</option>
-                    <% } %>
-                    <% if(tracking.server === "DNN") { %>
-                  <option value="Presence">Presence</option>
-                  <option value="T.LINK">T.LINK</option>
-                  <% } %>
-                  <% if(tracking.server === "T.LINK") { %>
-                    <option value="Presence">Presence</option>
-                    <option value="DNN">DNN</option>
-                    <% } %>
-                </select>
-                </div>
-          </label>
-
-
-
-        <div class="form-group">
-          
-          <label name="tracking[onboarder]">On-Boarder:
-            <select name="tracking[onboarder]">
-                <option value="<%= tracking.onboarder %>"><%= tracking.onboarder %></option>
-                <option value="None">None</option>
-                <% users.forEach(function(user){ %>
-                  <% if(user.team == 'On-Boarder') { %>
-                      <option value="<%= user.firstName %>"><%= user.firstName %></option>
-                  <% } %>
-              <% }); %>
-            </select>
-          </label>
-        </div> <!-- end of form-group -->
-        
-
+                          </section>
         <script>
             $(document).ready(function(){
                 var count = 0;
@@ -202,7 +182,7 @@
               $("#addTask").click(function () {               
                     count++;        
                     var newTaskInput = $(".task:last-of-type"); 
-                    newTaskInput.clone().appendTo("#task"); 
+                    newTaskInput.clone().appendTo(".taskTable"); 
                   $("div.task:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
                   $("div.task:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
                   $("div.task:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
@@ -219,12 +199,19 @@
               });
             });
           </script>
-        <div class="form-group" id="task">
-            <label class="labelTask"><h3>Task:</h3></label>
-            <button type='button' id='addTask'>+</button>
-            <button type='button' id='removeTask'>-</button>
+        <div id="task">
+            <div class="taskTable">
+                <div class="header flexbox">
+                <div class="cell type">Task</div>
+                <div class="cell quantity">Quantity</div>
+                <div class="cell notes">Notes</div>
+            </div>
+            
+                
             <% for (i=0; i < tracking.taskTypes.length; i++) { %>
-            <div class="task">
+            <div class="task flexbox row">
+                <div class="cell type">
+                    <div class="customSelect">
                 <select class="taskType" name="tracking[taskTypes][i].taskTypeName">
                   <option value="none">None</option>
                     <% if (tracking.taskTypes[i].taskTypeName === "Site Build") { %>
@@ -248,8 +235,13 @@
                       <option value="Content Entry">Content Entry</option>
                     <% } %>
                   </select>
+                  </div>
+                  </div>
+                  <div class="cell quantity">
+                      <div class="customSelect">
                   <select class="taskQuantity">
                       <option selected value="<%= tracking.taskTypes[i].quantity %>"><%= tracking.taskTypes[i].quantity %></option>
+                      <option value="none">None</option>
                       <% if (tracking.taskTypes[i].quantity === "0 - 15") { %>
                         <option selected value="0 - 15">0 - 15</option>
                       <% } else { %>
@@ -266,13 +258,19 @@
                         <option value="36+">36+</option>
                       <% } %>
                     </select>
+                    </div>
+                    </div>
+                    <div class="cell notes">
               <input class="taskNotes" type="text" value="<%= tracking.taskTypes[i].taskNotes %>">
-              
+            </div>
             </div>
             <% } %>
             </div>
           <!-- end of form-group -->
-        
+          <div class="taskButtons flexbox flexRight">
+              <button type="button" id="addTask">Add <i class="fas fa-plus"></i></button>
+              <button type="button" id="removeTask">Remove <i class="fas fa-minus"></i></button>
+              </div>
         <div class="form-group">
           <label class="labelNotes" name="tracking[notes]">Notes:
             <textarea name="tracking[notes]"><%= tracking.notes %></textarea>

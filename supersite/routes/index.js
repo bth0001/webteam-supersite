@@ -12,13 +12,14 @@ router.get("/", function(req, res){
 
 router.get("/search", function(req, res){
   if (req.query.search){
-    //const regex = new RegExp(escapeRegex(req.query.search), '');
+    const regex = new RegExp(escapeRegex(req.query.search), 'g');
     
-    const escapedString = escapeStringRegexp(req.query.search);
+    // const escapedString = escapeStringRegexp(req.query.search);
     //console.log(escapedString);
     //console.log(regex);
-        //TeamTracker.find({$text: {$search : regex}}, function(err, allTracks){
-        TeamTracker.find({$text: {$search : escapedString}}, function(err, allTracks){
+        TeamTracker.find({$text: {$search : regex}}, function(err, allTracks){
+          console.log(regex);
+        // TeamTracker.find({$text: {$search : escapedString}}, function(err, allTracks){
         if(err){
             console.log("Something went wrong");
             console.log(err);
@@ -35,8 +36,8 @@ router.get("/search", function(req, res){
       }
 });
 
-// function escapeRegex(text) {
-//   return text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-// };
+function escapeRegex(text) {
+  return text.replace(/[-\/\\^$*+?.()|[\]{}]/, '\\$&');
+};
 
 module.exports = router;
