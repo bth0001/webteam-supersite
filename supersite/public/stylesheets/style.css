@@ -106,7 +106,8 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 .profileImage img {border-radius: 50%; border: 2px solid #19B9E7; object-fit:cover; width: 50px; height:50px; max-height:50px; min-height:50px; }
 .profileText {text-align: center;}
 .profileText p {color: #fff; font-family: 'Raleway', sans-serif; font-size: .9em; font-weight: 300; margin: 0;}
-.profile-thumbnail img { object-fit: cover; width: 15em; border: none; height: 15em;}
+.profile-thumbnail {text-align: center;}
+.profile-thumbnail img { object-fit: cover; width: 15em; border: none; height: 15em; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);}
 
 #profileBar {position:relative;}
 #profileBar .dropdown {background: #323232; display:none; position: absolute; min-width: 150px; padding: 10px 0; right: 0; left: auto; z-index: 1; top: 50px;}
@@ -134,7 +135,13 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 #navBar a:hover, #navBar a:focus, #navBar a.is-active {background:#fff; color:#2637B0;}
 #navBar ul {padding: 0; margin: 0;}
 
+/* search box */
 .searchBox {background: rgba(255,255,255,.1); color: #fff; width: 250px; padding: 6px 15px;}
+form.searchBox {box-shadow: none; max-width: none; margin: auto; text-align: left; background: transparent; position: relative;}
+form.searchBox input {width: 250px; padding: 6px 15px; margin: auto; background-color: rgba(255,255,255,.1); border: 0;}
+form.searchBox input::placeholder {color: #fff;}
+form.searchBox button {background-color: transparent; padding: 0; margin: auto; border-radius: 0; display: inline-block; position: absolute; right: 30px; border: none; color: #fff;}
+
 
 /* Alert Message */
 #alertMessage {position: fixed; top: 10px; left: 50%; bottom: auto; right: auto; transform: translateX(-50%)}
@@ -248,35 +255,122 @@ div#accordion p {margin: 0;}
 
 .panel {display: none; padding: 10px 40px 40px;}
 .panel span {line-height: 1.65em;}
-  
-/* Form */
-form {background-color:#e8e3e3; box-shadow:1px 1px 10px rgba(0,0,0,0.34); max-width:400px; margin: 30px auto; text-align:center; padding:30px;}
-form input {display:block; width:100%; margin:10px 0; padding:5px 10px;}
-form button, .trackerForm button {background-color:#252525; color:#fff; padding:5px 20px; margin:5px 10px 0; cursor:pointer; border-radius:6px; border:0;}
-.form-group {margin-bottom: 1rem;display: flex; justify-content: space-between; align-items: center; flex-flow: row wrap;}
-
-.trackerForm {background-color:#e8e3e3; border-radius: 5px; box-shadow:1px 1px 10px rgba(0,0,0,0.34); margin:0 auto; max-width:100%; padding:20px; text-align:left;}
-.trackerForm label {flex:1 1 250px; margin: 0 10px}
-.trackerForm fieldset {margin: 0 10px}
-.trackerForm input, .trackerForm select {display: inline-block; margin: 0; padding: 5px 10px; width: 100%;}
-
-/* fieldset */
-fieldset {width: 100%; border: 1px solid rgba(0,0,0,0.2); display: flex; padding:10px 10px 20px; min-width:none; flex-flow: row wrap; align-items: flex-start; justify-content: space-between; text-align: center;}
-fieldset input {width: auto !important; margin: 0 10px 0 20px !important}
-fieldset legend {width: auto}
-fieldset input:first-of-type {margin:0 10px 0 0 !important}
-fieldset label {flex:1; margin: 0}
-
-/*task on form*/
-#task {display: flex; flex-wrap: wrap; justify-content: space-between;}
-#task label h3 {margin: 0;}
-div .task {display: flex; flex-wrap: wrap; justify-content: center; align-items: center; flex: 100%; margin: 5px 0px;}
-div .task > * {flex: 30%; margin: 0 10px;}
-
-/* hidden by default */
 
 
-.profileForm {background-color:#e8e3e3; box-shadow:1px 1px 10px rgba(0,0,0,0.34); margin:30px 10px; max-width:400px; padding:30px; text-align:left;}
+/* Universal Form Styles */
+.form {background: #fff; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22); font-family: 'Roboto Condensed', sans-serif; font-size: 1rem; margin: 0 auto; width:calc(100% - 20px)}
+.form .header {background:#484554; color:#ada9bb; padding: 20px 30px;}
+.form h2 {color:#ada9bb; margin: 0; padding: 0; text-transform: uppercase;}
+.form .close .fas {color:#ada9bb; font-size: 2em;}
+.form section {padding: 0 0 30px;}
+.form .wrapper {padding: 30px;}
+
+.form input,
+.form textarea,
+.form select {background-color: transparent; border: none; border-bottom: 1px solid #ddd; border-radius: 0; color:#ada9bb; font-family: 'Roboto Condensed', sans-serif; font-size: 1.125em; margin-bottom: 10px; outline: none; padding: 5px; width: 100%;}
+.form label {display: block;}
+.form input:focus, 
+.form textarea:focus, 
+.form select:focus {color: #2637B0; outline: 0;}
+
+.form textarea {overflow: hidden; resize:none;}
+.form button[type="submit"] {font-size: 1.25em; padding: 15px; width: 100%;}
+.form button[type="button"],
+.form button[type="submit"] {background-color: #2637B0; border: none; display: inline-block; cursor: pointer; font-family: 'Roboto Condensed', sans-serif; font-weight: 700; color: #fff; text-decoration: none; transition: background 0.3s;}
+.form button[type="button"]:hover,
+.form button[type="submit"]:hover {background: none; box-shadow: inset 0px 0px 0px 1px rgba(38, 55, 176, 1); color: #2637B0;}
+
+/* removes browser styles */
+::placeholder, select:required:invalid{color: #ada9bb;}
+input, select, textarea {color: #2637B0 !important;}
+::-moz-placeholder {opacity: 1;}
+.form select,
+.form option {-webkit-appearance: none; /* WebKit/Chromium */ -moz-appearance: none; appearance: none; /* Gecko */}
+
+.form select option {color: #4A3C3E; padding: 0;}
+.form select option:disabled {background-color: transparent; color: #ada9bb;}
+.form select::-ms-expand {display: none;}
+
+/* number arrow styles */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {-webkit-appearance: none; margin: 0;}
+input[type=number] {-moz-appearance: textfield;}
+
+.acctNumber input {height: 40px; float: left; display: block;}
+.acctNumber-nav {float: left; position: relative; height: 40px;}
+.acctNumber-button { color: #2637B0; font-size: .7em; position: relative; cursor: pointer; width: 20px; text-align: center;  -webkit-transform: translateX(-100%); transform: translateX(-100%); -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;}
+.acctNumber-button.acctNumber-up {position: absolute; height: 50%; top: 0;}
+.acctNumber-button.acctNumber-down {position: absolute; bottom: 0; height: 50%;}
+.acctNumber .fas {vertical-align: middle;}
+
+/* select boxes */
+.selectBox .customSelect,
+.selectBox input {width: 100%; position: relative;}
+select:first-child {color: #ada9bb;}
+.customSelect::after {color: #2637B0; content: '\f107'; cursor: pointer; font-family: "Font Awesome 5 Free"; font-size: 1em; font-weight: 900; right: 11px; top: 5px; position: absolute;}
+
+/* check boxes */
+.customCheck {padding: 10px 10px 20px;}
+.customCheck span {margin: 8px 10px 8px 30px;}
+.customCheck .checkbox {color: #404040;
+cursor: pointer; position: relative; width: 200px;}
+.customCheck .checkbox input {left: -9999px; position: absolute;}
+.customCheck .checkbox input + i::after {color: #2637B0; content: '\f00c'; font-family: FontAwesome; height: 15px; left: 1px; position: absolute; opacity: 0; text-align: center; top: 2px; transition: opacity 0.1s; width: 15px;}
+.customCheck .checkbox i {background: #fff; border: 2px solid #e5e5e5; height: 25px; left: 0; outline: none; position: absolute; transition: border-color 0.3s; top: 5px; width: 25px;}
+
+.customCheck .checkbox input:checked + i::after {opacity: 1;}
+.customCheck .checkbox input:checked + i {border: 2px solid #2637B0;}
+.checkbox {align-items: center; display: flex;}
+
+/* task types table */
+.taskTable {padding-bottom: 25px; width: 100%;}
+#task .fas {color: inherit; font-size: inherit;}
+.taskTable .header {font-weight: 400; padding:5px;}
+.taskTable .header .cell {padding: 5px 10px;}
+.taskTable .row {border-bottom: 1px solid #ddd; justify-content: space-between; padding: 5px 0 0;  margin: 0;}
+.taskTable .cell {padding: 0 10px;}
+.taskTable .customSelect {height: 57px; position: relative;}
+.taskTable input, 
+.taskTable textarea, 
+.taskTable select {border-bottom: none; margin-bottom: 0;}
+.taskButtons {padding: 10px 0;}
+.taskButtons button {font-size: 1em; margin: 0 0 0 5px; padding: 8px 15px;}
+.taskButtons button i {margin-left: 3px;}
+
+/*Edit Profile Form*/
+.profileForm label {flex: 30%; margin: 0 5px;}
+.upload-btn-wrapper {position: relative; overflow: hidden; display: inline-block;}
+.profileForm .btn {border: 2px solid #2637B0; color: #fff; background-color: #2637B0; padding: 8px 20px; border-radius: 8px; font-size: 20px; font-weight: bold;}
+.upload-btn-wrapper:hover .btn {border: 2px solid #2637B0; background: #fff; color: #2637B0;}
+
+.upload-btn-wrapper input[type=file] {font-size: 20px;	position: absolute;	left: 0; top: 0; opacity: 0; cursor: pointer;}
+
+@media screen and (max-width: 400px) {
+	.taskTable .header .type,
+	.taskTable .header .quantity {display: none;}
+	.taskTable .row {border-bottom: 1px solid #484554; padding: 15px 0 10px;}
+	.taskButtons {justify-content: space-between;}
+	.taskButtons button {margin: 10px 0 0; padding: 8px; width: 48%;}
+}
+@media screen and (max-width: 767px) {
+	.taskTable .header .notes {display: none;}
+	.taskTable .header {justify-content: space-between;}
+	.taskTable .cell.notes {width: 100%;}
+	.taskTable .cell.type {width: 200px;}
+	.taskTable .cell.quantity {width: 100px;}
+	.form label {width: 100%;}
+	.acctNumber {width: 100%;}
+
+	
+}
+@media screen and (min-width: 768px) {
+	.form {max-width: 800px;}
+	.selectBox .flexItem {width: 45%;}
+	.taskTable .cell.type {width: 200px;}
+	.taskTable .cell.quantity {width: 125px;}
+    .taskTable .cell.notes {flex-grow: 1;}
+	
+}
 
 .labelNotes {display:flex; flex-wrap:wrap; width:100% !important;}
 .labelNotes textarea {flex:100%;}

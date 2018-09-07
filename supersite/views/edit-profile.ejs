@@ -2,7 +2,7 @@
 <div id="overview" class="center">
   <h1><%= currentUser.firstName %>'s Profile</h1>
 </div>
-<div class="container">
+<div class="container" style="margin: 10px auto;">
   <div class="row">
     <div class="col-md-3">
       <div class="profile-thumbnail">
@@ -10,24 +10,47 @@
       </div>
     </div>
     <div class="col-md-9">
-      <h1>Edit Profile</h1>
-      <form class="profileForm" action="/edit-profile" method="POST" enctype="multipart/form-data">
-        <input type="text" name="firstName" placeholder="First Name" value="<%= currentUser.firstName %>">
-        <input type="text" name="lastName" placeholder="Last Name"  value="<%= currentUser.lastName %>">
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="text" name="email" placeholder="Email"  value="<%= currentUser.email %>">
-        <input type="file" id="image" name="image" accept="image/*" value="<%= currentUser.profileImageUrl %>" />
-        <img id="imagePreview" src="#" alt="your image" />
-        <select name="team" >
-          <option value="<%= currentUser.team %>"><%= currentUser.team %></option>
-          <option value="Developer">Developer</option>
-          <option value="Designer">Designer</option>
-          <option value="Copy Writer">Copy Writer</option>
-          <option value="On-Boarder">On-Boarder</option>
-          <option value="Web Techs">Web Techs</option>
-          <option value="Web CSI">Web CSI</option>
-        </select>
-        <button>Update Profile</button>
+      <form class="form profileForm" action="/edit-profile" method="POST" enctype="multipart/form-data">
+        <section class="header flexbox flexJustify">
+            <h2>Edit Profile</h2>
+        </section>
+        <div class="wrapper">
+          <section class="flexbox flexJustify">
+            <label for="firstName"><span>First Name:</span>
+              <input type="text" name="firstName" placeholder="First Name" value="<%= currentUser.firstName %>">
+            </label>
+            <label for="lastName"><span>Last Name:</span>
+              <input type="text" name="lastName" placeholder="Last Name"  value="<%= currentUser.lastName %>">
+            </label>
+          <label for="email"><span>E-mail:</span>
+            <input type="text" name="email" placeholder="Email"  value="<%= currentUser.email %>">
+          </label>
+          <label for="password"><span>Password</span><input type="password" name="password" placeholder="Password" required></label>
+          <label for="team"><span>Team:</span>
+          <select name="team" disabled>
+              <option value="<%= currentUser.team %>"><%= currentUser.team %></option>
+              <option value="Developer">Developer</option>
+              <option value="Designer">Designer</option>
+              <option value="Copy Writer">Copy Writer</option>
+              <option value="On-Boarder">On-Boarder</option>
+              <option value="Web Techs">Web Techs</option>
+              <option value="Web CSI">Web CSI</option>
+            </select>
+          </label>
+        </section>
+        
+            <label for="imageProfile"><span>Profile Image</span></label>
+              <div class="upload-btn-wrapper">
+                  <button class="btn">Upload a Image</button>
+                  <input type="file" id="image" name="image" accept="image/*" value="<%= currentUser.profileImageUrl %>" />
+                </div>
+          
+          <label for="imagePreview"><span>Image Preview</span>
+            <img id="imagePreview" src="#" alt="your image" style="margin: 10px auto;"/>
+        </label>
+        
+          <button type="submit">Update Profile</button>
+      </div>
       </form>
     </div>
   </div>

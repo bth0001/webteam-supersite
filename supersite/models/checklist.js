@@ -12,7 +12,8 @@ const developerChecklistSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
     },
-    firstName: String
+    firstName: String,
+    email: String
   },
   
   domain: {
