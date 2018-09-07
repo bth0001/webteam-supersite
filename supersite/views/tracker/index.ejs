@@ -625,7 +625,7 @@ $(document).ready(function(){
 	var count = 0;
 	$("div.task div.row:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
 	$("div.task div.row:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
-	$("div.task div.row:first-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+	$("div.task div.row:first-of-type textarea.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
 
 	$("#addTask").click(function () {               
 		count++;        
@@ -633,7 +633,7 @@ $(document).ready(function(){
 		newTaskInput.clone().appendTo(".task"); 
 		$("div.task div.row:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
 		$("div.task div.row:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
-		$("div.task div.row:last-of-type input.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+		$("div.task div.row:last-of-type textarea.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
 	});
 
 	$("#removeTask").click(function () {
