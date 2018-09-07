@@ -45,6 +45,12 @@ const teamTrackerSchema = new mongoose.Schema({
   notes: {
     type: String
   },
+  homeSS: {
+    type: String
+  },
+  interiorSS: {
+    type: String
+  },
   designer: {
       type: String,
       ref: "User"
