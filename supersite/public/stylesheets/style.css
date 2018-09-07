@@ -140,7 +140,7 @@ p {font-family: 'Roboto', sans-serif; font-size: 1em; font-weight: 300; margin:0
 form.searchBox {box-shadow: none; max-width: none; margin: auto; text-align: left; background: transparent; position: relative;}
 form.searchBox input {width: 250px; padding: 6px 15px; margin: auto; background-color: rgba(255,255,255,.1); border: 0;}
 form.searchBox input::placeholder {color: #fff;}
-form.searchBox button {background-color: transparent; padding: 0; margin: auto; border-radius: 0; display: inline-block; position: absolute; right: 30px;}
+form.searchBox button {background-color: transparent; padding: 0; margin: auto; border-radius: 0; display: inline-block; position: absolute; right: 30px; border: none; color: #fff;}
 
 
 /* Alert Message */

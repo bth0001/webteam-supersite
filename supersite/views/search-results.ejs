@@ -1,11 +1,11 @@
 <% include partials/header %>
-
+<div id="overview" class="center">
+    <h1>Showing Search Results for: <strong><%= searchWord %></strong>...</h1>
+    
+</div>
 <div class="container">
 
 <% if (tracking.length > 0){ %>
-
-    <h3>Showing search results for <strong><%= searchWord %></strong>...</h3>
-    <hr />
     <% tracking.forEach(function(tracked){ %>
 
     <p><strong>Created By:</strong> <%= tracked.author.firstName %></p>
@@ -29,8 +29,8 @@
     <hr />
     <% }); %>
 <% } else { %>
-
     <h3>No Results Found for <strong><%= searchWord %></strong>.</h3>
+    
 
 <% } %>
 
