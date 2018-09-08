@@ -1,39 +1,49 @@
 <% include ../partials/header %>
- <div class="container">
-       <header class="jumbotron">
-          <div class="container">
-             <h1>Welcome to the Project Manager!</h1>
-             <p>Create new projects for your team</p>
-             <p>
-                <a class="btn btn-primary large" href="/projects/new">Add New Campground</a>
-             </p>
+  <style>
+    .flexbox.flexCenter.thumbnail {flex-direction: column; margin: 10px 0; padding: 10px 20px 20px; border: 1px solid #323232; background: #fff;}
+    .caption {padding: 5px 0 10px;}
+  </style>
+
+  <div id="overview" class="center">
+    <h1>Welcome to the Project Manager!</h1>
+    <p>Create new projects for your team</p>
+    <h4><a href="/projects/new" id="myBtn">Add New Project<i class="fas fa-plus"></i></a></h4>
+  </div>
+  <div class="container" style="margin: 30px auto;">
+    <div class="flexbox flexCenter flexAround alignCenter">
+      <% projects.forEach(function(project){%>
+        <div class="flexbox flexAround">
+          <div class="flexbox flexCenter thumbnail">
+            <img src="/images/Projectweb.png">
+            <div class="caption">
+              <h4>
+                <strong><%= project.name %></strong>
+              </h4>
+            </div>
+            <p><strong>Status:</strong> <span class="projectStatus"><%= project.status %></span>
+              
+            </p>
+            <a href="/projects/<%= project._id %>" class="myBtn">More Info</a>
+
           </div>
-       </header>
-      
-      
-      
-      <div class="row text-center" style="display: flex; flex-wrap: wrap; ">
-         <div class="col-lg-12">
-            <% projects.forEach(function(project){%>
-            
-               <div class="col-md-3 col-sm-6">
-                  <div class="thumbnail">
-                     <img src="http://webplus.televoxsites.com/projects/supersite/web.jpg">
-                        <div class="caption">
-                           <h4><%= project.name %></h4>
-                        </div>
-                        <p>
-                           <a href="/projects/<%= project._id %>" class="btn btn-primary">More Info</a>
-                        </p>
-                  </div>
-                   
-                   
-               </div>
-               
-            <% }); %>
-         </div>
-      </div>
+        </div>
+        <% }); %>
+    </div>
+    <script>
+        $( ".projectStatus:contains('Completed')" ).css( "color", "green" );
+        $( ".projectStatus:contains('Incomplete')" ).css( "color", "red" );
+      </script>
+  </div>
+  <% include ../partials/footer %>
 
-</div>
 
-<% include ../partials/footer %>
+
+
+
+
+    </div>
+
+
+    <div class="flexbox alignCenter">
+    </div>
+    </div>

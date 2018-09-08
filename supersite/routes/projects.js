@@ -62,7 +62,7 @@ router.get("/:id", function(req, res){
 
 //edit projects route
 router.get("/:id/edit", middleware.checkProjectOwnership, function(req, res){
-        Project.findById(req.params.id, function(err, foundProjects){
+        Project.findById(req.params.id, function(err, foundProject){
                     res.render("projects/edit", {project: foundProject});
 });
 });

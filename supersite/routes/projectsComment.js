@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router({mergeParams: true});
 var Projects = require("../models/projects");
-var Comment = require("../models/projectsComment");
-//var middleware = require("../middleware");
+var Comment = require("../models/projectComments");
+var middleware = require("../middleware");
 
 //Comments New
 router.get("/new", function(req, res){
@@ -20,7 +20,7 @@ router.get("/new", function(req, res){
 //Comments Create and save
 router.post("/", function(req, res){
     //lookup project using ID
-    Projects.findById(req.params.id, function(err, projects){
+    Projects.findById(req.params.id, function(err, project){
         if(err) {
             console.log(err);
             res.redirect("/projects");
