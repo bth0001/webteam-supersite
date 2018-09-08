@@ -1,0 +1,34 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center;">Create a New Project</h1>
+        <div style="width: 30%; margin: 30px auto;">
+            <form action="/projects" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="datetime-local" name="date">
+                </div>
+                <div class="form-group">
+                    <!-- <input class="form-control"type="text" name="image" placeholder="Image Url"> -->
+                    <select name="status">
+                        <option value="Complete">Complete</option>
+                        <option value="Incomplete" selected>Incomplete</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input class="form-control"type="text" name="description" placeholder="Description">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-large btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+            <a href="/projects">Back to Campgrounds</a>
+        </div>
+        
+        
+    </div>
+</div>
+<% include ../partials/footer %>

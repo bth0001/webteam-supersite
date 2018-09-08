@@ -30,7 +30,7 @@ var hatsOffRouter = require('./routes/hats-off');
 var presenceUrlTracker = require('./routes/presence-url-tracker');
 var blueprintGenerator = require('./routes/blueprint-generator');
 var checklist = require('./routes/checklist');
-var projectsTracker = require('./routes/projects-tracker');
+var projects = require('./routes/projects');
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -105,7 +105,7 @@ app.use('/hats-off', hatsOffRouter);
 app.use('/presence-url-tracker', presenceUrlTracker);
 app.use('/blueprint-generator', blueprintGenerator);
 app.use('/checklist', checklist);
-app.use('/projects-tracker', projectsTracker);
+app.use('/projects', projects);
 // ----For Route Files----end
 
 app.get('/forgot', function(req, res) {
