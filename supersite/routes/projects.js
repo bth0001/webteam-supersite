@@ -22,10 +22,7 @@ router.post("/", function(req, res){
     var status = req.body.status;
     var date = req.body.date;
     var desc = req.body.description;
-    var author = {
-        id: req.user._id,
-        firstName: req.user.firstName
-    }
+    var author = {id: req.user._id, firstName: req.user.firstName, email: req.user.email};
     var newProject = {name: name, status: status, date: date, description: desc, author: author};
     Project.create(newProject, function(err, newlyCreatedProject){
         if(err){

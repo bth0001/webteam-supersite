@@ -1,9 +1,25 @@
 <% include ../partials/header %>
-<div class="container">
+<style>
+    h1 {text-transform: capitalize;}
+    #trackerBtn {clear: both;}
+    .list-group-item.active {background-color: #2637B0; border-color: #2637B0;}
+</style>
+<div id="overview" class="center">
+        <h1><%= project.name %> Project</h1>
+      </div>
+<div class="container" style="margin: 30px auto;">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-3" style="margin: 10px 0;">
+            <p class="lead">Project Details</p>
+            <div class="list-group">
+                <li class="list-group-item active">Status: <%= project.status %></li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </div>
+        </div>
+        <div class="col-md-9">
             <div class="thumbnail">
-                <img class="img-responsive" src="http://webplus.televoxsites.com/projects/supersite/web.jpg">
+                <img src="/images/Projectweb.png" alt="Strom Centre" class="responsive-image" style="float: right;">
                 <div class="caption-full">
                     <h4 class="pull-right"><%= project.date %></h4>
                     <h4><a><%=project.name%></a></h4>
@@ -11,35 +27,36 @@
                     <p><em>Submitted By: <strong><%= project.author.firstName %> - <%= project.author.email %></strong></em></p>
                     
                         <% if(currentUser && project.author.id.equals(currentUser._id)){ %>
-                            <a class="btn btn-xs btn-warning" href="/projects/<%= project._id %>/edit">Edit</a>
-                            <form id="delete-form" action="/projects/<%= project._id %>?_method=DELETE" method="POST">
-                                <button class="btn btn-xs btn-danger">Delete</button>
-                            </form>
+                            <div id="trackerBtn">
+                                <a class="btn edit" href="/projects/<%= project._id %>/edit">Edit</a>
+                                <form id="delete-form" action="/projects/<%= project._id %>?_method=DELETE" method="POST">
+                                    <button class="btn delete">Delete</button>
+                                </form>
+                                <a class="btn archive archiveButton" href="/projects/<%= project._id %>/projectComments/new">Leave a Comment!</a>
+                            </div>        
                         <% } %>
-                </div>
+        </div>
             </div>
-            <div class="well">
-                <div class="text-right">
-                    <a class="btn btn-success" href="/projects/<%= project._id %>/projectComments/new">Leave us a Review!</a>
-                </div>
+            <div class="well">                
                 <hr>
             <% project.comments.forEach(function(comment){%>
                 <div class="row">
                     <div class="col-md-12">
                         <strong>
-                        <%= comment.author.firstName %>
-                        </strong>
-                        <span class="pull-right">10 Days Ago</span>
+                        <%= comment.author.firstName %> - </strong> <em><%= comment.author.email %></em>
+                        <span class="pull-right"><%= comment.time %></span>
                         <p>
                             <%= comment.text %>
                         </p>
                         <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-                        <a class="btn btn-xs btn-warning" 
-                            href="/projects/<%= project._id %>/projectComments/<%= comment._id %>/edit">Edit
-                        </a>
-                        <form id="delete-form" action="/projects/<%= project._id %>/projectComments/<%=comment._id %>?_method=DELETE" method="POST">
-                                <button class="btn btn-xs btn-danger">Delete</button>
-                        </form>
+                        <div id="trackerBtn">
+                            <a class="btn edit" 
+                                href="/projects/<%= project._id %>/projectComments/<%= comment._id %>/edit">Edit
+                            </a>
+                            <form id="delete-form" action="/projects/<%= project._id %>/projectComments/<%=comment._id %>?_method=DELETE" method="POST">
+                                    <button class="btn delete">Delete</button>
+                            </form>
+                        </div>
                         <% } %>
                     </div>
                 </div>
@@ -48,5 +65,4 @@
         </div>
     </div>
 </div>
-<a href="/projects">Back to CampGrounds</a>
 <% include ../partials/footer %>

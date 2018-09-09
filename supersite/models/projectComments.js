@@ -9,8 +9,12 @@ const projectCommentSchema = mongoose.Schema({
         },
         firstName: String,
         email: String
+    },
+    time: { 
+        type : Date, 
+        default: Date.now 
     }
-});
+}, {timestamps: {createdAt: 'created_at'}});
 
 
 module.exports = mongoose.model("ProjectComments", projectCommentSchema);
