@@ -3,6 +3,7 @@
     <h1><%= currentUser.team %> Tracker Show Page</h1>
 </div>
 <div class="container">
+		<h3 class="pageHeader" style="text-align: center; margin: 10px 0 20px;">You are looking at Tracked Item for <strong><a href="<%= tracking.domain %>" target="_blank"><%= tracking.domain %></a></strong></h3>
 <div id="bottomRow" class="flexbox">
          <div class="widget fullCol">
 				<div id="dashEssentials">			
@@ -30,6 +31,8 @@
 										<% if(tracking.buildPkg === "Essential") { %>
 											<p><strong>Special Features:</strong> <%= tracking.specialFeatures %> </p>
 											<p><strong>CSS Path:</strong> <%= tracking.cssPath %></p>
+											<p><strong>Home Screenshot:</strong> <a href="<%= tracking.homeSS %>" target="_blank"><%= tracking.homeSS %></a> </p>
+											<p><strong>Interior Screenshot:</strong> <a href="<%= tracking.interiorSS %>" target="_blank"><%= tracking.interiorSS %></a></p>
 										<% } %>
 										<% if(tracking.buildPkg === "Starter") { %>
 											<p><strong>Starter Template:</strong> <%= tracking.starterTemplate %> </p>
@@ -52,7 +55,7 @@
 									   <% } %>
 									   <% if(tracking.archive === true) { %>
 										<form id="archive-form" class="trackerForm" action="/tracker/<%= tracking._id %>?_method=PUT" method="POST"> 
-											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">un-Archive</button>
+											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Un-Archive</button>
 									   </form> 
 									   <% } %>
 									   <script> 

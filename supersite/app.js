@@ -57,7 +57,7 @@ app.use(passport.session());
 passport.use(User.createStrategy(function(email, password, done) {
   User.findOne({ email: email }, function(err, user) {
     if (err) return done(err);
-    if (!user) return done(null, false, { message: 'Incorrect email.' });
+    if (!user) return done(null, false, { message: 'Incorrect e-mail.' });
     user.comparePassword(password, function(err, isMatch) {
       if (isMatch) {
         return done(null, user);
@@ -118,7 +118,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
       return next();
   }
-  req.flash("error", "Please Login First!");
+  req.flash("error", "Please Log in First!");
   res.redirect("/");
 }
 

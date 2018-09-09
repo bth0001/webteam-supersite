@@ -47,7 +47,7 @@
 		<% }); %>
 		<div class="container">
 			<h3 class="pageHeader" style="text-align: center; margin-top: 10px;"> <%= currentUser.firstName %>, this is where you will track any of your completed tasks. </h3>
-			<h4 style="text-align: center;"><span class="showEssentials">Essentials:</span> <%= essCount %> | <span class="showStarter">Starters:</span> <%= strCount %> | <span class="showProd">Prod Change:</span> <%= prodCount %> | <span class="showTlink">T.LINK Branding:</span> <%= tlinkCount %> | <span class="showContent">Content Entry:</span> <%= contentCount %></h4>
+			<h4 style="text-align: center; margin: 20px 0 0;"><span class="showEssentials myBtn">Essentials: <%= essCount %></span> | <span class="showStarter myBtn">Starters: <%= strCount %></span> | <span class="showProd myBtn">Prod Change: <%= prodCount %></span> | <span class="showTlink myBtn">T.LINK Branding: <%= tlinkCount %></span> | <span class="showContent myBtn">Content Entry: <%= contentCount %></span></h4>
 		</div>
 <div id="dashboard">
 	<div class="container">
@@ -95,6 +95,8 @@
 								<div class="cell date"><%= tracked.date %></div>
 								<div class="cell arrow" data-panel-id="panel1"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
+									<p><strong>Home Screenshot:</strong> <a href="<%= tracked.homeSS %>" target="_blank"><%= tracked.homeSS %></a> </p>
+									<p><strong>Interior Screenshot:</strong> <a href="<%= tracked.interiorSS %>" target="_blank"><%= tracked.interiorSS %></a></p>
 									<p><strong>Special Features:</strong> <%= tracked.specialFeatures %> </p>
 									<p><strong>CSS Path:</strong> <%= tracked.cssPath %></p>
 									<p><strong>Task:</strong></p>
@@ -406,8 +408,8 @@
 						  <section class="date">
 							<div class="flexbox flexJustify">
 							  <label for="date"> <span>Date:</span>
-								<input type="date" id="number" name="teamTrack[date]">
-							  </label>
+								<input type="date" id="myDate" name="teamTrack[date]">
+								</label>
 								<div class="acctNumber">
 							  <label for="acctNum"> <span>Account Number:</span>
 								<input required="" type="number" placeholder="######" id="number" name="teamTrack[acctNum]" min="1" max="999999">
@@ -457,6 +459,14 @@
 							<label name="domain"> <span>Domain:</span>
 							  <input name="teamTrack[domain]" placeholder="Domain" type="text">
 							</label>
+							<div class="selectBox flexbox flexJustify alignCenter">
+									<label class="flexItem" name="homeSS"> <span>Home Screenshot:</span>
+										<input name="teamTrack[homeSS]" placeholder="Home ScreenShot Url" type="text">
+									</label>
+									<label class="flexItem" name="interiorSS"> <span>Interior Screenshot:</span>
+										<input name="teamTrack[interiorSS]" placeholder="Interior ScreenShot Url" type="text">
+									</label>
+							</div>
 							<div class="selectBox flexbox flexJustify alignCenter">
 							  <label class="flexItem" for="buildPkg">
 							  <div class="flexbox alignCenter"> <span>Build Package:</span>
@@ -714,5 +724,25 @@ $('.showContent').click(function() {
 	$('#bottomRow, #dashContent').fadeIn("slow");
 });
 
+function SetDate()
+{
+var date = new Date();
+
+var day = date.getDate();
+var month = date.getMonth() + 1;
+var year = date.getFullYear();
+
+if (month < 10) month = "0" + month;
+if (day < 10) day = "0" + day;
+
+var today = year + "-" + month + "-" + day;
+
+
+document.getElementById('myDate').value = today;
+}
+
+$(document).ready(function(){
+	SetDate();
+});
 </script>
 <% include ../partials/footer %>

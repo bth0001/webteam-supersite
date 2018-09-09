@@ -70,8 +70,9 @@
         .center {text-align: center;}
         
         /* ====== Template ====== */
-        #template.login {background-image: -webkit-gradient(linear, left top, right bottom, from(#2638b0), color-stop(#0060c8), color-stop(#007fcb), color-stop(#0099c2), to(#00b0b7));background-image: linear-gradient(to right bottom, #2638b0, #0060c8, #007fcb, #0099c2, #00b0b7); height: 100%;}
-        #template.login .container {-webkit-box-align: center;-ms-flex-align: center;align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; height: 100%;}
+        #template.login {background-image: -webkit-gradient(linear, left top, right bottom, from(#2638b0), color-stop(#0060c8), color-stop(#007fcb), color-stop(#0099c2), to(#00b0b7));
+    background-image: linear-gradient(to right bottom, #2638b0, #0060c8, #007fcb, #0099c2, #00b0b7); height: auto !important;}
+        #template.login .container {-webkit-box-align: center;-ms-flex-align: center;align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;}
         
         input::-moz-placeholder,
         input:-moz-placeholder {color:#ada9bb; font-family: 'Roboto Condensed', sans-serif; font-size: 1.125em; opacity: 1;}
@@ -98,7 +99,7 @@
         #login .signUp button {background: none; border: 1px solid #C7FCEB; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px;}
         #login .signUp button {color: #000;}
         
-        #login button:hover {background:none; -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0, 196, 155, 1); box-shadow: inset 0px 0px 0px 1px rgba(0, 196, 155, 1);}
+        #login button:hover, .upload-btn-wrapper:hover .btn {background:none; -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0, 196, 155, 1); box-shadow: inset 0px 0px 0px 1px rgba(0, 196, 155, 1);}
         #login legend:hover {background:none; -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0, 176, 183, 1); box-shadow: inset 0px 0px 0px 1px rgba(0, 176, 183, 1);}
         #login .signUp button:hover {background:#C7FCEB; -webkit-box-shadow: none; box-shadow: none;}
         #login .signUp button:hover a {color: #1456A0;}
@@ -107,6 +108,13 @@
         #imagePreview {max-width: 50%; display: block; margin: 0 0 10px; border: 1px solid white;}
         #imagePreview[src="#"] {display: none;}
         input[type="file" i] {color: white;}
+
+        select.team.flexbox {max-width: 60%; margin: 0 auto; flex: 100%; height: 40px;}
+
+        .profileForm label {flex: 30%; margin: 0 5px;}
+        .upload-btn-wrapper {position: relative; overflow: hidden; display: inline-block;}
+        .profileForm .btn {border: 2px solid #2637B0; color: #fff; background-color: #2637B0; padding: 8px 20px; border-radius: 8px; font-size: 20px; font-weight: bold;}
+        .upload-btn-wrapper input[type=file] {font-size: 20px;	position: absolute;	left: 85px; top: 2px; opacity: 0; cursor: pointer;}
         </style>
         
         
@@ -143,8 +151,8 @@
                 <% } %>
             <div id="login">
                 <form class="form" action="/signup" method="POST" enctype="multipart/form-data">
-                  <div class="subtitle">Welcome to the new</div>
-                  <div class="title">WebTeam SuperSite</div>
+                  <div class="subtitle">Welcome to</div>
+                  <div class="title">Strom Centre</div>
               <div class="subtext">We know you'll find it to be a very useful tool.</div>
                 <div class="wrapper flexbox">
                 <div class="email flexbox">  
@@ -159,26 +167,26 @@
                 <div class="email flexbox">  
                     <input name="email" placeholder="Email" type="text" required>
                 </div>
-                <div class="flexbox">
-                  <label for="image"><div class="subtitle">Image</div></label>
+                <div class="email flexbox">  
+                <select class="team flexbox" name="team" required>
+                        <option value="">Select Your Team</option>
+                        <option value="Developer">Developer</option>
+                        <option value="Designer">Designer</option>
+                        <option value="Copy Writer">Copy Writer</option>
+                        <option value="On-Boarder">On-Boarder</option>
+                        <option value="Web Techs">Web Techs</option>
+                        <option value="Web CSI">Web CSI</option>
+                    </select>
                 </div>
-                <div class="flexbox">
-                  <input type="file" id="image" name="image" accept="image/*" required>
-                </div>
-                <div class="flexbox">
-                  
-                  <img id="imagePreview" src="#" alt="Your Profile Image" />
-                 
-                </div>
-                <select class="email flexbox" name="team" required>
-                    <option value="">Select Your Team</option>
-                    <option value="Developer">Developer</option>
-                    <option value="Designer">Designer</option>
-                    <option value="Copy Writer">Copy Writer</option>
-                    <option value="On-Boarder">On-Boarder</option>
-                    <option value="Web Techs">Web Techs</option>
-                    <option value="Web CSI">Web CSI</option>
-                </select>
+                <label for="imageProfile"><span class="subtitle">Profile Image</span></label>
+              <div class="upload-btn-wrapper">
+                  <button class="btn">Upload a Image</button>
+                  <input type="file" id="image" name="image" accept="image/*" />
+                </div>  
+                <label for="imagePreview">
+                    <img id="imagePreview" src="#" alt="your image" style="margin: 10px auto;"/>
+                </label>
+                
                 <button class="login">Sign Up</button>
                 <legend class="forgot"><a href="/">Login</a></legend>
                 <legend class="forgot"><a href="/forgot">Forgot Password?</a></legend>
