@@ -64,11 +64,7 @@ h1, h2, h3, h4, h5, h6 {color: #545454; line-height:1.35em; margin:0 0 .15em;}
 #myBtn, .myBtn {background: none; cursor: pointer; padding: 6px 20px; font-family: 'Roboto Condensed', sans-serif; font-weight: 400; outline: none; position: relative; -webkit-transition: all 0.3s;
 transition: all 0.3s; border-radius: 0; background: #fff; border: #2637B0 2px solid; color:#2637B0}
 #myBtn:hover, #myBtn:focus, .myBtn:hover, .myBtn:focus {background: #2637B0; color:#fff}
-<<<<<<< HEAD
-#myBtn:hover .fas,  #myBtn:focus .fas {color: #fff;}
-=======
 #myBtn:hover .fas,  #myBtn:focus .fas, .myBtn:hover .fas,  .myBtn:focus .fas {color: #fff;}
->>>>>>> a65163ab51cb949ede8f7cc61846077361b18022
 .btn {background: none; cursor: pointer; padding: 6px 20px; font-family: 'Roboto Condensed', sans-serif; font-weight: 400; outline: none; position: relative; -webkit-transition: all 0.3s;
 transition: all 0.3s; border-radius: 0;}
 #trackerBtn {text-align: right;}
@@ -78,6 +74,8 @@ a#myBtn:hover, a.myBtn:hover, a#myBtn:focus, a.myBtn:focus {text-decoration: non
 .btn.edit:hover {background: #2395A3; color: #fff;}
 .btn.archive {background: #e3dff0; border: 1px solid #484554; color: #484554;}
 .btn.archive:hover {background: #484554; color: #fff;}
+.btn.comment {background: #e3dff0; border: 1px solid #8E33D2; color: #8E33D2;}
+.btn.comment:hover {background: #8E33D2; color: #fff;}
 .btn.delete {background: #FBECF0; border: 1px solid #CC3359; color: #CC3359;}
 .btn.delete:hover {background: #CC3359; color: #fff;}
 

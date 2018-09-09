@@ -32,7 +32,7 @@
                                 <form id="delete-form" action="/projects/<%= project._id %>?_method=DELETE" method="POST">
                                     <button class="btn delete">Delete</button>
                                 </form>
-                                <a class="btn archive archiveButton" href="/projects/<%= project._id %>/projectComments/new">Leave a Comment!</a>
+                                <a class="btn comment" href="/projects/<%= project._id %>/projectComments/new">Leave a Comment!</a>
                             </div>        
                         <% } %>
         </div>
