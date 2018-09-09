@@ -13,7 +13,36 @@
                 <div class="form-group">
                     <select name="project[status]">
                         <option value="<%= project.status %>"><%= project.status %></option>
-                        <option value="Completed">Completed</option>
+                        <% if(project.status === "Ready for Work") { %>
+                            <option value="In Progress">In Progress</option>    
+                            <option value="Awaiting Review">Awaiting Review</option>
+                            <option value="On Hold">On Hold</option>
+                            <option value="Completed">Completed</option>
+                        <% } %>
+                        <% if(project.status === "In Progress") { %>
+                            <option value="Ready for Work">Ready for Work</option>
+                            <option value="Awaiting Review">Awaiting Review</option>
+                            <option value="On Hold">On Hold</option>
+                            <option value="Completed">Completed</option>
+                        <% } %>
+                        <% if(project.status === "Awaiting Review") { %>
+                            <option value="Ready for Work">Ready for Work</option>
+                            <option value="In Progress">In Progress</option>    
+                            <option value="On Hold">On Hold</option>
+                            <option value="Completed">Completed</option>
+                        <% } %>
+                        <% if(project.status === "On Hold") { %>
+                            <option value="Ready for Work">Ready for Work</option>
+                            <option value="In Progress">In Progress</option>    
+                            <option value="Awaiting Review">Awaiting Review</option>
+                            <option value="Completed">Completed</option>
+                        <% } %>
+                        <% if(project.status === "Completed") { %>
+                            <option value="Ready for Work">Ready for Work</option>
+                            <option value="In Progress">In Progress</option>    
+                            <option value="Awaiting Review">Awaiting Review</option>
+                            <option value="On Hold">On Hold</option>
+                        <% } %>
                     </select>
                 </div>
                 <div class="form-group">
