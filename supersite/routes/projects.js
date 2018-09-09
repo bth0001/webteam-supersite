@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Project = require("../models/projects");
 var middleware = require("../middleware");
-
+var moment = require('moment');
 
 //Index route
 router.get("/", function(req, res){   
@@ -10,7 +10,7 @@ router.get("/", function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render("projects/index", {projects: allProjects});
+            res.render("projects/index", {projects: allProjects, moment: moment});
         }
     });
 });
@@ -51,7 +51,7 @@ router.get("/:id", function(req, res){
        } else {
            console.log(foundProject);
          //render show template with that campground
-         res.render("projects/show", {project: foundProject});
+         res.render("projects/show", {project: foundProject, moment: moment});
        }
     });
 
@@ -60,7 +60,7 @@ router.get("/:id", function(req, res){
 //edit projects route
 router.get("/:id/edit", middleware.checkProjectOwnership, function(req, res){
         Project.findById(req.params.id, function(err, foundProject){
-                    res.render("projects/edit", {project: foundProject});
+                    res.render("projects/edit", {project: foundProject, moment: moment});
 });
 });
 //update projects route

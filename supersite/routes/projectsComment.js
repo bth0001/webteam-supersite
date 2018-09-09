@@ -3,6 +3,7 @@ var router = express.Router({mergeParams: true});
 var Projects = require("../models/projects");
 var Comment = require("../models/projectComments");
 var middleware = require("../middleware");
+var moment = require('moment');
 
 //Comments New
 router.get("/new", function(req, res){
@@ -10,7 +11,7 @@ router.get("/new", function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render("projectComments/new", {project: project});
+            res.render("projectComments/new", {project: project, moment: moment});
             
         }
     })
@@ -57,7 +58,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
         if(err){
             res.redirect("back");
         } else {
-            res.render("projectComments/edit", {project_id: req.params.id, project: project, comment: foundComment})
+            res.render("projectComments/edit", {project_id: req.params.id, project: project, comment: foundComment, moment: moment})
         }
     })
 }
