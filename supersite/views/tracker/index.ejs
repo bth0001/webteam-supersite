@@ -47,7 +47,7 @@
 		<% }); %>
 		<div class="container">
 			<h3 class="pageHeader" style="text-align: center; margin-top: 10px;"> <%= currentUser.firstName %>, this is where you will track any of your completed tasks. </h3>
-			<h4 style="text-align: center; margin: 20px 0 0;"><span class="showEssentials myBtn">Essentials: <%= essCount %></span> | <span class="showStarter myBtn">Starters: <%= strCount %></span> | <span class="showProd myBtn">Prod Change: <%= prodCount %></span> | <span class="showTlink myBtn">T.LINK Branding: <%= tlinkCount %></span> | <span class="showContent myBtn">Content Entry: <%= contentCount %></span></h4>
+			<h4 style="text-align: center; margin: 20px 0 0;"><span class="showEssentials myBtn">Essentials: <%= essCount %></span> | <span class="showStarter myBtn">Starters: <%= strCount %></span> | <span class="showProd myBtn">Prod Change: <%= prodCount %></span> | <span class="showTlink myBtn">T.LINK Branding: <%= tlinkCount %></span> | <span class="showContent myBtn">Content Entry: <%= contentCount %></span> | <span class="showAll myBtn">Show All</span></h4>
 		</div>
 <div id="dashboard">
 	<div class="container">
@@ -722,6 +722,10 @@ $('.showTlink').click(function() {
 $('.showContent').click(function() {
 	$('#dashProd, #dashEssential, #dashTlink, #dashStarter').hide();
 	$('#bottomRow, #dashContent').fadeIn("slow");
+});
+$('.showAll').click(function() {
+	// $('#dashProd, #dashEssential, #dashTlink, #dashStarter').hide();
+	$('#dashProd, #dashEssential, #dashTlink, #dashStarter, #dashContent').fadeIn("slow");
 });
 
 function SetDate()
