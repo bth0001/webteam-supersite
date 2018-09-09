@@ -1,0 +1,50 @@
+<% include ../partials/header %>
+  <style>
+    .flexbox.flexCenter.thumbnail {flex-direction: column; margin: 10px 0; padding: 10px 20px 20px; border: 1px solid #323232; background: #fff;}
+    .caption {padding: 5px 0 10px;}
+  </style>
+
+  <div id="overview" class="center">
+    <h1>Welcome to the Project Manager!</h1>
+    <p>Create new projects for your team</p>
+    <h4><a href="/projects/new" id="myBtn">Add New Project<i class="fas fa-plus"></i></a></h4>
+  </div>
+  <div class="container" style="margin: 30px auto;">
+    <div class="flexbox flexCenter flexAround alignCenter">
+      <% projects.forEach(function(project){%>
+        <div class="flexbox flexAround">
+          <div class="flexbox flexCenter thumbnail">
+            <img src="/images/Projectweb.png">
+            <div class="caption">
+              <h4>
+                <strong><%= project.name %></strong>
+              </h4>
+            </div>
+            <p><strong>Status:</strong> <span class="projectStatus"><%= project.status %></span>
+              
+            </p>
+            <a href="/projects/<%= project._id %>" class="myBtn">More Info</a>
+
+          </div>
+        </div>
+        <% }); %>
+    </div>
+    <script>
+        $( ".projectStatus:contains('Completed')" ).css( "color", "green" );
+        $( ".projectStatus:contains('Ready for Work')" ).css( "color", "#CA3435" );
+        $( ".projectStatus:contains('In Progress')" ).css( "color", "blue" );
+      </script>
+  </div>
+  <% include ../partials/footer %>
+
+
+
+
+
+
+    </div>
+
+
+    <div class="flexbox alignCenter">
+    </div>
+    </div>

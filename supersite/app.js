@@ -27,10 +27,11 @@ var resetRoutes = require('./routes/forgotPassword');
 var dashboardRouter = require('./routes/dashboard');
 var ideaWarehouseRouter = require('./routes/idea-warehouse');
 var hatsOffRouter = require('./routes/hats-off');
-var presenceUrlTracker = require('./routes/presence-url-tracker');
-var blueprintGenerator = require('./routes/blueprint-generator');
-var checklist = require('./routes/checklist');
-var projectsTracker = require('./routes/projects-tracker');
+var presenceUrlTrackerRouter = require('./routes/presence-url-tracker');
+var blueprintGeneratorRouter = require('./routes/blueprint-generator');
+var checklistRouter = require('./routes/checklist');
+var projectsRouter = require('./routes/projects');
+var projectCommentsRouter = require('./routes/projectsComment');
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -102,10 +103,11 @@ app.use('/users', usersRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/idea-warehouse', ideaWarehouseRouter);
 app.use('/hats-off', hatsOffRouter);
-app.use('/presence-url-tracker', presenceUrlTracker);
-app.use('/blueprint-generator', blueprintGenerator);
-app.use('/checklist', checklist);
-app.use('/projects-tracker', projectsTracker);
+app.use('/presence-url-tracker', presenceUrlTrackerRouter);
+app.use('/blueprint-generator', blueprintGeneratorRouter);
+app.use('/checklist', checklistRouter);
+app.use('/projects', projectsRouter);
+app.use('/projects/:id/projectComments', projectCommentsRouter);
 // ----For Route Files----end
 
 app.get('/forgot', function(req, res) {
