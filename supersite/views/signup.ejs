@@ -68,11 +68,13 @@
             justify-content:space-around;
         }
         .center {text-align: center;}
-        
+
+        input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {-webkit-box-shadow: 0 0 0 30px white inset;}
+
         /* ====== Template ====== */
         #template.login {background-image: -webkit-gradient(linear, left top, right bottom, from(#2638b0), color-stop(#0060c8), color-stop(#007fcb), color-stop(#0099c2), to(#00b0b7));
     background-image: linear-gradient(to right bottom, #2638b0, #0060c8, #007fcb, #0099c2, #00b0b7); height: auto !important;}
-        #template.login .container {-webkit-box-align: center;-ms-flex-align: center;align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;}
+        #template.login .container {-webkit-box-align: center;-ms-flex-align: center;align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; height: auto !important;}
         
         input::-moz-placeholder,
         input:-moz-placeholder {color:#ada9bb; font-family: 'Roboto Condensed', sans-serif; font-size: 1.125em; opacity: 1;}
@@ -91,14 +93,17 @@
         #login .subtitle {font-family: 'Roboto Condensed', sans-serif; font-size: 1.375em; font-weight: 400;}
         #login .subtext {font-family: 'Roboto Condensed', sans-serif; font-size: 1.025em; font-weight: 400; margin: 1em 0 2.5em;}
         
+        #login a {width: 100%;}
+        #login a:hover {text-decoration: none;}
         #login button,
-        #login legend {border: none; color: #fff; font-family: 'Roboto Condensed', sans-serif; font-size: 1.25em; font-weight: 700; max-width: 32%; padding: 15px; width: 100%; -webkit-transition: background 0.3s; transition: background 0.3s;}
-        #login button {background: #00C49B; margin: 0 5px;}
+        #login legend, #login a legend {border: none; color: #fff; font-family: 'Roboto Condensed', sans-serif; font-size: 1.25em; font-weight: 700; max-width: 60%; padding: 15px; width: 100%; -webkit-transition: background 0.3s; transition: background 0.3s; border-radius: 0;}
+        #login button {background: #00C49B; margin: 5px 0; cursor: pointer;}
         #login legend {background: #00B0B7;}
+        #login a legend {margin: 0 auto;}
         #login legend a, #login button a {color: #fff;}
-        #login .signUp button {background: none; border: 1px solid #C7FCEB; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px;}
-        #login .signUp button {color: #000;}
-        
+        #login .signUp button {background: none; border: 1px solid #C7FCEB; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; color: #fff; cursor: pointer;}
+        #login .signUp button:hover {color: #1456A0; text-decoration: none;}
+
         #login button:hover, .upload-btn-wrapper:hover .btn {background:none; -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0, 196, 155, 1); box-shadow: inset 0px 0px 0px 1px rgba(0, 196, 155, 1);}
         #login legend:hover {background:none; -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0, 176, 183, 1); box-shadow: inset 0px 0px 0px 1px rgba(0, 176, 183, 1);}
         #login .signUp button:hover {background:#C7FCEB; -webkit-box-shadow: none; box-shadow: none;}
@@ -116,8 +121,7 @@
         .profileForm .btn {border: 2px solid #2637B0; color: #fff; background-color: #2637B0; padding: 8px 20px; border-radius: 8px; font-size: 20px; font-weight: bold;}
         .upload-btn-wrapper input[type=file] {font-size: 20px;	position: absolute;	left: 85px; top: 2px; opacity: 0; cursor: pointer;}
         </style>
-        
-        
+
         <!doctype html>
         <html>
             <head>
@@ -170,6 +174,7 @@
                 <div class="email flexbox">  
                 <select class="team flexbox" name="team" required>
                         <option value="">Select Your Team</option>
+                        <option value="CRA">CRA</option>
                         <option value="Developer">Developer</option>
                         <option value="Designer">Designer</option>
                         <option value="Copy Writer">Copy Writer</option>

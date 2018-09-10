@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Project = require("../models/projects");
+var User = require("../models/user");
 var middleware = require("../middleware");
 var moment = require('moment');
 
@@ -37,7 +38,9 @@ router.post("/", function(req, res){
 
 //new Project form
 router.get("/new", function(req, res){
-    res.render("projects/new");
+    User.find({}, function(err, allUsers){
+        res.render("projects/new", {users: allUsers}); 
+    })
 });
 
 //==============================================================================

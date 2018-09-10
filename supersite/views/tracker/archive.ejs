@@ -27,89 +27,403 @@
 		<% }); %>
 <div class="container">
 	<h3 style="text-align: center; margin: 10px 0 20px;">Welcome to the Archive Section - please proceed with caution</h3>
-	<h4 style="text-align: center; margin: 20px 0;"><span class="showEssentials myBtn">Essentials: <%= essCount %></span> | <span class="showStarter myBtn">Starters: <%= strCount %></span> | <span class="showProd myBtn">Prod Change: <%= prodCount %></span> | <span class="showTlink myBtn">T.LINK Branding: <%= tlinkCount %></span> | <span class="showContent myBtn">Content Entry: <%= contentCount %></span></h4>
-<div id="bottomRow" class="flexbox">
-         <div class="widget fullCol">
-				<div id="dashEssentials">
-					<% tracking.forEach(function(tracked){ %>
-					<% if(tracked.archive === true){ %>
-					<div class="table">
-						<div class="row title flexbox">
-							<div class="cell url">Website URL</div>
-							<div class="cell actNumber">Account Number</div>
-							<div class="cell name">Onboarder</div>
-							<div class="cell name">Build Package</div>
-							<div class="cell date">Date</div>
-							<div class="cell arrow"></div>
-						</div>
-						<div id="accordion">				
-
-							<div class="row flexbox">
-								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
-								<div class="cell actNumber"><%= tracked.acctNum %></div>
-								<div class="cell name"><%= tracked.onboarder %></div>
-								<div class="cell name"><%= tracked.buildPkg %></div>
-								<div class="cell date"><%= tracked.date %></div>
-								<div class="cell arrow" data-panel-id="panel1"><i class="fas fa-angle-down"></i></div>
-								<div class="expanded" style="display: none;">
-									<p><strong>Developer:</strong> <%= tracked.author.firstName %> </p>
-									<p><strong>Build Package:</strong> <%= tracked.buildPkg %> </p>
-										<% if(tracked.buildPkg === "Essential") { %>
-											<p><strong>Special Features:</strong> <%= tracked.specialFeatures %> </p>
-											<p><strong>CSS Path:</strong> <%= tracked.cssPath %></p>
-											<p><strong>Home Screenshot:</strong> <a href="<%= tracked.homeSS %>" target="_blank"><%= tracked.homeSS %></a> </p>
-											<p><strong>Interior Screenshot:</strong> <a href="<%= tracked.interiorSS %>" target="_blank"><%= tracked.interiorSS %></a></p>
-										<% } %>
-										<% if(tracked.buildPkg === "Starter") { %>
-											<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %> </p>
-										<% } %>
-									<p><strong>Server:</strong> <%= tracked.server %> </p>
-									<p><strong>Task:</strong></p>
-									<ul>
-										<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
-										<li><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></li>
-										<% }; %>
-									</ul>
-									<p><strong>Notes:</strong> <%= tracked.notes %></p>
-									<p><strong>Archived:</strong> <%= tracked.archive %></p>
-									<div id="trackerBtn">
-										<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
-											<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
-										<button type="submit" class="btn delete">Delete</button>
-									</form>
-									<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
-										<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Un-Archive</button>
-								   </form> 
-								   <script> 
-									$(document).ready(function(){
-										$("#delete-form button.archiveButton").click(function(){
-											$("#delete-form button.archiveButton").each(function(){
-												$(this).val("false");
-											});
-										});
-									}); 
-								</script>
-									</div> 
-								</div>
-								<!-- end of expanded --> 								
+	<h4 style="text-align: center; margin: 20px 0;"><span class="showEssentials myBtn">Essentials: <%= essCount %></span> | <span class="showStarter myBtn">Starters: <%= strCount %></span> | <span class="showProd myBtn">Prod Change: <%= prodCount %></span> | <span class="showTlink myBtn">T.LINK Branding: <%= tlinkCount %></span> | <span class="showContent myBtn">Content Entry: <%= contentCount %></span> | <span class="showAll myBtn">Show All</span></h4>
+	<div id="dashboard">
+		<div class="container">
+			<div id="bottomRow" class="flexbox">
+				<div class="widget fullCol">
+					<div id="dashEssential">
+						<h2>Essential Builds</h2>
+						<div class="table">
+							<div class="row title flexbox">
+								<div class="cell url">Website URL</div>
+								<div class="cell actNumber">Account Number</div>
+								<div class="cell name">Designer</div>
+								<div class="cell name">OnBoarder</div>
+								<div class="cell date">Date</div>
+								<div class="cell arrow"></div>
 							</div>
-							
+							<div id="accordion">
+								<% tracking.forEach(function(tracked){ %>
+								<% if(currentUser.email === tracked.author.email) { %>
+								<% if(tracked.buildPkg === "Essential" && tracked.archive == true){ %>
+								<div class="row flexbox">
+									<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
+									<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
+									<div class="cell name"><%= tracked.designer %></div>
+									<div class="cell name"><%= tracked.onboarder %></div>
+									<div class="cell date"><%= tracked.date %></div>
+									<div class="cell arrow" data-panel-id="panel1"><i class="fas fa-angle-down"></i></div>
+									<div class="expanded" style="display:none">
+										<p><strong>Home Screenshot:</strong> <a href="<%= tracked.homeSS %>" target="_blank"><%= tracked.homeSS %></a> </p>
+										<p><strong>Interior Screenshot:</strong> <a href="<%= tracked.interiorSS %>" target="_blank"><%= tracked.interiorSS %></a></p>
+										<p><strong>Special Features:</strong> <%= tracked.specialFeatures %> </p>
+										<p><strong>CSS Path:</strong> <%= tracked.cssPath %></p>
+										<p><strong>Task:</strong></p>
+										<ul>
+											<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+											<li><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></li>
+											<% }; %>
+										</ul>
+										<p><strong>Notes:</strong> <%= tracked.notes %></p>
+										<p><strong>Archived:</strong> <%= tracked.archive %></p>
+										<div id="trackerBtn">
+											<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+												<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+											<button type="submit" class="btn delete">Delete</button>
+										</form>
+										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Un-Archive</button>
+										</form> 
+										<script> 
+										$(document).ready(function(){
+											$("#delete-form button.archiveButton").click(function(){
+												$("#delete-form button.archiveButton").each(function(){
+													$(this).val("false");
+												});
+											});
+										}); 
+										</script>
+										</div> 
+									</div>
+									<!-- end of expanded --> 								
+								</div>
+								<% } %>
+								<% } %>
+								<% }); %>
+							</div>
 						</div>
 					</div>
-											<% } %>
-				
-			<% }); %>
-				</div>
-												<% } %>
-		<% countEssential(); %>
-            </div>
-</div>
-</div>
-<script>
-// when you click the purple arrow beside a task it expands for further info
-$('#accordion .fa-angle-down').click(function() {
-	$(this).parent().next('.expanded').slideToggle();
-});
-
+					<!-- end of dashEssential -->
+					<div id="dashStarter">
+						<h2>Starter Builds</h2>
+						<div class="table">
+							<div class="row title flexbox">
+								<div class="cell url">Website URL</div>
+								<div class="cell actNumber">Account Number</div>
+								<div class="cell name">Designer</div>
+								<div class="cell name">OnBoarder</div>
+								<div class="cell date">Date</div>
+								<div class="cell arrow"></div>
+							</div>
+							<div id="accordion">
+								<% tracking.forEach(function(tracked){ %>
+								<% if(currentUser.email === tracked.author.email) { %>
+								<% if(tracked.buildPkg === "Starter" && tracked.archive == true){ %>
+								<div class="row flexbox">
+									<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
+									<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
+									<div class="cell name"><%= tracked.designer %></div>
+									<div class="cell name"><%= tracked.onboarder %></div>
+									<div class="cell date"><%= tracked.date %></div>
+									<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
+									<div class="expanded" style="display:none">
+										<p><strong>Starter Template:</strong> <%= tracked.starterTemplate %></p>
+										<p><strong>Task:</strong></p>
+										<ul>
+											<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+											<li><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></li>
+											<% }; %>
+										</ul>
+										<p><strong>Notes:</strong> <%= tracked.notes %></p>
+										<p><strong>Archived:</strong> <%= tracked.archive %></p>
+<div id="trackerBtn">
+	<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+		<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+	<button type="submit" class="btn delete">Delete</button>
+</form>
+<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+	<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Un-Archive</button>
+</form> 
+<script> 
+$(document).ready(function(){
+	$("#delete-form button.archiveButton").click(function(){
+		$("#delete-form button.archiveButton").each(function(){
+			$(this).val("false");
+		});
+	});
+}); 
 </script>
-<% include ../partials/footer %>
+										</div> 
+									</div>
+									<!-- end of expanded --> 
+								</div>
+								<% } %>
+								<% } %>
+								<% }); %>
+							</div>
+						</div>
+					</div>
+					<!-- end of dashStarter -->
+					<div id="dashProd">
+						<h2>Prod Changes</h2>
+						<div class="table">
+							<div class="row title flexbox">
+								<div class="cell url">Website URL</div>
+								<div class="cell actNumber">Account Number</div>
+								<div class="cell name">Designer</div>
+								<div class="cell name">OnBoarder</div>
+								<div class="cell date">Date</div>
+								<div class="cell arrow"></div>
+							</div>
+							<div id="accordion">
+								<% tracking.forEach(function(tracked){ %>
+								<% if(currentUser.email === tracked.author.email) { %>
+								<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
+								<% if(tracked.taskTypes[i].taskTypeName === "Production Change" && tracked.archive == true){ %>
+								<div class="row flexbox">
+									<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
+									<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
+									<div class="cell name"><%= tracked.designer %></div>
+									<div class="cell name"><%= tracked.onboarder %></div>
+									<div class="cell date"><%= tracked.date %></div>
+									<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
+									<div class="expanded" style="display:none">
+										<p><strong>Build Package:</strong> <%= tracked.buildPkg %></p>
+										<p><strong>Server:</strong> <%= tracked.server %></p>
+										<p><strong>Task:</strong></p>
+										<ul>
+											<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+											<li><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></li>
+											<% }; %>
+										</ul>
+										<p><strong>Notes:</strong> <%= tracked.notes %></p>
+										<p><strong>Archived:</strong> <%= tracked.archive %></p>
+<div id="trackerBtn">
+	<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+		<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+	<button type="submit" class="btn delete">Delete</button>
+</form>
+<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+	<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Un-Archive</button>
+</form> 
+<script> 
+$(document).ready(function(){
+	$("#delete-form button.archiveButton").click(function(){
+		$("#delete-form button.archiveButton").each(function(){
+			$(this).val("false");
+		});
+	});
+}); 
+</script>
+										</div> 
+									</div>
+									<!-- end of expanded --> 
+								</div>
+								<% } %>
+								<% } %>
+								<% } %>
+								<% }); %>
+							</div>
+						</div>
+					</div>
+					<!-- end of dashProd -->
+					<div id="dashTlink">
+						<h2>T.LINK Branding</h2>
+						<div class="table">
+							<div class="row title flexbox">
+								<div class="cell url">Website URL</div>
+								<div class="cell actNumber">Account Number</div>
+								<div class="cell name">Designer</div>
+								<div class="cell name">OnBoarder</div>
+								<div class="cell date">Date</div>
+								<div class="cell arrow"></div>
+							</div>
+							<div id="accordion">
+								<% tracking.forEach(function(tracked){ %>
+								<% if(currentUser.email === tracked.author.email) { %>
+								<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
+								<% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding" && tracked.archive == true){ %>
+								<div class="row flexbox">
+									<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
+									<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
+									<div class="cell name"><%= tracked.designer %></div>
+									<div class="cell name"><%= tracked.onboarder %></div>
+									<div class="cell date"><%= tracked.date %></div>
+									<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
+									<div class="expanded" style="display:none">
+										<p><strong>Build Package:</strong> <%= tracked.buildPkg %></p>
+										<p><strong>Server:</strong> <%= tracked.server %></p>
+										<p><strong>Task:</strong></p>
+										<ul>
+											<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+											<li><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></li>
+											<% }; %>
+										</ul>
+										<p><strong>Notes:</strong> <%= tracked.notes %></p>
+										<p><strong>Archived:</strong> <%= tracked.archive %></p>
+<div id="trackerBtn">
+	<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+		<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+	<button type="submit" class="btn delete">Delete</button>
+</form>
+<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+	<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Un-Archive</button>
+</form> 
+<script> 
+$(document).ready(function(){
+	$("#delete-form button.archiveButton").click(function(){
+		$("#delete-form button.archiveButton").each(function(){
+			$(this).val("false");
+		});
+	});
+}); 
+</script>
+										</div> 
+									</div>
+									<!-- end of expanded --> 
+								</div>
+								<% } %>
+								<% } %>
+								<% } %>
+								<% }); %>
+							</div>
+						</div>
+					</div>
+					<!-- end of dashTlink -->
+					<div id="dashContent">
+						<h2>Content</h2>
+						<div class="table">
+							<div class="row title flexbox">
+								<div class="cell url">Website URL</div>
+								<div class="cell actNumber">Account Number</div>
+								<div class="cell name">Designer</div>
+								<div class="cell name">OnBoarder</div>
+								<div class="cell date">Date</div>
+								<div class="cell arrow"></div>
+							</div>
+							<div id="accordion">
+								<% tracking.forEach(function(tracked){ %>
+								<% if(currentUser.email === tracked.author.email) { %>
+								<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
+								<% if(tracked.taskTypes[i].taskTypeName === "Content Entry" && tracked.archive == true){ %>
+								<div class="row flexbox">
+									<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
+									<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
+									<div class="cell name"><%= tracked.designer %></div>
+									<div class="cell name"><%= tracked.onboarder %></div>
+									<div class="cell date"><%= tracked.date %></div>
+									<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
+									<div class="expanded" style="display:none">
+										<p><strong>Build Package:</strong> <%= tracked.buildPkg %></p>
+										<p><strong>Server:</strong> <%= tracked.server %></p>
+										<p><strong>Task:</strong></p>
+										<ul>
+											<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
+											<li><%= tracked.taskTypes[i].taskTypeName %> / <%= tracked.taskTypes[i].quantity %> / <%= tracked.taskTypes[i].taskNotes %></li>
+											<% }; %>
+										</ul>
+										<p><strong>Notes:</strong> <%= tracked.notes %></p>
+										<p><strong>Archived:</strong> <%= tracked.archive %></p>
+<div id="trackerBtn">
+	<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+		<form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
+	<button type="submit" class="btn delete">Delete</button>
+</form>
+<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST"> 
+	<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Un-Archive</button>
+</form> 
+<script> 
+$(document).ready(function(){
+	$("#delete-form button.archiveButton").click(function(){
+		$("#delete-form button.archiveButton").each(function(){
+			$(this).val("false");
+		});
+	});
+}); 
+</script>
+										</div> 
+									</div>
+									<!-- end of expanded --> 
+									
+								</div>
+								<% } %>
+								<% } %>
+								<% } %>
+								<% }); %>
+							</div>
+						</div>
+					</div>
+					<!-- end of dashContent --> 
+				</div>
+				<% } %>
+				<% countEssential(); %>
+			</div>
+			<!-- end statsContainer --> 
+		</div>
+		<!-- end stats --> 
+	</div>
+	<script>	
+	// Hide Special Features, Starter Template and CSS Path inputs initially
+	$('.ifEssential').hide();
+	$('.ifStarter').hide();
+	
+	$(function() {
+		$('#buildPkg').on('change', function(){
+			// If Build Package selection is "Essential" then show Special Features and CSS Path fields
+			// Reset to default selection for Starter Template dropdown
+			if ($(this).val() === 'Essential'){
+				$('.ifEssential').show();
+				$('.starterClearInput').prop('selectedIndex',0);
+			}
+			else {
+				// If "Essential" is not chosen then keep associated fields hidden
+				$('.ifEssential').hide();
+			}
+		// If Build Package selection is "Starter" then show Starter Template dropdown
+		// Reset to selections/input fields for Special Features and CSS Path
+			if ($(this).val() === 'Starter'){
+				$('.ifStarter').show();
+				$('.essentialClearInput').val("");
+			}  
+	
+			else {
+				// If "Starter" is not chosen then keep associated fields hidden
+				$('.ifStarter').hide();
+			}
+		});
+	});
+	
+	
+	// list of team members drop down when you click the purple arrow beside your name
+	$('.selectTeamMember .fa-angle-down').click(function() {
+		$('#allTeamMembers').slideToggle();
+	});
+	
+	// when you click the purple arrow beside a task it expands for further info
+	$('#accordion .fa-angle-down').click(function() {
+		$(this).parent().next('.expanded').slideToggle();
+	});
+	
+	// when you click on essentials circle it shows tracked essential tasks
+	$('.showEssentials').click(function() {
+		$('#dashStarter, #dashTlink, #dashProd, #dashContent').hide();
+		$('#bottomRow, #dashEssential').fadeIn("slow");
+	});
+	// when you click on essentials circle it shows tracked starter tasks
+	$('.showStarter').click(function() {
+		$('#dashEssential, #dashTlink, #dashProd, #dashContent').hide();
+		$('#bottomRow, #dashStarter').fadeIn("slow");
+	});
+	// when you click on essentials circle it shows tracked starter tasks
+	$('.showProd').click(function() {
+		$('#dashTlink, #dashEssential, #dashContent, #dashStarter').hide();
+		$('#bottomRow, #dashProd').fadeIn("slow");
+	});
+	// when you click on essentials circle it shows tracked starter tasks
+	$('.showTlink').click(function() {
+		$('#dashProd, #dashEssential, #dashContent, #dashStarter').hide();
+		$('#bottomRow, #dashTlink').fadeIn("slow");
+	});
+	// when you click on essentials circle it shows tracked starter tasks
+	$('.showContent').click(function() {
+		$('#dashProd, #dashEssential, #dashTlink, #dashStarter').hide();
+		$('#bottomRow, #dashContent').fadeIn("slow");
+	});
+	$('.showAll').click(function() {
+		// $('#dashProd, #dashEssential, #dashTlink, #dashStarter').hide();
+		$('#dashProd, #dashEssential, #dashTlink, #dashStarter, #dashContent').fadeIn("slow");
+	});
+	
+	</script>
+	<% include ../partials/footer %>

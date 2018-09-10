@@ -27,6 +27,13 @@
                     <option value="Completed">Completed</option>
                 </select>
             </label>
+            <label for="owner"><span>Owner:</span>
+                <select name="owner" multiple>
+                    <% users.forEach(function(user){ %>
+                            <option value="<%= user.firstName %>"><%= user.firstName %></option>
+                        <% }); %>
+                </select>
+            </label>
         </section>
             <section>
                     <label for="description" class="labelNotes"><span>Project Description:</span>

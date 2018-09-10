@@ -13,6 +13,10 @@ const projectSchema = new mongoose.Schema({
       firstName: String,
       email: String
    },
+   owner: {
+       type: mongoose.Schema.Types.ObjectId,
+       ref: "User"
+   },
    comments: [
       {
          type: mongoose.Schema.Types.ObjectId,
