@@ -13,8 +13,8 @@
             <p class="lead">Project Details</p>
             <div class="list-group">
                 <li class="list-group-item"><strong>Status:</strong> <%= project.status %></li>
-                <li class="list-group-item"><strong>Created Date:</strong> <%= moment(project.created_at).format("MMM DD, YYYY hh:mm") %></li>
-                <li class="list-group-item"><strong>Last Modified:</strong> <%= moment(project.updatedAt).format("MMM DD, YYYY hh:mm") %></li>
+                <li class="list-group-item"><strong>Created Date:</strong> <%= moment(project.created_at).format("MMM DD, YYYY hh:mm a") %></li>
+                <li class="list-group-item"><strong>Last Modified:</strong> <%= moment(project.updatedAt).format("MMM DD, YYYY hh:mm a") %></li>
             </div>
         </div>
         <div class="col-md-8">

@@ -29,7 +29,7 @@ router.post("/", function(req, res){
             console.log(err);
         } else {
             //redirect back to projects
-            console.log(newlyCreatedProject);
+            req.flash("success", "You have successfully created a project");
             res.redirect("/projects");         
         }
     })
