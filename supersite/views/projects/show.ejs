@@ -9,15 +9,15 @@
       </div>
 <div class="container" style="margin: 30px auto;">
     <div class="row">
-        <div class="col-md-3" style="margin: 10px 0;">
+        <div class="col-md-4" style="margin: 10px 0;">
             <p class="lead">Project Details</p>
             <div class="list-group">
-                <li class="list-group-item active">Status: <%= project.status %></li>
-                <li class="list-group-item">Info 2</li>
-                <li class="list-group-item">Info 3</li>
+                <li class="list-group-item"><strong>Status:</strong> <%= project.status %></li>
+                <li class="list-group-item"><strong>Created Date:</strong> <%= moment(project.created_at).format("MMM DD, YYYY hh:mm") %></li>
+                <li class="list-group-item"><strong>Last Modified:</strong> <%= moment(project.updatedAt).format("MMM DD, YYYY hh:mm") %></li>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="thumbnail">
                 <img src="/images/Projectweb.png" alt="Strom Centre" class="responsive-image" style="float: right;">
                 <div class="caption-full">

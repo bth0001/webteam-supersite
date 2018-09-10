@@ -9,7 +9,6 @@ router.get("/", function(req, res){
   TeamTracker.find({}, function(err, allTracks){
     User.find({}, function(err, allUsers){
       TaskTypes.find({}, function(err, allTask){
-        
     if(err){
       console.log(err);
     } else {

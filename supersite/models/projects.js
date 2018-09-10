@@ -19,6 +19,6 @@ const projectSchema = new mongoose.Schema({
          ref: "ProjectComments"
       }
    ]
-});
+}, {timestamps: {createdAt: 'created_at'}});
 
 module.exports = mongoose.model("Projects", projectSchema);
