@@ -97,7 +97,19 @@ const blueprintWizardSchema = new mongoose.Schema({
           default: ""
         }
       }]
-  }]
+  }],
+  socialMedia: [{
+    name: {
+      type: String
+    },
+    link: {
+      type: String
+    }
+  }],
+  dateCreated: { 
+    type : Date, 
+    default: Date.now 
+  }
 });
 
 const BlueprintWizard = mongoose.model("BlueprintWizard", blueprintWizardSchema);

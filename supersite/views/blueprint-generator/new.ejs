@@ -1,6 +1,35 @@
 <% include ../partials/header %>
 
   <style>
+
+/* Blueprint Temp Styles */
+#blueprint {padding: 3vw 5vw; background-color: #fff; margin: 20px 0; border: 1px solid #C6C6C6}
+#blueprint div.row {margin: 0 0 20px;}
+#blueprint div.row div.text {flex: 1 100%;}
+#blueprint div.row div.formField {margin: 0 10px 0 0}
+#overlay {z-index: 1999;background-color: #000;position: fixed;top: 0;left: 0;right: 0;bottom: 0;height: 100vw;width: 100vw;opacity: .5;}
+#enterSocialMedia {cursor: pointer;}
+#socialMedia {position: fixed;top: 50%;left: 50%;bottom: auto;right: auto;transform: translate(-50%,-50%);max-height: 0;overflow: hidden;transition: opacity 250ms ease;opacity: 0;background-color: #fff;width: 100%;max-width: 600px;}
+#socialMedia.open {opacity: 1; max-height: none; padding: 30px 20px; z-index: 2000;}
+#socialMedia a.close {position: absolute; top: 3px; right: 3px; left: auto; bottom: auto; cursor: pointer;}
+#socialMedia div.cell {display: flex; flex-wrap: nowrap; text-align: right; margin: 0 0 10px}
+#socialMedia div.cell span {flex: 0 115px; padding: 0 5px 0 0;}
+#socialMedia div.cell input[type*="hidden"] {display: none;}
+#socialMedia div.cell input[type*="text"] {flex: 1 1;}
+/*social media icons*/
+#socialMedia span:before {font-family: FontAwesome; font-size: 20px; padding: 0 5px 0 0;}
+#socialMedia span.facebook:before {content: "\f230"}
+#socialMedia span.google:before {content: "\f0d5"}
+#socialMedia span.instagram:before {content: "\f16d"}
+#socialMedia span.linkedin:before {content: "\f08c"}
+#socialMedia span.twitter:before {content: "\f099"}
+#socialMedia span.pinterest:before {content: "\f0d2"}
+#socialMedia span.youtube:before {content: "\f167"}
+#socialMedia span.rssfeed:before {content: "\f143"}
+#socialMedia span.blogger:before {content: "\f37c"}
+#socialMedia span.yelp:before {content: "\f1e9"}
+#socialMedia span.angieslist:before {content: "\f209"}
+
     form#blueprint {
       max-width: none;
     }
@@ -51,45 +80,60 @@
   </div>
 <div class="container">
   <form id="blueprint" onsubmit="assignNames()" action="/blueprint-generator/new" method="POST">
-    <div class="formField">
-      <label for="blueprint[onboarder]">Onboarder:</label>
-      <select name="blueprint[onboarder]">
-        <option value="Select Onboarder" disabled selected>Select Onboarder</option>
+
+    <div class="row">
+      <div class="formField">
+        <label for="blueprint[onboarder]">Onboarder:</label>
+        <select name="blueprint[onboarder]">
+          <option value="Select Onboarder" disabled selected>Select Onboarder</option>
+          <% users.forEach(function(user){ %>
+            <% if(user.team == 'On-Boarder') { %>
+                <option value="<%= user.firstName %>"><%= user.firstName %></option>
+            <% } %>
+        <% }); %>
+      </select>
+      </div><!--formField-->
+
+      <div class="formField">
+        <label for="blueprint[onboarder]">Designer:</label>
+        <select name="blueprint[designer]">
+        <option value="Select Designer" disabled selected>Select Designer</option>
         <% users.forEach(function(user){ %>
-          <% if(user.team == 'On-Boarder') { %>
+          <% if(user.team == 'Designer') { %>
               <option value="<%= user.firstName %>"><%= user.firstName %></option>
           <% } %>
-      <% }); %>
-    </select>
-    </div>
+        <% }); %>
+        </select>
+      </div><!--formField-->
+    </div><!--row-->
 
-    <div class="formField">
-      <label for="blueprint[onboarder]">Designer:</label>
-      <select name="blueprint[designer]">
-      <option value="Select Designer" disabled selected>Select Designer</option>
-      <% users.forEach(function(user){ %>
-        <% if(user.team == 'Designer') { %>
-            <option value="<%= user.firstName %>"><%= user.firstName %></option>
-        <% } %>
-    <% }); %>
-  </select>
-    </div>
+    <div class="row">
+        <div class="formField">
+          <label>Practice Name:</label>
+          <input type="text" name="blueprint[practiceName]" placeholder="Practice Name" />
+        </div><!--formField-->
+    </div><!--row-->
 
-    <div class="formField">
-      <input type="text" name="blueprint[homeScreenshot]" placeholder="Home Screenshot" />
-    </div>
-    <div class="formField">
-      <input type="text" name="blueprint[interiorScreenshot]" placeholder="Interior Screenshot" />
-    </div>
+    <hr />
+
+    <div class="row">
+      <div class="text">
+        <h3>Screenshots</h3>
+      </div><!--text-->
+      <div class="formField">
+        <input type="text" name="blueprint[homeScreenshot]" placeholder="Home Screenshot" />
+      </div><!--formField-->
+      <div class="formField">
+        <input type="text" name="blueprint[interiorScreenshot]" placeholder="Interior Screenshot" />
+      </div><!--formField-->
+    </div><!--row-->
     
-<style>
-  #howManyDoctorsContainer input{background-color: rgb(243,243,102)}
-</style>
+    <hr />
 
-<script>
+    <script>
 $(document).ready(function(){
   $('<input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />').appendTo("#howManyDoctorsContainer");
-  $("#howManyDoctors").bind('keyup mouseup', function () {
+  $("#howManyDoctors").change(function () {
     $("#howManyDoctorsContainer").empty();
     for(i = 0; i < $(this).val(); i++) {
       $('<input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />').appendTo("#howManyDoctorsContainer");
@@ -98,77 +142,237 @@ $(document).ready(function(){
 });
 </script>
 
-    <div class="formField">
-      <label>How many Doctors?</label><input type="number" name="blueprint[howManyDoctors]" min="1" max="20" value="1" id="howManyDoctors">
-    </div>
+    <div class="row">
+      <div class="text">
+        <h3>Doctor(s) Information</h3>
+      </div><!--text-->
+      <div class="formField">
+        <select name="blueprint[howManyDoctors]" id="howManyDoctors">
+            <option value="" disabled selected>How many doctors?</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+      </div>
+      <div class="formField" id="howManyDoctorsContainer">
+        <!--inserted with script-->
+      </div><!--formField-->
+    </div><!--row-->
 
-    <div class="formField" id="howManyDoctorsContainer">
-      <!--inserted with script-->
-    </div>
+    <hr />
 
-    <div class="formField">
-      <input type="text" name="blueprint[practiceName]" placeholder="Practice Name" />
-    </div>
-    <div class="formField">
-      <input type="text" name="blueprint[contactName]" placeholder="Contact Name" />
-    </div>
-    <div class="formField">
-      <input type="text" name="blueprint[contactEmail]" placeholder="Contact Email" />
-    </div>
-    <div class="formField">
-      <input type="text" name="blueprint[contactNumber]" placeholder="Contact Number" />
-    </div>
-    <div class="formField">
-      <input type="text" name="blueprint[address]" placeholder="Address" />
-    </div>
+    <div class="row">
+      <div class="text">
+        <h3>Contact Information</h3>
+      </div><!--text-->
+      <div class="formField">
+        <input type="text" name="blueprint[contactName]" placeholder="Contact Name" />
+      </div><!--formField-->
+      <div class="formField">
+        <input type="text" name="blueprint[contactEmail]" placeholder="Contact Email" />
+      </div><!--formField-->
+      <div class="formField">
+        <input type="text" name="blueprint[contactNumber]" placeholder="Contact Number" />
+      </div><!--formField-->
+    </div><!--row-->
 
-    <div class="formField">
-      <select name="blueprint[howManyOffices">
-        <option value="" disabled selected>How many offices?</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10+">10+</option>
-      </select>
-      <!--onboarder-->
-    </div>
+    <hr />
+    
+    <div class="row">
+      <div class="text">
+        <h3>Office(s) Information</h3>
+      </div>
 
-    <div class="formField">
-      <input type="text" name="blueprint[dearDoctorID]" placeholder="Dear Doctor ID" />
-    </div>
-    <div class="formField">
-      <input type="text" name="blueprint[practiceEmail]" placeholder="Practice Email" />
-    </div>
-    <div class="formField">
-      <input type="text" name="blueprint[currentSiteURL]" placeholder="Current Site Url" />
-    </div>
-    <div class="formField">
-      <input type="text" name="blueprint[clientUsername]" placeholder="Client Username" />
-    </div>
-    <div class="formField">
-      <input type="text" name="blueprint[clientPassword]" placeholder="Client Password" />
-    </div>
+      <script>
+          $(document).ready(function(){
+            $('<input type="text" name="blueprint[address]" placeholder="Address" />').appendTo("#howManyOfficesContainer");
+            $("#howManyOffices").change(function () {
+              $("#howManyOfficesContainer").empty();
+              for(i = 0; i < $(this).val(); i++) {
+                $('<input type="text" name="blueprint[address]" placeholder="Address" />').appendTo("#howManyOfficesContainer");
+              }
+            });
+          });
+      </script>
 
-    <div class="formField">
-      <label for="copywriteNotes">Copywrite Notes:</label>
-      <textarea name="blueprint[copywriteNotes]" cols="100" rows="2"></textarea>
-    </div>
+      <div class="formField">
+        <select name="blueprint[howManyOffices]" id="howManyOffices">
+          <option value="" disabled selected>How many offices?</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div><!--formField-->
 
-    <div class="formField">
-      <label for="designerNotes">Designer Notes:</label>
-      <textarea name="blueprint[designerNotes]" cols="100" rows="2"></textarea>
-    </div>
+      <div class="formField" id="howManyOfficesContainer">
+        <!--inserted with script-->
+      </div><!--formField-->
+    </div><!--row-->
 
-    <div class="formField">
-      <label for="developerNotes">Developer Notes</label>
-      <textarea name="blueprint[developerNotes]" cols="100" rows="2"></textarea>
-    </div>
+    <hr />
+
+    <div class="row">
+      <div class="text">
+        <h3>Client Login Information</h3>
+      </div><!--text-->
+      <div class="formField">
+        <input type="text" name="blueprint[clientUsername]" placeholder="Client Username" />
+      </div>
+      <div class="formField">
+        <input type="text" name="blueprint[clientPassword]" placeholder="Client Password" />
+      </div>
+    </div><!--row-->
+
+    <hr />
+
+    <script>
+        $(document).ready(function(){
+          $('<input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />').appendTo("#howManyDoctorsContainer");
+          $("#howManyDoctors").change(function () {
+            $("#howManyDoctorsContainer").empty();
+            for(i = 0; i < $(this).val(); i++) {
+              $('<input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />').appendTo("#howManyDoctorsContainer");
+            }
+        });
+        });
+        </script>
+        <script>
+        $(document).ready(function(){
+          $("#enterSocialMedia").click(function(){
+            $("#socialMedia").addClass("open");
+            $("#overlay").show();
+          });
+          $("#socialMedia a.close").click(function(){
+            $("#socialMedia").removeClass("open");
+            $("#overlay").hide();
+          });
+        });
+        </script>
+            <div class="row">
+              <div class="text">
+                <h3>Social Media</h3>
+              </div><!--text-->
+              <div class="formField">
+                  <a id="enterSocialMedia">Enter Social Media</a>
+                  <div id="socialMedia">
+                    <a class="close">X</a>
+                    <div class="cell">
+                      <span class="facebook">Facebook</span>
+                      <input class="name" type="hidden" value="Facebook" />
+                      <input class="url" type="text" />
+                    </div>
+                    <div class="cell">
+                      <span class="google">Google+</span>
+                      <input class="name" type="hidden" value="Google+" />
+                      <input class="url" type="text" />
+                    </div>
+                    <div class="cell">
+                      <span class="instagram">Instagram</span>
+                      <input class="name" type="hidden" value="Instagram" />
+                      <input class="url" type="text" />
+                    </div>
+                    <div class="cell">
+                      <span class="linkedin">LinkedIn</span>
+                      <input class="name" type="hidden" value="LinkedIn" />
+                      <input class="url" type="text" />
+                    </div>
+                    <div class="cell">
+                      <span class="twitter">Twitter</span>
+                      <input class="name" type="hidden" value="Twitter" />
+                      <input class="url" type="text" />
+                    </div>
+                    <div class="cell">
+                      <span class="pinterest">Pinterest</span>
+                      <input class="name" type="hidden" value="Pinterest" />
+                      <input class="url" type="text" />
+                    </div>
+                    <div class="cell">
+                      <span class="youtube">YouTube</span>
+                      <input class="name" type="hidden" value="YouTube" />
+                      <input class="url" type="text" />
+                    </div>
+                    <div class="cell">
+                      <span class="rssfeed">RSS Feed</span>
+                      <input class="name" type="hidden" value="RSS Feed" />
+                      <input class="url" type="text" />
+                    </div>
+                    <div class="cell">
+                      <span class="blogger">Blogger</span>
+                      <input class="name" type="hidden" value="Blogger" />
+                      <input class="url" type="text" />
+                    </div>
+                    <div class="cell">
+                      <span class="yelp">Yelp</span>
+                      <input class="name" type="hidden" value="Yelp" />
+                      <input class="url" type="text" />
+                    </div>
+                    <div class="cell">
+                      <span class="angieslist">Angie's List</span>
+                      <input class="name" type="hidden" value="Angie's List" />
+                      <input class="url" type="text" />
+                    </div>
+                  </div>
+                  <!--socialMedia-->
+              </div>
+              <div class="formField" id="howManyDoctorsContainer">
+                <!--inserted with script-->
+              </div><!--formField-->
+            </div><!--row-->
+
+      <hr />
+
+    <div class="row">
+        <div class="text">
+          <h3>Other</h3>
+        </div>
+        <div class="formField">
+          <input type="text" name="blueprint[dearDoctorID]" placeholder="Dear Doctor ID" />
+        </div>
+        <div class="formField">
+          <input type="text" name="blueprint[practiceEmail]" placeholder="Practice Email" />
+        </div>
+        <div class="formField">
+          <input type="text" name="blueprint[currentSiteURL]" placeholder="Current Site Url" />
+        </div>
+      </div><!--row-->
+      
+      <hr />
+
+    <div class="row">
+      <div class="formField">
+        <label for="copywriteNotes">Copywrite Notes:</label>
+        <textarea name="blueprint[copywriteNotes]" cols="100" rows="2"></textarea>
+      </div><!--formField-->
+    </div><!--row-->
+    <hr />
+     <div class="row">
+      <div class="formField">
+        <label for="designerNotes">Designer Notes:</label>
+        <textarea name="blueprint[designerNotes]" cols="100" rows="2"></textarea>
+      </div><!--formField-->
+    </div><!--row-->
+    <hr />
+     <div class="row">
+      <div class="formField">
+        <label for="developerNotes">Developer Notes</label>
+        <textarea name="blueprint[developerNotes]" cols="100" rows="2"></textarea>
+      </div><!--formField-->
+    </div><!--row-->
+    <hr />
 
     <div id="pageTable">
       <div class="pageInput">
@@ -189,5 +393,5 @@ $(document).ready(function(){
   </form>
 
 </div><!--container-->
-
+<div id="overlay" style="display: none;"></div>
     <% include ../partials/footer %>

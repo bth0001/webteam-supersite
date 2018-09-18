@@ -81,6 +81,15 @@ setTimeout(function() {
       });
       parentCount++;
     });
+    // assigns names to social media
+    var smcount = 1;
+    $("#socialMedia div.cell input.url").each(function(){
+      if(!$(this).val() == ""){
+        $(this).prev().attr("name", "blueprint[socialMedia]["+smcount+"][name]");
+        $(this).attr("name", "blueprint[socialMedia]["+smcount+"][link]");
+        smcount++;
+      }
+    });
   }
 
   // For image uploader preview 2 of 2
