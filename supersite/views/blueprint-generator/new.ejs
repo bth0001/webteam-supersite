@@ -110,7 +110,7 @@
     <div class="row">
         <div class="formField">
           <label>Practice Name:</label>
-          <input type="text" name="blueprint[practiceName]" placeholder="Practice Name" />
+          <input class="main" type="text" name="blueprint[practiceName]" aria-label="Practice Name" placeholder="Practice Name" />
         </div><!--formField-->
     </div><!--row-->
 
@@ -121,10 +121,10 @@
         <h3>Screenshots</h3>
       </div><!--text-->
       <div class="formField">
-        <input type="text" name="blueprint[homeScreenshot]" placeholder="Home Screenshot" />
+        <input class="main" type="text" name="blueprint[homeScreenshot]" aria-label="Home Screenshot" placeholder="Home Screenshot" />
       </div><!--formField-->
       <div class="formField">
-        <input type="text" name="blueprint[interiorScreenshot]" placeholder="Interior Screenshot" />
+        <input class="main" type="text" name="blueprint[interiorScreenshot]" aria-label="Interior Screenshot" placeholder="Interior Screenshot" />
       </div><!--formField-->
     </div><!--row-->
     
@@ -173,13 +173,13 @@ $(document).ready(function(){
         <h3>Contact Information</h3>
       </div><!--text-->
       <div class="formField">
-        <input type="text" name="blueprint[contactName]" placeholder="Contact Name" />
+        <input class="main" type="text" name="blueprint[contactName]" aria-label="Contact Name" placeholder="Contact Name" />
       </div><!--formField-->
       <div class="formField">
-        <input type="text" name="blueprint[contactEmail]" placeholder="Contact Email" />
+        <input class="main" type="text" name="blueprint[contactEmail]" aria-label="Contact Email" placeholder="Contact Email" />
       </div><!--formField-->
       <div class="formField">
-        <input type="text" name="blueprint[contactNumber]" placeholder="Contact Number" />
+        <input class="main" type="text" name="blueprint[contactNumber]" aria-label="Contact Number" placeholder="Contact Number" />
       </div><!--formField-->
     </div><!--row-->
 
@@ -229,10 +229,10 @@ $(document).ready(function(){
         <h3>Client Login Information</h3>
       </div><!--text-->
       <div class="formField">
-        <input type="text" name="blueprint[clientUsername]" placeholder="Client Username" />
+        <input class="main" type="text" name="blueprint[clientUsername]" aria-label="Client Username" placeholder="Client Username" />
       </div>
       <div class="formField">
-        <input type="text" name="blueprint[clientPassword]" placeholder="Client Password" />
+        <input class="main" type="text" name="blueprint[clientPassword]" aria-label="Client Password" placeholder="Client Password" />
       </div>
     </div><!--row-->
 
@@ -329,22 +329,22 @@ $(document).ready(function(){
           <h3>Other</h3>
         </div>
         <div class="formField">
-          <input type="text" name="blueprint[dearDoctorID]" placeholder="Dear Doctor ID" />
+          <input class="main" type="text" name="blueprint[dearDoctorID]" aria-label="Dear Doctor ID" placeholder="Dear Doctor ID" />
         </div>
         <div class="formField">
-          <input type="text" name="blueprint[practiceEmail]" placeholder="Practice Email" />
+          <input class="main" type="text" name="blueprint[practiceEmail]" aria-label="Practice Email" placeholder="Practice Email" />
         </div>
         <div class="formField">
-            <input type="text" name="blueprint[practicePhone]" placeholder="Practice Phone" />
+            <input class="main" type="text" name="blueprint[practicePhone]" aria-label="Practice Phone" placeholder="Practice Phone" />
         </div>
         <div class="formField">
-            <input type="text" name="blueprint[practiceFax]" placeholder="Practice Fax" />
+            <input class="main" type="text" name="blueprint[practiceFax]" aria-label="Practice Fax" placeholder="Practice Fax" />
         </div>
         <div class="formField">
-          <input type="text" name="blueprint[currentSiteURL]" placeholder="Current Site Url" />
+          <input class="main" type="text" name="blueprint[currentSiteURL]" aria-label="Current Site URL" placeholder="Current Site Url" />
         </div>
         <div class="formField">
-            <input type="text" name="blueprint[tlink]" placeholder="T. Link URL" />
+            <input class="main" type="text" name="blueprint[tlink]" aria-label="T. Link URL" placeholder="T. Link URL" />
         </div>
       </div><!--row-->
       
@@ -386,10 +386,64 @@ $(document).ready(function(){
     </div>
 
     <div class="formButtons">
-      <button id="submit">Submit</button>
+      <a id="submit">Submit</a>
+      <button type="submit" class="hiddenSubmit" style="display: none;">Submit</button>
     </div>
   </form>
 
+  <style>
+      #errorScreen {position: fixed;top: 50%;left: 50%;bottom: auto;right: auto;transform: translate(-50%,-50%);max-height: 0;overflow: hidden;transition: opacity 250ms ease;opacity: 0;background-color: #fff;width: 100%;max-width: 600px;}
+      #errorScreen.open {opacity: 1; max-height: none; padding: 30px 20px; z-index: 2000;}
+      /*buttons*/
+      #submit {background-color: #2637B0; border: none; display: block; font-size: 1.25em; padding: 15px; text-align: center; margin: 30px 0 0; width: 100%; cursor: pointer; font-family: 'Roboto Condensed', sans-serif; font-weight: 700; color: #fff; text-decoration: none; transition: background 0.3s;}
+      #submit:hover {background: none; box-shadow: inset 0px 0px 0px 1px rgba(38, 55, 176, 1); color: #2637B0;}
+      #errorScreen div.buttons {text-align: center;}
+      #errorScreen div.buttons a {display: inline-block; border: 1px solid; padding: 3px 20px; border-radius: 6px; cursor: pointer; color: #fff; border-radius: 6px; padding: 5px 20px; border: solid #1f628d 1px; text-decoration: none; transition: all 250ms ease}
+      #errorScreen div.buttons a.yes {margin: 0 5px 0 0; background-image: linear-gradient(to bottom, #3498db, #2980b9);}
+      #errorScreen div.buttons a.yes:hover, #errorScreen div.buttons a.yes:focus {background-image: linear-gradient(to bottom, #2980b9, #3498db);}
+      #errorScreen div.buttons a.no {background: linear-gradient(to bottom, #eb5555, #d11b1b);}
+      #errorScreen div.buttons a.no:hover, #errorScreen div.buttons a.no:focus {background: linear-gradient(to bottom, #cc1919, #d12e2e);}
+    </style>
+
+<script>
+  $("#submit").click(function(event){
+  var empty = [];
+  $("#errorScreen").removeClass("open");
+  $("#errorScreen div.message ul").empty();
+  $("#blueprint input.main").each(function(){
+    if($(this).val() == ""){
+      empty.push($(this).attr("aria-label"));
+    }
+  });
+  if(empty.length > 0){
+    $("#errorScreen").addClass("open");
+    $("#overlay").show();
+    for(i = 0; i < empty.length; i++) {
+      $("<li>"+empty[i]+"</li>").appendTo("#errorScreen div.message ul");
+    }
+    $("#errorScreen a.yes").click(function(){
+      $("#blueprint").submit();
+      return true
+    });
+    $("#errorScreen a.no").click(function(){
+      $("#errorScreen").removeClass("open");
+      $("#overlay").hide();
+    });
+  }
+});
+</script>
+
 </div><!--container-->
 <div id="overlay" style="display: none;"></div>
+<div id="errorScreen">
+    <div class="message">
+        <p>The following fields are empty:</p>
+        <ul></ul>
+        <p>Are you sure you want to continue?</p>
+    </div>
+    <div class="buttons">
+      <a class="yes">Yes</a>
+      <a class="no">No</a>
+    </div>
+  </div>
     <% include ../partials/footer %>
