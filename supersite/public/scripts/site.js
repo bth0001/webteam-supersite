@@ -72,11 +72,19 @@ setTimeout(function() {
         }
       });
       childCount = 0;
-      $(this).find("input.parentText").attr("name", "blueprint[siteArchitecture][" + parentCount + "][parentPageName]");
-      $(this).find("input.parentNotes").attr("name", "blueprint[siteArchitecture][" + parentCount + "][parentPageNotes]");
+      if(!$(this).find("input.parentText").val() == ""){
+        $(this).find("input.parentText").attr("name", "blueprint[siteArchitecture][" + parentCount + "][parentPageName]");
+      }
+      if(!$(this).find("input.parentNotes").val() == ""){
+        $(this).find("input.parentNotes").attr("name", "blueprint[siteArchitecture][" + parentCount + "][parentPageNotes]");
+      }
       $(this).find("div.child").each(function () {
-        $(this).find("input:first-of-type").attr("name", "blueprint[siteArchitecture][" + parentCount + "][subpage][" + childCount + "][childPageName]");
-        $(this).find("input:last-of-type").attr("name", "blueprint[siteArchitecture][" + parentCount + "][subpage][" + childCount + "][childPageNotes]");
+        if(!$(this).find("input:first-of-type").val() == ""){
+          $(this).find("input:first-of-type").attr("name", "blueprint[siteArchitecture][" + parentCount + "][subpage][" + childCount + "][childPageName]");
+        }
+        if(!$(this).find("input:last-of-type").val() == ""){
+          $(this).find("input:last-of-type").attr("name", "blueprint[siteArchitecture][" + parentCount + "][subpage][" + childCount + "][childPageNotes]");
+        }
         childCount++;
       });
       parentCount++;
@@ -88,6 +96,21 @@ setTimeout(function() {
         $(this).prev().attr("name", "blueprint[socialMedia]["+smcount+"][name]");
         $(this).attr("name", "blueprint[socialMedia]["+smcount+"][link]");
         smcount++;
+      }
+    });
+    var doctorcount = 1;
+    $("#howManyDoctorsContainer input").each(function(){
+      if(!$(this).val() == ""){
+        $(this).attr("name", "blueprint[doctors]["+doctorcount+"][doctorName]");
+        doctorcount++;
+      }
+    });
+    // Count and assigns names to office input
+    var officecount = 1;
+    $("#howManyOfficesContainer input").each(function(){
+      if(!$(this).val() == ""){
+        $(this).attr("name", "blueprint[officeAddress]["+officecount+"][address]");
+        officecount++;
       }
     });
   }

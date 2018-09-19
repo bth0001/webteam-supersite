@@ -132,11 +132,11 @@
 
     <script>
 $(document).ready(function(){
-  $('<input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />').appendTo("#howManyDoctorsContainer");
+  //$('<div class="formField"><input type="text" name="blueprint[doctor]" placeholder="Doctor Name" /></div>').appendTo("#howManyDoctorsContainer");
   $("#howManyDoctors").change(function () {
     $("#howManyDoctorsContainer").empty();
     for(i = 0; i < $(this).val(); i++) {
-      $('<input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />').appendTo("#howManyDoctorsContainer");
+      $('<div class="formField"><input type="text" name="blueprint[doctor]" placeholder="Doctor Name" /></div>').appendTo("#howManyDoctorsContainer");
     }
 });
 });
@@ -161,7 +161,7 @@ $(document).ready(function(){
             <option value="10">10</option>
         </select>
       </div>
-      <div class="formField" id="howManyDoctorsContainer">
+      <div id="howManyDoctorsContainer">
         <!--inserted with script-->
       </div><!--formField-->
     </div><!--row-->
@@ -192,11 +192,10 @@ $(document).ready(function(){
 
       <script>
           $(document).ready(function(){
-            $('<input type="text" name="blueprint[address]" placeholder="Address" />').appendTo("#howManyOfficesContainer");
             $("#howManyOffices").change(function () {
               $("#howManyOfficesContainer").empty();
               for(i = 0; i < $(this).val(); i++) {
-                $('<input type="text" name="blueprint[address]" placeholder="Address" />').appendTo("#howManyOfficesContainer");
+                $('<div class="formField"><input type="text" name="blueprint[address]" placeholder="Address" /></div>').appendTo("#howManyOfficesContainer");
               }
             });
           });
@@ -218,7 +217,7 @@ $(document).ready(function(){
         </select>
       </div><!--formField-->
 
-      <div class="formField" id="howManyOfficesContainer">
+      <div id="howManyOfficesContainer">
         <!--inserted with script-->
       </div><!--formField-->
     </div><!--row-->
@@ -239,24 +238,13 @@ $(document).ready(function(){
 
     <hr />
 
-    <script>
-        $(document).ready(function(){
-          $('<input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />').appendTo("#howManyDoctorsContainer");
-          $("#howManyDoctors").change(function () {
-            $("#howManyDoctorsContainer").empty();
-            for(i = 0; i < $(this).val(); i++) {
-              $('<input type="text" name="blueprint[doctor]" placeholder="Doctor Name" />').appendTo("#howManyDoctorsContainer");
-            }
-        });
-        });
-        </script>
         <script>
         $(document).ready(function(){
           $("#enterSocialMedia").click(function(){
             $("#socialMedia").addClass("open");
             $("#overlay").show();
           });
-          $("#socialMedia a.close").click(function(){
+          $("#socialMedia a.close, #socialMedia a.submit").click(function(){
             $("#socialMedia").removeClass("open");
             $("#overlay").hide();
           });
@@ -325,6 +313,7 @@ $(document).ready(function(){
                       <input class="name" type="hidden" value="Angie's List" />
                       <input class="url" type="text" />
                     </div>
+                    <a class="submit">Submit</a>
                   </div>
                   <!--socialMedia-->
               </div>
@@ -346,7 +335,16 @@ $(document).ready(function(){
           <input type="text" name="blueprint[practiceEmail]" placeholder="Practice Email" />
         </div>
         <div class="formField">
+            <input type="text" name="blueprint[practicePhone]" placeholder="Practice Phone" />
+        </div>
+        <div class="formField">
+            <input type="text" name="blueprint[practiceFax]" placeholder="Practice Fax" />
+        </div>
+        <div class="formField">
           <input type="text" name="blueprint[currentSiteURL]" placeholder="Current Site Url" />
+        </div>
+        <div class="formField">
+            <input type="text" name="blueprint[tlink]" placeholder="T. Link URL" />
         </div>
       </div><!--row-->
       

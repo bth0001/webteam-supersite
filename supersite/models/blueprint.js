@@ -43,16 +43,24 @@ const blueprintWizardSchema = new mongoose.Schema({
   contactNumber: {
     type: String
   },
-  address: {
-    type: String
-  },
   howManyOffices: {
     type: String
   },
+  officeAddress: [{
+    address: {
+      type: String
+    }
+  }],
   dearDoctorID: {
     type: String
   },
   practiceEmail: {
+    type: String
+  },
+  practicePhone: {
+    type: String
+  },
+  practiceFax: {
     type: String
   },
   currentSiteURL: {
@@ -62,6 +70,9 @@ const blueprintWizardSchema = new mongoose.Schema({
     type: String
   },
   clientPassword: {
+    type: String
+  },
+  tlink: {
     type: String
   },
   copywriteNotes: {
