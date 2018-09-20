@@ -59,7 +59,94 @@ setTimeout(function() {
     readURL(this);
   });
 
-  });//End document ready
+// Error Check Blueprint Wizard form
+$("#blueprint #submit").click(function(event){
+  var empty = [];
+  $("#errorScreen").removeClass("open");
+  $("#errorScreen div.message ul").empty();
+  $("input.highlight").removeClass("highlight");
+  $("#blueprint input.main").each(function(){
+    if($(this).val() == ""){
+      empty.push($(this).attr("aria-label"));
+    }
+  });
+  if(empty.length > 0){
+    $("#errorScreen").addClass("open");
+    $("#overlay").show();
+    for(i = 0; i < empty.length; i++) {
+      $("<li><a class='goto'>"+empty[i]+"</a></li>").appendTo("#errorScreen div.message ul");
+    }
+    $("#errorScreen a.goto").bind("click", function(){
+      var html = $(this).html();
+      $("#errorScreen").removeClass("open");
+      $("#overlay").hide();
+      $("input[aria-label*='"+html+"']").addClass("highlight");
+      $([document.documentElement, document.body]).animate({
+	      scrollTop: $("input[aria-label*='"+html+"']").offset().top-100
+      }, 750);
+      setTimeout(function(){
+        $("input[aria-label*='"+html+"']").removeClass("highlight");
+      }, 5000);
+    });
+    $("#errorScreen a.yes").click(function(){
+      $("#blueprint").submit();
+      return true
+    });
+    $("#errorScreen a.no").click(function(){
+      $("#errorScreen").removeClass("open");
+      $("#overlay").hide();
+    });
+  } else {
+    $("#blueprint").submit();
+      return true
+  }
+});
+$("#blueprint input").focus(function(){
+  $(this).removeClass("highlight");
+});
+
+// Adds doctor names depending on selection
+$("#howManyDoctors").change(function () {
+  $("#howManyDoctorsContainer").empty();
+  for(i = 0; i < $(this).val(); i++) {
+    $('<div class="formField"><input type="text" name="blueprint[doctor]" placeholder="Doctor Name" /></div>').appendTo("#howManyDoctorsContainer");
+  }
+});
+// Adds office locations depending on selection
+$("#howManyOffices").change(function () {
+  $("#howManyOfficesContainer").empty();
+  for(i = 0; i < $(this).val(); i++) {
+    $('<div class="formField"><input type="text" name="blueprint[address]" placeholder="Address" /></div>').appendTo("#howManyOfficesContainer");
+  }
+});
+// Toggles social media input screen
+$("#enterSocialMedia").click(function(){
+  $("#socialMedia").addClass("open");
+  $("#overlay").show();
+});
+$("#socialMedia a.close, #socialMedia a.submit").click(function(){
+  $("#socialMedia").removeClass("open");
+  $("#socialMediaPreview ul").empty();
+  $("#overlay").hide();
+  var socialMedia = []
+  var emptycount = 0;
+  $("#socialMedia div.cell input.url").each(function(){
+    if(!$(this).val() == ""){
+      emptycount++
+      var socialsite = $(this).prev().val();
+      var sociallink = $(this).val();
+      $("<li>"+socialsite+": <a href='"+sociallink+"'>"+sociallink+"</a></li>")
+        .appendTo("#socialMediaPreview ul");
+    }
+  });
+  if (emptycount > 0){
+    $("#enterSocialMedia").text("Edit Social Media");
+  } else {
+    $("#enterSocialMedia").text("Add Social Media");
+  }
+});
+
+});//End document ready
   
   function assignNames() {
     var parentCount = 0;
