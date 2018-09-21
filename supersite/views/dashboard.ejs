@@ -13,32 +13,65 @@
 <div id="overview" class="center">
 	<h1><%= currentUser.team %> Dashboard</h1>
 	<div class="flexbox flexCenter">
-		<h4>August</h4>
-		<i class="fas fa-angle-down"></i> </div>
+		<!-- <h4 id="thisMonth">August</h4> -->
+		<!-- <i class="fas fa-angle-down"></i>  -->
+		<div class="selectMonth">
+			<dl class="dropdown selectMonth">
+				<dt>
+					<a><h4 id="thisMonth"></h4>
+						<i class="fas fa-angle-down"></i>
+					</a>
+				</dt>					
+				<dd>
+					<ul id="allMonths">
+						<li><a>January</a></li>
+						<li><a>February</a></li>
+						<li><a>March</a></li>
+						<li><a>April</a></li>
+						<li><a>May</a></li>
+						<li><a>June</a></li>
+						<li><a>July</a></li>
+						<li><a>August</a></li>
+						<li><a>September</a></li>
+						<li><a>October</a></li>
+						<li><a>November</a></li>
+						<li><a>December</a></li>
+					</ul>
+				</dd>
+			</dl>
+		</div>
+	</div>
 </div>
 <% function countEssential() { %>
-<% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; var contentCount = 0; %>
-<% tracking.forEach(function(tracked){ %>
-<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
-<% if(currentUser.email === tracked.author.email) { %>
-<% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
-<% strCount++ %>
-<% } %>
-<% if(tracked.buildPkg === "Essential" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
-<% essCount++ %>
-<% } %>
-<% if(tracked.taskTypes[i].taskTypeName === "Production Change" && tracked.archive == !true){ %>
-<% prodCount++ %>
-<% } %>
-<% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding" && tracked.archive == !true){ %>
-<% tlinkCount++ %>
-<% } %>
-<% if(tracked.taskTypes[i].taskTypeName === "Content Entry" && tracked.archive == !true){ %>
-<% contentCount++ %>
-<% } %>
-<% } %>
-<% } %>
-<% }); %>
+	<% var essCount = 0; var strCount = 0; var prodCount = 0; var tlinkCount = 0; var contentCount = 0; var projectCount = 0%>
+		<% tracking.forEach(function(tracked){ %>
+			<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
+				<% if(currentUser.email === tracked.author.email) { %>
+					<% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
+						<% strCount++ %>
+					<% } %>
+					<% if(tracked.buildPkg === "Essential" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
+						<% essCount++ %>
+					<% } %>
+					<% if(tracked.taskTypes[i].taskTypeName === "Production Change" && tracked.archive == !true){ %>
+						<% prodCount++ %>
+					<% } %>
+					<% if(tracked.taskTypes[i].taskTypeName === "T.LINK Branding" && tracked.archive == !true){ %>
+						<% tlinkCount++ %>
+					<% } %>
+					<% if(tracked.taskTypes[i].taskTypeName === "Content Entry" && tracked.archive == !true){ %>
+						<% contentCount++ %>
+					<% } %>
+				<% } %>
+			<% } %>
+		<% }); %>
+		<% projects.forEach(function(project){ %>
+				<% if(currentUser.email === project.author.email) { %>
+					<% if(project.status === "Completed"){ %>
+						<% projectCount++ %>
+					<% } %>
+				<% } %>
+		<% }); %>
 <div id="dashboard">
 	<div class="container">
 		<div class="developer flexbox flexLeft">
@@ -68,7 +101,7 @@
 					<h2>Site Builds</h2>
 					<div class="wrapper flexbox">
 						<div class="column flexbox">
-							<div class="cell graph"><span class="circle showEssentials"><%= essCount++ %></span></div>
+							<div class="cell graph"><span class="circle showEssentials"><%= essCount %></span></div>
 							<div class="cell build">Essentials</div>
 						</div>
 						<div class="column flexbox">
@@ -93,6 +126,10 @@
 					<div class="row flexbox showContent">
 						<div class="cell task">Content Entry</div>
 						<div class="cell taskNumber"><%= contentCount %></div>
+					</div>
+					<div class="row flexbox showProject">
+						<div class="cell task">Projects Completed</div>
+						<div class="cell taskNumber"><%= projectCount %></div>
 					</div>
 				</div>
 			</div>
@@ -357,6 +394,9 @@
           // list of team members drop down when you click the purple arrow beside your name
           $('.selectTeamMember .fa-angle-down').click(function() {
               $('#allTeamMembers').slideToggle();
+					});
+					$('.selectMonth .fa-angle-down').click(function() {
+              $('#allMonths').slideToggle();
           });
 
           // when you click the purple arrow beside a task it expands for further info
@@ -389,6 +429,23 @@
             $('#dashProd, #dashEssential, #dashTlink, #dashStarter').hide();
             $('#bottomRow, #dashContent').fadeIn("slow");
           });
-      });
+			});
+			var month = new Array();
+				month[0] = "January";
+				month[1] = "February";
+				month[2] = "March";
+				month[3] = "April";
+				month[4] = "May";
+				month[5] = "June";
+				month[6] = "July";
+				month[7] = "August";
+				month[8] = "September";
+				month[9] = "October";
+				month[10] = "November";
+				month[11] = "December";
+
+    var d = new Date();
+    var n = month[d.getMonth()];
+    document.getElementById("thisMonth").innerHTML = n;
     </script>
 <% include partials/footer %>

@@ -41,7 +41,7 @@ app.use(express.static("public"));
 app.use('/downloads', express.static('routes/word'))
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(methodOverride("_method"));
-app.use(bodyParser());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(flash());
 //==============================================================================

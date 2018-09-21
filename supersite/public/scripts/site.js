@@ -10,15 +10,26 @@ setTimeout(function() {
         $(this).parent().parent().next().toggleClass("open");
     });
 //Dashboard Name Drop down and Select
-  $(".dropdown dd ul li a").click(function() {
+  $(".selectTeamMember .dropdown dd ul li a").click(function() {
     var text = $(this).html();
-    $(".dropdown dt a h4").html(text);
-    $(".dropdown dd ul").hide();
+    $(".selectTeamMember .dropdown dt a h4").html(text);
+    $(".selectTeamMember .dropdown dd ul").hide();
   }); 
   $(document).on('click', function(e) {
     var $clicked = $(e.target);
     if (! $clicked.parents().hasClass("dropdown"))
-      $(".dropdown dd ul").hide();
+      $(".selectTeamMember .dropdown dd ul").hide();
+  });
+  //Dashboard MOnth Drop Down and Select
+  $(".selectMonth .dropdown dd ul li a").click(function() {
+    var text = $(this).html();
+    $(".selectMonth .dropdown dt a h4").html(text);
+    $(".selectMonth .dropdown dd ul").hide();
+  }); 
+  $(document).on('click', function(e) {
+    var $clicked = $(e.target);
+    if (! $clicked.parents().hasClass("dropdown"))
+      $(".selectMonth .dropdown dd ul").hide();
   });
 // Assigns names to textboxes for blueprint wizard
   var parentCount = 0;
