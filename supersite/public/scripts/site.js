@@ -127,7 +127,7 @@ $("#howManyDoctors").change(function () {
 $("#howManyOffices").change(function () {
   $("#howManyOfficesContainer").empty();
   for(i = 0; i < $(this).val(); i++) {
-    $('<div class="formField"><input type="text" name="blueprint[address]" placeholder="Address" /></div>').appendTo("#howManyOfficesContainer");
+    $('<div class="formField officeAddress"><input class="text" type="text" placeholder="Address" /><input type="text" class="number" placeholder="Building/Suite #" /><input type="text" class="city" placeholder="City" /><input type="text" class="state" placeholder="State" /><input type="text" class="zip" placeholder="Zip Code" /></div>').appendTo("#howManyOfficesContainer");
   }
 });
 // Toggles social media input screen
@@ -204,13 +204,25 @@ $("#socialMedia a.close, #socialMedia a.submit").click(function(){
       }
     });
     // Count and assigns names to office input
-    var officecount = 1;
-    $("#howManyOfficesContainer input").each(function(){
-      if(!$(this).val() == ""){
-        $(this).attr("name", "blueprint[officeAddress]["+officecount+"][address]");
-        officecount++;
+    var officecount = 0;
+    $("#howManyOfficesContainer div.officeAddress").each(function(){
+      if(!$(this).children().eq(0).val() == ""){
+        $(this).children().eq(0).attr("name", "blueprint[officeAddress]["+officecount+"][address]");
       }
-    });
+      if(!$(this).children().eq(1).val() == ""){
+        $(this).children().eq(1).attr("name", "blueprint[officeAddress]["+officecount+"][number]");
+      }
+      if(!$(this).children().eq(2).val() == ""){
+        $(this).children().eq(2).attr("name", "blueprint[officeAddress]["+officecount+"][city]");
+      }
+      if(!$(this).children().eq(3).val() == ""){
+        $(this).children().eq(3).attr("name", "blueprint[officeAddress]["+officecount+"][state]");
+      }
+      if(!$(this).children().eq(4).val() == ""){
+        $(this).children().eq(4).attr("name", "blueprint[officeAddress]["+officecount+"][zip]");
+      }
+        officecount++;
+    }); 
   }
 
   // For image uploader preview 2 of 2
