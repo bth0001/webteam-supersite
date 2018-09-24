@@ -166,12 +166,12 @@ form.searchBox button {background-color: transparent; padding: 0; margin: auto; 
 h3.pageHeader {text-align:center; margin: 10px 0 5px;}
 
 /* dashboard - select team member */
-.selectTeamMember {position:relative;}
-.selectTeamMember .fa-angle-down {cursor: pointer;}
-.selectTeamMember h4, .selectTeamMember .fa-angle-down { display:inline-block}
-#allTeamMembers {background: #323232; position: absolute;  display:none; list-style-type:none; min-width: 150px; padding: 10px 0; right:auto; left: 0; z-index: 1; top: 35px;}
-#allTeamMembers a {color: #adadad; display: block; font-size: .85em; font-family: 'Roboto', sans-serif; font-weight: 400; padding: 8px 15px; text-decoration: none; transition: color .25s ease-in-out;}
-#allTeamMembers a:hover, #allTeamMembers a:focus {background-color: #19B9E7; color: #fff;}
+.selectTeamMember, .selectMonth {position:relative;}
+.selectTeamMember .fa-angle-down, .selectMonth .fa-angle-down {cursor: pointer;}
+.selectTeamMember h4, .selectTeamMember .fa-angle-down, .selectMonth h4, .selectMonth .fa-angle-down { display:inline-block}
+#allTeamMembers, #allMonths {background: #323232; position: absolute;  display:none; list-style-type:none; min-width: 150px; padding: 10px 0; right:auto; left: 0; z-index: 1; top: 35px;}
+#allTeamMembers a, #allMonths a {color: #adadad; display: block; font-size: .85em; font-family: 'Roboto', sans-serif; font-weight: 400; padding: 8px 15px; text-decoration: none; transition: color .25s ease-in-out;}
+#allTeamMembers a:hover, #allTeamMembers a:focus, #allMonths a:hover, #allMonths a:focus {background-color: #19B9E7; color: #fff;}
 
 /*Dashboard*/
 #dashboard {margin:50px 0;}

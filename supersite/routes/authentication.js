@@ -73,7 +73,7 @@ router.get("/signup", function(req, res){
   //Logout route
   router.get("/logout", function(req, res){
     req.logout();
-    req.flash("success", "Your have successfully logged out!");
+    req.flash("success", "You have successfully logged out!");
     res.redirect("/");
   });
   //==============================================================================
@@ -97,11 +97,11 @@ router.get("/signup", function(req, res){
             req.flash('error', 'No account found');
             return res.redirect('/edit-profile');
         }
-        var email = req.body.email.trim();
-        var firstName = req.body.firstName.trim();
-        var lastName = req.body.lastName.trim();
-        var profileImageUrl = req.body.profileImageUrl.trim();
-        var team = req.body.team.trim();
+        var email = req.body.email;
+        var firstName = req.body.firstName;
+        var lastName = req.body.lastName;
+        var profileImageUrl = req.body.profileImageUrl;
+        var team = req.body.team;
         // validate 
         if (!email || !firstName || !lastName || !team) { // simplified: '' is a falsey
             req.flash('error', 'One or more fields are empty');

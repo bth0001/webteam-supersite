@@ -74,7 +74,7 @@ const teamTrackerSchema = new mongoose.Schema({
       type: String
     }
   }]
-});
+}, {timestamps: {createdAt: 'created_at'}});
 
 
 const TeamTracker = mongoose.model("TeamTracker", teamTrackerSchema);

@@ -18,23 +18,18 @@
 	<script>
 		function defaultImg() {
 			if (profileImageUrl === "") {
-				document.getElementById('userProfile').src = "http://webplus.televoxsites.com/projects/supersite/web.jpg";
+				document.getElementById('userProfile').src = "/images/Projectweb.png";
 			}
-
 		}
 		
 			// if on the home page, remove active classes
 			if (window.location.pathname === "/") {
 			document.getElementsByTagName('a').classList.remove('is-active');
 			}
-
-
 		$(document).ready(function () {
 			$('#profileBar .fa-angle-down').on('click', function(){
 				$('#profileBar .dropdown').slideToggle();
 		});
-			
-		
 		// add active class to parent menu item when you're on its page
 		$('#navBar a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('is-active');
 	});
@@ -48,11 +43,11 @@
 
 	if(h == 0){
 		h = 12;
-	} else if(h > 12){
+	} 
+	if(h >= 12){
 		h = h - 12;
 		diem = "PM";
 	}
-
     m = checkTime(m);
     s = checkTime(s);
     document.getElementById('clock').innerHTML =
@@ -91,7 +86,7 @@ function checkTime(i) {
 						<div class="flexbox flexRight">
 							<div class="profileImage">
 								<a href="/edit-profile">
-									<img onerror="this.src='http://webplus.televoxsites.com/projects/supersite/web.jpg'" src="/<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" />
+									<img onerror="this.src='/images/Projectweb.png'" src="/<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" />
 								</a>
 							</div>
 							<div class="profileText">

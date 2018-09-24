@@ -12,7 +12,7 @@ const taskTypeSchema = new mongoose.Schema({
             type: String
           }
        
-});
+}, {timestamps: {createdAt: 'created_at'}});
 
 
 const TaskType = mongoose.model("TaskType", taskTypeSchema);
