@@ -117,6 +117,22 @@ router.get("/new", function(req, res) {
     })
   })
 });
+
+
+// Find and Update
+router.put("/:id", function(req, res){
+  TeamTracker.findByIdAndUpdate(req.params.id, function(err, updatedTracker){
+     if(err){
+         req.flash("error", err.message);
+         res.redirect("/tracker");
+      } else {
+          req.flash("success", "You have successfully updated the Task");
+          res.redirect("/tracker/" + req.params.id);
+      }
+  });
+ });
+
+// Delete
 router.delete("/see-all/delete/:id", function(req, res) {
   Blueprint.findByIdAndRemove(req.params.id, function(err) {
     if (err) {

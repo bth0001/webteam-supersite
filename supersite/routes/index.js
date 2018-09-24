@@ -33,7 +33,7 @@ router.get("/search", function(req, res){
               searchWord: req.query.search
             });
         }
-      });   
+      }).sort({});   
       } else {
         req.flash("error", "You didn't enter a search word.");
         res.redirect("/dashboard");

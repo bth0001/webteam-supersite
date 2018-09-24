@@ -10,116 +10,161 @@ const blueprintWizardSchema = new mongoose.Schema({
   },
   onboarder: {
     type: String,
-    ref: "User"
+    ref: "User",
+    default: null
   },
   designer: {
       type: String,
-      ref: "User"
+      ref: "User",
+      default: null
   },
   homeScreenshot: {
-    type: String
+    type: String,
+    default: null
   },
   interiorScreenshot: {
-    type: String
+    type: String,
+    default: null
   },
   howManyDoctors: {
-    type: Number
+    type: Number,
+    default: null
   },
   doctors: [{
     doctorName: {
       type: String, 
-      default: ""
+      default: null
     }
   }],
   practiceName: {
-    type: String
+    type: String,
+    default: null
   },
   contactName: {
-    type: String
+    type: String,
+    default: null
   },
   contactEmail: {
-    type: String
+    type: String,
+    default: null
   },
   contactNumber: {
-    type: String
+    type: String,
+    default: null
   },
   howManyOffices: {
-    type: String
+    type: String,
+    default: null
   },
   officeAddress: [{
     address: {
-      type: String
+      type: String,
+      default: null
+    },
+    number: {
+      type: String,
+      default: null
+    },
+    city: {
+      type: String,
+      default: null
+    },
+    state: {
+      type: String,
+      default: null
+    },
+    zip: {
+      type: String,
+      default: null
     }
   }],
   dearDoctorID: {
-    type: String
+    type: String,
+    default: null
   },
   practiceEmail: {
-    type: String
+    type: String,
+    default: null
   },
   practicePhone: {
-    type: String
+    type: String,
+    default: null
   },
   practiceFax: {
-    type: String
+    type: String,
+    default: null
   },
   currentSiteURL: {
-    type: String
+    type: String,
+    default: null
   },
   clientUsername: {
-    type: String
+    type: String,
+    default: null
   },
   clientPassword: {
-    type: String
+    type: String,
+    default: null
   },
   tlink: {
-    type: String
+    type: String,
+    default: null
   },
   copywriteNotes: {
-    type: String
+    type: String,
+    default: null
   },
   designerNotes: {
-    type: String
+    type: String,
+    default: null
   },
   specialNotes: {
       notes: {
-          type: String
+          type: String,
+          default: null
       }
   },
   developerNotes: {
-    type: String
+    type: String,
+    default: null
   },
   siteArchitecture: [{
       parentPageName: {
         type: String, 
-        default: ""
+        default: null
       },
       parentPageNotes: {
         type: String,
-        default: ""
+        default: null
       },
       subpage: [{
         childPageName: {
           type: String,
-          default: ""
+          default: null
         },
         childPageNotes: {
           type: String,
-          default: ""
+          default: null
         }
       }]
   }],
   socialMedia: [{
     name: {
-      type: String
+      type: String,
+      default: null
     },
     link: {
-      type: String
+      type: String,
+      default: null
     }
   }],
   dateCreated: { 
     type : Date, 
     default: Date.now 
+  },
+  archive: {
+    type: Boolean,
+    default: false
   }
 });
 
