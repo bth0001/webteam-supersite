@@ -30,7 +30,8 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
       </div>
     <% } %>
   <% blueprints.forEach(function(blueprint){ %>
-    <%= blueprint %>
+
+    <% if (blueprint.archive === false) { %>
   <div class="blueprintContainer">
     <div class="top">
       <div class="practiceName">
@@ -64,6 +65,11 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
             <button class="btn delete">Delete</button>
         </form>
         </div>
+
+
+
+
+        
     </div>
     <!--top-->
     <div class="bottom">
@@ -109,6 +115,7 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
     </div>
     <!--bottom-->
   </div>
+  <% } %>
   <% }); %>
 
 </div>

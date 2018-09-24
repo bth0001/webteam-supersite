@@ -22,7 +22,7 @@ setTimeout(function() {
   });
 // Assigns names to textboxes for blueprint wizard
   var parentCount = 0;
-  var htmlChild = '<div class="child"> <span>Child Page</span> <input type="text" placeholder="Child Page Name" value=""/> <input type="text" placeholder="Child Page Notes" value=""/><a onclick="this.parentNode.remove()" class="removeSpecificSubpage">---</a> </div>';
+  var htmlChild = '<div class="child"> <span>Child Page</span> <input type="text" placeholder="Child Page Name" value=""/> <input type="text" placeholder="Child Page Notes" value=""/><a onclick="this.parentNode.remove()" class="removeSpecificSubpage"></a> </div>';
   $("#pageTable a.addSubpage").click(function () {
     $(htmlChild).insertBefore($(this));
   });
@@ -135,7 +135,7 @@ $("#socialMedia a.close, #socialMedia a.submit").click(function(){
       emptycount++
       var socialsite = $(this).prev().val();
       var sociallink = $(this).val();
-      $("<li>"+socialsite+": <a href='"+sociallink+"'>"+sociallink+"</a></li>")
+      $("<li>"+socialsite+": <a target='_blank' href='"+sociallink+"'>"+sociallink+"</a></li>")
         .appendTo("#socialMediaPreview ul");
     }
   });
@@ -151,7 +151,7 @@ $("#socialMedia a.close, #socialMedia a.submit").click(function(){
   function assignNames() {
     var parentCount = 0;
     var childCount = 0;
-    var htmlChild = '<div class="child"> <span>Child Page</span> <input type="text" placeholder="Child Page Name" value=""/> <input type="text" placeholder="Child Page Notes" value=""/><a onclick="this.parentNode.remove()" class="removeSpecificSubpage">---</a> </div>';
+    var htmlChild = '<div class="child"> <span>Child Page</span> <input type="text" placeholder="Child Page Name" value=""/> <input type="text" placeholder="Child Page Notes" value=""/><a onclick="this.parentNode.remove()" class="removeSpecificSubpage"></a> </div>';
     $("#pageTable div.pageInput").each(function () {
       $("#pageTable div.pageInput div.parent").each(function () {
         if (!$(this).next().hasClass("child")) {
