@@ -1,0 +1,101 @@
+/* Blueprint Temp Styles */
+#blueprint {padding: 3vw 5vw; background-color: #fff; margin: 20px 0; border: 1px solid #C6C6C6}
+#blueprint div.row {margin: 0 0 20px;}
+#blueprint div.row.center {text-align:left; align-items: center; justify-content: center;}
+#blueprint div.row div.text {flex: 1 100%;}
+#blueprint div.row div.formField {margin: 0 10px 0 0}
+#blueprint div.formField.full {flex: 1 100%; margin: 0 0 10px !important;}
+#blueprint div.formField input {width: 100%}
+#howManyDoctorsContainer, #howManyOfficesContainer {flex: 1 100%; margin: 20px 0 0}
+#howManyDoctorsContainer > div.formField:not(:last-of-type), #howManyOfficesContainer > div.formField:not(:last-of-type) {margin: 0 0 10px !important;}
+#blueprint input, #blueprint textarea, #blueprint select {border-radius: 3px; border: 1px solid #ddd; color: #ada9bb; font-family: 'Roboto Condensed', sans-serif; font-size: 1em; outline: none; padding: 5px; width: 100%;}
+#overlay {z-index: 1999;background-color: #000;position: fixed;top: 0;left: 0;right: 0;bottom: 0;height: 100vw;width: 100vw;opacity: .5;}
+#socialMedia {position: fixed;top: 50%;left: 50%;bottom: auto;right: auto;transform: translate(-50%,-50%);max-height: 0;overflow: hidden;transition: opacity 250ms ease;opacity: 0;background-color: #fff;width: 100%;max-width: 600px;}
+#socialMedia.open {opacity: 1; max-height: none; padding: 30px 20px; z-index: 2000;}
+#socialMedia a.close {position: absolute; top: 3px; right: 3px; left: auto; bottom: auto; cursor: pointer;}
+#socialMedia div.cell {display: flex; flex-wrap: nowrap; text-align: right; margin: 0 0 10px}
+#socialMedia div.cell span {flex: 0 115px; padding: 0 5px 0 0;}
+#socialMedia div.cell input[type*="hidden"] {display: none;}
+#socialMedia div.cell input[type*="text"] {flex: 1 1;}
+/* Office Information */
+#blueprint div.row div.formField.officeAddress {margin: 0 0 10px;}
+#blueprint div.officeAddress {display: flex; flex-wrap: nowrap;}
+#blueprint div.officeAddress input {margin: 0 10px 0 0;}
+#blueprint div.officeAddress input.text {flex: 1 30%}
+#blueprint div.officeAddress input.number {flex: 1 10%}
+#blueprint div.officeAddress input.city {flex: 1 20%}
+#blueprint div.officeAddress input.state {flex: 1 10%}
+#blueprint div.officeAddress input.zip {flex: 1 10%; margin: 0;}
+/*social media icons*/
+#socialMedia span:before {font-family: FontAwesome; font-size: 20px; padding: 0 5px 0 0;}
+#socialMedia span.facebook:before {content: "\f230"}
+#socialMedia span.google:before {content: "\f0d5"}
+#socialMedia span.instagram:before {content: "\f16d"}
+#socialMedia span.linkedin:before {content: "\f08c"}
+#socialMedia span.twitter:before {content: "\f099"}
+#socialMedia span.pinterest:before {content: "\f0d2"}
+#socialMedia span.youtube:before {content: "\f167"}
+#socialMedia span.rssfeed:before {content: "\f143"}
+#socialMedia span.blogger:before {content: "\f37c"}
+#socialMedia span.yelp:before {content: "\f1e9"}
+#socialMedia span.angieslist:before {content: "\f209"}
+#errorScreen {position: fixed;top: 50%;left: 50%;bottom: auto;right: auto;transform: translate(-50%,-50%);max-height: 0;overflow: hidden;transition: opacity 250ms ease;opacity: 0;background-color: #fff;width: 100%;max-width: 600px;}
+#errorScreen.open {opacity: 1; max-height: none; padding: 30px 20px; z-index: 2000;}
+#blueprint input.highlight {animation: pulse .75s infinite alternate ease-in-out;}
+@keyframes pulse { 0% {box-shadow: inset 0 0 0px 2px rgb(247,38,38);} 100% {box-shadow: inset 0 0 0px 1px rgb(247,38,38);}}
+#errorScreen ul {display: flex; flex-wrap: wrap;}
+#errorScreen ul > li {flex: 1 50%;}
+#errorScreen ul > li > a {cursor: pointer;}
+#errorScreen ul > li > a:hover, #errorScreen ul > li > a:focus {text-decoration: underline;}
+#socialMediaPreview {margin: 20px 0 0;}
+#blueprint a.submit.button {margin: 15px auto 0;}
+#enterSocialMedia, #blueprint a.button {background-color: #2637B0; border: none; display: block; cursor: pointer; font-size: 1em; padding: 5px 15px; text-align: center; margin: 0; width: 200px; cursor: pointer; font-family: 'Roboto Condensed', sans-serif; font-weight: 700; color: #fff; text-decoration: none; transition: background 0.3s;}
+#enterSocialMedia:hover, #enterSocialMedia:focus, #blueprint a.button:hover, #blueprint a.button:focus {background: none; box-shadow: inset 0px 0px 0px 1px rgba(38, 55, 176, 1); color: #2637B0;}
+/*buttons*/
+#submit {background-color: #2637B0; border: none; display: block; font-size: 1.25em; padding: 15px; text-align: center; margin: 30px 0 0; width: 100%; cursor: pointer; font-family: 'Roboto Condensed', sans-serif; font-weight: 700; color: #fff; text-decoration: none; transition: background 0.3s;}
+#submit:hover {background: none; box-shadow: inset 0px 0px 0px 1px rgba(38, 55, 176, 1); color: #2637B0;}
+#errorScreen div.buttons {text-align: center;}
+#errorScreen div.buttons a {display: inline-block; border: 1px solid; padding: 3px 20px; border-radius: 6px; cursor: pointer; color: #fff; border-radius: 6px; padding: 5px 20px; border: solid #1f628d 1px; text-decoration: none; transition: all 250ms ease}
+#errorScreen div.buttons a.yes {margin: 0 5px 0 0; background-image: linear-gradient(to bottom, #3498db, #2980b9);}
+#errorScreen div.buttons a.yes:hover, #errorScreen div.buttons a.yes:focus {background-image: linear-gradient(to bottom, #2980b9, #3498db);}
+#errorScreen div.buttons a.no {background: linear-gradient(to bottom, #eb5555, #d11b1b);}
+#errorScreen div.buttons a.no:hover, #errorScreen div.buttons a.no:focus {background: linear-gradient(to bottom, #cc1919, #d12e2e);}
+form#blueprint {max-width: none;}
+/* Site Architecture */
+#pageTable {background-color: #d8dcff;padding: 20px;border-radius: 3px;text-align: center;}
+/*add/remove parent buttons*/
+#pageTable a {cursor: pointer;}
+#pageTable > a {background-color: #2637B0;color: #fff;box-shadow: inset 0px 0px 0px 1px rgba(38, 55, 176, 1);display: inline-block;font-weight: bold;padding: 5px 20px;font-size: 1.15em;transition: background 0.3s;letter-spacing: 1px;}
+#pageTable > a:hover, #pageTable > a:focus {background-color: transparent; color: #2637B0;}
+#pageTable > a.removeParent {margin: 0 0 0 10px;}
+#pageTable > a.addParent {margin: 0 auto;}
+#pageTable > a:before {font-family: FontAwesome; display: inline-block; padding: 0 7px 0 0;}
+#pageTable > a.removeParent:before {content: "\f068";}
+#pageTable > a.addParent:before {content: "\f067"}
+#pageTable a.removeAll:before, #pageTable a.removeSpecificSubpage:before {content: "\f014"; font-family: FontAwesome; color: #1a1a1a;}
+/*add/remove child buttons*/
+#pageTable > div.pageInput > a.removeSubpage {display: none}
+#pageTable > div.pageInput > div.child ~ a {display: inline-block;font-weight: bold;letter-spacing: .5px;}
+#pageTable > div.pageInput > a {background-color: #2637B0;color: #fff;box-shadow: inset 0px 0px 0px 1px rgba(38, 55, 176, 1);padding: 5px 10px;transition: background 0.3s;margin: 10px 0 0;display: inline-block;}
+#pageTable > div.pageInput > a:hover, #pageTable > div.pageInput > a:focus {background-color: transparent; color: #2637B0;}
+#pageTable > div.pageInput > a.addSubpage {font-weight: bold; letter-spacing: .5px;}
+#pageTable > div.pageInput > a.removeSubpage {margin: 0 0 0 10px;}
+#pageTable > div.pageInput > a:before {font-family: FontAwesome; display: inline-block; padding: 0 5px 0 0;}
+#pageTable > div.pageInput > a.addSubpage:before {content: "\f067"}
+#pageTable > div.pageInput > a.removeSubpage:before {content: "\f068";}
+/*input rows parent*/
+#pageTable > div.pageInput {margin: 20px 0 0;text-align: left;}
+#pageTable > div.pageInput:not(:first-of-type) {border-top: 1px solid #cfd1df;padding: 20px 0 0;}
+#pageTable > div.pageInput > div.parent {display: flex;flex-wrap: wrap;align-items: center;}
+#pageTable > div.pageInput > div.parent > span {flex: 1 100%;font-family: 'Raleway', sans-serif;font-size: 1.5em;color: #252525;line-height: 1.35em;margin: 0 0 .15em;font-weight: bold;}
+#pageTable > div.pageInput > div.parent > input:first-of-type {flex: 0 200px;margin: 0 20px 0 0;}
+#pageTable > div.pageInput > div.parent > input:last-of-type {flex: 1 50%;}
+#pageTable > div.pageInput > div.parent > a.removeAll {flex: 1 100%;flex: 0 30px;height: 30px;background-color: #f25757; display: flex;align-items: center;justify-content: center;border-radius: 0;margin: 0 0 0 10px; transition: opacity 250ms ease;}
+#pageTable > div.pageInput > div.parent > a.removeAll:hover {opacity: .75}
+#pageTable > div.pageInput > div.child {background-color: #f1f2ff;padding: 20px;display: flex;flex-wrap: wrap;align-items: center;}
+#pageTable > div.pageInput > div.child:nth-of-type(2) {margin: 20px 0 0;}
+#pageTable > div.pageInput > div.child > span {flex: 1 100%;font-weight: bold;color: #545454;}
+#pageTable > div.pageInput > div.child > input:first-of-type {flex: 0 200px;margin: 0 20px 0 0;}
+#pageTable > div.pageInput > div.child > input:last-of-type {flex: 1 50%;}
+#pageTable > div.pageInput > div.child > a {flex: 0 30px;height: 30px;background-color: #f25757;color: #fff;display: flex;align-items: center;justify-content: center;border-radius: 0;margin: 0 0 0 10px; transition: opacity 250ms ease;}
+#pageTable > div.pageInput > div.child > a:hover, #pageTable > div.pageInput > div.child > a:focus {opacity: .75;}

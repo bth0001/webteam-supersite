@@ -10,6 +10,8 @@ var flatten = require('flat');
 var TeamTracker = require("../models/teamTracker");
 var User = require("../models/user");
 var Blueprint = require("../models/blueprint");
+
+// Main landing page for blueprints
 router.get("/", function(req, res) {
   TeamTracker.find({}, function(eryr, allTracks) {
     User.find({}, function(err, allUsers) {
@@ -27,6 +29,8 @@ router.get("/", function(req, res) {
     })
   })
 });
+
+// See all blueprints route (not archived)
 router.get("/see-all", function(req, res) {
   TeamTracker.find({}, function(err, allTracks) {
     User.find({}, function(err, allUsers) {
@@ -44,6 +48,27 @@ router.get("/see-all", function(req, res) {
     })
   })
 });
+
+// See all blueprints route (arhived)
+router.get("/see-all/archive", function(req, res) {
+  TeamTracker.find({}, function(err, allTracks) {
+    User.find({}, function(err, allUsers) {
+      Blueprint.find({}, function(err, allBlueprints) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("blueprint-generator/archive", {
+            tracking: allTracks,
+            users: allUsers,
+            blueprints: allBlueprints
+          });
+        }
+      })
+    })
+  })
+});
+
+// New blueprint page
 router.get("/new", function(req, res) {
   TeamTracker.find({}, function(err, allTracks) {
     User.find({}, function(err, allUsers) {
@@ -61,6 +86,8 @@ router.get("/new", function(req, res) {
     })
   })
 });
+
+// Grabs user input and creates new blueprint
 router.post("/new", function(req, res) {
   var author = {
     id: req.user._id,
@@ -79,6 +106,8 @@ router.post("/new", function(req, res) {
     }
   });
 });
+
+// Sends data to docx template and downloads the file onto the users computer
 router.get("/see-all/download/:id", function(req, res) {
   var data = req.params.id;
   Blueprint.findById(data, function(err, findBlueprint) {
@@ -100,6 +129,7 @@ router.get("/see-all/download/:id", function(req, res) {
     }
   });
 });
+// New blueprint page
 router.get("/new", function(req, res) {
   TeamTracker.find({}, function(err, allTracks) {
     User.find({}, function(err, allUsers) {
@@ -118,16 +148,16 @@ router.get("/new", function(req, res) {
   })
 });
 
-
 // Find and Update
 router.put("/:id", function(req, res){
-  TeamTracker.findByIdAndUpdate(req.params.id, function(err, updatedTracker){
+  var blueprint = req.body.blueprint;
+  Blueprint.findByIdAndUpdate(req.params.id, blueprint, function(err, updatedTracker){
      if(err){
          req.flash("error", err.message);
-         res.redirect("/tracker");
+         res.redirect("/blueprint-generator/see-all");
       } else {
-          req.flash("success", "You have successfully updated the Task");
-          res.redirect("/tracker/" + req.params.id);
+          req.flash("success", "You have successfully deleted the blueprint!");
+          res.redirect("/blueprint-generator/see-all");
       }
   });
  });

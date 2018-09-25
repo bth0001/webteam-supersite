@@ -20,8 +20,7 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
 </style>
 
 <div id="overview" class="center">
-    <h1>All Current Blueprints</h1>
-    <a href="/blueprint-generator/see-all/archive">Archived Blueprints</a>
+    <h1>All Archived Blueprints</h1>
   </div>
 <div class="container" style="margin: 30px auto;">
     <% if(blueprints.length === 0) { %>
@@ -32,40 +31,7 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
     <% } %>
   <% blueprints.forEach(function(blueprint){ %>
 
-    <% if (blueprint.archive === false) { %>
-
-      <%= blueprint %>
-      <br /><br />
-
-
-      <p><strong>Created By:</strong> <%= blueprint.author.firstName %></p>
-
-      <% if (blueprint.specialNotes.notes != null || blueprint.specialNotes.length > 0){ %>
-          <p><strong>Notes:</strong> <%= blueprint.specialNotes.notes %></p>
-      <% } %>
-
-
-
-      <% if (blueprint.designer != null || blueprint.designer != undefined){ %>
-          <p><strong>Designer:</strong> <%= blueprint.designer %></p>
-      <% } %>
-
-      <% if (blueprint.homeScreenshot != '' || blueprint.homeScreenshot.length > 0){ %>
-        <p><strong>Home Screenshot:</strong> <%= blueprint.homeScreenshot %></p>
-      <% } %>
-
-      <% if (blueprint.interiorScreenshot != '' || blueprint.interiorScreenshot.length > 0){ %>
-        <p><strong>Interior Screenshot:</strong> <%= blueprint.interiorScreenshot %></p>
-      <% } %>
-
-
-
-
-
-
-
-
-
+    <% if (blueprint.archive === true) { %>
 
   <div class="blueprintContainer">
     <div class="top">
@@ -92,14 +58,14 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
       <div class="seeMore">
         <a class="more"></a>
       </div>
-      <div class="download">
-        <a href="/blueprint-generator/see-all/download/<%= blueprint._id %>" class="btn download">Download</a>
-      </div>
       <div class="delete">
-          <form id="delete-form" action="/blueprint-generator/<%= blueprint._id %>?_method=PUT" method="POST">
-            <input type="hidden" name="blueprint[archive]" value="true" />
-            <button class="btn delete">Delete</button>
-        </form>
+            <form id="delete-form" action="/blueprint-generator/<%= blueprint._id %>?_method=PUT" method="POST">
+                <input type="hidden" name="blueprint[archive]" value="false" />
+                <button class="btn delete">Un-Archive</button>
+            </form>
+            <form id="delete-form" action="/blueprint-generator/see-all/delete/<%= blueprint._id %>?_method=DELETE" method="POST">
+                <button class="btn delete">Delete</button>
+              </form>
         </div>
 
 
@@ -140,18 +106,9 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
           <ul class="parent">
             <% for (iParent = 0; iParent < blueprint.siteArchitecture.length; iParent++) { %>
             <li>
-              <strong><%= blueprint.siteArchitecture[iParent].parentPageName %></strong>
+              <%= blueprint.siteArchitecture[iParent].parentPageName %>
               <%= blueprint.siteArchitecture[iParent].parentPageNotes %>
-              <% if (blueprint.siteArchitecture[iParent].subpage.length > 0) { %>
-                <ul>
-                    <% for (iChild = 0; iChild < blueprint.siteArchitecture[iParent].subpage.length; iChild++) { %>
-                      <li>
-                        <strong><%= blueprint.siteArchitecture[iParent].subpage[iChild].childPageName %></strong> - 
-                        <%= blueprint.siteArchitecture[iParent].subpage[iChild].childPageNotes %>
-                      </li>
-                    <% } %>
-                </ul>
-              <% } %>
+             
             </li>
             <% } %>
           </ul>

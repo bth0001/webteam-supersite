@@ -64,6 +64,15 @@ setTimeout(function() {
       $(this).parent().parent().remove();
     }
   });
+  //Change title depending on user input
+  // $("input.parentText").focusout(function(){
+  //   var title = $(this).val();
+  //   if (title.length > 0){
+  //     $(this).prev().text(title);	
+  //   } else {
+  //     $(this).prev().text("Parent Page");
+  //   }
+  // });
 
   // For image uploader preview 1 of 2
   $("#image").change(function() {
