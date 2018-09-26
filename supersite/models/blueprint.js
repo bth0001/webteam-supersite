@@ -18,6 +18,9 @@ const blueprintWizardSchema = new mongoose.Schema({
       ref: "User",
       default: null
   },
+  package: {
+    type: String
+  },
   homeScreenshot: {
     type: String,
     default: null
@@ -97,6 +100,10 @@ const blueprintWizardSchema = new mongoose.Schema({
   currentSiteURL: {
     type: String,
     default: null
+  },
+  provisionLink: {
+    type: String,
+    default: ""
   },
   clientUsername: {
     type: String,

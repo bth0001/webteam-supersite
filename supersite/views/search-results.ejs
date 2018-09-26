@@ -3,6 +3,27 @@
     <h1>Showing Search Results for: <strong><%= searchWord %></strong>...</h1>
     
 </div>
+
+<div class="history">
+    <h3>Recent Searches</h3>
+    <ul>
+        <% for(var i=0;i < searchHistory.length; i++){ %>
+            <li>
+                <form action="/search" method="GET" class="">
+                    <input value="<%= searchHistory[i] %>" type="hidden" name="search" placeholder="Custom Search">
+                    <button class="nobutton"><%= searchHistory[i] %></button>
+                </form>
+            </li>
+        <% } %>
+    </ul>
+    <a href="/clear-search">Clear</a>
+</div>
+
+<style>
+button.nobutton {display: inline-block; -webkit-appearance: none; background-color: transparent; border: 0; padding: 0; cursor: pointer;}
+button.nobutton:hover, button.nobutton:focus {text-decoration: underline;}
+</style>
+
 <div class="container">
 
 <% if (tracking.length > 0){ %>
