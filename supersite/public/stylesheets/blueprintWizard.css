@@ -1,5 +1,5 @@
 /* Blueprint Temp Styles */
-#blueprint {padding: 3vw 5vw; background-color: #fff; margin: 20px 0; border: 1px solid #C6C6C6}
+#blueprint {padding: 3vw 5vw; background-color: #fff; margin: 4vw 0; border: 1px solid #C6C6C6}
 #blueprint div.row {margin: 0 0 20px;}
 #blueprint div.row.center {text-align:left; align-items: center; justify-content: center;}
 #blueprint div.row div.text {flex: 1 100%;}

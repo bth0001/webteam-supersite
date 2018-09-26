@@ -1,7 +1,22 @@
 <% include ../partials/header %>
 <link rel="stylesheet" type="text/css" href="/stylesheets/blueprintWizard.css" />
 
+<script>
+  // $(".hidden").each(function(){
+  //   $(this).addClass("package");
+  // });
+  // $("#package").change(function(){
+  //   if($(this).val("Essential")){
+  //     $(".package").each(function(){
+  //       $(this).removeClass("hidden");
+  //     });
+  //   }
+  // });
+</script>
 
+<style>
+  /* .hidden {display: none !important;} */
+</style>
 
 <div id="overview" class="center">
     <h1>New Blueprint Wizard</h1>
@@ -10,6 +25,16 @@
   <form id="blueprint" onsubmit="assignNames()" action="/blueprint-generator/new" method="POST">
 
     <div class="row center">
+
+        <div class="formField">
+            <label for="blueprint[package]">Build Package:</label>
+            <select name="blueprint[package]" id="package">
+              <option value="Select Package" disabled selected>Select Package</option>
+              <option value="Essential">Essential</option>
+              <option value="Starter">Starter</option>
+              </select>
+          </div><!--formField-->
+
       <div class="formField">
         <label for="blueprint[onboarder]">Onboarder:</label>
         <select name="blueprint[onboarder]">
@@ -22,7 +47,7 @@
       </select>
       </div><!--formField-->
 
-      <div class="formField">
+      <div class="formField hidden">
         <label for="blueprint[designer]">Designer:</label>
         <select name="blueprint[designer]">
         <option value="Select Designer" disabled selected>Select Designer</option>
@@ -33,15 +58,6 @@
         <% }); %>
         </select>
       </div><!--formField-->
-
-      <div class="formField">
-          <label for="blueprint[package]">Build Package:</label>
-          <select name="blueprint[package]">
-            <option value="Select Package" disabled selected>Select Package</option>
-            <option value="Essential">Essential</option>
-            <option value="Starter">Starter</option>
-            </select>
-        </div><!--formField-->
 
     </div><!--row-->
 
@@ -67,7 +83,7 @@
 
     <hr />
 
-    <div class="row">
+    <div class="row hidden">
       <div class="text">
         <h3>Screenshots</h3>
       </div><!--text-->
