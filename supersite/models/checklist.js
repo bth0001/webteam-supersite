@@ -29,7 +29,8 @@ const developerChecklistSchema = new mongoose.Schema(
           type: String
         },
         taskStatus: {
-          type: String
+          type: String,
+          default: "N/A"
         },
         additionalNotes: {
           type: String
