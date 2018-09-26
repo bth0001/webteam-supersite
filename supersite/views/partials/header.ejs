@@ -5,8 +5,10 @@
 	<title>Strom Centre</title>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/solid.css" integrity="sha384-wnAC7ln+XN0UKdcPvJvtqIH3jOjs9pnKnq9qX68ImXvOGz2JuFoEiCjT8jyZQX2z" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/solid.css" integrity="sha384-wnAC7ln+XN0UKdcPvJvtqIH3jOjs9pnKnq9qX68ImXvOGz2JuFoEiCjT8jyZQX2z"
+	 crossorigin="anonymous">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -21,46 +23,47 @@
 				document.getElementById('userProfile').src = "/images/Projectweb.png";
 			}
 		}
-		
-			// if on the home page, remove active classes
-			if (window.location.pathname === "/") {
-			document.getElementsByTagName('a').classList.remove('is-active');
-			}
-		$(document).ready(function () {
-			$('#profileBar .fa-angle-down').on('click', function(){
-				$('#profileBar .dropdown').slideToggle();
-		});
-		// add active class to parent menu item when you're on its page
-		$('#navBar a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('is-active');
-	});
-	
-	function startTime() {
-    var today = new Date();
-	var diem = "AM";
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
 
-	if(h == 0){
-		h = 12;
-	} 
-	if(h >= 12){
-		h = h - 12;
-		diem = "PM";
-	}
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('clock').innerHTML =
-    h + ":" + m + ":" + s + "<sup>" + diem + "</sup>";
-    var t = setTimeout(startTime, 500);
-}
-function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-    return i;
-}
+		// if on the home page, remove active classes
+		if (window.location.pathname === "/") {
+			document.getElementsByTagName('a').classList.remove('is-active');
+		}
+		$(document).ready(function () {
+			$('#profileBar .fa-angle-down').on('click', function () {
+				$('#profileBar .dropdown').slideToggle();
+			});
+			// add active class to parent menu item when you're on its page
+			$('#navBar a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('is-active');
+		});
+
+		function startTime() {
+			var today = new Date();
+			var diem = "AM";
+			var h = today.getHours();
+			var m = today.getMinutes();
+			var s = today.getSeconds();
+
+			if (h >= 12) {
+				h = h - 12;
+				diem = "PM";
+			}
+			if (h == 0) {
+				h = 12;
+			}
+
+			m = checkTime(m);
+			s = checkTime(s);
+			document.getElementById('clock').innerHTML =
+				h + ":" + m + ":" + s + "<sup>" + diem + "</sup>";
+			var t = setTimeout(startTime, 500);
+		}
+		function checkTime(i) {
+			if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+			return i;
+		}
 	</script>
-<style>
-		#clock {flex: 1; font-size: 40px; font-weight: 300; color: #fff; text-align: right;}
+	<style>
+		#clock {flex: 1; font-size: 40px; font-weight: 300; color: #fff; text-align: right; height: 60px;}
 		#clock sup {font-size: 24px; margin-left: 5px;}
 	</style>
 </head>
@@ -72,34 +75,40 @@ function checkTime(i) {
 
 				<div id="logo">
 					<% if(!currentUser){ %>
-						<a href="/"><h2 class="brand">Strom Centre</h2></a>
+					<a href="/">
+						<h2 class="brand">Strom Centre</h2>
+					</a>
 					<% } else { %>
-						<a href="/dashboard"><h2 class="brand">Strom Centre</h2></a>
+					<a href="/dashboard">
+						<h2 class="brand">Strom Centre</h2>
+					</a>
 					<% } %>
-				</div><!--logo-->
+				</div>
+				<!--logo-->
 				<div id="clock"></div>
 				<div id="profileBar">
 					<% if(!currentUser){ %>
-						<div class=""><a href="/login">Login</a></div>
-						<div class=""><a href="/signup">Sign Up</a></div>
+					<div class=""><a href="/login">Login</a></div>
+					<div class=""><a href="/signup">Sign Up</a></div>
 					<% } else { %>
-						<div class="flexbox flexRight">
-							<div class="profileImage">
-								<a href="/edit-profile">
-									<img onerror="this.src='/images/Projectweb.png'" src="/<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" />
-								</a>
-							</div>
-							<div class="profileText">
-								<p><a href="/edit-profile"><%= currentUser.firstName + " " + currentUser.lastName %></a></p>
-							</div>
-							<i class="fas fa-angle-down">
-								<div class="dropdown">
-									<a href="/edit-profile">My Profile</a>
-									<a href="/logout">Log Out</a>
-								</div>
-							</i>
+					<div class="flexbox flexRight">
+						<div class="profileImage">
+							<a href="/edit-profile">
+								<img onerror="this.src='/images/Projectweb.png'" src="/<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" />
+							</a>
 						</div>
-						<!-- <div class=""><a href="/logout">Logout</a></div> -->
+						<div class="profileText">
+							<p><a href="/edit-profile">
+									<%= currentUser.firstName + " " + currentUser.lastName %></a></p>
+						</div>
+						<i class="fas fa-angle-down">
+							<div class="dropdown">
+								<a href="/edit-profile">My Profile</a>
+								<a href="/logout">Log Out</a>
+							</div>
+						</i>
+					</div>
+					<!-- <div class=""><a href="/logout">Logout</a></div> -->
 					<% } %>
 				</div><!-- profileBar -->
 			</div><!-- adminBar container -->
@@ -132,16 +141,16 @@ function checkTime(i) {
 
 	<div class="container">
 		<% if(error && error.length > 0){ %>
-			<div id="alertMessage" class="alert alert-danger" role="alert">
-				<%= error %>
-			</div>
+		<div id="alertMessage" class="alert alert-danger" role="alert">
+			<%= error %>
+		</div>
 		<% } %>
 		<% if(success && success.length > 0){ %>
-			<div id="alertMessage" class="alert alert-success" role="alert">
-				<%= success %>
-			</div>
+		<div id="alertMessage" class="alert alert-success" role="alert">
+			<%= success %>
+		</div>
 		<% } %>
 	</div>
-		
+
 	<section id="siteBody">
-	<!--closing tag in footer file-->
+		<!--closing tag in footer file-->
