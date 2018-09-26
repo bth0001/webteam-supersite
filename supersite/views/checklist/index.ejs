@@ -1,0 +1,204 @@
+<% include ../partials/header %>
+<div id="overview" class="center">
+    <h1>
+        <%= currentUser.team %> Checklist Page</h1>
+    <a style="display: inline-block; text-decoration: none;" href="/checklist/new">
+        <h4 id="myBtn">New Checklist<i class="fas fa-plus"></i></h4>
+    </a>
+</div>
+<div id="dashboard">
+    <div class="container">
+        <div class="developer flexbox flexLeft">
+            <div class="selectTeamMember">
+                <dl class="dropdown">
+                    <dt> <a>
+                            <h4 class="activeUser">
+                                <%= currentUser.firstName %>
+                            </h4>
+                            <i class="fas fa-angle-down"></i>
+                        </a> </dt>
+                    <dd>
+                        <ul id="allTeamMembers">
+                            <li><a>All</a></li>
+                            <% users.forEach(function(user){ %>
+                            <% if(user.team == 'Developer') { %>
+                            <li><a>
+                                    <%= user.firstName %></a></li>
+                            <% } %>
+                            <% }); %>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+
+        <div id="bottomRow" class="flexbox">
+            <div class="widget fullCol">
+                <div id="dashEssential">
+                    <h2>Checklist</h2>
+                    <div class="table">
+                        <div class="row title flexbox">
+                            <div class="cell url">Domain</div>
+                            <div class="cell actNumber">Developer</div>
+                            <div class="cell name">Build Package</div>
+                            <div class="cell date">Date</div>
+                            <div class="cell arrow"></div>
+                        </div>
+                        <div id="accordion">
+                            <% checklist.forEach(function(checked){ %>
+                            <% if(currentUser.email === checked.author.email) { %>
+                            <div class="row flexbox">
+                                <div class="cell url"><a href="<%= checked.domain %>" target="_blank">
+                                        <%=checked.domain %></a></div>
+                                <div class="cell actNumber">
+                                    <%= checked.author.firstName %>
+                                </div>
+
+                                <div class="cell name">
+                                    <%= checked.buildPkg %>
+                                </div>
+                                <div class="cell date">
+                                    <%= moment(checked.created_at).format("MMM DD, YYYY a") %>
+                                </div>
+                                <div class="cell arrow" data-panel-id="panel1"><i class="fas fa-angle-down"></i></div>
+                                <div class="expanded" style="display:none">
+                                    <p><strong>Checklist Task:</strong></p>
+                                    <ul>
+                                        <% for(i = 0; i < checked.checklistTask.length; i++) { %>
+                                        <li>
+                                            <%= checked.checklistTask[i].taskName %> /
+                                            <%= checked.checklistTask[i].taskStatus %> /
+                                            <%= checked.checklistTask[i].additionalNotes %>
+                                        </li>
+                                        <% }; %>
+                                    </ul>
+                                    <div id="trackerBtn">
+                                        <a href="/checklist/<%= checked._id %>/edit"><button class="btn edit">Edit
+                                                Checklist</button></a>
+                                        <form id="delete-form" class="trackerForm" action="/checklist/<%= checked._id %>?_method=PUT"
+                                            method="POST">
+                                            <button class="btn archive archiveButton" value="Archive" name="checklist[archive]"
+                                                type="submit">Archive</button>
+                                        </form>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $("#delete-form button.archiveButton").click(function () {
+                                                    $("#delete-form button.archiveButton").each(function () {
+                                                        $(this).val("true");
+                                                    });
+                                                });
+                                            }); 
+                                        </script>
+                                    </div>
+                                </div>
+                                <!-- end of expanded -->
+                            </div>
+                            <% } %>
+                            <% }) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function adjust_textarea(h) {
+        h.style.height = "20px";
+        h.style.height = (h.scrollHeight) + "px";
+    }
+
+
+    // Hide Special Features, Starter Template and CSS Path inputs initially
+    $('.ifEssential').hide();
+    $('.ifStarter').hide();
+
+    $(function () {
+        $('#buildPkg').on('change', function () {
+            // If Build Package selection is "Essential" then show Special Features and CSS Path fields
+            // Reset to default selection for Starter Template dropdown
+            if ($(this).val() === 'Essential') {
+                $('.ifEssential').show();
+                $('.starterClearInput').prop('selectedIndex', 0);
+            }
+            else {
+                // If "Essential" is not chosen then keep associated fields hidden
+                $('.ifEssential').hide();
+            }
+            // If Build Package selection is "Starter" then show Starter Template dropdown
+            // Reset to selections/input fields for Special Features and CSS Path
+            if ($(this).val() === 'Starter') {
+                $('.ifStarter').show();
+                $('.essentialClearInput').val("");
+            }
+
+            else {
+                // If "Starter" is not chosen then keep associated fields hidden
+                $('.ifStarter').hide();
+            }
+        });
+    });
+
+
+    // list of team members drop down when you click the purple arrow beside your name
+    $('.selectTeamMember .fa-angle-down').click(function () {
+        $('#allTeamMembers').slideToggle();
+    });
+
+    // when you click the purple arrow beside a task it expands for further info
+    $('#accordion .fa-angle-down').click(function () {
+        $(this).parent().next('.expanded').slideToggle();
+    });
+
+    // when you click on essentials circle it shows tracked essential tasks
+    $('.showEssentials').click(function () {
+        $('#dashStarter, #dashTlink, #dashProd, #dashContent').hide();
+        $('#bottomRow, #dashEssential').fadeIn("slow");
+    });
+    // when you click on essentials circle it shows tracked starter tasks
+    $('.showStarter').click(function () {
+        $('#dashEssential, #dashTlink, #dashProd, #dashContent').hide();
+        $('#bottomRow, #dashStarter').fadeIn("slow");
+    });
+    // when you click on essentials circle it shows tracked starter tasks
+    $('.showProd').click(function () {
+        $('#dashTlink, #dashEssential, #dashContent, #dashStarter').hide();
+        $('#bottomRow, #dashProd').fadeIn("slow");
+    });
+    // when you click on essentials circle it shows tracked starter tasks
+    $('.showTlink').click(function () {
+        $('#dashProd, #dashEssential, #dashContent, #dashStarter').hide();
+        $('#bottomRow, #dashTlink').fadeIn("slow");
+    });
+    // when you click on essentials circle it shows tracked starter tasks
+    $('.showContent').click(function () {
+        $('#dashProd, #dashEssential, #dashTlink, #dashStarter').hide();
+        $('#bottomRow, #dashContent').fadeIn("slow");
+    });
+    $('.showAll').click(function () {
+        // $('#dashProd, #dashEssential, #dashTlink, #dashStarter').hide();
+        $('#dashProd, #dashEssential, #dashTlink, #dashStarter, #dashContent').fadeIn("slow");
+    });
+
+    function SetDate() {
+        var date = new Date();
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = year + "-" + month + "-" + day;
+
+
+        document.getElementById('myDate').value = today;
+    }
+
+    $(document).ready(function () {
+        SetDate();
+    });
+</script>
+<% include ../partials/footer %>

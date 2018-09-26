@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
 mongoose.set("debug", true);
-mongoose.connect("mongodb://chase123:chase123@ds121982.mlab.com:21982/testforsupersite", {
-  keepAlive: true,
-  useNewUrlParser: true 
-});
+mongoose.connect(
+  "mongodb://haney:Gators21@ds263791.mlab.com:63791/webteam-super-site",
+  {
+    keepAlive: true,
+    useNewUrlParser: true
+  }
+);
 
+module.exports.TeamTracker = require("./teamTracker");
 module.exports.User = require("./user");
