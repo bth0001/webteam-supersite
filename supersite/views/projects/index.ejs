@@ -8,6 +8,14 @@
     background: #fff;
   }
 
+  .projectStatus {
+    display: inline-block;
+  }
+
+  .projectStatus span:not(:last-child):after {
+    content: ", ";
+  }
+
   .caption {
     padding: 5px 0 10px;
   }
@@ -30,20 +38,17 @@
               <%= project.name %></strong>
           </h4>
         </div>
-        <%# for(let i = 0; i < project.owners.length; i++) { %>
-        <p><strong>Owner:</strong> <span class="projectStatus">
-            <%#= project.owners[i].firstName %></span>
-          <%# } %>
-          <p><strong>Status:</strong> <span class="projectStatus">
-              <%= project.status %></span></p>
-
-
-
-          <p><strong>Status:</strong> <span class="projectStatus">
-              <%= project.status %></span>
-
-          </p>
-          <a href="/projects/<%= project._id %>" class="myBtn">More Info</a>
+        <div class="ownerList"><strong>Owner:</strong>
+          <div class="projectStatus">
+            <% for(let i = 0; i < project.owners.length; i++) { %>
+            <span>
+              <%= project.owners[i].firstName %></span>
+            <% } %>
+          </div>
+        </div>
+        <p><strong>Status:</strong> <span class="projectStatus">
+            <%= project.status %></span></p>
+        <a href="/projects/<%= project._id %>" class="myBtn">More Info</a>
 
       </div>
     </div>
