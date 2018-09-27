@@ -95,12 +95,19 @@ router.get("/:id/edit", function(req, res){
 
 //update tracker route
 router.put("/:id", function(req, res){
+  
+  var historyArray = [];
+  TeamTracker.findById(req.params.id, function(err, foundTracked){
+    for(i=0; i < foundTracked.history.length; i++){
+      historyArray.push(foundTracked.history[i]);
+    }
+    var history = {historyName: req.user.firstName, id: req.user._id};
+    historyArray.push(history);
    //find and update correct tracker
-   var author = {id: req.user._id, firstName: req.user.firstName, email: req.user.email};
    var teamTracking = req.body.tracking;
    var taskTrack = req.body.teamTrack;
-   const newTrack = Object.assign(teamTracking, {author: author}, taskTrack);
-   TeamTracker.findByIdAndUpdate(req.params.id, newTrack, function(err, updatedTracker){
+   const newTrack = Object.assign(teamTracking, taskTrack, {history: historyArray});
+    TeamTracker.findByIdAndUpdate(req.params.id, newTrack, function(err, updatedTracker){
       if(err){
           req.flash("error", err.message);
           res.redirect("/tracker");
@@ -109,6 +116,7 @@ router.put("/:id", function(req, res){
            res.redirect("/tracker/" + req.params.id);
        }
    });
+  });
   });
 
 //Destroy Route

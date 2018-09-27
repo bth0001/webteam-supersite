@@ -5,7 +5,11 @@
 </div>
 
 <div class="history">
-    <h3>Recent Searches</h3>
+    <% if(searchHistory.length === 1){ %>
+        <h3>Recent Search</h3>
+    <% } else { %>
+        <h3>Recent Searches</h3>
+    <% } %>
     <ul>
         <% for(var i=0;i < searchHistory.length; i++){ %>
             <li>

@@ -165,6 +165,9 @@ const blueprintWizardSchema = new mongoose.Schema({
       default: null
     }
   }],
+  history: {
+    type: String
+  },
   dateCreated: { 
     type : Date, 
     default: Date.now 

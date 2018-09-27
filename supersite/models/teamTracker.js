@@ -63,6 +63,19 @@ const teamTrackerSchema = new mongoose.Schema({
       type: Boolean,
       default: false,
   },
+  history: [{
+    historyName: {
+      type: String
+    },
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    time: { 
+        type : Date, 
+        default: Date.now 
+    }
+  }],
   taskTypes: [{
     taskTypeName: {
       type: String

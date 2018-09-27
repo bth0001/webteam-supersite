@@ -4,6 +4,13 @@
 </div>
 <div class="container">
 		<h3 class="pageHeader" style="text-align: center; margin: 10px 0 20px;">You are looking at Tracked Item for <strong><a href="<%= tracking.domain %>" target="_blank"><%= tracking.domain %></a></strong></h3>
+		<% if (tracking.history.length > 0){ %>
+		<% var indexLength = tracking.history.length %>
+		<h4><strong>Last Modified By: </strong><%= tracking.history[indexLength - 1].historyName %><br />
+			<strong>Last Modified Time: </strong><%= tracking.history[indexLength - 1].time %></h4>
+			<br />
+			<br />	
+		<% } %>
 <div id="bottomRow" class="flexbox">
          <div class="widget fullCol">
 				<div id="dashEssentials">			

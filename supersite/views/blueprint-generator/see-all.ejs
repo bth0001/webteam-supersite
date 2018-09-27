@@ -44,8 +44,6 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
           <p><strong>Notes:</strong> <%= blueprint.specialNotes.notes %></p>
       <% } %>
 
-
-
       <% if (blueprint.designer != null || blueprint.designer != undefined){ %>
           <p><strong>Designer:</strong> <%= blueprint.designer %></p>
       <% } %>
@@ -126,13 +124,11 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
       </div>
       <div>
         <h4>Home Screenshot:</h4>
-        <span>
-          <%= blueprint.homeScreenshot %></span>
+        <a target="_blank" href="<%= blueprint.homeScreenshot %>"><%= blueprint.homeScreenshot %></a>
       </div>
       <div>
         <h4>Interior Screenshot:</h4>
-        <span>
-          <%= blueprint.interiorScreenshot %></span>
+        <a target="_blank" href="<%= blueprint.interiorScreenshot %>"><%= blueprint.interiorScreenshot %></a>
       </div>
       <div>
         <div class="siteArchitecture">

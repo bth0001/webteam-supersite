@@ -16,10 +16,12 @@ router.get("/strom", function(req, res){
 
 router.get("/search", function(req, res){
   req.session.searchHistory = req.session.searchHistory || [];
-
+  if (req.query.search === "strom"){
+    res.redirect("/strom")
+  }
   if (req.query.search){
-    const regex = new RegExp(escapeRegex(req.query.search), 'g');
-    
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+
         TeamTracker.find({$text: {$search : regex}}, function(err, allTracks){
           console.log(regex);
         if(err){
@@ -34,7 +36,6 @@ router.get("/search", function(req, res){
             array.splice(searchIndex, 1);
             req.session.searchHistory.unshift(req.query.search);
           }
-          console.log(req.session);
             res.render("search-results", {
               tracking : allTracks,
               searchWord: req.query.search,
