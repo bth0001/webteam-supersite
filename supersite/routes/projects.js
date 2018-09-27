@@ -24,17 +24,17 @@ router.post("/", function(req, res) {
   var date = req.body.date;
   var desc = req.body.description;
   var owners = req.body.owners;
-  //   var author = {
-  //     id: req.body._id,
-  //     firstName: req.body.firstName,
-  //     email: req.body.email
-  //   };
+  var author = {
+    id: req.user._id,
+    firstName: req.user.firstName,
+    email: req.user.email
+  };
   var newProject = {
     name: name,
     status: status,
     date: date,
     description: desc,
-    // author: author
+    author: author,
     owners: owners
   };
   Project.create(newProject, function(err, newlyCreatedProject) {

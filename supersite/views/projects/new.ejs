@@ -28,21 +28,42 @@
                                 <option value="Completed">Completed</option>
                             </select>
                         </label>
-                        <label for="owners"><span>Owner:</span>
-                            <select name="owners" multiple>
-                                <% users.forEach(function(user){ %>
-                                <option value="<%= user.firstName %>">
-                                    <%= user.firstName %>
-                                </option>
-                                <% }); %>
-                            </select>
-                        </label>
+                        <section style="width: 100%;">
+                            <label for="description" class="labelNotes"><span>Project Description:</span>
+                                <textarea name="description" placeholder="Project Description"></textarea>
+                            </label>
+                        </section>
+                        <section style="width: 100%;">
+                            <div id="task">
+                                <div class="taskTable">
+                                    <div class="header flexbox">
+                                        <div class="cell type">Team Members</div>
+                                    </div>
+                                    <div class="task">
+                                        <div class="row flexbox">
+                                            <div class="cell type">
+                                                <div class="customSelect">
+                                                    <select class="owners">
+                                                        <% users.forEach(function(user){ %>
+                                                        <option value="<%= user.firstName %>">
+                                                            <%= user.firstName %>
+                                                        </option>
+                                                        <% }); %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="taskButtons flexbox flexRight">
+                                <button type="button" id="addTask">Add <i class="fas fa-plus"></i></button>
+                                <button type="button" id="removeTask">Remove <i class="fas fa-minus"></i></button>
+                            </div>
+                        </section>
                     </section>
-                    <section>
-                        <label for="description" class="labelNotes"><span>Project Description:</span>
-                            <textarea name="description" placeholder="Project Description"></textarea>
-                        </label>
-                    </section>
+
                     <button type="submit">Create Project</button>
                 </div>
             </form>
@@ -50,5 +71,28 @@
         </div>
     </div>
 </div>
+<script>
+    // Name field for tasktypes
+    $(document).ready(function () {
+        var count = 0;
+        $("div.task div.row:first-of-type select.owners").attr("name", "owners[" + count + "][firstName]");
 
+        $("#addTask").click(function () {
+            count++;
+            var newTaskInput = $(".task .row:last-of-type");
+            newTaskInput.clone().appendTo(".task");
+            $("div.task div.row:last-of-type select.owners").attr("name", "owners[" + count + "][firstName]");
+        });
+
+        $("#removeTask").click(function () {
+            var taskCount = $("div.task div.row").length;
+            if (taskCount === 1) {
+                alert("You cannot remove the only task");
+            } else {
+                var newTaskInput = $(".task .row:last-of-type");
+                newTaskInput.remove();
+            };
+        });
+    });
+</script>
 <% include ../partials/footer %>

@@ -6,6 +6,14 @@ const projectSchema = new mongoose.Schema(
     description: String,
     date: String,
     status: String,
+    author: {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      },
+      firstName: String,
+      email: String
+    },
     owners: [
       {
         id: {
