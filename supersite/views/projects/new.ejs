@@ -30,9 +30,11 @@
             <label for="owner"><span>Owner:</span>
                 <select name="owner" multiple>
                     <% users.forEach(function(user){ %>
-                            <option value="<%= user.firstName %>"><%= user.firstName %></option>
+                            <option value="<%= user.firstName %>|<%= user.email %>|<%= user._id %>"><%= user.firstName %></option>
+                            <!-- {'firstName': '<%= user.firstName %>', 'email': '<%= user.email %>', 'id': '<%= user._id %>'} -->
                         <% }); %>
                 </select>
+
             </label>
         </section>
             <section>
