@@ -7,7 +7,7 @@
 		<% if (tracking.history.length > 0){ %>
 		<% var indexLength = tracking.history.length %>
 		<h4><strong>Last Modified By: </strong><%= tracking.history[indexLength - 1].historyName %><br />
-			<strong>Last Modified Time: </strong><%= tracking.history[indexLength - 1].time %></h4>
+			<strong>Last Modified Time: </strong><%= moment(tracking.history[indexLength - 1].time).format("MMM DD, YYYY hh:mm a") %></h4>
 			<br />
 			<br />	
 		<% } %>

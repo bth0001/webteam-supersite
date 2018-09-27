@@ -6,6 +6,46 @@
 </div>
 <div class="container" style="margin: 10px auto;">
     <div class="row">
+<<<<<<< HEAD
+    <div class="col-md-12">
+        <form class="form profileForm" action="/projects" method="POST">
+        <section class="header flexbox flexJustify">
+            <h2>Project Creation</h2>
+        </section>
+        <div class="wrapper">
+            <section class="flexbox flexJustify">
+            <label for="name"><span>Project Name:</span>
+                <input type="text" name="name" placeholder="Project Name">
+            </label>
+            <label for="date"><span>Create Date:</span>
+                <input type="date" name="date" >
+            </label>
+            <label for="status"><span>Project Status:</span>
+                <select name="status">
+                    <option value="Ready for Work" selected>Ready for Work</option>
+                    <option value="In Progress">In Progress</option>    
+                    <option value="Awaiting Review">Awaiting Review</option>
+                    <option value="On Hold">On Hold</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </label>
+            <label for="owner"><span>Owner:</span>
+                <select name="owner" multiple>
+                    <% users.forEach(function(user){ %>
+                            <option value="<%= user.firstName %>|<%= user.email %>|<%= user._id %>"><%= user.firstName %></option>
+                            <!-- {'firstName': '<%= user.firstName %>', 'email': '<%= user.email %>', 'id': '<%= user._id %>'} -->
+                        <% }); %>
+                </select>
+
+            </label>
+        </section>
+            <section>
+                    <label for="description" class="labelNotes"><span>Project Description:</span>
+                        <textarea name="description" placeholder="Project Description"></textarea>
+                    </label>
+            </section>
+            <button type="submit">Create Project</button>
+=======
         <div class="col-md-12">
             <form class="form profileForm" action="/projects" method="POST">
                 <section class="header flexbox flexJustify">
@@ -68,6 +108,7 @@
                 </div>
             </form>
 
+>>>>>>> 33a3f557f9b4f02fa284d0b662d47c76c5471aa8
         </div>
     </div>
 </div>

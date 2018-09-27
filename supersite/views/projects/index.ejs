@@ -30,14 +30,20 @@
               <%= project.name %></strong>
           </h4>
         </div>
+        <%# for(let i = 0; i < project.owners.length; i++) { %>
+        <p><strong>Owner:</strong> <span class="projectStatus">
+            <%#= project.owners[i].firstName %></span>
+          <%# } %>
+          <p><strong>Status:</strong> <span class="projectStatus">
+              <%= project.status %></span></p>
 
 
 
-        <p><strong>Status:</strong> <span class="projectStatus">
-            <%= project.status %></span>
+          <p><strong>Status:</strong> <span class="projectStatus">
+              <%= project.status %></span>
 
-        </p>
-        <a href="/projects/<%= project._id %>" class="myBtn">More Info</a>
+          </p>
+          <a href="/projects/<%= project._id %>" class="myBtn">More Info</a>
 
       </div>
     </div>

@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
-const projectSchema = new mongoose.Schema(
-  {
+const projectSchema = new mongoose.Schema({
     name: String,
     description: String,
     date: String,
@@ -17,21 +16,45 @@ const projectSchema = new mongoose.Schema(
     owners: [
       {
         id: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
         },
         firstName: String,
         email: String
-      }
-    ],
-    comments: [
-      {
+    },
+    owner: [{
+        firstName: {
+            type: String
+        },
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        email: {
+            type: String
+        },
+    }],
+    comments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "ProjectComments"
-      }
-    ]
-  },
-  { timestamps: { createdAt: "created_at" } }
-);
+    }],
+    history: [{
+        historyName: {
+            type: String
+        },
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        time: {
+            type: Date,
+            default: Date.now
+        }
+    }],
+}, {
+    timestamps: {
+        createdAt: 'created_at'
+    }
+});
 
 module.exports = mongoose.model("Projects", projectSchema);
