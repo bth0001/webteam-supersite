@@ -113,8 +113,7 @@ router.get("/edit-profile", isLoggedIn, function(req, res) {
 
 
 router.post("/edit-profile", isLoggedIn, upload.single("image"), function(req, res, next) {
-  User.findById(req.user.id, function(err, sanitizedUser) {  
-    
+  User.findById(req.user.id, function(err, sanitizedUser) {
     if (!sanitizedUser) {
       req.flash("error", "No account found");
       return res.redirect("/edit-profile");
@@ -124,10 +123,8 @@ router.post("/edit-profile", isLoggedIn, upload.single("image"), function(req, r
     var lastName = req.body.lastName;
     // Check to see if image was inserted
     if (req.file === undefined || req.file === null) {
-      console.log("--------- IF --------");
       profileImageUrl = sanitizedUser.profileImageUrl;
     } else {
-      console.log("--------- ELSE --------");
       req.body.profileImageUrl = req.file.path;
       var profileImageUrl = req.body.profileImageUrl;
     }
