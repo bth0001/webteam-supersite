@@ -71,7 +71,6 @@ router.get("/:id", function(req, res) {
         if (err) {
           console.log(err);
         } else {
-          //render show template with that campground
           res.render("tracker/show", {
             tracking: allTracks,
             users: allUsers,

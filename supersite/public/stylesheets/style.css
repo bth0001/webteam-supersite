@@ -1270,6 +1270,7 @@ select:first-child {
 /* Audit History Table */
 div.auditHistory {z-index: 3001; position: absolute;left: 50%;top: 50%;bottom: auto;right: auto;transform: translate(-50%,-50%);background-color: #fff;min-width: 850px;padding: 2vw;border: 1px solid #eee;box-shadow: 0 0 5px 1px rgba(0,0,0,0.1);transition: opacity 250ms ease, zoom 250ms ease;zoom: 0.875;opacity: 0;max-height: 0;}
 div.auditHistory.visible {max-height: none; opacity: 1; zoom: 1;}
+div.auditHistory a.highlight {background-color: #ffffad}
 /*all rows*/
 div.auditHistory > div {display: flex; flex-wrap: nowrap;}
 /*column widths*/

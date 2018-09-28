@@ -175,6 +175,20 @@ $("#socialMedia a.close, #socialMedia a.submit").click(function(){
     $("div.auditHistory").removeClass("visible");
     $("#pageOverlay").hide();
   });
+  // Will add a class on audit history hover
+  $("div.auditHistory a.user").on("mouseover focusin", function(){
+    var value = $(this).attr("href");
+    $("div.auditHistory a.user").each(function(){
+      if (value === $(this).attr("href")){
+        $(this).addClass("highlight");
+      }
+    });
+    $("div.auditHistory a.user").on("mouseout focusout", function(){
+      $("div.auditHistory a.user").each(function(){
+        $(this).removeClass("highlight");
+      });
+    });
+  });
 
 });//End document ready
   

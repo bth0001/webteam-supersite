@@ -82,6 +82,22 @@ router.get("/logout", function(req, res) {
 });
 //==============================================================================
 
+// Show Page for Edit Profile
+router.get("/profile/:id", function(req, res) {
+  User.findById((req.params.id), function(err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("show-profile", {
+      users: foundUser
+      });
+    }
+  });
+});
+
+
+//==============================================================================
+
 // EDIT Task
 router.get("/edit-task", function(req, res) {
   res.render("edit-task");

@@ -1,0 +1,29 @@
+<% include partials/header %>
+<div id="overview" class="center">
+  <h1>
+    <%= users.firstName %>'s Profile</h1>
+</div>
+<div class="container" style="margin: 10px auto;">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="profile-thumbnail">
+        <img  src="<%= users.profileImageUrl %>" alt="<%= users.firstName %>" />
+      </div>
+    </div>
+    <div class="col-md-9">
+        <div class="wrapper">
+
+                <p><strong>Name:</strong> <%= users.firstName %> <%= users.lastName %></p>
+
+                <p><strong>Email:</strong> <%= users.email %></p>
+
+                <p><strong>Team:</strong> <%= users.team %></p>
+
+                <p><strong>User ID:</strong> <%= users._id %></p>
+                
+        </div>
+    </div>
+  </div>
+</div>
+
+<% include partials/footer %>

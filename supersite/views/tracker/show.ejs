@@ -23,10 +23,10 @@
 				<% for (i=(Math.max(tracking.history.length - 10, 1)); i < tracking.history.length; i++){ %>
 				<div class="auditRow">
 					<div class="name">
-						<%= tracking.history[i].historyName %>
+						<a class="user" target="_blank" href="/profile/<%= tracking.history[i].id %>"><%= tracking.history[i].historyName %></a>
 					</div>
 					<div class="id">
-						<%= tracking.history[i].id %>
+						<a class="user" target="_blank" href="/profile/<%= tracking.history[i].id %>"><%= tracking.history[i].id %></a>
 					</div>
 					<div class="date">
 						<%= moment(tracking.history[i].time).format("MMM DD, YYYY hh:mm a") %>
@@ -47,10 +47,10 @@
 					<% for (i=0; i < tracking.history.length; i++){ %>
 					<div class="auditRow">
 						<div class="name">
-							<%= tracking.history[i].historyName %>
+							<a class="user" target="_blank" href="/profile/<%= tracking.history[i].id %>"><%= tracking.history[i].historyName %></a>
 						</div>
 						<div class="id">
-							<%= tracking.history[i].id %>
+							<a class="user" target="_blank" href="/profile/<%= tracking.history[i].id %>"><%= tracking.history[i].id %></a>
 						</div>
 						<div class="date">
 							<%= moment(tracking.history[i].time).format("MMM DD, YYYY hh:mm a") %>
