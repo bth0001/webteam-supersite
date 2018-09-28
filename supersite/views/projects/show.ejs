@@ -28,10 +28,10 @@
                 <li class="list-group-item"><strong>Created Date:</strong>
                     <%= moment(project.created_at).format("MMM DD, YYYY hh:mm a") %>
                 </li>
-            </div>
-            <% if (project.history.length > 0){ %>
-            <% var indexLength = project.history.length %>
-            <div class="list-group">
+
+                <% if (project.history.length > 0){ %>
+                <% var indexLength = project.history.length %>
+
                 <li class="list-group-item"><strong>Last Modified By: </strong>
                     <%= project.history[indexLength - 1].historyName %>
                 </li>
@@ -99,7 +99,7 @@
                         </div>
                         <% } %>
                     </div>
-                    <hr />
+
                 </div>
                 <hr />
                 <% }) %>

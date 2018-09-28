@@ -1,5 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i|Raleway:300,400,700");
-
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #1aabc6 inset; /* Change the color to your own background color */
+  -webkit-text-fill-color: #fff;
+}
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px #1aabc6 inset;
+  -webkit-text-fill-color: #fff;
+}
 html {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -420,7 +431,6 @@ p {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   width: 250px;
-
   padding: 6px 15px;
 }
 form.searchBox {
@@ -437,6 +447,7 @@ form.searchBox input {
   margin: auto;
   background-color: rgba(255, 255, 255, 0.1);
   border: 0;
+  color: #fff !important;
 }
 form.searchBox input::placeholder {
   color: #fff;
@@ -650,7 +661,6 @@ nav.contentNav a.active {
   margin: 0 auto;
   max-width: 1100px;
   display: flex;
-
   flex-wrap: wrap;
 }
 #essTracked,
@@ -757,7 +767,6 @@ div#accordion p {
   color: #ada9bb;
   font-weight: 500;
 }
-
 .table .row {
   border-top: solid 1px #e6e7ef;
   margin: 0;
@@ -795,7 +804,6 @@ div#accordion p {
   width: 175px;
   flex: inherit;
 }
-
 .fullCol {
   width: 100%;
 }
@@ -936,7 +944,6 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -984,7 +991,6 @@ input[type="number"] {
   width: 100%;
   position: relative;
 }
-
 select:first-child {
   color: #ada9bb;
 }
@@ -1046,7 +1052,6 @@ select:first-child {
 .customCheck .checkbox input:checked + i {
   border: 2px solid #2637b0;
 }
-
 .checkbox {
   align-items: center;
   display: flex;
