@@ -110,13 +110,11 @@ router.get("/edit-profile", isLoggedIn, function(req, res) {
   res.render("edit-profile");
 });
 
-router.post("/edit-profile", isLoggedIn, upload.single("image"), function(
-  req,
-  res,
-  next
-) {
-  User.findById(req.user.id, function(err, sanitizedUser) {
-    req.body.profileImageUrl = req.file.path; //grabs file path and assigns to profileImageUrl
+
+
+router.post("/edit-profile", isLoggedIn, upload.single("image"), function(req, res, next) {
+  User.findById(req.user.id, function(err, sanitizedUser) {  
+    
     if (!sanitizedUser) {
       req.flash("error", "No account found");
       return res.redirect("/edit-profile");
@@ -124,7 +122,15 @@ router.post("/edit-profile", isLoggedIn, upload.single("image"), function(
     var email = req.body.email;
     var firstName = req.body.firstName;
     var lastName = req.body.lastName;
-    var profileImageUrl = req.body.profileImageUrl;
+    // Check to see if image was inserted
+    if (req.file === undefined || req.file === null) {
+      console.log("--------- IF --------");
+      profileImageUrl = sanitizedUser.profileImageUrl;
+    } else {
+      console.log("--------- ELSE --------");
+      req.body.profileImageUrl = req.file.path;
+      var profileImageUrl = req.body.profileImageUrl;
+    }
     var team = req.body.team;
     // validate
     if (!email || !firstName || !lastName) {

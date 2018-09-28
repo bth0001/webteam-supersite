@@ -34,7 +34,8 @@
 				</div><!--auditRow-->
 				<% } %>
 			</div>
-			<% } else { %>
+			<% } %>
+			<% if (tracking.history.length > 1){ %>
 				<a id="auditHistory" href="#" onclick="return false;">Audit History</a>
 				<div class="auditHistory">
 					<a class="close" href="#" onclick="return false;"></a>
