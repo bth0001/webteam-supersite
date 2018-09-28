@@ -166,6 +166,16 @@ $("#socialMedia a.close, #socialMedia a.submit").click(function(){
   }
 });
 
+  // Audit History Toggle for show pages that have history enabled
+  $("#auditHistory").on("click", function(){
+    $("div.auditHistory").addClass("visible");
+    $("#pageOverlay").show();
+  });
+  $("div.auditHistory a.close").on("click", function(){
+    $("div.auditHistory").removeClass("visible");
+    $("#pageOverlay").hide();
+  });
+
 });//End document ready
   
   function assignNames() {

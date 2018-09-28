@@ -8,9 +8,59 @@
 		<% var indexLength = tracking.history.length %>
 		<h4><strong>Last Modified By: </strong><%= tracking.history[indexLength - 1].historyName %><br />
 			<strong>Last Modified Time: </strong><%= moment(tracking.history[indexLength - 1].time).format("MMM DD, YYYY hh:mm a") %></h4>
-			<br />
-			<br />	
 		<% } %>
+
+		<% if (tracking.history.length > 10){ %>
+			<a id="auditHistory" href="#" onclick="return false;">Audit History</a>
+			<div class="auditHistory">
+				<a class="close" href="#" onclick="return false;"></a>
+				<div class="headings">
+					<div class="name">First Name:</div>
+					<div class="id">User ID:</div>
+					<div class="date">Date Modified:</div>
+				</div>
+				
+				<% for (i=(Math.max(tracking.history.length - 10, 1)); i < tracking.history.length; i++){ %>
+				<div class="auditRow">
+					<div class="name">
+						<%= tracking.history[i].historyName %>
+					</div>
+					<div class="id">
+						<%= tracking.history[i].id %>
+					</div>
+					<div class="date">
+						<%= moment(tracking.history[i].time).format("MMM DD, YYYY hh:mm a") %>
+					</div>
+				</div><!--auditRow-->
+				<% } %>
+			</div>
+			<% } else { %>
+				<a id="auditHistory" href="#" onclick="return false;">Audit History</a>
+				<div class="auditHistory">
+					<a class="close" href="#" onclick="return false;"></a>
+					<div class="headings">
+						<div class="name">First Name:</div>
+						<div class="id">User ID:</div>
+						<div class="date">Date Modified:</div>
+					</div>
+					
+					<% for (i=0; i < tracking.history.length; i++){ %>
+					<div class="auditRow">
+						<div class="name">
+							<%= tracking.history[i].historyName %>
+						</div>
+						<div class="id">
+							<%= tracking.history[i].id %>
+						</div>
+						<div class="date">
+							<%= moment(tracking.history[i].time).format("MMM DD, YYYY hh:mm a") %>
+						</div>
+					</div><!--auditRow-->
+					<% } %>
+				</div>
+				<% } %>
+
+
 <div id="bottomRow" class="flexbox">
          <div class="widget fullCol">
 				<div id="dashEssentials">			

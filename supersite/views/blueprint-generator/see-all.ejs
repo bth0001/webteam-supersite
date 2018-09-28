@@ -24,13 +24,18 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
     <a href="/blueprint-generator/see-all/archive">Archived Blueprints</a>
   </div>
 <div class="container" style="margin: 30px auto;">
-    <% if(blueprints.length === 0) { %>
+
+<% checkBlueprints() %>
+<% function checkBlueprints(){ %>
+  <% var blueprintCount = blueprints.length - 1; %>
+  <% blueprints.forEach(function(blueprint){ %>
+    <% if(blueprintCount === 0) { %>
       <div class="wrapper" style="text-align: center;">
           <p><strong>There are no blueprints to display. Get started by clicking the button below!</strong></p>
           <a href="/blueprint-generator/new"><button class="btn archive">New Blueprint</button></a>
       </div>
     <% } %>
-  <% blueprints.forEach(function(blueprint){ %>
+
 
     <% if (blueprint.archive === false) { %>
 
@@ -156,8 +161,10 @@ div.blueprintContainer > div.bottom.open {visibility: visible;max-height: none;o
     </div>
     <!--bottom-->
   </div>
-  <% } %>
+  <% } else { %>
+    <% blueprintCount-- } %>
   <% }); %>
+  <% } %>
 
 </div>
 

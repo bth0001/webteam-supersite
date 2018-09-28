@@ -1266,3 +1266,21 @@ select:first-child {
     width: 100%;
   }
 }
+
+/* Audit History Table */
+div.auditHistory {z-index: 3001; position: absolute;left: 50%;top: 50%;bottom: auto;right: auto;transform: translate(-50%,-50%);background-color: #fff;min-width: 850px;padding: 2vw;border: 1px solid #eee;box-shadow: 0 0 5px 1px rgba(0,0,0,0.1);transition: opacity 250ms ease, zoom 250ms ease;zoom: 0.875;opacity: 0;max-height: 0;}
+div.auditHistory.visible {max-height: none; opacity: 1; zoom: 1;}
+/*all rows*/
+div.auditHistory > div {display: flex; flex-wrap: nowrap;}
+/*column widths*/
+div.auditHistory > div > div:first-of-type {flex: 1 25%;}
+div.auditHistory > div > div:nth-of-type(2) {flex: 1 50%; border: 1px solid #252525; border-top: 0; border-bottom: 0;}
+div.auditHistory > div > div:last-of-type {flex: 1 25%}
+/*general*/
+div.auditHistory > div.headings {border-bottom: 1px solid #252525;}
+div.auditHistory > div > div {padding: 5px 10px;}
+/*close button*/
+div.auditHistory a.close {position: absolute; top: 3px; right: 3px;}
+div.auditHistory a.close:before {content: "\f00d"; font-family: FontAwesome;}
+/*page overlay in footer*/
+#pageOverlay {position: fixed; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(0,0,0,0.5); height: 100%; width: 100%; z-index: 3000;}
