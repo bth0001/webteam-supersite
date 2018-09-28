@@ -209,7 +209,8 @@
 									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
-									<%= tracked.date %>
+									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
+
 								</div>
 								<div class="cell arrow" data-panel-id="panel1"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
@@ -227,10 +228,16 @@
 									<ul>
 										<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
 										<li>
-											<%= tracked.taskTypes[i].taskTypeName %> /
-											<%= tracked.taskTypes[i].quantity %> /
-											<%= tracked.taskTypes[i].taskNotes %>
+											<%= tracked.taskTypes[i].taskTypeName %>
 										</li>
+										<ul>
+											<li>
+												<%= tracked.taskTypes[i].quantity %>
+											</li>
+											<li>
+												<%= tracked.taskTypes[i].taskNotes %>
+											</li>
+										</ul>
 										<% }; %>
 									</ul>
 									<p><strong>Notes:</strong>
@@ -276,7 +283,7 @@
 									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
-									<%= tracked.date %>
+									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
@@ -287,10 +294,16 @@
 									<ul>
 										<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
 										<li>
-											<%= tracked.taskTypes[i].taskTypeName %> /
-											<%= tracked.taskTypes[i].quantity %> /
-											<%= tracked.taskTypes[i].taskNotes %>
+											<%= tracked.taskTypes[i].taskTypeName %>
 										</li>
+										<ul>
+											<li>
+												<%= tracked.taskTypes[i].quantity %>
+											</li>
+											<li>
+												<%= tracked.taskTypes[i].taskNotes %>
+											</li>
+										</ul>
 										<% }; %>
 									</ul>
 									<p><strong>Notes:</strong>
@@ -336,7 +349,7 @@
 									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
-									<%= tracked.date %>
+									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
@@ -350,10 +363,16 @@
 									<ul>
 										<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
 										<li>
-											<%= tracked.taskTypes[i].taskTypeName %> /
-											<%= tracked.taskTypes[i].quantity %> /
-											<%= tracked.taskTypes[i].taskNotes %>
+											<%= tracked.taskTypes[i].taskTypeName %>
 										</li>
+										<ul>
+											<li>
+												<%= tracked.taskTypes[i].quantity %>
+											</li>
+											<li>
+												<%= tracked.taskTypes[i].taskNotes %>
+											</li>
+										</ul>
 										<% }; %>
 									</ul>
 									<p><strong>Notes:</strong>
@@ -400,7 +419,7 @@
 									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
-									<%= tracked.date %>
+									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
@@ -414,10 +433,16 @@
 									<ul>
 										<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
 										<li>
-											<%= tracked.taskTypes[i].taskTypeName %> /
-											<%= tracked.taskTypes[i].quantity %> /
-											<%= tracked.taskTypes[i].taskNotes %>
+											<%= tracked.taskTypes[i].taskTypeName %>
 										</li>
+										<ul>
+											<li>
+												<%= tracked.taskTypes[i].quantity %>
+											</li>
+											<li>
+												<%= tracked.taskTypes[i].taskNotes %>
+											</li>
+										</ul>
 										<% }; %>
 									</ul>
 									<p><strong>Notes:</strong>
@@ -464,7 +489,7 @@
 									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
-									<%= tracked.date %>
+									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
@@ -478,10 +503,16 @@
 									<ul>
 										<% for(i = 0; i < tracked.taskTypes.length; i++) { %>
 										<li>
-											<%= tracked.taskTypes[i].taskTypeName %> /
-											<%= tracked.taskTypes[i].quantity %> /
-											<%= tracked.taskTypes[i].taskNotes %>
+											<%= tracked.taskTypes[i].taskTypeName %>
 										</li>
+										<ul>
+											<li>
+												<%= tracked.taskTypes[i].quantity %>
+											</li>
+											<li>
+												<%= tracked.taskTypes[i].taskNotes %>
+											</li>
+										</ul>
 										<% }; %>
 									</ul>
 									<p><strong>Notes:</strong>

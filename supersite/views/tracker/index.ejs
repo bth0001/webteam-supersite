@@ -112,7 +112,7 @@
 									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
-									<%= tracked.date %>
+									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel1"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
@@ -195,7 +195,7 @@
 									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
-									<%= tracked.date %>
+									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
@@ -272,7 +272,7 @@
 									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
-									<%= tracked.date %>
+									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
@@ -353,7 +353,7 @@
 									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
-									<%= tracked.date %>
+									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
@@ -434,7 +434,7 @@
 									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
-									<%= tracked.date %>
+									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
@@ -511,24 +511,20 @@
 						<div class="wrapper">
 							<section class="date">
 								<div class="flexbox flexJustify">
-									<label for="date"> <span>Date:</span>
-										<input type="date" id="myDate" name="teamTrack[date]">
+									<label for="username">
+										<div class="flexbox alignCenter"> <span>Developer:</span>
+											<input type="text" id="text" value="<%= currentUser.firstName %>" name="teamTrack[username]">
+										</div>
 									</label>
 									<div class="acctNumber">
-										<label for="acctNum"> <span>Account Number:</span>
-											<input required="" type="number" placeholder="######" id="number" name="teamTrack[acctNum]" min="1" max="999999">
-											<div class="acctNumber-nav">
-												<div class="acctNumber-button acctNumber-up"><i class="fas fa-plus"></i></div>
-												<div class="acctNumber-button acctNumber-down"><i class="fas fa-minus"></i></div>
+										<label for="acctNum">
+											<div class="flexbox alignCenter"><span>Account Number:</span>
+												<input required="" type="number" placeholder="######" id="number" name="teamTrack[acctNum]" min="1" max="999999">
 											</div>
 										</label>
 									</div>
 								</div>
-								<label for="username">
-									<div class="flexbox alignCenter"> <span>Developer:</span>
-										<input type="text" id="text" value="<%= currentUser.firstName %>" name="teamTrack[username]">
-									</div>
-								</label>
+
 								<div class="selectBox flexbox flexJustify alignCenter">
 									<label class="flexItem" for="designer">
 										<div class="flexbox alignCenter"> <span>Designer:</span>
@@ -570,14 +566,6 @@
 								<label name="domain"> <span>Domain:</span>
 									<input name="teamTrack[domain]" placeholder="Domain" type="text">
 								</label>
-								<div class="selectBox flexbox flexJustify alignCenter">
-									<label class="flexItem" name="homeSS"> <span>Home Screenshot:</span>
-										<input name="teamTrack[homeSS]" placeholder="Home ScreenShot Url" type="text">
-									</label>
-									<label class="flexItem" name="interiorSS"> <span>Interior Screenshot:</span>
-										<input name="teamTrack[interiorSS]" placeholder="Interior ScreenShot Url" type="text">
-									</label>
-								</div>
 								<div class="selectBox flexbox flexJustify alignCenter">
 									<label class="flexItem" for="buildPkg">
 										<div class="flexbox alignCenter"> <span>Build Package:</span>
@@ -623,6 +611,14 @@
 
 									<!-- If site is an Essential -->
 									<div class="ifEssential">
+										<div class="selectBox flexbox flexJustify alignCenter">
+											<label class="flexItem" name="homeSS"> <span>Home Screenshot:</span>
+												<input name="teamTrack[homeSS]" placeholder="Home ScreenShot Url" type="text">
+											</label>
+											<label class="flexItem" name="interiorSS"> <span>Interior Screenshot:</span>
+												<input name="teamTrack[interiorSS]" placeholder="Interior ScreenShot Url" type="text">
+											</label>
+										</div>
 										<label><span>Special Features:</span> </label>
 										<div class="customCheck flexbox">
 											<label class="checkbox">
@@ -743,14 +739,14 @@
 	}
 	// Name field for tasktypes
 	$(document).ready(function () {
-		var  count  =  0;
+		var count = 0;
 		$("div.task div.row:first-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
 		$("div.task div.row:first-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
 		$("div.task div.row:first-of-type textarea.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
 
-		$("#addTask").click(function  () {
+		$("#addTask").click(function () {
 			count++;
-			var  newTaskInput  =  $(".task .row:last-of-type");
+			var newTaskInput = $(".task .row:last-of-type");
 			newTaskInput.clone().appendTo(".task");
 			$("div.task div.row:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
 			$("div.task div.row:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
@@ -762,7 +758,7 @@
 			if (taskCount === 1) {
 				alert("You cannot remove the only task");
 			} else {
-				var  newTaskInput  =  $(".task .row:last-of-type");
+				var newTaskInput = $(".task .row:last-of-type");
 				newTaskInput.remove();
 			};
 		});

@@ -1,34 +1,72 @@
 <% include partials/header %>
 
 <style>
-#presenceTracker div.trackedurl {padding: 20px;border: 1px solid #252525;display:  flex; align-items: center;}
-#presenceTracker div.trackedurl:nth-of-type(even) {background-color: #eee;}
-#presenceTracker div.trackedurl:nth-of-type(odd) {background-color: #e6e4e4;}
-#presenceTracker div.trackedurl > div.left {flex: 1 50%; text-align: left;}
-#presenceTracker div.trackedurl > div.right {flex: 1 50%; text-align: right;}
+    #presenceTracker div.trackedurl {
+        padding: 20px;
+        border: 1px solid #252525;
+        display: flex;
+        align-items: center;
+        background-color: #eee;
+        flex: 1 0 45%;
+        margin: 10px;
+    }
+
+    #presenceTracker div.trackedurl p {
+        margin: 0 0 0 .5em
+    }
+
+    .presenceTrackerContainer {
+        display: flex;
+        flex-wrap: wrap;
+    }
 </style>
 <div id="overview" class="center">
-	<h1><%= currentUser.team %> Url Tracker</h1>
+    <h1>
+        <%= currentUser.team %> Url Tracker</h1>
 </div>
 <div class="container">
-    <h3 class="pageHeader"><%= currentUser.firstName %>, this is the Presence URL Tracker for Essential builds.  This is the easiest way to keep up with site build URLs.</h1>
-    <div id="presenceTracker">
-        <a id="count"></a>
-        <div class="presenceTrackerContainer">
+    <h3 class="pageHeader">
+        <%= currentUser.firstName %>, this is the Presence URL Tracker for Essential builds. This is the easiest way to
+        keep up with site build URLs.</h3>
+    <div id="dashContent">
+        <div class="table">
+            <div class="row title flexbox">
+                <div class="cell url">Domain</div>
+                <div class="cell url">CSS Path</div>
+                <div class="cell name">Developer</div>
+                <div class="cell name">OnBoarder</div>
+                <div class="cell date">Date</div>
+                <div class="cell arrow"></div>
+            </div>
             <% tracking.forEach(function(tracked){ %>
-                <% if(tracked.buildPkg === "Essential"){ %>
-                <div class="trackedurl">
-                    <div class="left"><h4> Added by: <strong><%= tracked.author.firstName %></strong></h4>
-                        <p> Date: <em><%= tracked.date %></em></p>
-                        <p> CSS Path: <%= tracked.cssPath %></p>
-                    </div>
-                    <div class="right">
-                    <p><a href="http://<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></p>
+            <%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
+            <%if(tracked.buildPkg === "Essential" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){%>
+            <div class="row flexbox">
+                <div class="cell url"><a href="<%= tracked.domain %>" target="_blank">
+                        <%= tracked.domain %></a></div>
+                <div class="cell url">
+                    <%= tracked.cssPath %>
                 </div>
+                <div class="cell name">
+                    <%= tracked.author.firstName %>
                 </div>
-                <% } %>
+                <div class="cell name">
+                    <%= tracked.onboarder %>
+                </div>
+                <div class="cell date">
+                    <%= moment(tracked.created_at).format('MMM DD, YYYY') %>
+                </div>
+
+                <!-- end of expanded -->
+
+            </div>
+            <% } %>
+            <% } %>
             <% }); %>
         </div>
     </div>
+</div>
+<!-- end of dashStarter -->
+</div>
 </div>
 <% include partials/footer %>

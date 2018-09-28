@@ -740,6 +740,9 @@ nav.contentNav a.active {
   width: 100%;
   padding: 20px 40px;
 }
+#accordion .expanded li:empty {
+  display: none;
+}
 div#accordion p {
   margin: 0;
 }
@@ -1001,7 +1004,7 @@ select:first-child {
   font-family: "Font Awesome 5 Free";
   font-size: 1em;
   font-weight: 900;
-  right: 11px;
+  left: 100%;
   top: 5px;
   position: absolute;
 }
@@ -1016,7 +1019,7 @@ select:first-child {
   color: #404040;
   cursor: pointer;
   position: relative;
-  width: 200px;
+  width: 220px;
 }
 .customCheck .checkbox input {
   left: -9999px;
