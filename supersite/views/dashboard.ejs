@@ -28,6 +28,10 @@
 	.selectTeamMember a:hover {
 		text-decoration: none;
 	}
+
+	.actNumber span:not(:last-child):after {
+		content: ", ";
+	}
 </style>
 <div id="overview" class="center">
 	<h1>
@@ -495,6 +499,57 @@
 					</div>
 				</div>
 				<!-- end of dashStarter -->
+				<div id="dashProject">
+					<h2>Special Projects</h2>
+					<div class="table">
+						<div class="row title flexbox">
+							<div class="cell url">Project Name</div>
+							<div class="cell actNumber">Owners</div>
+							<div class="cell name">Creator</div>
+							<div class="cell name">Status</div>
+							<div class="cell date">Date</div>
+							<div class="cell arrow"></div>
+						</div>
+						<div id="accordion">
+							<% projects.forEach(function(project){ %>
+							<%	for(var i = 0; i < project.owners.length; i++){ %>
+							<% if(currentUser.firstName === project.owners[i].firstName) { %>
+							<% if(project.status === "Completed"){ %>
+							<div class="row flexbox">
+								<div class="cell url">
+									<%= project.name %>
+								</div>
+								<div class="cell actNumber">
+									<%	for(var i = 0; i < project.owners.length; i++){ %>
+									<span>
+										<%= project.owners[i].firstName %></span>
+									<% } %>
+								</div>
+								<div class="cell name">
+									<%= project.author.firstName %>
+								</div>
+								<div class="cell name">
+									<%= project.status %>
+								</div>
+								<div class="cell date">
+									<%= moment(project.created_at).format("MMM DD, YYYY") %>
+								</div>
+								<div class="cell arrow" data-panel-id="panel1"><i class="fas fa-angle-down"></i></div>
+								<div class="expanded" style="display:none">
+									<p><strong>Project Description:</strong>
+										<%= project.description %>
+									</p>
+								</div>
+								<!-- end of expanded -->
+							</div>
+							<% } %>
+							<% } %>
+							<% } %>
+							<% }); %>
+						</div>
+					</div>
+				</div>
+				<!-- end of dashProject -->
 			</div>
 
 			<% } %>
@@ -538,28 +593,33 @@
 
 		// when you click on essentials circle it shows tracked essential tasks
 		$('.showEssentials').click(function () {
-			$('#dashStarter, #dashTlink, #dashProd, #dashContent').hide();
+			$('#dashStarter, #dashTlink, #dashProd, #dashContent, #dashProject').hide();
 			$('#bottomRow, #dashEssential').fadeIn("slow");
 		});
 		// when you click on essentials circle it shows tracked starter tasks
 		$('.showStarter').click(function () {
-			$('#dashEssential, #dashTlink, #dashProd, #dashContent').hide();
+			$('#dashEssential, #dashTlink, #dashProd, #dashContent, #dashProject').hide();
 			$('#bottomRow, #dashStarter').fadeIn("slow");
 		});
 		// when you click on essentials circle it shows tracked starter tasks
 		$('.showProd').click(function () {
-			$('#dashTlink, #dashEssential, #dashContent, #dashStarter').hide();
+			$('#dashTlink, #dashEssential, #dashContent, #dashStarter, #dashProject').hide();
 			$('#bottomRow, #dashProd').fadeIn("slow");
 		});
 		// when you click on essentials circle it shows tracked starter tasks
 		$('.showTlink').click(function () {
-			$('#dashProd, #dashEssential, #dashContent, #dashStarter').hide();
+			$('#dashProd, #dashEssential, #dashContent, #dashStarter, #dashProject').hide();
 			$('#bottomRow, #dashTlink').fadeIn("slow");
 		});
 		// when you click on essentials circle it shows tracked starter tasks
 		$('.showContent').click(function () {
-			$('#dashProd, #dashEssential, #dashTlink, #dashStarter').hide();
+			$('#dashProd, #dashEssential, #dashTlink, #dashStarter, #dashProject').hide();
 			$('#bottomRow, #dashContent').fadeIn("slow");
+		});
+		// when you click on essentials circle it shows tracked starter tasks
+		$('.showProject').click(function () {
+			$('#dashProd, #dashEssential, #dashTlink, #dashStarter, #dashContent').hide();
+			$('#bottomRow, #dashProject').fadeIn("slow");
 		});
 	});
 	var month = new Array();
