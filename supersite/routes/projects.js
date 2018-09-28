@@ -75,8 +75,14 @@ router.get("/:id", function(req, res) {
 
 //edit projects route
 router.get("/:id/edit", function(req, res) {
-  Project.findById(req.params.id, function(err, foundProject) {
-    res.render("projects/edit", { project: foundProject, moment: moment });
+  User.find({}, function(err, allUsers) {
+    Project.findById(req.params.id, function(err, foundProject) {
+      res.render("projects/edit", {
+        project: foundProject,
+        moment: moment,
+        users: allUsers
+      });
+    });
   });
 });
 //update projects route
