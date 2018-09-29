@@ -28,7 +28,8 @@
                 <li class="list-group-item"><strong>Created Date:</strong>
                     <%= moment(project.created_at).format("MMM DD, YYYY hh:mm a") %>
                 </li>
-
+            </div>
+            <div class="list-group">
                 <% if (project.history.length > 0){ %>
                 <% var indexLength = project.history.length %>
 
@@ -38,8 +39,9 @@
                 <li class="list-group-item"><strong>Last Modified Time: </strong>
                     <%= moment(project.history[indexLength - 1].time).format("MMM DD, YYYY hh:mm a") %>
                 </li>
+                <% } %>
             </div>
-            <% } %>
+
         </div>
         <div class="col-md-8">
             <div class="thumbnail">
@@ -56,14 +58,15 @@
                     <p><em>Submitted By: <strong>
                                 <%= project.author.firstName %> -
                                 <%= project.author.email %></strong></em></p>
+                    <div class="ownerList"><strong>Owners:</strong>
+                        <div class="projectStatus">
+                            <% for(let i = 0; i < project.owners.length; i++) { %>
+                            <span>
+                                <%= project.owners[i].firstName %></span>
+                            <% } %>
+                        </div>
+                    </div>
                     <div id="trackerBtn">
-
-                        <!-- <% for(let i = 0; i < project.owners.length; i++) { %>
-
-                        <% if(currentUser.firstName === project.owners[i].firstName || currentUser && project.author.id.equals(currentUser._id)){ %>
-                        <% } %>
-
-                        <% } %> -->
                         <a class="btn edit" href="/projects/<%= project._id %>/edit">Edit</a>
 
                         <% if(currentUser && project.author.id.equals(currentUser._id) || currentUser.team === "Developer"){ %>

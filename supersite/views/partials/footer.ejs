@@ -1,11 +1,21 @@
-
 </section>
 <footer id="footer">
     <div class="container">
-        <a href="/"><h2 style="text-align: center;" class="brand">Strom Centre</h2></a>
+        <div id="logo" style="text-align: center;">
+            <% if(!currentUser){ %>
+            <a href="/">
+                <h2 class="brand">Strom Centre</h2>
+            </a>
+            <% } else { %>
+            <a href="/dashboard">
+                <h2 class="brand">Strom Centre</h2>
+            </a>
+            <% } %>
+        </div>
         <p><a style="color: white;" href="/strom">&copy; 2018 Web Devs</a></p>
     </div>
 </footer>
 <div id="pageOverlay" style="display: none;"></div>
 </body>
+
 </html>

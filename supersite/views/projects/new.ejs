@@ -16,9 +16,6 @@
                         <label for="name"><span>Project Name:</span>
                             <input type="text" name="name" placeholder="Project Name">
                         </label>
-                        <label for="date"><span>Create Date:</span>
-                            <input type="date" name="date">
-                        </label>
                         <label for="status"><span>Project Status:</span>
                             <select name="status">
                                 <option value="Ready for Work" selected>Ready for Work</option>
@@ -44,7 +41,8 @@
                                     <div class="row flexbox">
                                         <div class="cell type">
                                             <div class="customSelect">
-                                                <select class="owners">
+                                                <select class="owners" required>
+                                                    <option value="">Please Owner</option>
                                                     <% users.forEach(function(user){ %>
                                                     <option value="<%= user.firstName %>">
                                                         <%= user.firstName %>
