@@ -1,0 +1,130 @@
+<% include partials/header %>
+
+<style>
+  .flexbox.flexCenter.thumbnail {
+    flex-direction: column;
+    margin: 10px 0;
+    padding: 10px 20px 20px;
+    border: 1px solid #323232;
+    background: #fff;
+  }
+
+  .flexbox.flexCenter.thumbnail img {
+    width: 200px;
+    object-fit: cover;
+    height: 200px;
+  }
+
+  .projectStatus {
+    display: inline-block;
+  }
+
+  .projectStatus span:not(:last-child):after {
+    content: ", ";
+  }
+
+  .caption {
+    padding: 5px 0 10px;
+  }
+</style>
+<div id="overview" class="center">
+  <h1>Meet Your Team</h1>
+</div>
+<div class="container">
+  <h3 class="pageHeader">Get to know your team better</h3>
+
+  <h2>Developers</h2>
+  <div class="flexbox flexCenter flexAround alignCenter">
+    <% users.forEach(function(user){%>
+    <% if(user.team === "Developer"){ %>
+    <div class="flexbox flexAround">
+      <div class="flexbox flexCenter thumbnail">
+        <img onerror="this.src='/images/Projectweb.png'" src="<%= user.profileImageUrl %>" alt="<%= user.firstName%>" />
+        <div class="caption">
+          <h4>
+            <strong>
+              <%= user.firstName %></strong>
+          </h4>
+        </div>
+        <p><strong>Team:</strong> <span class="projectStatus">
+            <%= user.team %></span></p>
+        <a href="/team/<%= user.id %>" class="myBtn">More Info</a>
+
+      </div>
+    </div>
+    <% } %>
+    <% }); %>
+
+  </div>
+  <hr />
+  <h2>Designers</h2>
+  <div class="flexbox flexCenter flexAround alignCenter">
+    <% users.forEach(function(user){%>
+    <% if(user.team === "Designer"){ %>
+    <div class="flexbox flexAround">
+      <div class="flexbox flexCenter thumbnail">
+        <img onerror="this.src='/images/Projectweb.png'" src="<%= user.profileImageUrl %>" alt="<%= user.firstName%>" />
+        <div class="caption">
+          <h4>
+            <strong>
+              <%= user.firstName %></strong>
+          </h4>
+        </div>
+        <p><strong>Team:</strong> <span class="projectStatus">
+            <%= user.team %></span></p>
+        <a href="/team/<%= user.id %>" class="myBtn">More Info</a>
+
+      </div>
+    </div>
+    <% } %>
+    <% }); %>
+  </div>
+  <hr />
+  <h2>Copy Writers</h2>
+  <div class="flexbox flexCenter flexAround alignCenter">
+    <% users.forEach(function(user){%>
+    <% if(user.team === "Copy Writer"){ %>
+    <div class="flexbox flexAround">
+      <div class="flexbox flexCenter thumbnail">
+        <img onerror="this.src='/images/Projectweb.png'" src="<%= user.profileImageUrl %>" alt="<%= user.firstName%>" />
+        <div class="caption">
+          <h4>
+            <strong>
+              <%= user.firstName %></strong>
+          </h4>
+        </div>
+        <p><strong>Team:</strong> <span class="projectStatus">
+            <%= user.team %></span></p>
+        <a href="/team/<%= user.id %>" class="myBtn">More Info</a>
+
+      </div>
+    </div>
+    <% } %>
+    <% }); %>
+  </div>
+  <hr />
+  <h2>Onboarders</h2>
+  <div class="flexbox flexCenter flexAround alignCenter">
+    <% users.forEach(function(user){%>
+    <% if(user.team === "On-Boarder"){ %>
+    <div class="flexbox flexAround">
+      <div class="flexbox flexCenter thumbnail">
+        <img onerror="this.src='/images/Projectweb.png'" src="<%= user.profileImageUrl %>" alt="<%= user.firstName%>" />
+        <div class="caption">
+          <h4>
+            <strong>
+              <%= user.firstName %></strong>
+          </h4>
+        </div>
+        <p><strong>Team:</strong> <span class="projectStatus">
+            <%= user.team %></span></p>
+        <a href="/team/<%= user.id %>" class="myBtn">More Info</a>
+
+      </div>
+    </div>
+    <% } %>
+    <% }); %>
+  </div>
+  <hr />
+</div>
+<% include partials/footer %>

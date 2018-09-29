@@ -28,8 +28,6 @@
                 <li class="list-group-item"><strong>Created Date:</strong>
                     <%= moment(project.created_at).format("MMM DD, YYYY hh:mm a") %>
                 </li>
-            </div>
-            <div class="list-group">
                 <% if (project.history.length > 0){ %>
                 <% var indexLength = project.history.length %>
 

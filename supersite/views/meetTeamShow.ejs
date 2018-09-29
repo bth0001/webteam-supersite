@@ -1,0 +1,75 @@
+<% include partials/header %>
+<style>
+  h1 {
+    text-transform: capitalize;
+  }
+
+  #trackerBtn {
+    clear: both;
+  }
+
+  .thumbnail img {
+    width: 300px;
+    object-fit: cover;
+    height: 300px;
+  }
+
+  .list-group-item.active {
+    background-color: #2637B0;
+    border-color: #2637B0;
+  }
+
+  .thumbnail img {
+    object-fit: cover;
+    width: 15em;
+    border: none;
+    height: 15em;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  }
+</style>
+<div id="overview" class="center">
+  <h1>
+    Meet
+    <%= user.firstName %>
+    <%= user.lastName %>
+  </h1>
+</div>
+<div class="container" style="margin: 30px auto;">
+  <div class="row">
+    <div class="col-md-4" style="margin: 10px 0;">
+      <p class="lead">Details</p>
+      <div class="list-group">
+        <li class="list-group-item active"><strong>Skills:</strong>
+        </li>
+        <li class="list-group-item">
+          <%= user.skills %>
+        </li>
+        <li class="list-group-item active"><strong>Links: </strong></li>
+        <li class="list-group-item">
+          <a href="<%= user.socials %>" target="_blank">
+            <%= user.socials %></a>
+        </li>
+      </div>
+
+    </div>
+    <div class="col-md-8">
+      <div class="thumbnail">
+        <img onerror="this.src='/images/Projectweb.png'" src="../<%= user.profileImageUrl %>" alt="<%= user.firstName %>"
+          class="responsive-image" style="float: right;" />
+        <div class="caption-full col-md-8">
+          <h4>
+            <%= user.team %>
+          </h4>
+          <p><em>Email: <strong>
+                <a href="mailto:<%= user.email %>">
+                  <%= user.email %></a></strong></em></p>
+          <p>
+            <%= user.bio %>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<% include partials/footer %>

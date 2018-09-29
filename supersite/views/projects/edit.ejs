@@ -1,6 +1,25 @@
 <% include ../partials/header %>
 <style>
   h1 {text-transform: capitalize;}
+  .taskTable {
+    padding-bottom: 25px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.taskTable .header {
+    font-weight: 400;
+    padding: 5px;
+    flex: 100%;
+}
+.taskTable {
+    padding-bottom: 25px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 </style>
 <div id="overview" class="center">
   <h1>Edit Project
@@ -20,6 +39,43 @@
             <label for="comment[text]"><span>Project Name:</span>
               <input type="text" name="project[name]" value="<%= project.name %>">
             </label>
+            <label for="status"><span>Project Status:</span>
+              <select name="project[status]" id="status">
+                <option value="<%= project.status %>">
+                  <%= project.status %>
+                </option>
+                <% if(project.status === "Ready for Work") { %>
+                <option value="In Progress">In Progress</option>
+                <option value="Awaiting Review">Awaiting Review</option>
+                <option value="On Hold">On Hold</option>
+                <option value="Completed">Completed</option>
+                <% } %>
+                <% if(project.status === "In Progress") { %>
+                <option value="Ready for Work">Ready for Work</option>
+                <option value="Awaiting Review">Awaiting Review</option>
+                <option value="On Hold">On Hold</option>
+                <option value="Completed">Completed</option>
+                <% } %>
+                <% if(project.status === "Awaiting Review") { %>
+                <option value="Ready for Work">Ready for Work</option>
+                <option value="In Progress">In Progress</option>
+                <option value="On Hold">On Hold</option>
+                <option value="Completed">Completed</option>
+                <% } %>
+                <% if(project.status === "On Hold") { %>
+                <option value="Ready for Work">Ready for Work</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Awaiting Review">Awaiting Review</option>
+                <option value="Completed">Completed</option>
+                <% } %>
+                <% if(project.status === "Completed") { %>
+                <option value="Ready for Work">Ready for Work</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Awaiting Review">Awaiting Review</option>
+                <option value="On Hold">On Hold</option>
+                <% } %>
+              </select>
+            </label>
           </section>
           <section class="flexbox flexJustify">
             <label for="comment[text]"><span>Project Description:</span>
@@ -27,47 +83,6 @@
             </label>
           </section>
           <div class="selectBox flexbox flexJustify alignCenter">
-            <label class="flexItem" for="project[status]">
-              <div class="flexbox alignCenter"><span>Project Status:</span>
-                <div class="customSelect">
-                  <select name="project[status]" id="status">
-                    <option value="<%= project.status %>">
-                      <%= project.status %>
-                    </option>
-                    <% if(project.status === "Ready for Work") { %>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Awaiting Review">Awaiting Review</option>
-                    <option value="On Hold">On Hold</option>
-                    <option value="Completed">Completed</option>
-                    <% } %>
-                    <% if(project.status === "In Progress") { %>
-                    <option value="Ready for Work">Ready for Work</option>
-                    <option value="Awaiting Review">Awaiting Review</option>
-                    <option value="On Hold">On Hold</option>
-                    <option value="Completed">Completed</option>
-                    <% } %>
-                    <% if(project.status === "Awaiting Review") { %>
-                    <option value="Ready for Work">Ready for Work</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="On Hold">On Hold</option>
-                    <option value="Completed">Completed</option>
-                    <% } %>
-                    <% if(project.status === "On Hold") { %>
-                    <option value="Ready for Work">Ready for Work</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Awaiting Review">Awaiting Review</option>
-                    <option value="Completed">Completed</option>
-                    <% } %>
-                    <% if(project.status === "Completed") { %>
-                    <option value="Ready for Work">Ready for Work</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Awaiting Review">Awaiting Review</option>
-                    <option value="On Hold">On Hold</option>
-                    <% } %>
-                  </select>
-                </div>
-              </div>
-            </label>
             <script>
               $(document).ready(function () {
                 var count = 0;

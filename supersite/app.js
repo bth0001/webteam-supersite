@@ -33,6 +33,7 @@ var blueprintGeneratorRouter = require("./routes/blueprint-generator");
 var checklistRouter = require("./routes/checklist");
 var projectsRouter = require("./routes/projects");
 var projectCommentsRouter = require("./routes/projectsComment");
+var teamRoutes = require("./routes/teamProfile");
 const errorHandler = require("./handlers/error");
 // API ROUTES
 const apiTracker = require("./routes/api/apiTracker");
@@ -105,6 +106,7 @@ app.use("/api/tracker", apiTracker);
 app.all("*", isLoggedIn); // For Authentication
 app.use("/tracker", trackerRoutes);
 app.use("/users", usersRouter);
+app.use("/team", teamRoutes);
 app.use("/dashboard", dashboardRouter);
 app.use("/idea-warehouse", ideaWarehouseRouter);
 app.use("/hats-off", hatsOffRouter);

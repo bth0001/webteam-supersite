@@ -36,7 +36,17 @@
               </select>
             </label>
           </section>
-
+          <section class="flexbox flexJustify">
+            <label for="skills"><span>Skills:</span>
+              <input type="text" name="skills" placeholder="Skillset" value="<%= currentUser.skills %>" />
+            </label>
+            <label for="socials"><span>Social:</span>
+              <input type="text" name="socials" placeholder="Your Social Links" value="<%= currentUser.socials %>" />
+            </label>
+          </section>
+          <label for="bio"><span>Bio:</span>
+            <textarea type="text" name="bio" placeholder="Your Bio" value="<%= currentUser.bio %>"><%= currentUser.bio %></textarea>
+          </label>
           <label for="imageProfile"><span>Profile Image</span></label>
           <div class="upload-btn-wrapper">
             <button class="btn">Upload a Image</button>

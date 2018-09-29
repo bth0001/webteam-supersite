@@ -1,5 +1,24 @@
 <% include ../partials/header %>
-
+<style>
+    .taskTable {
+    padding-bottom: 25px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.taskTable .header {
+    font-weight: 400;
+    padding: 5px;
+    flex: 100%;
+}
+.task {
+    padding-bottom: 25px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}</style>
 <div id="overview" class="center">
     <h1>
         <%= currentUser.firstName %>'s Project Creation</h1>
@@ -42,7 +61,7 @@
                                         <div class="cell type">
                                             <div class="customSelect">
                                                 <select class="owners" required>
-                                                    <option value="">Please Owner</option>
+                                                    <option value="" disabled>Please Select</option>
                                                     <% users.forEach(function(user){ %>
                                                     <option value="<%= user.firstName %>">
                                                         <%= user.firstName %>
