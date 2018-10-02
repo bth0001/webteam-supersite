@@ -1,21 +1,21 @@
 <% include ../partials/header %>
 <script>
-  $(document).ready(function () {
-    $("#startEssWrap, #checklistEssential").hide();
+  // $(document).ready(function () {
+  //   $("#startEssWrap, #checklistEssential").hide();
 
-    $('#buildPkg').on('change', function () {
-      if ($(this).val() === 'Essential') {
-        $("#startEssWrap").show("slow");
-        $("#checklistStarter, #checklistEssential").show();
-      }
+  //   $('#buildPkg').on('change', function () {
+  //     if ($(this).val() === 'Essential') {
+  //       $("#startEssWrap").show("slow");
+  //       $("#checklistStarter, #checklistEssential").show();
+  //     }
 
-      if ($(this).val() === 'Starter') {
-        $("#startEssWrap").show("slow");
-        $("#checklistStarter").show();
-        $("#checklistEssential").hide();
-      }
-    });
-  });
+  //     if ($(this).val() === 'Starter') {
+  //       $("#startEssWrap").show("slow");
+  //       $("#checklistStarter").show();
+  //       $("#checklistEssential").hide();
+  //     }
+  //   });
+  // });
 </script>
 
 <style>
@@ -23,7 +23,7 @@
 form input {display:inline-block; width: auto;}
 .checklistForm input[type="radio"], .checklistForm input[type="radio"] {margin: 0 8px 0 0}
 .form-group{margin:0}
-#startEssWrap {display:none; margin: 30px 0 0}
+#startEssWrap {margin: 30px 0 0}
 #startEssWrap input {color: #fff !important;}
 
 .checklistContainer {max-width:80%; margin: 0 auto; }  
@@ -47,7 +47,7 @@ input.checkName {width: 100%; background: none; border: none; color: #fff; font-
 #checklistHeaderInfo {display:flex; justify-content: space-between; flex-wrap:wrap; flex-direction:row; margin: 0 auto; border: none !important}
 #checklistHeaderInfo label {border:none; flex:1; margin: 0 10px; text-align:left}
 #checklistHeaderInfo .domain {flex: 2}
-#checklistHeaderInfo input, #checklistHeaderInfo select {width: 100%; height:2.5em; margin: 10px 0 0}
+#checklistHeaderInfo input, #checklistHeaderInfo select {width: 100%; height:2.5em; margin: 10px 0 0; padding: 0 15px;}
 #checklistHeaderInfo select {padding: 0 10px}
 
 @media screen and (max-width:768px) {
@@ -77,11 +77,17 @@ input.checkName {width: 100%; background: none; border: none; color: #fff; font-
         <div class="form-group" id="checklistHeaderInfo">
           <label name="buildPkg">Build Package:
             <select name="checklist[buildPkg]" id="buildPkg">
+              <% if(checklist.buildPkg === "Essential") { %>
               <option value="<%= checklist.buildPkg %>" selected>
                 <%= checklist.buildPkg %>
               </option>
-              <option value="Essential">Essential</option>
               <option value="Starter">Starter</option>
+              <% } %>
+              <% if(checklist.buildPkg === "Starter") { %>
+              <option value="<%= checklist.buildPkg %>" selected>
+                <%= checklist.buildPkg %>
+              <option value="Essential">Essential</option>
+              <% } %>
             </select>
           </label>
 
@@ -116,56 +122,8 @@ input.checkName {width: 100%; background: none; border: none; color: #fff; font-
 
             </div> <!-- end of form-group-->
             <% } %>
-          </div> <!-- end of checklistStarter-->
-          <div id="checklistEssential">
-            <div class="form-group">
-              <span class="taskName"><input class="checkName" value="Phone Number on Mobile" /></span>
-              <span class="taskComplete"><input type="radio" class="checkStatus" value="Complete" name="phoneMobile">
-                Complete</span>
-              <span class="taskNA"><input type="radio" class="checkStatus" value="N/A" name="phoneMobile">
-                N/A</span>
-              <span class="taskNotes"><textarea class="checkNotes" placeholder="Additional Notes"></textarea></span>
-              </label>
-            </div> <!-- end of form-group-->
-            <div class="form-group">
-              <span class="taskName"><input class="checkName" value="Forms, Galleries, IAs Styled to Match Site" /></span>
-              <span class="taskComplete"><input type="radio" class="checkStatus" value="Complete" name="otherStyling">
-                Complete</span>
-              <span class="taskNA"><input type="radio" class="checkStatus" value="N/A" name="otherStyling">
-                N/A</span>
-              <span class="taskNotes"><textarea class="checkNotes" placeholder="Additional Notes"></textarea></span>
-              </label>
-            </div> <!-- end of form-group-->
-            <div class="form-group">
-              <span class="taskName"><input class="checkName" value="Focus to Hover States" /></span>
-              <span class="taskComplete"><input type="radio" class="checkStatus" value="Complete" name="focusHover">
-                Complete</span>
-              <span class="taskNA"><input type="radio" class="checkStatus" value="N/A" name="focusHover">
-                N/A</span>
-              <span class="taskNotes"><textarea class="checkNotes" placeholder="Additional Notes"></textarea></span>
-              </label>
-            </div> <!-- end of form-group-->
-            <div class="form-group">
-              <span class="taskName"><input class="checkName" value="Check Site in Browsers" /></span>
-              <span class="taskComplete"><input type="radio" class="checkStatus" value="Complete" name="checkBrowsers">
-                Complete</span>
-              <span class="taskNA"><input type="radio" class="checkStatus" value="N/A" name="checkBrowsers">
-                N/A</span>
-              <span class="taskNotes"><textarea class="checkNotes" placeholder="Additional Notes"></textarea></span>
-              </label>
-            </div> <!-- end of form-group-->
-            <div class="form-group">
-              <span class="taskName"><input class="checkName" value="Meta Descriptions" /></span>
-              <span class="taskComplete"><input type="radio" class="checkStatus" value="Complete" name="metaDesc">
-                Complete</span>
-              <span class="taskNA"><input type="radio" class="checkStatus" value="N/A" name="metaDesc">
-                N/A</span>
-              <span class="taskNotes"><textarea class="checkNotes" placeholder="Additional Notes"></textarea></span>
-              </label>
-            </div> <!-- end of form-group-->
-
           </div>
-          <button id="submit" class="myBtn">Submit Checklist</button>
+          <button id="submit" class="myBtn">Update Checklist</button>
         </div> <!-- end startEssWrap -->
 
       </form> <!-- end of form -->
@@ -174,21 +132,12 @@ input.checkName {width: 100%; background: none; border: none; color: #fff; font-
 <script>
   $("form.checklistForm").submit(function () {
     var count = 0;
-    if (!$("#checklistEssential").css("display", "none") === true) {
-      $("#startEssWrap div.form-group").each(function () {
-        $(this).children().find(".checkName").attr("name", "checklist[checklistTask][" + count + "][taskName]");
-        $(this).children().find(".checkStatus").attr("name", "checklist[checklistTask][" + count + "][taskStatus]");
-        $(this).children().find(".checkNotes").attr("name", "checklist[checklistTask][" + count + "][additionalNotes]");
-        count++;
-      });
-    } else {
-      $("#checklistStarter div.form-group").each(function () {
-        $(this).children().find(".checkName").attr("name", "checklist[checklistTask][" + count + "][taskName]");
-        $(this).children().find(".checkStatus").attr("name", "checklist[checklistTask][" + count + "][taskStatus]");
-        $(this).children().find(".checkNotes").attr("name", "checklist[checklistTask][" + count + "][additionalNotes]");
-        count++;
-      });
-    }
+    $("#startEssWrap div.form-group").each(function () {
+      $(this).children().find(".checkName").attr("name", "checklist[checklistTask][" + count + "][taskName]");
+      $(this).children().find(".checkStatus").attr("name", "checklist[checklistTask][" + count + "][taskStatus]");
+      $(this).children().find(".checkNotes").attr("name", "checklist[checklistTask][" + count + "][additionalNotes]");
+      count++;
+    });
   });
 </script>
 

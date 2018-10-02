@@ -48,6 +48,7 @@ app.use(methodOverride("_method"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash());
+
 //==============================================================================
 //PASSPORT CONFIGURATION
 app.use(

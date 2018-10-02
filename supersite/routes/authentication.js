@@ -35,7 +35,12 @@ router.get("/signup", function(req, res) {
 
 //handles signup route
 router.post("/signup", upload.single("image"), function(req, res) {
-  req.body.profileImageUrl = req.file.path; //grabs file path and assigns to profileImageUrl
+  if (req.file === undefined || req.file === null) {
+    profileImageUrl = "/images/Projectweb.png";
+  } else {
+    req.body.profileImageUrl = req.file.path;
+    var profileImageUrl = req.body.profileImageUrl;
+  }
   const newUser = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,

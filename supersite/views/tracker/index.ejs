@@ -99,7 +99,8 @@
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
 							<% if(currentUser.email === tracked.author.email) { %>
-							<% if(tracked.buildPkg === "Essential" && tracked.archive == !true){ %>
+							<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
+							<% if(tracked.buildPkg === "Essential" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank">
 										<%= tracked.domain %></a></div>
@@ -163,6 +164,7 @@
 							</div>
 							<% } %>
 							<% } %>
+							<% }; %>
 							<% }); %>
 						</div>
 					</div>
@@ -181,8 +183,9 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
+							<%	for(var i = 0; i < tracked.taskTypes.length; i++){ %>
 							<% if(currentUser.email === tracked.author.email) { %>
-							<% if(tracked.buildPkg === "Starter" && tracked.archive == !true){ %>
+							<% if(tracked.buildPkg === "Starter" && tracked.taskTypes[i].taskTypeName === "Site Build" && tracked.archive == !true){ %>
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank">
 										<%= tracked.domain %></a></div>
@@ -238,6 +241,7 @@
 								<!-- end of expanded -->
 							</div>
 							<% } %>
+							<% }; %>
 							<% } %>
 							<% }); %>
 						</div>

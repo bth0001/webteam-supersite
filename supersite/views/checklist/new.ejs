@@ -21,7 +21,7 @@
 <style>
   form {max-width:100%; padding:0; box-shadow:none; background-color: transparent}
 form input {display:inline-block; width: auto;}
-.checklistForm input[type="radio"], .checklistForm input[type="radio"] {margin: 0 8px 0 0}
+.checklistForm input[type="radio"], .checklistForm input[type="radio"] {margin: 0 8px 0 0; }
 .form-group{margin:0}
 #startEssWrap {display:none; margin: 30px 0 0}
 #startEssWrap input {color: #fff !important;}
@@ -47,7 +47,7 @@ input.checkName {width: 100%; background: none; border: none; color: #fff; font-
 #checklistHeaderInfo {display:flex; justify-content: space-between; flex-wrap:wrap; flex-direction:row; margin: 0 auto; border: none !important}
 #checklistHeaderInfo label {border:none; flex:1; margin: 0 10px; text-align:left}
 #checklistHeaderInfo .domain {flex: 2}
-#checklistHeaderInfo input, #checklistHeaderInfo select {width: 100%; height:2.5em; margin: 10px 0 0}
+#checklistHeaderInfo input, #checklistHeaderInfo select {width: 100%; height:2.5em; margin: 10px 0 0; padding: 0 15px;}
 #checklistHeaderInfo select {padding: 0 10px}
 
 @media screen and (max-width:768px) {
@@ -259,21 +259,21 @@ input.checkName {width: 100%; background: none; border: none; color: #fff; font-
 <script>
   $("form.checklistForm").submit(function () {
     var count = 0;
-    if (!$("#checklistEssential").css("display", "none") === true) {
-      $("#startEssWrap div.form-group").each(function () {
-        $(this).children().find(".checkName").attr("name", "checklist[checklistTask][" + count + "][taskName]");
-        $(this).children().find(".checkStatus").attr("name", "checklist[checklistTask][" + count + "][taskStatus]");
-        $(this).children().find(".checkNotes").attr("name", "checklist[checklistTask][" + count + "][additionalNotes]");
-        count++;
-      });
-    } else {
-      $("#checklistStarter div.form-group").each(function () {
-        $(this).children().find(".checkName").attr("name", "checklist[checklistTask][" + count + "][taskName]");
-        $(this).children().find(".checkStatus").attr("name", "checklist[checklistTask][" + count + "][taskStatus]");
-        $(this).children().find(".checkNotes").attr("name", "checklist[checklistTask][" + count + "][additionalNotes]");
-        count++;
-      });
-    }
+    // if (!$("#checklistEssential").css("display", "none") === true) {
+    $("#startEssWrap div.form-group").each(function () {
+      $(this).children().find(".checkName").attr("name", "checklist[checklistTask][" + count + "][taskName]");
+      $(this).children().find(".checkStatus").attr("name", "checklist[checklistTask][" + count + "][taskStatus]");
+      $(this).children().find(".checkNotes").attr("name", "checklist[checklistTask][" + count + "][additionalNotes]");
+      count++;
+    });
+    // } else {
+    // $("#checklistStarter div.form-group").each(function () {
+    //   $(this).children().find(".checkName").attr("name", "checklist[checklistTask][" + count + "][taskName]");
+    //   $(this).children().find(".checkStatus").attr("name", "checklist[checklistTask][" + count + "][taskStatus]");
+    //   $(this).children().find(".checkNotes").attr("name", "checklist[checklistTask][" + count + "][additionalNotes]");
+    //   count++;
+    // });
+    // }
   });
 </script>
 

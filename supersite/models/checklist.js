@@ -20,8 +20,9 @@ const developerChecklistSchema = new mongoose.Schema(
     domain: {
       type: String
     },
-    archived: {
-      type: Boolean
+    archive: {
+      type: Boolean,
+      default: false
     },
     checklistTask: [
       {

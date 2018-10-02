@@ -1,51 +1,82 @@
 <% include partials/header %>
 <div id="overview" class="center">
-    <h1>Showing Search Results for: <strong><%= searchWord %></strong>...</h1>
-    
+    <h1>Showing Search Results for: <strong>
+            <%= searchWord %></strong>...</h1>
+
 </div>
 
 <div class="history">
     <% if(searchHistory.length === 1){ %>
-        <h3>Recent Search</h3>
+    <h3>Recent Search</h3>
     <% } else { %>
-        <h3>Recent Searches</h3>
+    <h3>Recent Searches</h3>
     <% } %>
     <ul>
         <% for(var i=0;i < searchHistory.length; i++){ %>
-            <li>
-                <form action="/search" method="GET" class="">
-                    <input value="<%= searchHistory[i] %>" type="hidden" name="search" placeholder="Custom Search">
-                    <button class="nobutton"><%= searchHistory[i] %></button>
-                </form>
-            </li>
+        <li>
+            <form action="/search" method="GET" class="">
+                <input value="<%= searchHistory[i] %>" type="hidden" name="search" placeholder="Custom Search">
+                <button class="nobutton">
+                    <%= searchHistory[i] %></button>
+            </form>
+        </li>
         <% } %>
     </ul>
     <a href="/clear-search">Clear</a>
 </div>
 
 <style>
-button.nobutton {display: inline-block; -webkit-appearance: none; background-color: transparent; border: 0; padding: 0; cursor: pointer;}
-button.nobutton:hover, button.nobutton:focus {text-decoration: underline;}
+    button.nobutton {
+        display: inline-block;
+        -webkit-appearance: none;
+        background-color: transparent;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    button.nobutton:hover,
+    button.nobutton:focus {
+        text-decoration: underline;
+    }
 </style>
 
 <div class="container">
 
-<% if (tracking.length > 0){ %>
+    <% if (tracking.length > 0){ %>
     <% tracking.forEach(function(tracked){ %>
 
-    <p><strong>Created By:</strong> <%= tracked.author.firstName %></p>
-    <p><strong>Onboarder:</strong> <%= tracked.onboarder %></p>
+    <p><strong>Created By:</strong>
+        <%= tracked.author.firstName %>
+    </p>
+    <p><strong>Onboarder:</strong>
+        <%= tracked.onboarder %>
+    </p>
     <% if (tracked.buildPkg === "Essential") { %>
-        <p><strong>Build Package:</strong> <%= tracked.buildPkg %></p>
-        <p><strong>Designer:</strong> <%= tracked.designer %></p>
-        <p><strong>CSS Path:</strong> <%= tracked.cssPath %></p>
+    <p><strong>Build Package:</strong>
+        <%= tracked.buildPkg %>
+    </p>
+    <p><strong>Designer:</strong>
+        <%= tracked.designer %>
+    </p>
+    <p><strong>CSS Path:</strong>
+        <%= tracked.cssPath %>
+    </p>
     <% } %>
     <% if (tracked.buildPkg === "Starter") { %>
-        <p><strong>Build Package:</strong> <%= tracked.buildPkg %></p>
-        <p><strong>Build Package:</strong> <%= tracked.starterTemplate %></p>
+    <p><strong>Build Package:</strong>
+        <%= tracked.buildPkg %>
+    </p>
+    <p><strong>Build Package:</strong>
+        <%= tracked.starterTemplate %>
+    </p>
     <% } %>
-    <p><strong>Domain:</strong> <%= tracked.domain %></p>
-    <p><strong>Notes:</strong> <%= tracked.notes %></p>
+    <p><strong>Domain:</strong>
+        <%= tracked.domain %>
+    </p>
+    <p><strong>Notes:</strong>
+        <%= tracked.notes %>
+    </p>
     <a href="/tracker/<%= tracked._id %>"><button class="btn edit">See More</button></a>
 
 
@@ -53,11 +84,19 @@ button.nobutton:hover, button.nobutton:focus {text-decoration: underline;}
 
     <hr />
     <% }); %>
-<% } else { %>
-    <h3>No Results Found for <strong><%= searchWord %></strong>.</h3>
-    
+    <% } else if(projects.length > 0) { %>
+    <% projects.forEach(function(project){ %>
+    <p>
+        <%= project %>
+    </p>
+    <% }); %>
+    <% }else { %>
+    <h3>No Results Found for <strong>
+            <%= searchWord %></strong>.</h3>
 
-<% } %>
 
-</div><!--container-->
+    <% } %>
+
+</div>
+<!--container-->
 <% include partials/footer %>

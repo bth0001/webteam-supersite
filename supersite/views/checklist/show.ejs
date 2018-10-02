@@ -1,7 +1,109 @@
 <% include ../partials/header %>
 <div id="overview" class="center">
   <h1>
-    <%= currentUser.team %> Tracker Show Page</h1>
+    <%= currentUser.team %> Checklist Show Page</h1>
 </div>
+<div class="container">
+  <h3 class="pageHeader" style="text-align: center; margin: 10px 0 20px;">You are looking at Checklist Item for <strong><a
+        href="<%= checklist.domain %>" target="_blank">
+        <%= checklist.domain %></a></strong></h3>
 
+  <div id="bottomRow" class="flexbox">
+    <div class="widget fullCol">
+      <div id="dashEssentials">
+        <div class="table">
+          <div class="row title flexbox">
+            <div class="cell url">Domain</div>
+
+            <div class="cell name">Build Package</div>
+            <div class="cell actNumber">Developer</div>
+            <div class="cell name">Archived?</div>
+            <div class="cell date">Date</div>
+            <div class="cell arrow"></div>
+          </div>
+          <div id="accordion">
+            <div class="row flexbox">
+              <div class="cell url">
+                <%= checklist.domain %>
+              </div>
+              <div class="cell name">
+                <%= checklist.buildPkg %>
+              </div>
+              <div class="cell actNumber">
+                Justin
+              </div>
+              <div class="cell name">
+                <%= checklist.archive %>
+              </div>
+              <div class="cell date">
+                <%= moment(checklist.date).format("MMM DD, YYYY") %>
+              </div>
+              <div class="cell arrow" data-panel-id="panel1"><i class="fas fa-angle-down"></i></div>
+              <div class="expanded">
+                <div class="row title flexbox">
+                  <div class="cell url">Task Name</div>
+
+                  <div class="cell actNumber">Task Status</div>
+                  <div class="cell name">Task Notes</div>
+                </div>
+                <% for (i=0; i < checklist.checklistTask.length; i++) { %>
+                <div class="row  flexbox">
+                  <div class="cell url">
+                    <%= checklist.checklistTask[i].taskName %>
+                  </div>
+                  <div class="cell actNumber">
+                    <%= checklist.checklistTask[i].taskStatus %>
+                  </div>
+                  <div class="cell name">
+                    <%= checklist.checklistTask[i].additionalNotes %>
+                  </div>
+
+                </div>
+                <% }; %>
+
+                <div id="trackerBtn">
+                  <a href="/checklist/<%= checklist._id %>/edit"><button class="btn edit">Edit Task</button></a>
+                  <% if(checklist.archive === !true) { %>
+                  <form id="delete-form" class="trackerForm" action="/checklist/<%= checklist._id %>?_method=PUT"
+                    method="POST">
+                    <button class="btn archive archiveButton" value="Archive" name="checklist[archive]" type="submit">Archive</button>
+                  </form>
+                  <% } %>
+                  <% if(checklist.archive === true) { %>
+                  <form id="archive-form" class="trackerForm" action="/checklist/<%= checklist._id %>?_method=PUT"
+                    method="POST">
+                    <button class="btn archive archiveButton" value="Archive" name="checklist[archive]" type="submit">Un-Archive</button>
+                  </form>
+                  <% } %>
+                  <script>
+                    $(document).ready(function () {
+                      $("#delete-form button.archiveButton").click(function () {
+                        $("#delete-form button.archiveButton").each(function () {
+                          $(this).val("true");
+                        });
+                      });
+                      $("#archive-form button.archiveButton").click(function () {
+                        $("#archive-form button.archiveButton").each(function () {
+                          $(this).val("false");
+                        });
+                      });
+                    }); 
+                  </script>
+                </div>
+              </div>
+              <!-- end of expanded -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // when you click the purple arrow beside a task it expands for further info
+  $('#accordion .fa-angle-down').click(function () {
+    $(this).parent().next('.expanded').slideToggle();
+  });
+</script>
 <% include ../partials/footer %>

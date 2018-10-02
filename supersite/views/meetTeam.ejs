@@ -80,13 +80,13 @@
     <% }); %>
   </div>
   <hr />
-  <h2>Copy Writers</h2>
+  <h2>Copywriters</h2>
   <div class="flexbox flexCenter flexAround alignCenter">
     <% users.forEach(function(user){%>
-    <% if(user.team === "Copy Writer"){ %>
+    <% if(user.team === "Copywriter"){ %>
     <div class="flexbox flexAround">
       <div class="flexbox flexCenter thumbnail">
-        <img onerror="this.src='/images/Projectweb.png'" src="<%= user.profileImageUrl %>" alt="<%= user.firstName%>" />
+        <img onerror="this.src='/images/Projectweb.png'" src="<%= user.profileImageUrl %>" alt="<%= user.firstName %>" />
         <div class="caption">
           <h4>
             <strong>
