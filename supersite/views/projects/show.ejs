@@ -38,6 +38,11 @@
                     <%= moment(project.history[indexLength - 1].time).format("MMM DD, YYYY hh:mm a") %>
                 </li>
                 <% } %>
+                <% if(project.isCompleted === true) { %>
+                <li class="list-group-item"><strong>Completed Date: </strong>
+                    <%= moment(project.updatedAt).format("MMM DD, YYYY hh:mm a") %>
+                </li>
+                <% } %>
             </div>
 
         </div>
@@ -72,10 +77,42 @@
                             <button class="btn delete">Delete</button>
                         </form>
                         <% } %>
+                        <% if(project.isCompleted === !true) { %>
+                        <form id="delete-form" class="trackerForm" action="/projects/<%= project._id %>?_method=PUT"
+                            method="POST">
+                            <div style="display: none">
+                                <input name="project[status]" id="status" value="Completed" />
+                            </div>
+                            <button class="btn archive archiveButton" value="Completed" name="project[isCompleted]"
+                                type="submit">Completed</button>
+                        </form>
+                        <% } %>
+                        <% if(project.isCompleted === true) { %>
+                        <form id="archive-form" class="trackerForm" action="/projects/<%= project._id %>?_method=PUT"
+                            method="POST">
+
+                            <button class="btn archive archiveButton" value="Completed" name="project[isCompleted]"
+                                type="submit">Re-Open</button>
+                        </form>
+                        <% } %>
                         <a class="btn comment" href="/projects/<%= project._id %>/projectComments/new">Leave a Comment!</a>
                     </div>
                 </div>
             </div>
+            <script>
+                $(document).ready(function () {
+                    $("#delete-form button.archiveButton").click(function () {
+                        $("#delete-form button.archiveButton").each(function () {
+                            $(this).val("true");
+                        });
+                    });
+                    $("#archive-form button.archiveButton").click(function () {
+                        $("#archive-form button.archiveButton").each(function () {
+                            $(this).val("false");
+                        });
+                    });
+                }); 
+            </script>
             <div class="well">
                 <hr>
                 <% project.comments.forEach(function(comment){%>

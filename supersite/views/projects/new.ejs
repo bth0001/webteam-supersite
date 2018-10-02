@@ -62,6 +62,7 @@
                                             <div class="customSelect">
                                                 <select class="owners" required>
                                                     <option value="" disabled>Please Select</option>
+                                                    <option value="Unassigned">Unassigned</option>
                                                     <% users.forEach(function(user){ %>
                                                     <option value="<%= user.firstName %>">
                                                         <%= user.firstName %>

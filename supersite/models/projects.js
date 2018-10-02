@@ -6,6 +6,11 @@ const projectSchema = new mongoose.Schema(
     description: String,
     date: String,
     status: String,
+    isCompleted: {
+      type: Boolean,
+      default: false,
+      date: Date
+    },
     author: {
       id: {
         type: mongoose.Schema.Types.ObjectId,

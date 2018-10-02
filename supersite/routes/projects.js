@@ -13,7 +13,7 @@ router.get("/", function(req, res) {
     } else {
       res.render("projects/index", { projects: allProjects, moment: moment });
     }
-  });
+  }).sort({ name: 1 });
 });
 
 //POST new Project
