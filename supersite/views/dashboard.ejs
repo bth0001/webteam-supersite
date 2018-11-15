@@ -106,19 +106,26 @@
 				<dl class="dropdown">
 					<dt>
 						<a>
-							<h4 class="activeUser">
+							<h4 class="activeUser" id="active">
 								<%= currentUser.firstName %>
 							</h4>
 							<i class="fas fa-angle-down"></i>
 						</a>
 					</dt>
+					<script>
+						let user = "<%= currentUser.firstName %>";
+						$(document).ready(function(){
+							if(user === "Justin"){
+								
+							}
+						})
+					</script>
 					<dd>
 						<ul id="allTeamMembers">
 							<li><a>All</a></li>
 							<% users.forEach(function(user){ %>
 							<% if(user.team == 'Developer') { %>
-							<li><a>
-									<%= user.firstName %></a></li>
+							<li><a><%= user.firstName %></a></li>
 							<% } %>
 							<% }); %>
 						</ul>
@@ -194,7 +201,7 @@
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.email === tracked.author.email) { %>
+							<%# if(currentUser.email === tracked.author.email) { #%>
 							<% if(tracked.buildPkg === "Essential" && tracked.archive == !true){ %>
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank">
@@ -248,7 +255,7 @@
 
 							</div>
 							<% } %>
-							<% } %>
+							<%# } #%>
 							<% }); %>
 						</div>
 					</div>

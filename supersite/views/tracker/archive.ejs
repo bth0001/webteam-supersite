@@ -26,10 +26,17 @@
 			<% } %>
 		<% }); %>
 <div class="container">
-	<h3 style="text-align: center; margin: 10px 0 20px;">Welcome to the Archive Section - please proceed with caution</h3>
-	<h4 style="text-align: center; margin: 20px 0;"><span class="showEssentials myBtn">Essentials: <%= essCount %></span> | <span class="showStarter myBtn">Starters: <%= strCount %></span> | <span class="showProd myBtn">Prod Change: <%= prodCount %></span> | <span class="showTlink myBtn">T.LINK Branding: <%= tlinkCount %></span> | <span class="showContent myBtn">Content Entry: <%= contentCount %></span> | <span class="showAll myBtn">Show All</span></h4>
 	<div id="dashboard">
 		<div class="container">
+				<h3 style="text-align: center; margin: 10px 0 20px;">Welcome to the Archive Section - please proceed with caution</h3>
+	<ul class="buttons flexbox flexCenter" style="text-align: center; margin: 20px 0;">
+		<li><a href="#" class="showEssentials myBtn">Essentials: <%= essCount %></a></li>
+		<li><a href="#" class="showStarter myBtn">Starters: <%= strCount %></a></li>
+		<li><a href="#" class="showProd myBtn">Prod Change: <%= prodCount %></a></li>
+		<li><a href="#" class="showTlink myBtn">T.LINK Branding: <%= tlinkCount %></a></li>
+		<li><a href="#" class="showContent myBtn">Content Entry: <%= contentCount %></a></li>
+		<li><a href="#" class="showAll myBtn">Show All</a></li>
+	</ul>
 			<div id="bottomRow" class="flexbox">
 				<div class="widget fullCol">
 					<div id="dashEssential">
@@ -38,6 +45,7 @@
 							<div class="row title flexbox">
 								<div class="cell url">Website URL</div>
 								<div class="cell actNumber">Account Number</div>
+								<div class="cell name">Developer</div>
 								<div class="cell name">Designer</div>
 								<div class="cell name">OnBoarder</div>
 								<div class="cell date">Date</div>
@@ -50,6 +58,7 @@
 								<div class="row flexbox">
 									<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 									<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
+									<div class="cell name"><%= tracked.author.firstName %></div>
 									<div class="cell name"><%= tracked.designer %></div>
 									<div class="cell name"><%= tracked.onboarder %></div>
 									<div class="cell date"><%= tracked.date %></div>
@@ -113,6 +122,7 @@
 								<div class="row flexbox">
 									<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 									<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
+									<div class="cell name"><%= tracked.author.firstName %></div>
 									<div class="cell name"><%= tracked.designer %></div>
 									<div class="cell name"><%= tracked.onboarder %></div>
 									<div class="cell date"><%= tracked.date %></div>
@@ -174,6 +184,7 @@ $(document).ready(function(){
 								<div class="row flexbox">
 									<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 									<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
+									<div class="cell name"><%= tracked.author.firstName %></div>
 									<div class="cell name"><%= tracked.designer %></div>
 									<div class="cell name"><%= tracked.onboarder %></div>
 									<div class="cell date"><%= tracked.date %></div>
@@ -237,6 +248,7 @@ $(document).ready(function(){
 								<div class="row flexbox">
 									<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 									<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
+									<div class="cell name"><%= tracked.author.firstName %></div>
 									<div class="cell name"><%= tracked.designer %></div>
 									<div class="cell name"><%= tracked.onboarder %></div>
 									<div class="cell date"><%= tracked.date %></div>
@@ -300,6 +312,7 @@ $(document).ready(function(){
 								<div class="row flexbox">
 									<div class="cell url"><a href="<%= tracked.domain %>" target="_blank"><%= tracked.domain %></a></div>
 									<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>"><%= tracked.acctNum %></a></div>
+									<div class="cell name"><%= tracked.author.firstName %></div>
 									<div class="cell name"><%= tracked.designer %></div>
 									<div class="cell name"><%= tracked.onboarder %></div>
 									<div class="cell date"><%= tracked.date %></div>

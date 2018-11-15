@@ -124,10 +124,6 @@ router.post("/edit-profile", isLoggedIn, upload.single("image"), function(
       req.flash("error", "No account found");
       return res.redirect("/edit-profile");
     }
-    // var email = req.body.email;
-    // var firstName = req.body.firstName;
-    // var lastName = req.body.lastName;
-    const { email, firstName, lastName, bio, socials, skills, team } = req.body;
     // Check to see if image was inserted
     if (req.file === undefined || req.file === null) {
       profileImageUrl = sanitizedUser.profileImageUrl;
@@ -135,7 +131,7 @@ router.post("/edit-profile", isLoggedIn, upload.single("image"), function(
       req.body.profileImageUrl = req.file.path;
       var profileImageUrl = req.body.profileImageUrl;
     }
-    // var team = req.body.team;
+    const { email, firstName, lastName, bio, socials, skills, team } = req.body;
     // validate
     if (!email || !firstName || !lastName) {
       // simplified: '' is a falsey

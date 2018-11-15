@@ -17,7 +17,7 @@
 	<h1>
 		<%= currentUser.team %> Tracker</h1>
 	<div class="flexbox flexCenter">
-		<h4 id="myBtn">Track Something<i class="fas fa-plus"></i></h4>
+		<a class="myBtn" id="myBtn">Track Something<i class="fas fa-plus"></i></a>
 	</div>
 	<% if(currentUser.team === "Developer") { %>
 	<a href="/tracker/archive">
@@ -48,18 +48,18 @@
 <% } %>
 <% } %>
 <% }); %>
-<div class="container">
-	<h3 class="pageHeader" style="text-align: center; margin-top: 10px;">
-		<%= currentUser.firstName %>, this is where you will track any of your completed tasks. </h3>
-	<h4 style="text-align: center; margin: 20px 0 0;"><span class="showEssentials myBtn">Essentials:
-			<%= essCount %></span> | <span class="showStarter myBtn">Starters:
-			<%= strCount %></span> | <span class="showProd myBtn">Prod Change:
-			<%= prodCount %></span> | <span class="showTlink myBtn">T.LINK Branding:
-			<%= tlinkCount %></span> | <span class="showContent myBtn">Content Entry:
-			<%= contentCount %></span> | <span class="showAll myBtn">Show All</span></h4>
-</div>
 <div id="dashboard">
 	<div class="container">
+					<h3 class="pageHeader" style="text-align: center; margin-top: 10px;">
+						<%= currentUser.firstName %>, this is where you will track any of your completed tasks. </h3>
+					<ul style="text-align: center; margin: 20px 0 0;" class="buttons flexbox flexCenter">
+						<li><a href="#" class="showEssentials myBtn">Essentials: <%= essCount %></a></li>
+						<li><a href="#" class="showStarter myBtn">Starters: <%= strCount %></a></li>
+						<li><a href="#" class="showProd myBtn">Prod Change: <%= prodCount %></a></li>
+						<li><a href="#" class="showTlink myBtn">T.LINK Branding: <%= tlinkCount %></a></li>
+						<li><a href="#" class="showContent myBtn">Content Entry: <%= contentCount %></a></li>
+						<li><a href="#" class="showAll myBtn">Show All</a></li>
+					</ul>
 		<div class="developer flexbox flexLeft">
 			<div class="selectTeamMember">
 				<dl class="dropdown">
@@ -801,40 +801,48 @@
 
 	// list of team members drop down when you click the purple arrow beside your name
 	$('.selectTeamMember .fa-angle-down').click(function () {
+		event.preventDefault();
 		$('#allTeamMembers').slideToggle();
 	});
 
 	// when you click the purple arrow beside a task it expands for further info
 	$('#accordion .fa-angle-down').click(function () {
+		event.preventDefault();
 		$(this).parent().next('.expanded').slideToggle();
 	});
 
 	// when you click on essentials circle it shows tracked essential tasks
 	$('.showEssentials').click(function () {
+		event.preventDefault();
 		$('#dashStarter, #dashTlink, #dashProd, #dashContent').hide();
 		$('#bottomRow, #dashEssential').fadeIn("slow");
 	});
 	// when you click on essentials circle it shows tracked starter tasks
 	$('.showStarter').click(function () {
+		event.preventDefault();
 		$('#dashEssential, #dashTlink, #dashProd, #dashContent').hide();
 		$('#bottomRow, #dashStarter').fadeIn("slow");
 	});
 	// when you click on essentials circle it shows tracked starter tasks
 	$('.showProd').click(function () {
+		event.preventDefault();
 		$('#dashTlink, #dashEssential, #dashContent, #dashStarter').hide();
 		$('#bottomRow, #dashProd').fadeIn("slow");
 	});
 	// when you click on essentials circle it shows tracked starter tasks
 	$('.showTlink').click(function () {
+		event.preventDefault();
 		$('#dashProd, #dashEssential, #dashContent, #dashStarter').hide();
 		$('#bottomRow, #dashTlink').fadeIn("slow");
 	});
 	// when you click on essentials circle it shows tracked starter tasks
 	$('.showContent').click(function () {
+		event.preventDefault();
 		$('#dashProd, #dashEssential, #dashTlink, #dashStarter').hide();
 		$('#bottomRow, #dashContent').fadeIn("slow");
 	});
 	$('.showAll').click(function () {
+		event.preventDefault();
 		// $('#dashProd, #dashEssential, #dashTlink, #dashStarter').hide();
 		$('#dashProd, #dashEssential, #dashTlink, #dashStarter, #dashContent').fadeIn("slow");
 	});
