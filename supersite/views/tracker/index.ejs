@@ -50,16 +50,21 @@
 <% }); %>
 <div id="dashboard">
 	<div class="container">
-					<h3 class="pageHeader" style="text-align: center; margin-top: 10px;">
-						<%= currentUser.firstName %>, this is where you will track any of your completed tasks. </h3>
-					<ul style="text-align: center; margin: 20px 0 0;" class="buttons flexbox flexCenter">
-						<li><a href="#" class="showEssentials myBtn">Essentials: <%= essCount %></a></li>
-						<li><a href="#" class="showStarter myBtn">Starters: <%= strCount %></a></li>
-						<li><a href="#" class="showProd myBtn">Prod Change: <%= prodCount %></a></li>
-						<li><a href="#" class="showTlink myBtn">T.LINK Branding: <%= tlinkCount %></a></li>
-						<li><a href="#" class="showContent myBtn">Content Entry: <%= contentCount %></a></li>
-						<li><a href="#" class="showAll myBtn">Show All</a></li>
-					</ul>
+		<h3 class="pageHeader" style="text-align: center; margin-top: 10px;">
+			<%= currentUser.firstName %>, this is where you will track any of your completed tasks. </h3>
+		<ul style="text-align: center; margin: 20px 0 0;" class="buttons flexbox flexCenter">
+			<li><a href="#" class="showEssentials myBtn">Essentials:
+					<%= essCount %></a></li>
+			<li><a href="#" class="showStarter myBtn">Starters:
+					<%= strCount %></a></li>
+			<li><a href="#" class="showProd myBtn">Prod Change:
+					<%= prodCount %></a></li>
+			<li><a href="#" class="showTlink myBtn">T.LINK Branding:
+					<%= tlinkCount %></a></li>
+			<li><a href="#" class="showContent myBtn">Content Entry:
+					<%= contentCount %></a></li>
+			<li><a href="#" class="showAll myBtn">Show All</a></li>
+		</ul>
 		<div class="developer flexbox flexLeft">
 			<div class="selectTeamMember">
 				<dl class="dropdown">
@@ -141,13 +146,13 @@
 										<%= tracked.notes %>
 									</p>
 									<div id="trackerBtn">
-										<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+										<a href="/tracker/<%= tracked._id %>/edit" class="edit">Edit Task</a>
 
 										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 										</form> -->
 										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
-											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+											<button class="archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 										</form>
 										<script>
 											$(document).ready(function () {
@@ -219,13 +224,13 @@
 										<%= tracked.notes %>
 									</p>
 									<div id="trackerBtn">
-										<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+										<a href="/tracker/<%= tracked._id %>/edit" class="edit">Edit Task</a>
 
 										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 										</form> -->
 										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
-											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+											<button class="archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 										</form>
 										<script>
 											$(document).ready(function () {
@@ -300,13 +305,13 @@
 										<%= tracked.notes %>
 									</p>
 									<div id="trackerBtn">
-										<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+										<a href="/tracker/<%= tracked._id %>/edit" class="edit">Edit Task</a>
 
 										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 										</form> -->
 										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
-											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+											<button class="archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 										</form>
 										<script>
 											$(document).ready(function () {
@@ -381,13 +386,13 @@
 										<%= tracked.notes %>
 									</p>
 									<div id="trackerBtn">
-										<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+										<a href="/tracker/<%= tracked._id %>/edit" class="edit">Edit Task</a>
 
 										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 										</form> -->
 										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
-											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+											<button class="archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 										</form>
 										<script>
 											$(document).ready(function () {
@@ -462,13 +467,13 @@
 										<%= tracked.notes %>
 									</p>
 									<div id="trackerBtn">
-										<a href="/tracker/<%= tracked._id %>/edit"><button class="btn edit">Edit Task</button></a>
+										<a href="/tracker/<%= tracked._id %>/edit" class="edit">Edit Task</a>
 
 										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 										</form> -->
 										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
-											<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
+											<button class="archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 										</form>
 										<script>
 											$(document).ready(function () {

@@ -1,87 +1,4 @@
 <% include ../partials/header %>
-<style>
-  .project > *, .employee > * {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    margin: 5px auto;
-  }
-  .projectsWrapper, .teamMembers {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    text-align: center;
-}
-  .project,
-  .employee {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 300px;
-    flex: 0 0 300px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    margin: 15px;
-    padding: 0 0 20px;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid #dedede;
-    border-radius: 5px;
-  }
-  .project .projectStatus {
-    margin: 0 auto;
-    padding: 10px;
-    width: 100%;
-    border-radius: 5px 5px 0 0;
-  }
-  .project .projectStatus::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    -webkit-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
-    border-top: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-left: 10px solid transparent;
-    border-bottom: 10px solid #fff;
-    z-index: 1;
-  }
-  .project .projectStatus span.icon i {
-    display: inline-block;
-    color: #fff;
-    font-size: 2.5em;
-    text-transform: none;
-  }
-  .project .projectStatus span {
-    display: block;
-    color: #fff;
-    font-weight: 500;
-    margin: 8px auto;
-    text-transform: uppercase;
-    font-size: 0.9em;
-  }
-  .ownerName span:not(:last-child):after {
-    content: ", ";
-  }
-  .project .caption {
-    padding: 15px 15px 5px;
-  }
-  .project .ownerList {
-    padding: 5px 15px 15px;
-    color: #545454;
-}
-.project .ownerList .ownerTitle {
-    display: block;
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: .9em;
-    margin-bottom: 2px;
-}
-.project .ownerList span {
-    font-weight: 400;
-}
-</style>
-
 <div id="overview" class="center">
   <h1>Welcome to the Project Manager!</h1>
   <p>Create new projects for your team</p>
@@ -100,7 +17,7 @@
           <span class="icon">
               <%= project.status %>
           </span>
-          <span class="projectStatus"><%= project.status %></span>
+          <span><%= project.status %></span>
         </div>
         <div class="caption">
           <h4><%= project.name %></h4>

@@ -26,127 +26,129 @@
     <%= project.name %>
   </h1>
 </div>
-<div class="container" style="margin: 20px auto;">
-  <div class="row">
-    <div class="col-md-12">
-      <form onsubmit="countTaskTypes();" class="form profileForm" action="/projects/<%= project._id %>?_method=PUT"
-        method="POST">
-        <section class="header flexbox flexJustify">
-          <h2>Project Editor</h2>
-        </section>
-        <div class="wrapper">
-          <section class="flexbox flexJustify">
-            <label for="comment[text]"><span>Project Name:</span>
-              <input type="text" name="project[name]" value="<%= project.name %>">
-            </label>
-            <label for="status"><span>Project Status:</span>
-              <select name="project[status]" id="status">
-                <option value="<%= project.status %>">
-                  <%= project.status %>
-                </option>
-                <% if(project.status === "Ready for Work") { %>
-                <option value="In Progress">In Progress</option>
-                <option value="Awaiting Review">Awaiting Review</option>
-                <option value="On Hold">On Hold</option>
-                <option value="Completed">Completed</option>
-                <% } %>
-                <% if(project.status === "In Progress") { %>
-                <option value="Ready for Work">Ready for Work</option>
-                <option value="Awaiting Review">Awaiting Review</option>
-                <option value="On Hold">On Hold</option>
-                <option value="Completed">Completed</option>
-                <% } %>
-                <% if(project.status === "Awaiting Review") { %>
-                <option value="Ready for Work">Ready for Work</option>
-                <option value="In Progress">In Progress</option>
-                <option value="On Hold">On Hold</option>
-                <option value="Completed">Completed</option>
-                <% } %>
-                <% if(project.status === "On Hold") { %>
-                <option value="Ready for Work">Ready for Work</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Awaiting Review">Awaiting Review</option>
-                <option value="Completed">Completed</option>
-                <% } %>
-                <% if(project.status === "Completed") { %>
-                <option value="Ready for Work">Ready for Work</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Awaiting Review">Awaiting Review</option>
-                <option value="On Hold">On Hold</option>
-                <% } %>
-              </select>
-            </label>
+<div id="dashboard">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form onsubmit="countTaskTypes();" class="form profileForm" action="/projects/<%= project._id %>?_method=PUT"
+          method="POST">
+          <section class="header flexbox flexJustify">
+            <h2>Project Editor</h2>
           </section>
-          <section class="flexbox flexJustify">
-            <label for="comment[text]"><span>Project Description:</span>
-              <textarea type="text" name="project[description]"><%= project.description %></textarea>
-            </label>
-          </section>
-          <div class="selectBox flexbox flexJustify alignCenter">
-            <script>
-              $(document).ready(function () {
-                var count = 0;
-                $("div.task:first-of-type select.owner").attr("name", "project[owners][" + count + "][firstName]");
+          <div class="wrapper">
+            <section class="flexbox flexJustify">
+              <label for="comment[text]"><span>Project Name:</span>
+                <input type="text" name="project[name]" value="<%= project.name %>">
+              </label>
+              <label for="status"><span>Project Status:</span>
+                <select name="project[status]" id="status">
+                  <option value="<%= project.status %>">
+                    <%= project.status %>
+                  </option>
+                  <% if(project.status === "Ready for Work") { %>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Awaiting Review">Awaiting Review</option>
+                  <option value="On Hold">On Hold</option>
+                  <option value="Completed">Completed</option>
+                  <% } %>
+                  <% if(project.status === "In Progress") { %>
+                  <option value="Ready for Work">Ready for Work</option>
+                  <option value="Awaiting Review">Awaiting Review</option>
+                  <option value="On Hold">On Hold</option>
+                  <option value="Completed">Completed</option>
+                  <% } %>
+                  <% if(project.status === "Awaiting Review") { %>
+                  <option value="Ready for Work">Ready for Work</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="On Hold">On Hold</option>
+                  <option value="Completed">Completed</option>
+                  <% } %>
+                  <% if(project.status === "On Hold") { %>
+                  <option value="Ready for Work">Ready for Work</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Awaiting Review">Awaiting Review</option>
+                  <option value="Completed">Completed</option>
+                  <% } %>
+                  <% if(project.status === "Completed") { %>
+                  <option value="Ready for Work">Ready for Work</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Awaiting Review">Awaiting Review</option>
+                  <option value="On Hold">On Hold</option>
+                  <% } %>
+                </select>
+              </label>
+            </section>
+            <section class="flexbox flexJustify">
+              <label for="comment[text]"><span>Project Description:</span>
+                <textarea type="text" name="project[description]"><%= project.description %></textarea>
+              </label>
+            </section>
+            <div class="selectBox flexbox flexJustify alignCenter">
+              <script>
+                $(document).ready(function () {
+                  var count = 0;
+                  $("div.task:first-of-type select.owner").attr("name", "project[owners][" + count + "][firstName]");
 
-                $("#addTask").click(function () {
-                  count++;
-                  var newTaskInput = $(".task:last-of-type");
-                  newTaskInput.clone().appendTo(".taskTable");
-                  $("div.task:last-of-type select.owner").attr("name", "project[owners][" + count + "][firstName]");
-                });
-
-                $("#removeTask").click(function () {
-                  var taskCount = $("div.task").length;
-                  if (taskCount === 1) {
-                    alert("You cannot remove the only task");
-                  } else {
+                  $("#addTask").click(function () {
+                    count++;
                     var newTaskInput = $(".task:last-of-type");
-                    newTaskInput.remove();
-                  };
+                    newTaskInput.clone().appendTo(".taskTable");
+                    $("div.task:last-of-type select.owner").attr("name", "project[owners][" + count + "][firstName]");
+                  });
+
+                  $("#removeTask").click(function () {
+                    var taskCount = $("div.task").length;
+                    if (taskCount === 1) {
+                      alert("You cannot remove the only task");
+                    } else {
+                      var newTaskInput = $(".task:last-of-type");
+                      newTaskInput.remove();
+                    };
+                  });
                 });
-              });
-            </script>
-            <section style="width: 100%;">
-              <div id="task">
-                <div class="taskTable">
-                  <div class="header flexbox">
-                    <div class="cell type">Team Members</div>
-                  </div>
-                  <% for (i=0; i < project.owners.length; i++) { %>
-                  <div class="task flexbox row">
-                    <div class="cell type">
-                      <div class="customSelect">
-                        <select class="owners">
-                          <option selected value="<%= project.owners[i].firstName %>">
-                            <%= project.owners[i].firstName %>
-                          </option>
-                          <% users.forEach(function(user){ %>
-                          <option value="<%= user.firstName %>">
-                            <%= user.firstName %>
-                          </option>
-                          <% }); %>
-                        </select>
+              </script>
+              <section style="width: 100%;">
+                <div id="task">
+                  <div class="taskTable">
+                    <div class="header flexbox">
+                      <div class="cell type">Team Members</div>
+                    </div>
+                    <% for (i=0; i < project.owners.length; i++) { %>
+                    <div class="task flexbox row">
+                      <div class="cell type">
+                        <div class="customSelect">
+                          <select class="owners">
+                            <option selected value="<%= project.owners[i].firstName %>">
+                              <%= project.owners[i].firstName %>
+                            </option>
+                            <% users.forEach(function(user){ %>
+                            <option value="<%= user.firstName %>">
+                              <%= user.firstName %>
+                            </option>
+                            <% }); %>
+                          </select>
+                        </div>
                       </div>
                     </div>
+                    <% } %>
                   </div>
-                  <% } %>
                 </div>
-              </div>
+            </div>
+
+            <div class="taskButtons flexbox flexRight">
+              <button type="button" id="addTask">Add <i class="fas fa-plus"></i></button>
+              <button type="button" id="removeTask">Remove <i class="fas fa-minus"></i></button>
+            </div>
+            <button type="submit">Update Project!</button>
+            </section>
+
           </div>
 
-          <div class="taskButtons flexbox flexRight">
-            <button type="button" id="addTask">Add <i class="fas fa-plus"></i></button>
-            <button type="button" id="removeTask">Remove <i class="fas fa-minus"></i></button>
-          </div>
-          <button type="submit">Update Project!</button>
-          </section>
 
-        </div>
+      </div>
 
-
+      </form>
     </div>
-
-    </form>
   </div>
 </div>
 </div>

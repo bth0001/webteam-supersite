@@ -30,11 +30,11 @@ const developerChecklistSchema = new mongoose.Schema(
           type: String
         },
         taskStatus: {
-          type: String,
-          default: "N/A"
+          type: String
         },
         additionalNotes: {
-          type: String
+          type: String,
+          default: "No Notes"
         }
       }
     ]

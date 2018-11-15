@@ -62,17 +62,17 @@
                 <% }; %>
 
                 <div id="trackerBtn">
-                  <a href="/checklist/<%= checklist._id %>/edit"><button class="btn edit">Edit Task</button></a>
+                  <a href="/checklist/<%= checklist._id %>/edit" class="edit">Edit Task</a>
                   <% if(checklist.archive === !true) { %>
                   <form id="delete-form" class="trackerForm" action="/checklist/<%= checklist._id %>?_method=PUT"
                     method="POST">
-                    <button class="btn archive archiveButton" value="Archive" name="checklist[archive]" type="submit">Archive</button>
+                    <button class="archive archiveButton" value="Archive" name="checklist[archive]" type="submit">Archive</button>
                   </form>
                   <% } %>
                   <% if(checklist.archive === true) { %>
                   <form id="archive-form" class="trackerForm" action="/checklist/<%= checklist._id %>?_method=PUT"
                     method="POST">
-                    <button class="btn archive archiveButton" value="Archive" name="checklist[archive]" type="submit">Un-Archive</button>
+                    <button class="archive archiveButton" value="Archive" name="checklist[archive]" type="submit">Un-Archive</button>
                   </form>
                   <% } %>
                   <script>

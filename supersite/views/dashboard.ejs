@@ -1,38 +1,4 @@
 <% include partials/header %>
-<style>
-	/* General dropdown styles */
-	.dropdown dd,
-	.dropdown dt,
-	.dropdown ul {
-		margin: 0px;
-		padding: 0px;
-	}
-
-	.dropdown dt a span {
-		cursor: pointer;
-		display: block;
-		padding: 5px;
-	}
-
-	/* UL styles */
-	/* .dropdown dd ul {display:none; list-style:none; padding:5px 0px; position:absolute; left:0px; top:2px; width:auto; min-width:170px;} */
-	.dropdown span.value {
-		display: none;
-	}
-
-	.dropdown dd ul li a {
-		padding: 5px;
-		display: block;
-	}
-
-	.selectTeamMember a:hover {
-		text-decoration: none;
-	}
-
-	.actNumber span:not(:last-child):after {
-		content: ", ";
-	}
-</style>
 <div id="overview" class="center">
 	<h1>
 		<%= currentUser.team %> Dashboard</h1>
@@ -114,9 +80,9 @@
 					</dt>
 					<script>
 						let user = "<%= currentUser.firstName %>";
-						$(document).ready(function(){
-							if(user === "Justin"){
-								
+						$(document).ready(function () {
+							if (user === "Justin") {
+
 							}
 						})
 					</script>
@@ -125,7 +91,8 @@
 							<li><a>All</a></li>
 							<% users.forEach(function(user){ %>
 							<% if(user.team == 'Developer') { %>
-							<li><a><%= user.firstName %></a></li>
+							<li><a>
+									<%= user.firstName %></a></li>
 							<% } %>
 							<% }); %>
 						</ul>

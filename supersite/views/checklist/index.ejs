@@ -36,7 +36,7 @@
         <div id="bottomRow" class="flexbox">
             <div class="widget fullCol">
                 <div id="dashEssential">
-                    <h2>Checklist</h2>
+                    <h2>Completed Checklist</h2>
                     <div class="table">
                         <div class="row title flexbox">
                             <div class="cell url">Domain</div>
@@ -67,18 +67,20 @@
                                     <ul>
                                         <% for(i = 0; i < checked.checklistTask.length; i++) { %>
                                         <li>
-                                            <%= checked.checklistTask[i].taskName %> /
-                                            <%= checked.checklistTask[i].taskStatus %> /
-                                            <%= checked.checklistTask[i].additionalNotes %>
+                                            <span>
+                                                <%= checked.checklistTask[i].taskName %></span> -
+                                            <span>
+                                                <%= checked.checklistTask[i].taskStatus %></span> -
+                                            <span>
+                                                <%= checked.checklistTask[i].additionalNotes %></span>
                                         </li>
                                         <% }; %>
                                     </ul>
                                     <div id="trackerBtn">
-                                        <a href="/checklist/<%= checked._id %>/edit"><button class="btn edit">Edit
-                                                Checklist</button></a>
+                                        <a href="/checklist/<%= checked._id %>/edit" class="edit">Edit</a>
                                         <form id="delete-form" class="trackerForm" action="/checklist/<%= checked._id %>?_method=PUT"
                                             method="POST">
-                                            <button class="btn archive archiveButton" value="Archive" name="checklist[archive]"
+                                            <button class="archive archiveButton" value="Archive" name="checklist[archive]"
                                                 type="submit">Archive</button>
                                         </form>
                                         <script>

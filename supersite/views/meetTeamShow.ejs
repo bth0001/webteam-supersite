@@ -1,74 +1,159 @@
 <% include partials/header %>
 <style>
-  h1 {
-    text-transform: capitalize;
+  #dashboard .flexbox {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
-
-  #trackerBtn {
-    clear: both;
+  .quickView {
+    max-width: 100%;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 300px;
+    flex: 1 0 300px;
   }
-
-  .thumbnail img {
-    width: 300px;
-    object-fit: cover;
-    height: 300px;
+  .quickView .empImg {
+    z-index: 1;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
   }
-
-  .list-group-item.active {
-    background-color: #2637B0;
-    border-color: #2637B0;
+  .quickView .empImg img {
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 200px;
+    border: 2px solid #fff;
+    background: #fff;
   }
-
-  .thumbnail img {
-    object-fit: cover;
-    width: 15em;
-    border: none;
-    height: 15em;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  .quickView .quickInfo {
+    background: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      from(#2638b0),
+      color-stop(#0060c8),
+      color-stop(#007fcb),
+      color-stop(#0099c2),
+      to(#00b0b7)
+    );
+    background: linear-gradient(
+      to top,
+      #2638b0,
+      #0060c8,
+      #007fcb,
+      #0099c2,
+      #00b0b7
+    );
+    padding: 115px 25px 25px;
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+  }
+  .quickView .quickInfo .detTitle {
+    margin-top: 20px;
+  }
+  .quickView .quickInfo h6 {
+    margin: 0 0 0.5em;
+    padding: 0 0 0.25em;
+    border-bottom: 1px solid #ccc;
+    color: #fff;
+  }
+  .quickView .quickInfo p {
+    font-size: 0.9em;
+    color: #fff;
+  }
+  .quickView .quickInfo p a {
+    position: relative;
+    color: #ccc;
+    font-weight: 700;
+    padding: 3px 0;
+    text-decoration: none;
+  }
+  .quickView .quickInfo p a::after {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 50%;
+    width: 50%;
+    height: 1px;
+    opacity: 0;
+    content: "";
+    background: #fff;
+    -webkit-transform: translateX(-50%) scale(0.5);
+    transform: translateX(-50%) scale(0.5);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+  .quickView .quickInfo p a:hover {
+    color: #fff;
+  }
+  .quickView .quickInfo p a:hover::after {
+    opacity: 1;
+    -webkit-transform: translateX(-50%) scale(1);
+    transform: translateX(-50%) scale(1);
+  }
+  .summary {
+    -webkit-box-flex: 2;
+    -ms-flex: 2 0 500px;
+    flex: 2 0 500px;
+    padding: 1% 8%;
+    max-width: 100%;
+  }
+  .summary p {
+    line-height: 1.75em;
+  }
+  h2 {
+    font-size: 1.5em;
+    padding-bottom: 20px;
+  }
+  h5 {
+    font-size: 1.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #676767;
   }
 </style>
 <div id="overview" class="center">
-  <h1>
-    Meet
-    <%= user.firstName %>
-    <%= user.lastName %>
-  </h1>
+  <h1>Meet <%= user.firstName %> <%= user.lastName %></h1>
+  <h5><%= user.team %></h5>
 </div>
-<div class="container" style="margin: 30px auto;">
-  <div class="row">
-    <div class="col-md-4" style="margin: 10px 0;">
-      <p class="lead">Details</p>
-      <div class="list-group">
-        <li class="list-group-item active"><strong>Skills:</strong>
-        </li>
-        <li class="list-group-item">
-          <%= user.skills %>
-        </li>
-        <li class="list-group-item active"><strong>Links: </strong></li>
-        <li class="list-group-item">
-          <a href="<%= user.socials %>" target="_blank">
-            <%= user.socials %></a>
-        </li>
+<div id="dashboard">
+  <div class="container flexbox">
+    <div class="quickView">
+      <div class="empImg">
+        <img
+          onerror="this.src='/images/Projectweb.png'"
+          src="../<%= user.profileImageUrl %>"
+          alt="<%= user.firstName %>"
+        />
       </div>
-
-    </div>
-    <div class="col-md-8">
-      <div class="thumbnail">
-        <img onerror="this.src='/images/Projectweb.png'" src="../<%= user.profileImageUrl %>" alt="<%= user.firstName %>"
-          class="responsive-image" style="float: right;" />
-        <div class="caption-full col-md-8">
-          <h4>
-            <%= user.team %>
-          </h4>
-          <p><em>Email: <strong>
-                <a href="mailto:<%= user.email %>">
-                  <%= user.email %></a></strong></em></p>
+      <div class="quickInfo">
+        <div class="detTitle"><h6>Skills:</h6></div>
+        <div class="details"><p><%= user.skills %></p></div>
+        <div class="detTitle"><h6>Links:</h6></div>
+        <div class="details">
           <p>
-            <%= user.bio %>
+            <a href="<%= user.socials %>" target="_blank">
+              <%= user.socials %></a
+            >
+          </p>
+        </div>
+        <div class="detTitle"><h6>Fun Fact:</h6></div>
+        <div class="details"><p><%= user.team %></p></div>
+        <div class="detTitle"><h6>Quote:</h6></div>
+        <div class="details">
+          <p>
+            <a href="mailto:<%= user.email %>" target="_blank">
+              <%= user.email %></a
+            >
           </p>
         </div>
       </div>
-
+    </div>
+    <div class="summary">
+      <h2>Background</h2>
+      <p><%= user.bio %></p>
     </div>
   </div>
 </div>

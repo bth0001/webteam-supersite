@@ -1,148 +1,135 @@
 <% include ../partials/header %>
-<style>
-    h1 {
-        text-transform: capitalize;
-    }
 
-    #trackerBtn {
-        clear: both;
-    }
-
-    .list-group-item.active {
-        background-color: #2637B0;
-        border-color: #2637B0;
-    }
-</style>
 <div id="overview" class="center">
     <h1>
         <%= project.name %> Project</h1>
 </div>
-<div class="container" style="margin: 30px auto;">
-    <div class="row">
-        <div class="col-md-4" style="margin: 10px 0;">
-            <p class="lead">Project Details</p>
-            <div class="list-group">
-                <li class="list-group-item"><strong>Status:</strong>
-                    <%= project.status %>
-                </li>
-                <li class="list-group-item"><strong>Created Date:</strong>
-                    <%= moment(project.created_at).format("MMM DD, YYYY hh:mm a") %>
-                </li>
-                <% if (project.history.length > 0){ %>
-                <% var indexLength = project.history.length %>
+<div id="dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="margin: 10px 0;">
+                <p class="lead">Project Details</p>
+                <div class="list-group">
+                    <li class="list-group-item"><strong>Status:</strong>
+                        <%= project.status %>
+                    </li>
+                    <li class="list-group-item"><strong>Created Date:</strong>
+                        <%= moment(project.created_at).format("MMM DD, YYYY hh:mm a") %>
+                    </li>
+                    <% if (project.history.length > 0){ %>
+                    <% var indexLength = project.history.length %>
 
-                <li class="list-group-item"><strong>Last Modified By: </strong>
-                    <%= project.history[indexLength - 1].historyName %>
-                </li>
-                <li class="list-group-item"><strong>Last Modified Time: </strong>
-                    <%= moment(project.history[indexLength - 1].time).format("MMM DD, YYYY hh:mm a") %>
-                </li>
-                <% } %>
-                <% if(project.isCompleted === true) { %>
-                <li class="list-group-item"><strong>Completed Date: </strong>
-                    <%= moment(project.updatedAt).format("MMM DD, YYYY hh:mm a") %>
-                </li>
-                <% } %>
+                    <li class="list-group-item"><strong>Last Modified By: </strong>
+                        <%= project.history[indexLength - 1].historyName %>
+                    </li>
+                    <li class="list-group-item"><strong>Last Modified Time: </strong>
+                        <%= moment(project.history[indexLength - 1].time).format("MMM DD, YYYY hh:mm a") %>
+                    </li>
+                    <% } %>
+                    <% if(project.isCompleted === true) { %>
+                    <li class="list-group-item"><strong>Completed Date: </strong>
+                        <%= moment(project.updatedAt).format("MMM DD, YYYY hh:mm a") %>
+                    </li>
+                    <% } %>
+                </div>
+
             </div>
+            <div class="col-md-8">
+                <div class="thumbnail">
+                    <img src="/images/Projectweb.png" alt="Strom Centre" class="responsive-image" style="float: right;">
+                    <div class="caption-full">
+                        <h4><a>
+                                <%=project.name%></a></h4>
+                        <p>
+                            <%= project.description %>
+                        </p>
+                        <p><em>Submitted By: <strong>
+                                    <%= project.author.firstName %> -
+                                    <%= project.author.email %></strong></em></p>
+                        <div class="ownerList"><strong>Owners:</strong>
+                            <div class="projectStatus">
+                                <% for(let i = 0; i < project.owners.length; i++) { %>
+                                <span>
+                                    <%= project.owners[i].firstName %></span>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div id="trackerBtn">
+                            <a class="edit" href="/projects/<%= project._id %>/edit">Edit</a>
 
-        </div>
-        <div class="col-md-8">
-            <div class="thumbnail">
-                <img src="/images/Projectweb.png" alt="Strom Centre" class="responsive-image" style="float: right;">
-                <div class="caption-full">
-                    <h4 class="pull-right">
-                        <%= moment(project.date).format("MMM DD, YYYY") %>
-                    </h4>
-                    <h4><a>
-                            <%=project.name%></a></h4>
-                    <p>
-                        <%= project.description %>
-                    </p>
-                    <p><em>Submitted By: <strong>
-                                <%= project.author.firstName %> -
-                                <%= project.author.email %></strong></em></p>
-                    <div class="ownerList"><strong>Owners:</strong>
-                        <div class="projectStatus">
-                            <% for(let i = 0; i < project.owners.length; i++) { %>
-                            <span>
-                                <%= project.owners[i].firstName %></span>
+                            <% if(currentUser && project.author.id.equals(currentUser._id) || currentUser.team === "Developer"){ %>
+                            <form id="delete-form" action="/projects/<%= project._id %>?_method=DELETE" method="POST">
+                                <button class="delete">Delete</button>
+                            </form>
+                            <% } %>
+                            <% if(project.isCompleted === !true) { %>
+                            <form id="delete-form" class="trackerForm" action="/projects/<%= project._id %>?_method=PUT"
+                                method="POST">
+                                <div style="display: none">
+                                    <input name="project[status]" id="status" value="Completed" />
+                                </div>
+                                <button class="archive archiveButton" value="Completed" name="project[isCompleted]"
+                                    type="submit">Completed</button>
+                            </form>
+                            <% } %>
+                            <% if(project.isCompleted === true) { %>
+                            <form id="archive-form" class="trackerForm" action="/projects/<%= project._id %>?_method=PUT"
+                                method="POST">
+                                <div style="display: none">
+                                    <input name="project[status]" id="status" value="In Progress" />
+                                </div>
+                                <button class="archive archiveButton" value="Completed" name="project[isCompleted]"
+                                    type="submit">Re-Open</button>
+                            </form>
+                            <% } %>
+                            <a class="comment" href="/projects/<%= project._id %>/projectComments/new">Leave a
+                                Comment!</a>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $("#delete-form button.archiveButton").click(function () {
+                            $("#delete-form button.archiveButton").each(function () {
+                                $(this).val("true");
+                            });
+                        });
+                        $("#archive-form button.archiveButton").click(function () {
+                            $("#archive-form button.archiveButton").each(function () {
+                                $(this).val("false");
+                            });
+                        });
+                    }); 
+                </script>
+                <div class="well">
+                    <hr>
+                    <% project.comments.forEach(function(comment){%>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong>
+                                <%= comment.author.firstName %> - </strong> <em>
+                                <%= comment.author.email %></em>
+                            <span class="pull-right"><strong>
+                                    <%= moment(comment.time).format("MMM DD, YYYY - hh:mm a") %></strong></span>
+                            <p>
+                                <%= comment.text %>
+                            </p>
+                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                            <div id="trackerBtn">
+                                <a class="edit" href="/projects/<%= project._id %>/projectComments/<%= comment._id %>/edit">Edit
+                                </a>
+                                <form id="delete-form" action="/projects/<%= project._id %>/projectComments/<%=comment._id %>?_method=DELETE"
+                                    method="POST">
+                                    <a class="delete">Delete</a>
+                                </form>
+                            </div>
                             <% } %>
                         </div>
-                    </div>
-                    <div id="trackerBtn">
-                        <a class="btn edit" href="/projects/<%= project._id %>/edit">Edit</a>
 
-                        <% if(currentUser && project.author.id.equals(currentUser._id) || currentUser.team === "Developer"){ %>
-                        <form id="delete-form" action="/projects/<%= project._id %>?_method=DELETE" method="POST">
-                            <button class="btn delete">Delete</button>
-                        </form>
-                        <% } %>
-                        <% if(project.isCompleted === !true) { %>
-                        <form id="delete-form" class="trackerForm" action="/projects/<%= project._id %>?_method=PUT"
-                            method="POST">
-                            <div style="display: none">
-                                <input name="project[status]" id="status" value="Completed" />
-                            </div>
-                            <button class="btn archive archiveButton" value="Completed" name="project[isCompleted]"
-                                type="submit">Completed</button>
-                        </form>
-                        <% } %>
-                        <% if(project.isCompleted === true) { %>
-                        <form id="archive-form" class="trackerForm" action="/projects/<%= project._id %>?_method=PUT"
-                            method="POST">
-                            <div style="display: none">
-                                <input name="project[status]" id="status" value="In Progress" />
-                            </div>
-                            <button class="btn archive archiveButton" value="Completed" name="project[isCompleted]"
-                                type="submit">Re-Open</button>
-                        </form>
-                        <% } %>
-                        <a class="btn comment" href="/projects/<%= project._id %>/projectComments/new">Leave a Comment!</a>
                     </div>
+                    <hr />
+                    <% }) %>
                 </div>
-            </div>
-            <script>
-                $(document).ready(function () {
-                    $("#delete-form button.archiveButton").click(function () {
-                        $("#delete-form button.archiveButton").each(function () {
-                            $(this).val("true");
-                        });
-                    });
-                    $("#archive-form button.archiveButton").click(function () {
-                        $("#archive-form button.archiveButton").each(function () {
-                            $(this).val("false");
-                        });
-                    });
-                }); 
-            </script>
-            <div class="well">
-                <hr>
-                <% project.comments.forEach(function(comment){%>
-                <div class="row">
-                    <div class="col-md-12">
-                        <strong>
-                            <%= comment.author.firstName %> - </strong> <em>
-                            <%= comment.author.email %></em>
-                        <span class="pull-right"><strong>
-                                <%= moment(comment.time).format("MMM DD, YYYY - hh:mm a") %></strong></span>
-                        <p>
-                            <%= comment.text %>
-                        </p>
-                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-                        <div id="trackerBtn">
-                            <a class="btn edit" href="/projects/<%= project._id %>/projectComments/<%= comment._id %>/edit">Edit
-                            </a>
-                            <form id="delete-form" action="/projects/<%= project._id %>/projectComments/<%=comment._id %>?_method=DELETE"
-                                method="POST">
-                                <button class="btn delete">Delete</button>
-                            </form>
-                        </div>
-                        <% } %>
-                    </div>
-
-                </div>
-                <hr />
-                <% }) %>
             </div>
         </div>
     </div>
