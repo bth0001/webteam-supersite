@@ -6,8 +6,8 @@ var middleware = require("../middleware");
 var moment = require("moment");
 
 //Index route
-router.get("/", function(req, res) {
-  Project.find({}, function(err, allProjects) {
+router.get("/", function (req, res) {
+  Project.find({}, function (err, allProjects) {
     if (err) {
       console.log(err);
     } else {
@@ -17,7 +17,7 @@ router.get("/", function(req, res) {
 });
 
 //POST new Project
-router.post("/", function(req, res) {
+router.post("/", function (req, res) {
   //Get Data from form
   var name = req.body.name;
   var status = req.body.status;
@@ -37,7 +37,7 @@ router.post("/", function(req, res) {
     author: author,
     owners: owners
   };
-  Project.create(newProject, function(err, newlyCreatedProject) {
+  Project.create(newProject, function (err, newlyCreatedProject) {
     if (err) {
       console.log(err);
     } else {
@@ -49,8 +49,8 @@ router.post("/", function(req, res) {
 });
 
 //new Project form
-router.get("/new", function(req, res) {
-  User.find({}, function(err, allUsers) {
+router.get("/new", function (req, res) {
+  User.find({}, function (err, allUsers) {
     res.render("projects/new", { users: allUsers });
   });
 });
@@ -58,11 +58,11 @@ router.get("/new", function(req, res) {
 //==============================================================================
 
 //SHOW - show more info about one projects
-router.get("/:id", function(req, res) {
+router.get("/:id", function (req, res) {
   //find the projects with provided ID
   Project.findById(req.params.id)
-    .populate("comments")
-    .exec(function(err, foundProject) {
+    .populate({ path: 'comments', options: { sort: { created_at: -1 } } })
+    .exec(function (err, foundProject) {
       if (err) {
         console.log(err);
       } else {
@@ -74,9 +74,9 @@ router.get("/:id", function(req, res) {
 });
 
 //edit projects route
-router.get("/:id/edit", function(req, res) {
-  User.find({}, function(err, allUsers) {
-    Project.findById(req.params.id, function(err, foundProject) {
+router.get("/:id/edit", function (req, res) {
+  User.find({}, function (err, allUsers) {
+    Project.findById(req.params.id, function (err, foundProject) {
       res.render("projects/edit", {
         project: foundProject,
         moment: moment,
@@ -100,9 +100,9 @@ router.get("/:id/edit", function(req, res) {
 
 /////////////////////////////////////
 
-router.put("/:id", function(req, res) {
+router.put("/:id", function (req, res) {
   var historyArray = [];
-  Project.findById(req.params.id, function(err, foundProject) {
+  Project.findById(req.params.id, function (err, foundProject) {
     for (i = 0; i < foundProject.history.length; i++) {
       historyArray.push(foundProject.history[i]);
     }
@@ -113,7 +113,7 @@ router.put("/:id", function(req, res) {
     const newProject = Object.assign(projectTracking, {
       history: historyArray
     });
-    Project.findByIdAndUpdate(req.params.id, newProject, function(
+    Project.findByIdAndUpdate(req.params.id, newProject, function (
       err,
       updatedProject
     ) {
@@ -131,8 +131,8 @@ router.put("/:id", function(req, res) {
 ///////////////////////////
 
 //Destroy Route
-router.delete("/:id", middleware.checkProjectOwnership, function(req, res) {
-  Project.findByIdAndRemove(req.params.id, function(err) {
+router.delete("/:id", middleware.checkProjectOwnership, function (req, res) {
+  Project.findByIdAndRemove(req.params.id, function (err) {
     if (err) {
       res.redirect("/projects");
     } else {

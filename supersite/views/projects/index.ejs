@@ -3,69 +3,76 @@
   <h1>Welcome to the Project Manager!</h1>
   <p>Create new projects for your team</p>
   <div>
-    <a href="/projects/new" id="myBtn"
-      >Add New Project<i class="fas fa-plus"></i
-    ></a>
-      </div>
+    <a href="/projects/new" id="myBtn">Add New Project<i class="fas fa-plus"></i></a>
+  </div>
 </div>
 <div id="dashboard">
-<div class="container">
-  <div class="projectsWrapper flexbox">
-    <% projects.forEach(function(project){%>
+  <div class="container">
+    <div class="projectsWrapper flexbox">
+      <% projects.forEach(function(project){%>
       <div class="project flexbox">
-        <div class="projectStatus ready">
+        <div class="projectStatus">
           <span class="icon">
-              <%= project.status %>
+            <%= project.status %>
           </span>
-          <span><%= project.status %></span>
+          <span>
+            <%= project.status %></span>
         </div>
         <div class="caption">
-          <h4><%= project.name %></h4>
+          <h4>
+            <%= project.name %>
+          </h4>
         </div>
         <div class="ownerList">
           <span class="ownerTitle">Owners:</span>
-            <span class="ownerName">
-             <% for(let i = 0; i < project.owners.length; i++) { %>
-            <span> <%= project.owners[i].firstName %></span> <% } %>
-          </div>
+          <span class="ownerName">
+            <% for(let i = 0; i < project.owners.length; i++) { %>
+            <span>
+              <%= project.owners[i].firstName %></span>
+            <% } %>
+        </div>
         </span>
         <a href="/projects/<%= project._id %>" class="myBtn">More Info</a>
       </div>
-    <% }); %>
+      <% }); %>
+    </div>
+    <script>
+      $(".icon:contains('Completed')").html(
+        "<i class='fas fa-check'></i>"
+      );
+      $(".icon:contains('Ready for Work')").html(
+        "<i class='far fa-circle'></i>"
+      );
+      $(".icon:contains('In Progress')").html(
+        "<i class='fas fa-redo'></i>"
+      );
+      $(".icon:contains('On Hold')").html(
+        "<i class='far fa-hand-paper'></i>"
+      );
+      $(".icon:contains('Awaiting Review')").html(
+        "<i class='far fa-hourglass'></i>"
+      );
+      $(".projectStatus:contains('Ready for Work')").css(
+        "background-color",
+        "#ba39c4"
+      );
+      $(".projectStatus:contains('In Progress')").css(
+        "background-color",
+        "#7b2bda"
+      );
+      $(".projectStatus:contains('Awaiting Review')").css(
+        "background-color",
+        "#006bc9"
+      );
+      $(".projectStatus:contains('Completed')").css(
+        "background-color",
+        "#00b0b8"
+      );
+      $(".projectStatus:contains('On Hold')").css(
+        "background-color",
+        "#323232"
+      );
+    </script>
   </div>
-  <script>
-    $(".icon:contains('Completed')").html(
-      "<i class='fas fa-check'></i>"
-    );
-    $(".icon:contains('Ready for Work')").html(
-      "<i class='far fa-circle'></i>"
-    );
-    $(".icon:contains('In Progress')").html(
-      "<i class='fas fa-redo'></i>"
-    );
-    $(".icon:contains('On Hold')").html(
-      "<i class='far fa-hand-paper'></i>"
-    );
-    $(".icon:contains('Awaiting Review')").html(
-      "<i class='far fa-hourglass'></i>"
-    );
-    $(".projectStatus:contains('Ready for Work')").css(
-      "background-color",
-      "#ba39c4"
-    );
-    $(".projectStatus:contains('In Progress')").css(
-      "background-color",
-      "#7b2bda"
-    );
-    $(".projectStatus:contains('Awaiting Review')").css(
-      "background-color",
-      "#006bc9"
-    );
-    $(".projectStatus:contains('Completed')").css(
-      "background-color",
-      "#00b0b8"
-    );
-  </script>
-</div>
 </div>
 <% include ../partials/footer %>
