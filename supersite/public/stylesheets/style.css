@@ -268,6 +268,8 @@ input[type="number"]{-moz-appearance:textfield;}
 .upload-btn-wrapper:hover .btn{border:2px solid #007fcb;background:#fff;color:#007fcb;}
 .upload-btn-wrapper input[type="file"]{font-size:20px;position:absolute;left:0;top:0;opacity:0;cursor:pointer;}
 .labelNotes{display:flex;flex-wrap:wrap;width:100%!important;}
+#imagePreview[src="#"] {display:none;}
+#accordion .expanded li:empty,.form select::-ms-expand {display:none;}
 
 /*----------------------------Footer Styles-----------------------------*/
 #footer{background: -webkit-gradient(linear, left top, right bottom, from(rgba(204, 61, 190, 1)), to(rgba(119, 42, 219, 1)));
@@ -299,7 +301,7 @@ h2.brand:hover,#adminBar #logo img:hover,::-moz-placeholder,.customCheck .checkb
 #logo a:hover,#logo a:hover h2.brand,#logo a:hover,#logo a:hover h2.brand,#logo a:hover::before{opacity:1;-webkit-transform:scale(1.02);transform:scale(1.02);}
 
 #profileBar .fa-angle-down,.selectTeamMember .fa-angle-down,.selectMonth .fa-angle-down,.showEssentials,.showStarter,.showProd,.showTlink,.showContent{cursor:pointer;}
-#imagePreview[src="#"],#accordion .expanded li:empty,.form select::-ms-expand{display:none;}
+
 .col-full,.labelNotes textarea{flex:100%;}
 .welcomeLinks p,#tracker #tracked{margin:10px 0;}
 #tracked p,div#accordion p{margin:0;}

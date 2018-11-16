@@ -7,14 +7,14 @@ var User = require("../models/user");
 //----Image Upload Start
 var multer = require("multer");
 var storage = multer.diskStorage({
-  filename: function(req, file, callback) {
+  filename: function (req, file, callback) {
     callback(null, Date.now() + file.originalname); // sets file name
   },
-  destination: function(req, file, cb) {
+  destination: function (req, file, cb) {
     cb(null, "uploads"); //file upload destination
   }
 });
-var imageFilter = function(req, file, cb) {
+var imageFilter = function (req, file, cb) {
   // accept image files only
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
     return cb(new Error("Only image files are allowed!"), false);
@@ -29,12 +29,12 @@ var upload = multer({
 //----Image Upload End
 
 //Register form route
-router.get("/signup", function(req, res) {
+router.get("/signup", function (req, res) {
   res.render("signup");
 });
 
 //handles signup route
-router.post("/signup", upload.single("image"), function(req, res) {
+router.post("/signup", upload.single("image"), function (req, res) {
   if (req.file === undefined || req.file === null) {
     profileImageUrl = "/images/Projectweb.png";
   } else {
@@ -48,13 +48,18 @@ router.post("/signup", upload.single("image"), function(req, res) {
     profileImageUrl: req.body.profileImageUrl,
     team: req.body.team
   });
-
-  User.register(newUser, req.body.password, function(err, user) {
+  if (req.body.adminCode === "TooHardToGuess321!") {
+    newUser.isMaster = true;
+  }
+  if (req.body.adminCode === "NotYourRole21!") {
+    newUser.isAdmin = true;
+  }
+  User.register(newUser, req.body.password, function (err, user) {
     if (err) {
       req.flash("error", err.message);
       return res.render("signup");
     }
-    passport.authenticate("local")(req, res, function() {
+    passport.authenticate("local")(req, res, function () {
       res.redirect("/dashboard");
     });
   });
@@ -62,7 +67,7 @@ router.post("/signup", upload.single("image"), function(req, res) {
 //==============================================================================
 
 //Show Login Form
-router.get("/", function(req, res) {
+router.get("/", function (req, res) {
   res.render("index", {});
 });
 
@@ -74,12 +79,12 @@ router.post(
     failureRedirect: "/",
     failureFlash: true
   }),
-  function(req, res) {}
+  function (req, res) { }
 );
 //==============================================================================
 
 //Logout route
-router.get("/logout", function(req, res) {
+router.get("/logout", function (req, res) {
   req.logout();
   req.flash("success", "You have successfully logged out!");
   req.session.destroy();
@@ -88,8 +93,8 @@ router.get("/logout", function(req, res) {
 //==============================================================================
 
 // Show Page for Edit Profile
-router.get("/profile/:id", function(req, res) {
-  User.findById(req.params.id, function(err, foundUser) {
+router.get("/profile/:id", function (req, res) {
+  User.findById(req.params.id, function (err, foundUser) {
     if (err) {
       console.log(err);
     } else {
@@ -103,23 +108,23 @@ router.get("/profile/:id", function(req, res) {
 //==============================================================================
 
 // EDIT Task
-router.get("/edit-task", function(req, res) {
+router.get("/edit-task", function (req, res) {
   res.render("edit-task");
 });
 
 //==============================================================================
 
 // EDIT Profile
-router.get("/edit-profile", isLoggedIn, function(req, res) {
+router.get("/edit-profile", isLoggedIn, function (req, res) {
   res.render("edit-profile");
 });
 
-router.post("/edit-profile", isLoggedIn, upload.single("image"), function(
+router.post("/edit-profile", isLoggedIn, upload.single("image"), function (
   req,
   res,
   next
 ) {
-  User.findById(req.user.id, function(err, sanitizedUser) {
+  User.findById(req.user.id, function (err, sanitizedUser) {
     if (!sanitizedUser) {
       req.flash("error", "No account found");
       return res.redirect("/edit-profile");
@@ -148,8 +153,8 @@ router.post("/edit-profile", isLoggedIn, upload.single("image"), function(
     sanitizedUser.socials = socials;
     sanitizedUser.skills = skills;
     // don't forget to save!
-    sanitizedUser.setPassword(req.body.password, function() {
-      sanitizedUser.save(function(err) {
+    sanitizedUser.setPassword(req.body.password, function () {
+      sanitizedUser.save(function (err) {
         if (err) {
           if (err.name === "MongoError" && err.code === 11000) {
             req.flash("error", "This email address is already in use.");
