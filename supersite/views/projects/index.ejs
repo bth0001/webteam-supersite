@@ -5,11 +5,15 @@
   <div>
     <a href="/projects/new" id="myBtn">Add New Project<i class="fas fa-plus"></i></a>
   </div>
+  <div style="margin: 20px 0 0;">
+    <a href="/projects/done">Completed Projects</a>
+  </div>
 </div>
 <div id="dashboard">
   <div class="container">
     <div class="projectsWrapper flexbox">
       <% projects.forEach(function(project){%>
+      <% if(!project.isCompleted) { %>
       <div class="project flexbox">
         <div class="projectStatus">
           <span class="icon">
@@ -34,6 +38,8 @@
         </span>
         <a href="/projects/<%= project._id %>" class="myBtn">More Info</a>
       </div>
+
+      <% } %>
       <% }); %>
     </div>
     <script>

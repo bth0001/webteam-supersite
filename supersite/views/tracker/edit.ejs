@@ -14,8 +14,10 @@
         <div class="wrapper">
           <section class="date">
             <div class="flexbox flexJustify">
-              <label name="date"><span>Date:</span>
-                <input type="date" name="tracking[date]" required value="<%= tracking.date %>" />
+              <label name="username">
+                <div class="flexbox alignCenter"><span>Developer:</span>
+                  <input type="text" name="tracking[username]" value="<%= currentUser.firstName %>" />
+                </div>
               </label>
               <div class="acctNumber">
                 <label name="acctNum"><span>Account Number:</span>
@@ -27,11 +29,7 @@
                 </label>
               </div>
             </div>
-            <label name="username">
-              <div class="flexbox alignCenter"><span>Developer:</span>
-                <input type="text" name="tracking[username]" value="<%= currentUser.firstName %>" />
-              </div>
-            </label>
+
             <div class="selectBox flexbox flexJustify alignCenter">
               <label class="flexItem" for="designer">
                 <div class="flexbox alignCenter"> <span>Designer:</span>

@@ -21,6 +21,12 @@ const UserSchema = new mongoose.Schema({
   profileImageUrl: {
     type: String
   },
+  funFacts: {
+    type: String
+  },
+  quote: {
+    type: String
+  },
   team: {
     type: String
   },

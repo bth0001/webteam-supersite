@@ -255,7 +255,7 @@ input[type="number"]{-moz-appearance:textfield;}
 .taskTable .header{font-weight:400;padding:5px;}
 .taskTable .row{border-bottom:1px solid #ddd;justify-content:space-between;margin:0;padding:5px 0 0;}
 .taskTable .cell{padding:0 10px;}
-.taskTable .customSelect{height:57px;position:relative;}
+.taskTable .customSelect{position:relative;}
 .taskTable input,.taskTable textarea,.taskTable select{border-bottom:none;margin-bottom:0;}
 .taskButtons{padding:10px 0;}
 .taskButtons button{font-size:1em;margin:0 0 0 5px;padding:8px 15px;}

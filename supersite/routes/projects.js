@@ -16,14 +16,20 @@ router.get("/", function (req, res) {
   }).sort({ name: 1 });
 });
 
+router.get("/done", function (req, res) {
+  Project.find({}, function (err, allProjects) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("projects/completed", { projects: allProjects, moment: moment });
+    }
+  }).sort({ name: 1 });
+});
+
 //POST new Project
 router.post("/", function (req, res) {
   //Get Data from form
-  var name = req.body.name;
-  var status = req.body.status;
-  var date = req.body.date;
-  var desc = req.body.description;
-  var owners = req.body.owners;
+  const { name, status, date, desc, owners, deadline, delivery, requestedBy } = req.body;
   var author = {
     id: req.user._id,
     firstName: req.user.firstName,
@@ -35,7 +41,10 @@ router.post("/", function (req, res) {
     date: date,
     description: desc,
     author: author,
-    owners: owners
+    deadline: deadline,
+    delivery: delivery,
+    owners: owners,
+    requestedBy: requestedBy
   };
   Project.create(newProject, function (err, newlyCreatedProject) {
     if (err) {
@@ -85,20 +94,6 @@ router.get("/:id/edit", function (req, res) {
     });
   });
 });
-//update projects route
-// router.put("/:id", middleware.checkProjectOwnership, function(req, res){
-//    //find and update correct project
-//    Project.findByIdAndUpdate(req.params.id, req.body.project, function(err, updatedProject){
-//        if(err){
-//            res.redirect("/projects");
-//        } else {
-//            req.flash("success", "You have successfully updated the project");
-//            res.redirect("/projects/" + req.params.id);
-//        }
-//    });
-// });
-
-/////////////////////////////////////
 
 router.put("/:id", function (req, res) {
   var historyArray = [];
@@ -110,6 +105,14 @@ router.put("/:id", function (req, res) {
     historyArray.push(history);
     //find and update correct project
     var projectTracking = req.body.project;
+    if (projectTracking.status === "Completed") {
+      projectTracking.completedDate = Date.now()
+      projectTracking.isCompleted = true;
+    }
+    if (projectTracking.status.indexOf("Completed") === -1) {
+      projectTracking.completedDate = null;
+      projectTracking.isCompleted = false;
+    }
     const newProject = Object.assign(projectTracking, {
       history: historyArray
     });

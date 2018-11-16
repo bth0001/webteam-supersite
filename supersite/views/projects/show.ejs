@@ -4,6 +4,11 @@
     <h1>
         <%= project.name %> Project</h1>
 </div>
+<% const now = moment(project.completedDate); %>
+<% const end = moment(project.created_at); %>
+<% const duration = moment.duration(now.diff(end));%>
+<% const days = duration.asDays(); %>
+
 <div id="dashboard">
     <div class="container flexbox" style="align-items: flex-start;">
         <div class="quickView projectQuickView">
@@ -27,6 +32,24 @@
                         <%= moment(project.created_at).format("MMM DD, YYYY hh:mm a") %>
                     </p>
                 </div>
+                <% if(project.isCompleted === true) { %>
+                <div class="detTitle">
+                    <h6>Completed Date:</h6>
+                </div>
+                <div class="details">
+                    <p>
+                        <%= moment(project.completedDate).format("MMM DD, YYYY hh:mm a") %>
+                    </p>
+                </div>
+                <div class="detTitle">
+                    <h6>Total Completion Time:</h6>
+                </div>
+                <div class="details">
+                    <p>
+                        <%= Math.round(days) %> Days </p>
+                </div>
+                <% } %>
+
                 <% if (project.history.length > 0){ %>
                 <% var indexLength = project.history.length %>
                 <div class="detTitle">
@@ -46,16 +69,6 @@
                     </p>
                 </div>
                 <% } %>
-                <% if(project.isCompleted === true) { %>
-                <div class="detTitle">
-                    <h6>Completed Date:</h6>
-                </div>
-                <div class="details">
-                    <p>
-                        <%= moment(project.updatedAt).format("MMM DD, YYYY hh:mm a") %>
-                    </p>
-                </div>
-                <% } %>
             </div>
         </div>
         <div class="summary">
@@ -65,21 +78,28 @@
             <p>
                 <%= project.description %>
             </p>
-            <p><em>Submitted By: <strong>
-                        <%= project.author.firstName %> -
-                        <%= project.author.email %></strong></em></p>
+            <p><em>Created By: <strong>
+                        <%= project.author.firstName %></strong>
+                    <span style="float: right;"><strong>Requested By:</strong>
+                        <%= project.requestedBy %></span>
+            </p>
             <div class="ownerList"><strong>Owners:</strong>
-                <div class="projectStatus">
+                <div class="ownerName">
                     <% for(let i = 0; i < project.owners.length; i++) { %>
                     <span>
                         <%= project.owners[i].firstName %></span>
                     <% } %>
                 </div>
+                <div class="dlDate" style="margin: 10px 0;"><strong>Next Delivery Date:</strong> <span>
+                        <%= moment(project.delivery).format("MMM DD, YYYY") %></span></div>
             </div>
+            <div class="prjDeadline" style="margin: 10px 0;"><strong>Deadline:</strong> <span>
+                    <%= moment(project.deadline).format("MMM DD, YYYY") %></span></div>
+
             <div id="trackerBtn" style="margin: 20px 0 50px;">
                 <a class="edit" href="/projects/<%= project._id %>/edit">Edit</a>
 
-                <% if(currentUser && project.author.id.equals(currentUser._id) || currentUser.team === "Developer"){ %>
+                <% if(currentUser && project.author.id.equals(currentUser._id) || currentUser.isAdmin || currentUser.isMaster ){ %>
                 <form id="delete-form" action="/projects/<%= project._id %>?_method=DELETE" method="POST">
                     <button class="delete">Delete</button>
                 </form>
@@ -115,13 +135,13 @@
                     <p>
                         <%= comment.text %>
                     </p>
-                    <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                    <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser.isAdmin || currentUser.isMaster){ %>
                     <div id="trackerBtn">
                         <a class="edit" href="/projects/<%= project._id %>/projectComments/<%= comment._id %>/edit">Edit
                         </a>
-                        <form id="delete-form" action="/projects/<%= project._id %>/projectComments/<%=comment._id %>?_method=DELETE"
+                        <form id="delete-form" action="/projects/<%= project._id %>/projectComments/<%= comment._id %>?_method=DELETE"
                             method="POST">
-                            <a class="delete">Delete</a>
+                            <button type="submit" class="delete">Delete</button>
                         </form>
                     </div>
                     <% } %>
@@ -132,7 +152,6 @@
             <% }) %>
         </div>
     </div>
-
 
 
 
@@ -149,6 +168,7 @@
                     $(this).val("false");
                 });
             });
-        }); 
+        });
+
     </script>
     <% include ../partials/footer %>

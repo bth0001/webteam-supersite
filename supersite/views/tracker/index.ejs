@@ -19,10 +19,10 @@
 	<div class="flexbox flexCenter">
 		<a class="myBtn" id="myBtn">Track Something<i class="fas fa-plus"></i></a>
 	</div>
-	<% if(currentUser.team === "Developer") { %>
-	<a href="/tracker/archive">
-		<h4>Archives</h4>
-	</a>
+	<% if(currentUser.isAdmin || currentUser.isMaster) { %>
+	<div style="margin: 20px 0 0;">
+		<a href="/tracker/archive">Archives</a>
+	</div>
 	<% } %>
 </div>
 <% function countEssential() { %>

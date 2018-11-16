@@ -11,7 +11,7 @@ middlewareObj.isMaster = function (req, res, next) {
     return next();
   }
   req.flash("error", "Only Admins are able to view this page");
-  res.redirect("/");
+  res.redirect("/dashboard");
 };
 
 middlewareObj.checkTrackerOwnership = function (req, res, next) {
@@ -23,7 +23,7 @@ middlewareObj.checkTrackerOwnership = function (req, res, next) {
         res.redirect("/tracker");
       } else {
         // does user own the comment?
-        if (foundTracker.author.id.equals(req.user._id)) {
+        if (foundTracker.author.id.equals(req.user._id) || req.user.isAdmin || req.user.isMaster) {
           next();
         } else {
           req.flash("error", "You do not have permission to do that!");
@@ -44,7 +44,7 @@ middlewareObj.checkCommentOwnership = function (req, res, next) {
         res.redirect("back");
       } else {
         // does user own the comment?
-        if (foundComment.author.id.equals(req.user._id)) {
+        if (foundComment.author.id.equals(req.user._id) || req.user.isAdmin || req.user.isMaster) {
           next();
         } else {
           req.flash("error", "You do not have permission to do that!");
@@ -65,10 +65,7 @@ middlewareObj.checkProjectOwnership = function (req, res, next) {
         res.redirect("back");
       } else {
         // does user own the project?
-        if (
-          foundProject.author.id.equals(req.user._id) ||
-          req.user.team === "Developer" //Will change to admin Role later
-        ) {
+        if (foundProject.author.id.equals(req.user._id) || req.user.isAdmin || req.user.isMaster) {
           next();
         } else {
           req.flash("error", "You do not have permission to do that!");

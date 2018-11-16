@@ -92,28 +92,6 @@ router.get("/logout", function (req, res) {
 });
 //==============================================================================
 
-// Show Page for Edit Profile
-router.get("/profile/:id", function (req, res) {
-  User.findById(req.params.id, function (err, foundUser) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("show-profile", {
-        users: foundUser
-      });
-    }
-  });
-});
-
-//==============================================================================
-
-// EDIT Task
-router.get("/edit-task", function (req, res) {
-  res.render("edit-task");
-});
-
-//==============================================================================
-
 // EDIT Profile
 router.get("/edit-profile", isLoggedIn, function (req, res) {
   res.render("edit-profile");
@@ -136,7 +114,7 @@ router.post("/edit-profile", isLoggedIn, upload.single("image"), function (
       req.body.profileImageUrl = req.file.path;
       var profileImageUrl = req.body.profileImageUrl;
     }
-    const { email, firstName, lastName, bio, socials, skills, team } = req.body;
+    const { email, firstName, lastName, bio, socials, skills, team, quote, funFacts } = req.body;
     // validate
     if (!email || !firstName || !lastName) {
       // simplified: '' is a falsey
@@ -152,6 +130,8 @@ router.post("/edit-profile", isLoggedIn, upload.single("image"), function (
     sanitizedUser.bio = bio;
     sanitizedUser.socials = socials;
     sanitizedUser.skills = skills;
+    sanitizedUser.quote = quote;
+    sanitizedUser.funFacts = funFacts;
     // don't forget to save!
     sanitizedUser.setPassword(req.body.password, function () {
       sanitizedUser.save(function (err) {

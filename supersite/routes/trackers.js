@@ -6,10 +6,10 @@ var TaskTypes = require("../models/taskType");
 var middleware = require("../middleware");
 
 //Index route
-router.get("/", function(req, res) {
-  TeamTracker.find({}, function(err, allTracks) {
-    User.find({}, function(err, allUsers) {
-      TaskTypes.find({}, function(err, allTask) {
+router.get("/", function (req, res) {
+  TeamTracker.find({}, function (err, allTracks) {
+    User.find({}, function (err, allUsers) {
+      TaskTypes.find({}, function (err, allTask) {
         if (err) {
           console.log(err);
         } else {
@@ -24,10 +24,10 @@ router.get("/", function(req, res) {
   });
 });
 //archive route
-router.get("/archive", function(req, res) {
-  TeamTracker.find({}, function(err, allTracks) {
-    User.find({}, function(err, allUsers) {
-      TaskTypes.find({}, function(err, allTask) {
+router.get("/archive", middleware.isMaster, function (req, res) {
+  TeamTracker.find({}, function (err, allTracks) {
+    User.find({}, function (err, allUsers) {
+      TaskTypes.find({}, function (err, allTask) {
         if (err) {
           console.log(err);
         } else {
@@ -43,7 +43,7 @@ router.get("/archive", function(req, res) {
 });
 
 //POST new teamTracked
-router.post("/", function(req, res) {
+router.post("/", function (req, res) {
   var author = {
     id: req.user._id,
     firstName: req.user.firstName,
@@ -51,8 +51,8 @@ router.post("/", function(req, res) {
   };
   var teamTrack = req.body.teamTrack;
   const newTrack = Object.assign(teamTrack, { author: author });
-  TaskTypes.create(teamTrack.taskTypes, function(err, newlyTask) {
-    TeamTracker.create(newTrack, function(err, newlyTracked) {
+  TaskTypes.create(teamTrack.taskTypes, function (err, newlyTask) {
+    TeamTracker.create(newTrack, function (err, newlyTracked) {
       if (err) {
         req.flash("error", err.message);
         res.redirect("/");
@@ -64,10 +64,10 @@ router.post("/", function(req, res) {
   });
 });
 
-router.get("/:id", function(req, res) {
-  TeamTracker.findById(req.params.id).exec(function(err, allTracks) {
-    TaskTypes.find({}, function(err, allTasks) {
-      User.find({}, function(err, allUsers) {
+router.get("/:id", function (req, res) {
+  TeamTracker.findById(req.params.id).exec(function (err, allTracks) {
+    TaskTypes.find({}, function (err, allTasks) {
+      User.find({}, function (err, allUsers) {
         if (err) {
           console.log(err);
         } else {
@@ -83,10 +83,10 @@ router.get("/:id", function(req, res) {
 });
 
 //edit tracker route
-router.get("/:id/edit", middleware.checkTrackerOwnership, function(req, res) {
-  TeamTracker.findById(req.params.id, function(err, foundTracked) {
-    TaskTypes.find({}, function(err, allTasks) {
-      User.find({}, function(err, allUsers) {
+router.get("/:id/edit", middleware.checkTrackerOwnership, function (req, res) {
+  TeamTracker.findById(req.params.id, function (err, foundTracked) {
+    TaskTypes.find({}, function (err, allTasks) {
+      User.find({}, function (err, allUsers) {
         res.render("tracker/edit", {
           tracking: foundTracked,
           users: allUsers,
@@ -98,9 +98,9 @@ router.get("/:id/edit", middleware.checkTrackerOwnership, function(req, res) {
 });
 
 //update tracker route
-router.put("/:id", middleware.checkTrackerOwnership, function(req, res) {
+router.put("/:id", middleware.checkTrackerOwnership, function (req, res) {
   var historyArray = [];
-  TeamTracker.findById(req.params.id, function(err, foundTracked) {
+  TeamTracker.findById(req.params.id, function (err, foundTracked) {
     for (i = 0; i < foundTracked.history.length; i++) {
       historyArray.push(foundTracked.history[i]);
     }
@@ -112,7 +112,7 @@ router.put("/:id", middleware.checkTrackerOwnership, function(req, res) {
     const newTrack = Object.assign(teamTracking, taskTrack, {
       history: historyArray
     });
-    TeamTracker.findByIdAndUpdate(req.params.id, newTrack, function(
+    TeamTracker.findByIdAndUpdate(req.params.id, newTrack, function (
       err,
       updatedTracker
     ) {
@@ -128,8 +128,8 @@ router.put("/:id", middleware.checkTrackerOwnership, function(req, res) {
 });
 
 //Destroy Route
-router.delete("/:id", function(req, res) {
-  TeamTracker.findByIdAndRemove(req.params.id, function(err) {
+router.delete("/:id", function (req, res) {
+  TeamTracker.findByIdAndRemove(req.params.id, function (err) {
     if (err) {
       res.redirect("/tracker");
     } else {

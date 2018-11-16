@@ -37,8 +37,17 @@
           </section>
           <div class="wrapper">
             <section class="flexbox flexJustify">
-              <label for="comment[text]"><span>Project Name:</span>
+              <label for="project[name]"><span style="margin: 0 0 5px; display: block;">Project Name:</span>
                 <input type="text" name="project[name]" value="<%= project.name %>">
+              </label>
+              <label for="project[requestedBy]"><span style="margin: 0 0 5px; display: block;">Requested By:</span>
+                <input type="text" name="project[requestedBy]" value="<%= project.requestedBy %>">
+              </label>
+              <label for="project[deadline]"><span>Deadline:</span>
+                <input type="date" name="project[deadline]" value="<%= moment(project.deadline).format('YYYY-MM-DD') %>">
+              </label>
+              <label for="project[delivery]"><span>Next Delivery:</span>
+                <input type="date" name="project[delivery]" value="<%= moment(project.delivery).format('YYYY-MM-DD') %>">
               </label>
               <label for="status"><span>Project Status:</span>
                 <select name="project[status]" id="status">
@@ -80,7 +89,7 @@
             </section>
             <section class="flexbox flexJustify">
               <label for="project[description]"><span>Project Description:</span>
-                <textarea type="text" name="project[description]"><%- project.description %></textarea>
+                <textarea type="text" rows="6" name="project[description]"><%- project.description %></textarea>
               </label>
             </section>
             <div class="selectBox flexbox flexJustify alignCenter">
