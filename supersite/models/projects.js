@@ -6,10 +6,14 @@ const projectSchema = new mongoose.Schema(
     description: String,
     date: String,
     status: String,
+    deadline: Date,
+    delivery: Date,
+    requestedBy: String,
+    hoursSpent: String,
+    completedDate: Date,
     isCompleted: {
       type: Boolean,
-      default: false,
-      date: Date
+      default: false
     },
     author: {
       id: {

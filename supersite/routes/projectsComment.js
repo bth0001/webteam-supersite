@@ -1,33 +1,33 @@
 var express = require("express");
-var router = express.Router({mergeParams: true});
+var router = express.Router({ mergeParams: true });
 var Projects = require("../models/projects");
 var Comment = require("../models/projectComments");
 var middleware = require("../middleware");
 var moment = require('moment');
 
 //Comments New
-router.get("/new", function(req, res){
-    Projects.findById(req.params.id, function(err, project){
-        if(err){
+router.get("/new", function (req, res) {
+    Projects.findById(req.params.id, function (err, project) {
+        if (err) {
             console.log(err);
         } else {
-            res.render("projectComments/new", {project: project, moment: moment});
-            
+            res.render("projectComments/new", { project: project, moment: moment });
+
         }
     })
-    
+
 });
 
 //Comments Create and save
-router.post("/", function(req, res){
+router.post("/", function (req, res) {
     //lookup project using ID
-    Projects.findById(req.params.id, function(err, project){
-        if(err) {
+    Projects.findById(req.params.id, function (err, project) {
+        if (err) {
             console.log(err);
             res.redirect("/projects");
         } else {
-            Comment.create(req.body.comment, function(err, comment){
-                if(err) {
+            Comment.create(req.body.comment, function (err, comment) {
+                if (err) {
                     req.flash("error", "Something went wrong");
                     console.log(err);
                 } else {
@@ -48,28 +48,28 @@ router.post("/", function(req, res){
 });
 
 // comment edit route
-router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res){
-    Projects.findById(req.params.id, function(err, project){
-        if(err) {
+router.get("/:comment_id/edit", middleware.checkCommentOwnership, function (req, res) {
+    Projects.findById(req.params.id, function (err, project) {
+        if (err) {
             console.log(err);
             res.redirect("/projects");
         } else {
-    Comment.findById(req.params.comment_id, function(err, foundComment){
-        if(err){
-            res.redirect("back");
-        } else {
-            res.render("projectComments/edit", {project_id: req.params.id, project: project, comment: foundComment, moment: moment})
+            Comment.findById(req.params.comment_id, function (err, foundComment) {
+                if (err) {
+                    res.redirect("back");
+                } else {
+                    res.render("projectComments/edit", { project_id: req.params.id, project: project, comment: foundComment, moment: moment })
+                }
+            })
         }
-    })
-}
     });
 });
 
 // comment update route
-router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
-    
-    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
-        if(err){
+router.put("/:comment_id", middleware.checkCommentOwnership, function (req, res) {
+
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function (err, updatedComment) {
+        if (err) {
             res.redirect("back");
         } else {
             res.redirect("/projects/" + req.params.id);
@@ -78,9 +78,9 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
 });
 
 // Destroy Comment
-router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, res){
-    Comment.findByIdAndRemove(req.params.comment_id, function(err){
-        if(err){
+router.delete("/:comment_id", middleware.checkCommentOwnership, function (req, res) {
+    Comment.findByIdAndRemove(req.params.comment_id, function (err) {
+        if (err) {
             res.redirect("back");
         } else {
             req.flash("success", "Comment Destroyed");

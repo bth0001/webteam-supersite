@@ -1,0 +1,151 @@
+<% include ../partials/header %>
+<style>
+  #rendered-form.flexBox {
+      flex-direction: row;
+      align-items: center;
+    }
+    #rendered-form .group {
+      width: 33%;
+    }
+    #rendered-form div > label {
+      display: block;
+      margin: 10px 0;
+    }
+    #rendered-form.flexBox input {
+      width: auto;
+      margin: 0;
+    }
+    #rendered-form.flexBox #newMatrix {
+      width: 100%;
+    }
+    #rendered-form .groupCheckBox label {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    #rendered-form .groupCheckBox input {
+      width: 20px;
+      margin: 10px;
+      display: inline-block;
+    }
+  </style>
+<div id="overview" class="center">
+  <h1>
+    <%= user.firstName %>'s Profile</h1>
+</div>
+<div id="dashboard">
+  <div class="container" style="margin: 10px auto;">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="profile-thumbnail">
+          <img onerror="this.src='/images/Projectweb.png'" src="/<%= user.profileImageUrl %>" alt="<%= user.firstName%>" />
+        </div>
+      </div>
+      <div class="col-md-9">
+        <form class="form profileForm" action="/accounts/<%= user.id %>" method="POST" enctype="multipart/form-data">
+          <section class="header flexbox flexJustify">
+            <h2>Edit Profile</h2>
+          </section>
+          <div class="wrapper">
+            <section class="flexbox flexJustify">
+              <label for="firstName"><span>First Name:</span>
+                <input type="text" name="firstName" placeholder="First Name" value="<%= user.firstName %>">
+              </label>
+              <label for="lastName"><span>Last Name:</span>
+                <input type="text" name="lastName" placeholder="Last Name" value="<%= user.lastName %>">
+              </label>
+              <label for="email"><span>E-mail:</span>
+                <input type="text" name="email" placeholder="Email" value="<%= user.email %>">
+              </label>
+              <label for="password"><span>Password</span><input type="password" name="password" placeholder="Password"
+                  value="<%= user.password %>"></label>
+              <label for="team"><span>Team:</span>
+                <select name="team">
+                  <option value="<%= user.team %>">
+                    <%= user.team %>
+                  </option>
+                </select>
+              </label>
+            </section>
+            <section class="flexbox flexJustify">
+              <label for="quote" style="flex: 48%;"><span>Quote:</span>
+                <input type="text" name="quote" placeholder="Favorite Quote" value="<%= user.quote %>">
+              </label>
+              <label for="funFacts" style="flex: 48%;"><span>Fun Facts:</span>
+                <input type="text" name="funFacts" placeholder="Fun Facts" value="<%= user.funFacts %>">
+              </label>
+              <label for="skills"><span>Skills:</span>
+                <input type="text" name="skills" placeholder="Skillset" value="<%= user.skills %>" />
+              </label>
+              <label for="socials"><span>Social:</span>
+                <input type="text" name="socials" placeholder="Your Social Links" value="<%= user.socials %>" />
+              </label>
+            </section>
+            <label for="bio"><span>Bio:</span>
+              <textarea rows="6" type="text" name="bio" placeholder="Your Bio" value="<%= user.bio %>"><%= user.bio %></textarea>
+            </label>
+            <h5>If the account is going to have special permissions please select one of the following options below.</h5>
+            <div class="permissionWrapper">
+              <div class="group groupCheckBox">
+                <p>If this user is an Strom Trooper Account, please check below.</p>
+                <label name="masterCode">Strom Trooper Account?<input type="checkbox" name="masterCode" value="true" /></label>
+              </div>
+
+              <div class="group groupCheckBox">
+                <p>If this user is an Admin Account, please check below.</p>
+                <label name="adminCode">Admin Account?<input type="checkbox" name="adminCode" value="true" /></label>
+              </div>
+              <div class="group groupCheckBox">
+                <p>If this user is a Basic Account, please check below.</p>
+                <label name="basicCode">Basic Account?<input type="checkbox" name="basicCode" value="true" /></label>
+              </div>
+            </div>
+            <label for="imageProfile"><span>Profile Image</span></label>
+            <div class="upload-btn-wrapper">
+              <button class="btn">Upload a Image</button>
+              <input type="file" id="image" name="image" accept="image/*" value="<%= user.profileImageUrl %>" />
+            </div>
+
+            <label for="imagePreview"><span>Image Preview</span>
+              <img id="imagePreview" src="#" alt="your image" style="margin: 10px auto;" />
+            </label>
+
+            <button type="submit">Update Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $("input:checkbox[name='adminCode']").change(function () {
+      if ($(this).is(":checked")) {
+        $("input:checkbox[name='masterCode']").attr("disabled", true);
+        $("input:checkbox[name='basicCode']").attr("disabled", true);
+      } else {
+        $("input:checkbox[name='masterCode']").attr("disabled", false);
+        $("input:checkbox[name='basicCode']").attr("disabled", false);
+      }
+    });
+    $("input:checkbox[name='masterCode']").change(function () {
+      if ($(this).is(":checked")) {
+        $("input:checkbox[name='adminCode']").attr("disabled", true);
+        $("input:checkbox[name='basicCode']").attr("disabled", true);
+      } else {
+        $("input:checkbox[name='adminCode']").attr("disabled", false);
+        $("input:checkbox[name='basicCode']").attr("disabled", false);
+      }
+    });
+    $("input:checkbox[name='basicCode']").change(function () {
+      if ($(this).is(":checked")) {
+        $("input:checkbox[name='adminCode']").attr("disabled", true);
+        $("input:checkbox[name='masterCode']").attr("disabled", true);
+      } else {
+        $("input:checkbox[name='adminCode']").attr("disabled", false);
+        $("input:checkbox[name='masterCode']").attr("disabled", false);
+      }
+    });
+  });
+</script>
+<% include ../partials/footer %>

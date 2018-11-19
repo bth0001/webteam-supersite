@@ -16,6 +16,7 @@ var xoauth2 = require("xoauth2");
 var methodOverride = require("method-override");
 var multer = require("multer");
 var moment = require("moment");
+var middleware = require("./middleware");
 
 // ROUTES
 var db = require("./models/index");
@@ -34,7 +35,7 @@ var checklistRouter = require("./routes/checklist");
 var projectsRouter = require("./routes/projects");
 var projectCommentsRouter = require("./routes/projectsComment");
 var teamRoutes = require("./routes/teamProfile");
-var apiTrackerRoutes = require("./routes/api/apiTracker");
+var accountRoutes = require("./routes/accounts");
 const errorHandler = require("./handlers/error");
 // API ROUTES
 const apiTracker = require("./routes/api/apiTracker");
@@ -65,11 +66,11 @@ app.use(passport.session());
 //   passReqToCallback : true
 // }));
 passport.use(
-  User.createStrategy(function(email, password, done) {
-    User.findOne({ email: email }, function(err, user) {
+  User.createStrategy(function (email, password, done) {
+    User.findOne({ email: email }, function (err, user) {
       if (err) return done(err);
       if (!user) return done(null, false, { message: "Incorrect e-mail." });
-      user.comparePassword(password, function(err, isMatch) {
+      user.comparePassword(password, function (err, isMatch) {
         if (isMatch) {
           return done(null, user);
         } else {
@@ -79,12 +80,12 @@ passport.use(
     });
   })
 );
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
     done(err, user);
   });
 });
@@ -92,7 +93,7 @@ passport.deserializeUser(function(id, done) {
 // passport.deserializeUser(User.deserializeUser());
 
 //==============================================================================
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
   res.locals.error = req.flash("error");
   res.locals.success = req.flash("success");
@@ -109,6 +110,7 @@ app.all("*", isLoggedIn); // For Authentication
 app.use("/tracker", trackerRoutes);
 app.use("/users", usersRouter);
 app.use("/team", teamRoutes);
+app.use("/accounts", isController, accountRoutes);
 app.use("/dashboard", dashboardRouter);
 app.use("/idea-warehouse", ideaWarehouseRouter);
 app.use("/hats-off", hatsOffRouter);
@@ -120,7 +122,7 @@ app.use("/api", apiTrackerRoutes);
 app.use("/projects/:id/projectComments", projectCommentsRouter);
 // ----For Route Files----end
 
-app.get("/forgot", function(req, res) {
+app.get("/forgot", function (req, res) {
   res.render("forgot", {
     user: req.user
   });
@@ -134,8 +136,16 @@ function isLoggedIn(req, res, next) {
   res.redirect("/");
 }
 
+function isController(req, res, next) {
+  if ((req.isAuthenticated() && req.user.isMaster) || (req.isAuthenticated() && req.user.isAdmin)) {
+    return next();
+  }
+  req.flash("error", "Only Strom Troopers are able to view this page");
+  res.redirect("/dashboard");
+};
+
 //ERROR HANDLING SETUP
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   let err = new Error("Not Found");
   err.status = 404;
   req.flash("error", "Page does not Exist: 404");

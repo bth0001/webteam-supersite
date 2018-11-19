@@ -2,159 +2,184 @@
 <html>
 
 <head>
-	<title>Strom Centre</title>
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-	 crossorigin="anonymous">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/solid.css" integrity="sha384-wnAC7ln+XN0UKdcPvJvtqIH3jOjs9pnKnq9qX68ImXvOGz2JuFoEiCjT8jyZQX2z"
-	 crossorigin="anonymous">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://d3js.org/d3.v5.min.js"></script>
-	<script src="/scripts/site.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-	<script>
-		function defaultImg() {
-			if (profileImageUrl === "") {
-				document.getElementById('userProfile').src = "/images/Projectweb.png";
-			}
-		}
+  <title>Strom Centre</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/solid.css" integrity="sha384-wnAC7ln+XN0UKdcPvJvtqIH3jOjs9pnKnq9qX68ImXvOGz2JuFoEiCjT8jyZQX2z"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="/scripts/site.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+  <script>
+    function defaultImg() {
+      if (profileImageUrl === "") {
+        document.getElementById("userProfile").src = "/images/Projectweb.png";
+      }
+    }
 
-		// if on the home page, remove active classes
-		if (window.location.pathname === "/") {
-			document.getElementsByTagName('a').classList.remove('is-active');
-		}
-		$(document).ready(function () {
-			$('#profileBar .fa-angle-down').on('click', function () {
-				$('#profileBar .dropdown').slideToggle();
-			});
-			// add active class to parent menu item when you're on its page
-			$('#navBar a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('is-active');
-		});
+    // if on the home page, remove active classes
+    if (window.location.pathname === "/") {
+      document.getElementsByTagName("a").classList.remove("is-active");
+    }
+    $(document).ready(function () {
+      $("#profileBar .fa-angle-down").on("click", function () {
+        $("#profileBar .dropdown").slideToggle();
+      });
+      // add active class to parent menu item when you're on its page
+      $(
+        '#navBar a[href^="/' + location.pathname.split("/")[1] + '"]'
+      ).addClass("is-active");
+    });
 
-		function startTime() {
-			var today = new Date();
-			var diem = "AM";
-			var h = today.getHours();
-			var m = today.getMinutes();
-			var s = today.getSeconds();
+    function startTime() {
+      var today = new Date();
+      var diem = "AM";
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
 
-			if (h >= 12) {
-				h = h - 12;
-				diem = "PM";
-			}
-			if (h == 0) {
-				h = 12;
-			}
+      if (h >= 12) {
+        h = h - 12;
+        diem = "PM";
+      }
+      if (h == 0) {
+        h = 12;
+      }
 
-			m = checkTime(m);
-			s = checkTime(s);
-			document.getElementById('clock').innerHTML =
-				h + ":" + m + ":" + s + "<sup>" + diem + "</sup>";
-			var t = setTimeout(startTime, 500);
-		}
-		function checkTime(i) {
-			if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
-			return i;
-		}
-	</script>
-	<style>
-		#clock {flex: 1; font-size: 40px; font-weight: 300; color: #fff; text-align: right; height: 60px;}
-		#clock sup {font-size: 24px; margin-left: 5px;}
-	</style>
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById("clock").innerHTML =
+        h + ":" + m + ":" + s + "<sup>" + diem + "</sup>";
+      var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+      if (i < 10) {
+        i = "0" + i;
+      } // add zero in front of numbers < 10
+      return i;
+    }
+  </script>
 </head>
 
 <body onload="startTime()">
-	<header id="header">
-		<div id="adminBar">
-			<div class="container flexbox flexJustify">
+  <header id="header">
+    <div id="adminBar">
+      <div class="container flexbox flexJustify">
+        <div id="logo">
+          <% if(!currentUser){ %>
+          <a class="fas fa-bolt" href="/">
+            <h2 class="brand">Strom Centre</h2>
+          </a>
+          <% } else { %>
+          <a class="fas fa-bolt" href="/dashboard">
+            <h2 class="brand">Strom Centre</h2>
+          </a>
+          <% } %>
+        </div>
+        <!-- logo -->
+        <div id="clock"></div>
+        <div id="profileBar">
+          <% if(!currentUser){ %>
+          <div class=""><a href="/login">Login</a></div>
+          <div class=""><a href="/signup">Sign Up</a></div>
+          <% } else { %>
+          <div class="flexbox flexRight">
+            <div class="profileImage">
+              <a href="/edit-profile">
+                <img onerror="this.src='/images/Projectweb.png'" src="/<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" />
+              </a>
+            </div>
+            <div class="profileText">
+              <p>
+                <a href="/edit-profile">
+                  <%= currentUser.firstName + " " + currentUser.lastName %></a>
+              </p>
+            </div>
+            <i class="fas fa-angle-down">
+              <div class="dropdown">
+                <a href="/team">Meet Your Team</a>
+                <a href="/edit-profile">My Profile</a>
+                <% if(currentUser.isMaster){ %>
 
-				<div id="logo">
-					<% if(!currentUser){ %>
-					<a href="/">
-						<h2 class="brand">Strom Centre</h2>
-					</a>
-					<% } else { %>
-					<a href="/dashboard">
-						<h2 class="brand">Strom Centre</h2>
-					</a>
-					<% } %>
-				</div>
-				<!--logo-->
-				<div id="clock"></div>
-				<div id="profileBar">
-					<% if(!currentUser){ %>
-					<div class=""><a href="/login">Login</a></div>
-					<div class=""><a href="/signup">Sign Up</a></div>
-					<% } else { %>
-					<div class="flexbox flexRight">
-						<div class="profileImage">
-							<a href="/edit-profile">
-								<img onerror="this.src='/images/Projectweb.png'" src="/<%= currentUser.profileImageUrl %>" alt="<%= currentUser.firstName %>" />
-							</a>
-						</div>
-						<div class="profileText">
-							<p><a href="/edit-profile">
-									<%= currentUser.firstName + " " + currentUser.lastName %></a></p>
-						</div>
-						<i class="fas fa-angle-down">
-							<div class="dropdown">
-								<a href="/team">Meet Your Team</a>
-								<a href="/edit-profile">My Profile</a>
-								<a href="/logout">Log Out</a>
-							</div>
-						</i>
-					</div>
-					<!-- <div class=""><a href="/logout">Logout</a></div> -->
-					<% } %>
-				</div><!-- profileBar -->
-			</div><!-- adminBar container -->
-		</div><!-- adminBar -->
+                <a href="/accounts">Account Manager</a>
 
-		<div id="navBar">
-			<div class="container flexbox flexJustify">
-				<ul class="flexbox">
-					<li><a href="/dashboard"><span>Dashboard</span></a></li>
-					<li><a href="/tracker"><span>Tracker</span></a></li>
-					<li><a href="/projects"><span>Projects</span></a></li>
-					<li><a href="/checklist"><span>Checklist</span></a></li>
-					<li><a href="/idea-warehouse"><span>Idea Warehouse</span></a></li>
-					<li><a href="/hats-off"><span>Hats-Off</span></a></li>
-					<li><a href="/blueprint-generator"><span>Blueprint</span></a></li>
-					<li><a href="/presence-url-tracker"><span>Presence URL</span></a></li>
-				</ul>
-				<form id="search" action="/quick-search" method="GET" class="searchBox flexbox flexJustify">
-					<input class="searchText" type="text" name="search" placeholder="Custom Search" />
-					<button class="searchIcon"><i class="fas fa-search"></i></button>
-				</form>
-				<div id="quickSearch">
-					<ul></ul>
-				</div>
-			</div><!-- navBar container-->
-		</div><!-- navBar -->
+                <% } %>
+                <a href="/logout">Log Out</a>
+              </div>
+            </i>
+          </div>
+          <!-- <div class=""><a href="/logout">Logout</a></div> -->
+          <% } %>
+        </div>
+        <!-- profileBar -->
+      </div>
+      <!-- adminBar container -->
+    </div>
+    <!-- adminBar -->
 
-		<!-- <div id="clockDisplay" class="clockStyle"></div> -->
-		<!-- </div> -->
-		<!--container-->
+    <div id="navBar">
+      <div class="container flexbox flexJustify">
+        <ul class="flexbox">
+          <li>
+            <a href="/dashboard"><span>Dashboard</span></a>
+          </li>
+          <li>
+            <a href="/tracker"><span>Tracker</span></a>
+          </li>
+          <li>
+            <a href="/projects"><span>Projects</span></a>
+          </li>
+          <li>
+            <a href="/checklist"><span>Checklist</span></a>
+          </li>
+          <li>
+            <a href="/brainstrom"><span>Brainstrom</span></a>
+          </li>
+          <li>
+            <a href="/prestige"><span>Prestige World Wide</span></a>
+          </li>
+          <li>
+            <a href="/blueprint-generator"><span>Blueprint</span></a>
+          </li>
 
-	</header><!-- end header -->
+        </ul>
+        <form action="/search" method="GET" class="searchBox flexbox flexJustify">
+          <input class="searchText" type="text" name="search" placeholder="Custom Search" />
+          <button class="searchIcon"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <!-- navBar container -->
+    </div>
+    <!-- navBar -->
 
-	<div class="container">
-		<% if(error && error.length > 0){ %>
-		<div id="alertMessage" class="alert alert-danger" role="alert">
-			<%= error %>
-		</div>
-		<% } %>
-		<% if(success && success.length > 0){ %>
-		<div id="alertMessage" class="alert alert-success" role="alert">
-			<%= success %>
-		</div>
-		<% } %>
-	</div>
+    <!-- <div id="clockDisplay" class="clockStyle"></div> -->
+    <!-- </div> -->
+    <!-- container -->
+  </header>
+  <!-- end header -->
 
-	<section id="siteBody">
-		<!--closing tag in footer file-->
+  <div class="container">
+    <% if(error && error.length > 0){ %>
+    <div id="alertMessage" class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+    <% } %>
+    <% if(success && success.length > 0){ %>
+    <div id="alertMessage" class="alert alert-success" role="alert">
+      <%= success %>
+    </div>
+    <% } %>
+  </div>
+
+  <section id="siteBody">
+    <!-- closing tag in footer file -->
+</body>
+
+</html>

@@ -1,22 +1,4 @@
 <% include ../partials/header %>
-<script>
-  // $(document).ready(function () {
-  //   $("#startEssWrap, #checklistEssential").hide();
-
-  //   $('#buildPkg').on('change', function () {
-  //     if ($(this).val() === 'Essential') {
-  //       $("#startEssWrap").show("slow");
-  //       $("#checklistStarter, #checklistEssential").show();
-  //     }
-
-  //     if ($(this).val() === 'Starter') {
-  //       $("#startEssWrap").show("slow");
-  //       $("#checklistStarter").show();
-  //       $("#checklistEssential").hide();
-  //     }
-  //   });
-  // });
-</script>
 
 <style>
   form {max-width:100%; padding:0; box-shadow:none; background-color: transparent}
@@ -104,18 +86,15 @@ input.checkName {width: 100%; background: none; border: none; color: #fff; font-
             <div class="form-group">
 
               <span class="taskName"><input class="checkName" value="<%= checklist.checklistTask[i].taskName %>" type="text" /></span>
-              <% if(checklist.checklistTask[i].taskStatus === "Complete") { %>
-              <span class="taskComplete"><input class="checkStatus" type="radio" checked="checked" value="<%= checklist.checklistTask[i].taskStatus %>"
+              <% if(checklist.checklistTask[i].taskStatus === "Completed") { %>
+              <span class="taskComplete"><input class="checkStatus" type="radio" checked="checked" value="Completed"
                   name="<%= checklist.checklistTask[i]._id %>">Complete</span>
-              <span class="taskNA"><input class="checkStatus" type="radio" value="<%= checklist.checklistTask[i].taskStatus %>"
-                  name="<%= checklist.checklistTask[i]._id %>">
+              <span class="taskNA"><input class="checkStatus" type="radio" value="N/A" name="<%= checklist.checklistTask[i]._id %>">
                 N/A</span>
               <% } %>
               <% if(checklist.checklistTask[i].taskStatus === "N/A") { %>
-              <span class="taskComplete"><input class="checkStatus" type="radio" value="<%= checklist.checklistTask[i].taskStatus %>"
-                  name="<%= checklist.checklistTask[i]._id %>">Complete</span>
-              <span class="taskNA"><input class="checkStatus" type="radio" checked="checked" value="<%= checklist.checklistTask[i].taskStatus %>"
-                  name="<%= checklist.checklistTask[i]._id %>">
+              <span class="taskComplete"><input class="checkStatus" type="radio" value="Completed" name="<%= checklist.checklistTask[i]._id %>">Complete</span>
+              <span class="taskNA"><input class="checkStatus" type="radio" checked="checked" value="N/A" name="<%= checklist.checklistTask[i]._id %>">
                 N/A</span>
               <% } %>
               <span class="taskNotes"><textarea class="checkNotes" value="<%= checklist.checklistTask[i].additionalNotes %>"><%= checklist.checklistTask[i].additionalNotes %></textarea></span>

@@ -33,7 +33,11 @@
                 Justin
               </div>
               <div class="cell name">
-                <%= checklist.archive %>
+                <% if(checklist.archive) { %>
+                Yes
+                <% } else { %>
+                No
+                <% } %>
               </div>
               <div class="cell date">
                 <%= moment(checklist.date).format("MMM DD, YYYY") %>
@@ -62,17 +66,17 @@
                 <% }; %>
 
                 <div id="trackerBtn">
-                  <a href="/checklist/<%= checklist._id %>/edit"><button class="btn edit">Edit Task</button></a>
-                  <% if(checklist.archive === !true) { %>
+                  <a href="/checklist/<%= checklist._id %>/edit" class="edit">Edit Task</a>
+                  <% if(checklist.archive === !true && currentUser.isAdmin || checklist.archive === !true && currentUser.isMaster) { %>
                   <form id="delete-form" class="trackerForm" action="/checklist/<%= checklist._id %>?_method=PUT"
                     method="POST">
-                    <button class="btn archive archiveButton" value="Archive" name="checklist[archive]" type="submit">Archive</button>
+                    <button class="archive archiveButton" value="Archive" name="checklist[archive]" type="submit">Archive</button>
                   </form>
                   <% } %>
-                  <% if(checklist.archive === true) { %>
+                  <% if(checklist.archive === true && currentUser.isAdmin || checklist.archive === true && currentUser.isMaster) { %>
                   <form id="archive-form" class="trackerForm" action="/checklist/<%= checklist._id %>?_method=PUT"
                     method="POST">
-                    <button class="btn archive archiveButton" value="Archive" name="checklist[archive]" type="submit">Un-Archive</button>
+                    <button class="archive archiveButton" value="Archive" name="checklist[archive]" type="submit">Un-Archive</button>
                   </form>
                   <% } %>
                   <script>

@@ -1,38 +1,4 @@
 <% include partials/header %>
-<style>
-	/* General dropdown styles */
-	.dropdown dd,
-	.dropdown dt,
-	.dropdown ul {
-		margin: 0px;
-		padding: 0px;
-	}
-
-	.dropdown dt a span {
-		cursor: pointer;
-		display: block;
-		padding: 5px;
-	}
-
-	/* UL styles */
-	/* .dropdown dd ul {display:none; list-style:none; padding:5px 0px; position:absolute; left:0px; top:2px; width:auto; min-width:170px;} */
-	.dropdown span.value {
-		display: none;
-	}
-
-	.dropdown dd ul li a {
-		padding: 5px;
-		display: block;
-	}
-
-	.selectTeamMember a:hover {
-		text-decoration: none;
-	}
-
-	.actNumber span:not(:last-child):after {
-		content: ", ";
-	}
-</style>
 <div id="overview" class="center">
 	<h1>
 		<%= currentUser.team %> Dashboard</h1>
@@ -230,12 +196,20 @@ $(document).ready(function(){
 				<dl class="dropdown">
 					<dt>
 						<a>
-							<h4 class="activeUser">
+							<h4 class="activeUser" id="active">
 								<%= currentUser.firstName %>
 							</h4>
 							<i class="fas fa-angle-down"></i>
 						</a>
 					</dt>
+					<script>
+						let user = "<%= currentUser.firstName %>";
+						$(document).ready(function () {
+							if (user === "Justin") {
+
+							}
+						})
+					</script>
 					<dd>
 						<ul id="allTeamMembers">
 							<li><a>All</a></li>
@@ -319,7 +293,7 @@ $(document).ready(function(){
 						</div>
 						<div id="accordion">
 							<% tracking.forEach(function(tracked){ %>
-							<% if(currentUser.email === tracked.author.email) { %>
+							<%# if(currentUser.email === tracked.author.email) { #%>
 							<% if(tracked.buildPkg === "Essential" && tracked.archive == !true){ %>
 							<div class="row flexbox">
 								<div class="cell url"><a href="<%= tracked.domain %>" target="_blank">
@@ -373,7 +347,7 @@ $(document).ready(function(){
 
 							</div>
 							<% } %>
-							<% } %>
+							<%# } #%>
 							<% }); %>
 						</div>
 					</div>
