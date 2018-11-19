@@ -32,6 +32,52 @@
           <% }); %>
         </div>
         <hr />
+        <h2>Web Team Supervisor</h2>
+        <div class="teamMembers flexbox">
+          <% users.forEach(function(user){%>
+          <% if(user.team === "Web Team Supervisor"){ %>
+          <div class="employee flexbox">
+            <div class="empImage">
+              <img onerror="this.src='/images/Projectweb.png'" src="<%= user.profileImageUrl %>" alt="<%= user.firstName%>" />
+            </div>
+            <div class="empName">
+              <h4><strong>
+                  <%= user.firstName %></strong></h4>
+            </div>
+            <div class="dept">
+              <span class="projectStatus">
+                <a href="mailto:<%= user.email %>">
+                  <%= user.email %></a></span>
+            </div>
+            <a href="/team/<%= user.id %>" class="myBtn">More Info</a>
+          </div>
+          <% } %>
+          <% }); %>
+        </div>
+        <hr />
+        <h2>Client Resource Advisor</h2>
+        <div class="teamMembers flexbox">
+          <% users.forEach(function(user){%>
+          <% if(user.team === "Client Resource Advisor"){ %>
+          <div class="employee flexbox">
+            <div class="empImage">
+              <img onerror="this.src='/images/Projectweb.png'" src="<%= user.profileImageUrl %>" alt="<%= user.firstName%>" />
+            </div>
+            <div class="empName">
+              <h4><strong>
+                  <%= user.firstName %></strong></h4>
+            </div>
+            <div class="dept">
+              <span class="projectStatus">
+                <a href="mailto:<%= user.email %>">
+                  <%= user.email %></a></span>
+            </div>
+            <a href="/team/<%= user.id %>" class="myBtn">More Info</a>
+          </div>
+          <% } %>
+          <% }); %>
+        </div>
+        <hr />
         <h2>Designers</h2>
         <div class="teamMembers flexbox">
           <% users.forEach(function(user){%>

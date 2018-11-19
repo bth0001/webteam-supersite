@@ -21,7 +21,7 @@
                         <ul id="allTeamMembers">
                             <li><a>All</a></li>
                             <% users.forEach(function(user){ %>
-                            <% if(user.team == 'Developer') { %>
+                            <% if(user.team == currentUser.team) { %>
                             <li><a>
                                     <%= user.firstName %></a></li>
                             <% } %>
@@ -40,6 +40,7 @@
                     <div class="table">
                         <div class="row title flexbox">
                             <div class="cell url">Domain</div>
+                            <div class="cell name">Edit Checklist</div>
                             <div class="cell actNumber">Developer</div>
                             <div class="cell name">Build Package</div>
                             <div class="cell date">Date</div>
@@ -51,7 +52,11 @@
                             <div class="row flexbox">
                                 <div class="cell url"><a href="<%= checked.domain %>" target="_blank">
                                         <%=checked.domain %></a></div>
-                                <div class="cell actNumber">
+                                <div class="cell name"><a href="/checklist/<%= checked._id %>">
+                                        Edit</a>
+                                </div>
+                                <div class="
+                                        cell actNumber">
                                     <%= checked.author.firstName %>
                                 </div>
 
@@ -78,11 +83,13 @@
                                     </ul>
                                     <div id="trackerBtn">
                                         <a href="/checklist/<%= checked._id %>/edit" class="edit">Edit</a>
+                                        <% if(currentUser.isAdmin || currentUser.isMaster) { %>
                                         <form id="delete-form" class="trackerForm" action="/checklist/<%= checked._id %>?_method=PUT"
                                             method="POST">
                                             <button class="archive archiveButton" value="Archive" name="checklist[archive]"
                                                 type="submit">Archive</button>
                                         </form>
+                                        <% } %>
                                         <script>
                                             $(document).ready(function () {
                                                 $("#delete-form button.archiveButton").click(function () {

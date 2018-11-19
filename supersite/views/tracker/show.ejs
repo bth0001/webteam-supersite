@@ -149,12 +149,13 @@
 								</p>
 								<div id="trackerBtn">
 									<a href="/tracker/<%= tracking._id %>/edit" class="edit">Edit Task</a>
-									<% if(tracking.archive === !true) { %>
+
+									<% if(tracking.archive === !true && currentUser.isAdmin || tracking.archive === !true && currentUser.isMaster) { %>
 									<form id="delete-form" class="trackerForm" action="/tracker/<%= tracking._id %>?_method=PUT" method="POST">
 										<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 									</form>
 									<% } %>
-									<% if(tracking.archive === true) { %>
+									<% if(tracking.archive === true && currentUser.isAdmin || tracking.archive === true && currentUser.isMaster) { %>
 									<form id="archive-form" class="trackerForm" action="/tracker/<%= tracking._id %>?_method=PUT" method="POST">
 										<button class="btn archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Un-Archive</button>
 									</form>

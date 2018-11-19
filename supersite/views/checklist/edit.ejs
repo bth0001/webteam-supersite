@@ -86,7 +86,7 @@ input.checkName {width: 100%; background: none; border: none; color: #fff; font-
             <div class="form-group">
 
               <span class="taskName"><input class="checkName" value="<%= checklist.checklistTask[i].taskName %>" type="text" /></span>
-              <% if(checklist.checklistTask[i].taskStatus === "Complete") { %>
+              <% if(checklist.checklistTask[i].taskStatus === "Completed") { %>
               <span class="taskComplete"><input class="checkStatus" type="radio" checked="checked" value="Completed"
                   name="<%= checklist.checklistTask[i]._id %>">Complete</span>
               <span class="taskNA"><input class="checkStatus" type="radio" value="N/A" name="<%= checklist.checklistTask[i]._id %>">

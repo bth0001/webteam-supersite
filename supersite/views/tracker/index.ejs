@@ -96,6 +96,7 @@
 						<div class="row title flexbox">
 							<div class="cell url">Website URL</div>
 							<div class="cell actNumber">Account Number</div>
+							<div class="cell name">Developer</div>
 							<div class="cell name">Designer</div>
 							<div class="cell name">OnBoarder</div>
 							<div class="cell date">Date</div>
@@ -111,6 +112,9 @@
 										<%= tracked.domain %></a></div>
 								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>">
 										<%= tracked.acctNum %></a></div>
+								<div class="cell name">
+									<%= tracked.developer %>
+								</div>
 								<div class="cell name">
 									<%= tracked.designer %>
 								</div>
@@ -151,9 +155,11 @@
 										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 										</form> -->
+										<% if(currentUser.isAdmin || currentUser.isMaster){ %>
 										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
 											<button class="archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 										</form>
+										<% } %>
 										<script>
 											$(document).ready(function () {
 												$("#delete-form button.archiveButton").click(function () {
@@ -181,6 +187,7 @@
 						<div class="row title flexbox">
 							<div class="cell url">Website URL</div>
 							<div class="cell actNumber">Account Number</div>
+							<div class="cell name">Developer</div>
 							<div class="cell name">Designer</div>
 							<div class="cell name">OnBoarder</div>
 							<div class="cell date">Date</div>
@@ -196,6 +203,9 @@
 										<%= tracked.domain %></a></div>
 								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>">
 										<%= tracked.acctNum %></a></div>
+								<div class="cell name">
+									<%= tracked.developer %>
+								</div>
 								<div class="cell name">
 									<%= tracked.designer %>
 								</div>
@@ -229,9 +239,11 @@
 										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 										</form> -->
+										<% if(currentUser.isAdmin || currentUser.isMaster){ %>
 										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
 											<button class="archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 										</form>
+										<% }; %>
 										<script>
 											$(document).ready(function () {
 												$("#delete-form button.archiveButton").click(function () {
@@ -259,6 +271,7 @@
 						<div class="row title flexbox">
 							<div class="cell url">Website URL</div>
 							<div class="cell actNumber">Account Number</div>
+							<div class="cell name">Developer</div>
 							<div class="cell name">Designer</div>
 							<div class="cell name">OnBoarder</div>
 							<div class="cell date">Date</div>
@@ -274,6 +287,9 @@
 										<%= tracked.domain %></a></div>
 								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>">
 										<%= tracked.acctNum %></a></div>
+								<div class="cell name">
+									<%= tracked.developer %>
+								</div>
 								<div class="cell name">
 									<%= tracked.designer %>
 								</div>
@@ -310,9 +326,11 @@
 										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 										</form> -->
+										<% if(currentUser.isAdmin || currentUser.isMaster){ %>
 										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
 											<button class="archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 										</form>
+										<% }; %>
 										<script>
 											$(document).ready(function () {
 												$("#delete-form button.archiveButton").click(function () {
@@ -340,6 +358,7 @@
 						<div class="row title flexbox">
 							<div class="cell url">Website URL</div>
 							<div class="cell actNumber">Account Number</div>
+							<div class="cell name">Developer</div>
 							<div class="cell name">Designer</div>
 							<div class="cell name">OnBoarder</div>
 							<div class="cell date">Date</div>
@@ -355,6 +374,9 @@
 										<%= tracked.domain %></a></div>
 								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>">
 										<%= tracked.acctNum %></a></div>
+								<div class="cell name">
+									<%= tracked.developer %>
+								</div>
 								<div class="cell name">
 									<%= tracked.designer %>
 								</div>
@@ -391,9 +413,11 @@
 										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 										</form> -->
+										<% if(currentUser.isAdmin || currentUser.isMaster){ %>
 										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
 											<button class="archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 										</form>
+										<% }; %>
 										<script>
 											$(document).ready(function () {
 												$("#delete-form button.archiveButton").click(function () {
@@ -421,6 +445,7 @@
 						<div class="row title flexbox">
 							<div class="cell url">Website URL</div>
 							<div class="cell actNumber">Account Number</div>
+							<div class="cell name">Developer</div>
 							<div class="cell name">Designer</div>
 							<div class="cell name">OnBoarder</div>
 							<div class="cell date">Date</div>
@@ -436,6 +461,9 @@
 										<%= tracked.domain %></a></div>
 								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>">
 										<%= tracked.acctNum %></a></div>
+								<div class="cell name">
+									<%= tracked.developer %>
+								</div>
 								<div class="cell name">
 									<%= tracked.designer %>
 								</div>
@@ -472,9 +500,11 @@
 										<!-- <form id="delete-form" action="/tracker/<%= tracked._id %>?_method=DELETE" method="POST">
 											<button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
 										</form> -->
+										<% if(currentUser.isAdmin || currentUser.isMaster){ %>
 										<form id="delete-form" class="trackerForm" action="/tracker/<%= tracked._id %>?_method=PUT" method="POST">
 											<button class="archive archiveButton" value="Archive" name="tracking[archive]" type="submit">Archive</button>
 										</form>
+										<% }; %>
 										<script>
 											$(document).ready(function () {
 												$("#delete-form button.archiveButton").click(function () {
