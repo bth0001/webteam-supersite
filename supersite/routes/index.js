@@ -55,6 +55,25 @@ router.get("/search", function(req, res) {
   }
 });
 
+router.get("/quick-search", function(req, res) {
+  if (req.query.search === "strom") {
+    return res.redirect("/strom");
+  }
+    const regex = new RegExp(escapeRegex(req.query.search), "gi");
+    TeamTracker.find({$text: { $search: regex } }, function(err, allTracks) {
+        console.log(regex);
+        if (err) {
+          console.log("Something went wrong");
+          console.log(err);
+        } else {
+          res.send({
+            tracking: allTracks,
+            projects: allProjects
+          });
+        }
+    }).sort({});
+});
+
 router.get("/clear-search", function(req, res) {
   req.session.searchHistory = [];
   req.flash("success", "Search History has been cleared!");

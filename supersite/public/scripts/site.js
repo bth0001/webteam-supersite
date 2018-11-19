@@ -190,6 +190,27 @@ $("#socialMedia a.close, #socialMedia a.submit").click(function(){
     });
   });
 
+  $("#search input").on("keyup", function(){
+    var searchString = $(this).val();
+    if(searchString.length > 0){
+     $.get("/quick-search", {search: searchString}, function(data, status){
+       console.log(data);
+       $("#quickSearch>ul>li").remove();
+        if(data.tracking.length){
+          for (var key in data.tracking) {
+             var value = data.tracking[key];
+             $("<li><a href='/tracker/"+value._id+"'>"+value+"</a></li>").appendTo("#quickSearch ul");
+          }
+        } else {
+          $("<li>No Results Found</li>").appendTo("#quickSearch ul");
+        }
+      }); 
+    } else {
+      $("#quickSearch>ul>li").remove();
+    }
+  });
+
+
 });//End document ready
   
   function assignNames() {

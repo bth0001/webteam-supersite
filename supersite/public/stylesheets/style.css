@@ -548,8 +548,8 @@ h3.pageHeader {
   z-index: 1;
   top: 35px;
 }
-#allTeamMembers a,
-#allMonths a {
+#allTeamMembers li,
+#allMonths li{
   color: #adadad;
   display: block;
   font-size: 0.85em;
@@ -559,8 +559,8 @@ h3.pageHeader {
   text-decoration: none;
   transition: color 0.25s ease-in-out;
 }
-#allTeamMembers a:hover,
-#allTeamMembers a:focus,
+#allTeamMembers li:hover,
+#allTeamMembers li:focus,
 #allMonths a:hover,
 #allMonths a:focus {
   background-color: #19b9e7;

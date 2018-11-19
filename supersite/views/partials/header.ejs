@@ -127,10 +127,13 @@
 					<li><a href="/blueprint-generator"><span>Blueprint</span></a></li>
 					<li><a href="/presence-url-tracker"><span>Presence URL</span></a></li>
 				</ul>
-				<form action="/search" method="GET" class="searchBox flexbox flexJustify">
+				<form id="search" action="/quick-search" method="GET" class="searchBox flexbox flexJustify">
 					<input class="searchText" type="text" name="search" placeholder="Custom Search" />
 					<button class="searchIcon"><i class="fas fa-search"></i></button>
 				</form>
+				<div id="quickSearch">
+					<ul></ul>
+				</div>
 			</div><!-- navBar container-->
 		</div><!-- navBar -->
 

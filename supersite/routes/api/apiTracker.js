@@ -1,17 +1,23 @@
 const express = require("express");
 const router = express.Router();
-
-// Tracker Model
 const db = require("../../models");
 
-// @route   GET api/items
-// @desc    Get All Items
-// @access  Private
-router.get("/", (req, res) => {
-  db.TeamTracker.find()
-    .sort({ date: -1 })
-    .then(trackers => res.json(trackers))
-    .catch(err => res.status(404).json(err));
+router.get("/", function(req, res) {
+    var start = new Date(req.query.startDate);
+    var end = new Date(req.query.endDate);
+    var user = req.query.users;
+    if (user === undefined) {user = req.user._id;}
+    console.log(user);
+    //db.TeamTracker.find({created_at: {$gte: start, $lt: end}})
+    db.TeamTracker.find({ $and: [
+      {created_at: {$gte: start, $lt: end}},
+      { "author.id": user }
+    ]}).then(function(allTracks) {
+            res.send(allTracks);
+        })
+        .catch(function(err) {
+            res.send(err);
+        });
 });
 
 module.exports = router;

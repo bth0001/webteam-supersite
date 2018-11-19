@@ -34,6 +34,7 @@ var checklistRouter = require("./routes/checklist");
 var projectsRouter = require("./routes/projects");
 var projectCommentsRouter = require("./routes/projectsComment");
 var teamRoutes = require("./routes/teamProfile");
+var apiTrackerRoutes = require("./routes/api/apiTracker");
 const errorHandler = require("./handlers/error");
 // API ROUTES
 const apiTracker = require("./routes/api/apiTracker");
@@ -115,6 +116,7 @@ app.use("/presence-url-tracker", presenceUrlTrackerRouter);
 app.use("/blueprint-generator", blueprintGeneratorRouter);
 app.use("/checklist", checklistRouter);
 app.use("/projects", projectsRouter);
+app.use("/api", apiTrackerRoutes);
 app.use("/projects/:id/projectComments", projectCommentsRouter);
 // ----For Route Files----end
 
