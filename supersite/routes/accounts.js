@@ -7,14 +7,14 @@ var db = require("../models");
 //----Image Upload Start
 var multer = require("multer");
 var storage = multer.diskStorage({
-  filename: function(req, file, callback) {
+  filename: function (req, file, callback) {
     callback(null, Date.now() + file.originalname); // sets file name
   },
-  destination: function(req, file, cb) {
+  destination: function (req, file, cb) {
     cb(null, "uploads"); //file upload destination
   }
 });
-var imageFilter = function(req, file, cb) {
+var imageFilter = function (req, file, cb) {
   // accept image files only
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
     return cb(new Error("Only image files are allowed!"), false);
@@ -28,7 +28,7 @@ var upload = multer({
 });
 //----Image Upload End
 
-router.get("/", function(req, res, next) {
+router.get("/", function (req, res, next) {
   var perPage = 10;
   var pageQuery = parseInt(req.query.page);
   var pageNumber = pageQuery ? pageQuery : 1;
@@ -40,8 +40,8 @@ router.get("/", function(req, res, next) {
       .sort({ isMaster: -1 })
       .skip(perPage * pageNumber - perPage)
       .limit(perPage)
-      .exec(function(err, foundUsers) {
-        db.User.countDocuments({ firstName: regex }).exec(function(err, count) {
+      .exec(function (err, foundUsers) {
+        db.User.countDocuments({ firstName: regex }).exec(function (err, count) {
           if (err) {
             req.flash("error", "No Users Found");
             res.redirect("/accounts");
@@ -68,8 +68,8 @@ router.get("/", function(req, res, next) {
       .sort({ isMaster: -1 })
       .skip(perPage * pageNumber - perPage)
       .limit(perPage)
-      .exec(function(err, foundUsers) {
-        db.User.countDocuments().exec(function(err, count) {
+      .exec(function (err, foundUsers) {
+        db.User.countDocuments().exec(function (err, count) {
           if (err) {
             console.log(err);
           } else {
@@ -86,8 +86,8 @@ router.get("/", function(req, res, next) {
   }
 });
 
-router.get("/:id", function(req, res, next) {
-  db.User.findById(req.params.id, function(err, foundUser) {
+router.get("/:id", function (req, res, next) {
+  db.User.findById(req.params.id, function (err, foundUser) {
     if (err) {
       req.flash("error", "User does not exist");
       res.redirect("/accounts");
@@ -96,13 +96,13 @@ router.get("/:id", function(req, res, next) {
   });
 });
 
-router.post("/:id", upload.single("image"), function(req, res) {
-  db.User.findById(req.params.id, function(err, sanitizedUser) {
+router.post("/:id", upload.single("image"), function (req, res) {
+  db.User.findById(req.params.id, function (err, sanitizedUser) {
     if (!sanitizedUser) {
       req.flash("error", "No account found");
       return res.redirect("/accounts");
     }
-    const { email, firstName, lastName, bio, socials, skills, team } = req.body;
+    const { email, firstName, lastName, bio, socials, skills, team, quote, funFacts } = req.body;
     if (req.body.adminCode === "true") {
       sanitizedUser.isAdmin = true;
       sanitizedUser.isMaster = false;
@@ -117,7 +117,7 @@ router.post("/:id", upload.single("image"), function(req, res) {
     }
     // Check to see if image was inserted
     if (req.file === undefined || req.file === null) {
-      profileImageUrl = "/images/Projectweb.png";
+      profileImageUrl = sanitizedUser.profileImageUrl;
     } else {
       req.body.profileImageUrl = req.file.path;
       var profileImageUrl = req.body.profileImageUrl;
@@ -137,9 +137,11 @@ router.post("/:id", upload.single("image"), function(req, res) {
     sanitizedUser.bio = bio;
     sanitizedUser.socials = socials;
     sanitizedUser.skills = skills;
+    sanitizedUser.quote = quote;
+    sanitizedUser.funFacts = funFacts;
     // don't forget to save!
-    sanitizedUser.setPassword(req.body.password, function() {
-      sanitizedUser.save(function(err) {
+    sanitizedUser.setPassword(req.body.password, function () {
+      sanitizedUser.save(function (err) {
         if (err) {
           if (err.name === "MongoError" && err.code === 11000) {
             req.flash("error", "This email address is already in use.");
@@ -154,8 +156,8 @@ router.post("/:id", upload.single("image"), function(req, res) {
   });
 });
 
-router.delete("/:id", function(req, res) {
-  db.User.findByIdAndRemove(req.params.id, function(err, foundUser) {
+router.delete("/:id", function (req, res) {
+  db.User.findByIdAndRemove(req.params.id, function (err, foundUser) {
     if (err) {
       req.flash("error", err);
       res.redirect("/accounts");

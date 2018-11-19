@@ -68,6 +68,12 @@
               </label>
             </section>
             <section class="flexbox flexJustify">
+              <label for="quote" style="flex: 48%;"><span>Quote:</span>
+                <input type="text" name="quote" placeholder="Favorite Quote" value="<%= user.quote %>">
+              </label>
+              <label for="funFacts" style="flex: 48%;"><span>Fun Facts:</span>
+                <input type="text" name="funFacts" placeholder="Fun Facts" value="<%= user.funFacts %>">
+              </label>
               <label for="skills"><span>Skills:</span>
                 <input type="text" name="skills" placeholder="Skillset" value="<%= user.skills %>" />
               </label>
@@ -76,22 +82,23 @@
               </label>
             </section>
             <label for="bio"><span>Bio:</span>
-              <textarea type="text" name="bio" placeholder="Your Bio" value="<%= user.bio %>"><%= user.bio %></textarea>
+              <textarea rows="6" type="text" name="bio" placeholder="Your Bio" value="<%= user.bio %>"><%= user.bio %></textarea>
             </label>
-            <h3>If the account is going to have special permissions please select one of
-              the following options below.</h3>
-            <div class="group groupCheckBox">
-              <p>If this user is an Strom Trooper Account, please check below.</p>
-              <label name="masterCode">Strom Trooper Account?<input type="checkbox" name="masterCode" value="true" /></label>
-            </div>
+            <h5>If the account is going to have special permissions please select one of the following options below.</h5>
+            <div class="permissionWrapper">
+              <div class="group groupCheckBox">
+                <p>If this user is an Strom Trooper Account, please check below.</p>
+                <label name="masterCode">Strom Trooper Account?<input type="checkbox" name="masterCode" value="true" /></label>
+              </div>
 
-            <div class="group groupCheckBox">
-              <p>If this user is an Admin Account, please check below.</p>
-              <label name="adminCode">Admin Account?<input type="checkbox" name="adminCode" value="true" /></label>
-            </div>
-            <div class="group groupCheckBox">
-              <p>If this user is a Basic Account, please check below.</p>
-              <label name="basicCode">Basic Account?<input type="checkbox" name="basicCode" value="true" /></label>
+              <div class="group groupCheckBox">
+                <p>If this user is an Admin Account, please check below.</p>
+                <label name="adminCode">Admin Account?<input type="checkbox" name="adminCode" value="true" /></label>
+              </div>
+              <div class="group groupCheckBox">
+                <p>If this user is a Basic Account, please check below.</p>
+                <label name="basicCode">Basic Account?<input type="checkbox" name="basicCode" value="true" /></label>
+              </div>
             </div>
             <label for="imageProfile"><span>Profile Image</span></label>
             <div class="upload-btn-wrapper">
