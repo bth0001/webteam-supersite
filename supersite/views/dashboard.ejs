@@ -16,7 +16,12 @@ $(document).ready(function(){
 	$("#startDate").val(firstDay.toISOString().substr(0, 10));
 	$("#endDate").val(lastDay.toISOString().substr(0, 10));
 	$("#dateFilter input, #allTeamMembers input").on("change", function(){
-		var userList = [];
+		getDashboardData();
+	});
+});
+
+function getDashboardData(){
+	var userList = [];
 		var startDateInput = $("input#startDate").val();
 		var endDateInput = $("input#endDate").val();
 		var now = new Date();
@@ -33,14 +38,12 @@ $(document).ready(function(){
 			endDate: endDateInput,
 			users: userList
 		}, function(data, status){
-			$("#dashboard #topRow, #dashboard #bottomRow").empty();
+			//$("#dashboard #topRow, #dashboard #bottomRow").empty();
 			var essCount, strCount, prodCount, tlinkCount, contentCount, projectCount;
 			essCount = strCount = prodCount = tlinkCount = contentCount = projectCount = 0;
 			if(data.length){
 				console.log(data);
 				//create variables
-				// ADD IN CHECK TO SEE IF DOCUMENT WAS ARCHIVED!!!!!!
-				var essCount = 0;
 				for (var key in data) {
 					var value = data[key];
 					// Count Essential
@@ -68,66 +71,26 @@ $(document).ready(function(){
 						projectCount++
 					}
 			  }
-			  //INSERT HTML
-			  $(
-			'	<div class="widget leftCol">' +
-			'		<div class="table graph">' +
-			'			<h2>Site Builds</h2>' +
-			'			<div class="wrapper flexbox">' +
-			'				<div class="column flexbox">' +
-			'					<div class="cell graph"><span class="circle showEssentials">' +
-			'							'+essCount+'</span></div>' +
-			'					<div class="cell build">Essentials</div>' +
-			'				</div>' +
-			'				<div class="column flexbox">' +
-			'					<div class="cell graph"><span class="circle showStarter">' +
-			'							'+strCount+'</span></div>' +
-			'					<div class="cell build">Starters</div>' +
-			'				</div>' +
-			'			</div>' +
-			'		</div>' +
-			'	</div>' +
-			'	<!-- End leftCol -->' +
-
-			'	<div class="widget rightCol tasks">' +
-			'		<div class="table">' +
-			'			<div class="row flexbox showProd">' +
-			'				<div class="cell task">Prod Change</div>' +
-			'				<div class="cell taskNumber">' + prodCount +
-			'				</div>' +
-			'			</div>' +
-			'			<div class="row flexbox showTlink">' +
-			'				<div class="cell task">T.LINK</div>' +
-			'				<div class="cell taskNumber">' + tlinkCount +
-			'				</div>' +
-			'			</div>' +
-			'			<div class="row flexbox showContent">' +
-			'				<div class="cell task">Content Entry</div>' +
-			'				<div class="cell taskNumber">' + contentCount +
-			'				</div>' +
-			'			</div>' +
-			'			<div class="row flexbox showProject">' +
-			'				<div class="cell task">Projects Completed</div>' +
-			'				<div class="cell taskNumber">' + projectCount +
-			'				</div>' +
-			'			</div>' +
-			'		</div>' +
-			'	</div>' +
-			'	<!-- End rightCol -->' +
-            '</div>'
-            //END OF HTML TEMPLATE
-            ).appendTo("#dashboard #topRow");
+			  //Update Top Row Stats
+				$("#topRow .showEssentials").html(essCount);
+				$("#topRow .showStarter").html(strCount);
+				$("#topRow .showProd .taskNumber").html(prodCount);
+				$("#topRow .showTlink .taskNumber").html(tlinkCount);
+				$("#topRow .showContent .taskNumber").html(contentCount);
+				$("#topRow .showShowProject .taskNumber").html(projectCount);
 		} else {
-		  $("<h2 style='text-align: center; min-width: 100%;'>No Results Found</h2>").appendTo("#dashboard #topRow");
+				alert("No results found");
+				$("#topRow .showEssentials").html("0");
+				$("#topRow .showStarter").html("0");
+				$("#topRow .showProd .taskNumber").html("0");
+				$("#topRow .showTlink .taskNumber").html("0");
+				$("#topRow .showContent .taskNumber").html("0");
+				$("#topRow .showShowProject .taskNumber").html("0");
 		}					
 		});
-	});
-});
+}
 									
 </script>
-
-
-
 
 						<form id="dateFilter" action="" method="POST">
 								<input type="date" id="startDate" />
@@ -202,23 +165,66 @@ $(document).ready(function(){
 							<i class="fas fa-angle-down"></i>
 						</a>
 					</dt>
-					<script>
-						let user = "<%= currentUser.firstName %>";
-						$(document).ready(function () {
-							if (user === "Justin") {
-
-							}
-						})
-					</script>
 					<dd>
+
+<script>
+//Dashboard Name Drop down and Select
+$(document).ready(function(){
+	$("#allTeamMembers > li > a").on("click", function(){
+		$("h4.activeUser").text($(this).text());
+		if($(this).hasClass("checked")){
+			$(this).removeClass("checked");
+			$(this).next().find("a").removeClass("checked");
+			$(this).next().find("input").prop("checked", false);
+		} else {
+			$(this).addClass("checked");
+			$(this).next().find("a").addClass("checked");
+			$(this).next().find("input").prop("checked", true);
+		}
+		getDashboardData();
+	  });
+	  $("#allTeamMembers ul a").on("click", function(){
+		$("h4.activeUser").text($(this).text());
+		if($(this).hasClass("checked")){
+			$(this).removeClass("checked");
+			$(this).next().prop("checked", false);
+		} else {
+			$(this).addClass("checked");
+			$(this).next().prop("checked", true);
+		}
+		getDashboardData();
+	  });
+});
+</script>
+
 						<ul id="allTeamMembers">
-							<li><a>All</a></li>
+							<li class="all"><a>All</a></li>
+							<% var teamsArray = []; %>
 							<% users.forEach(function(user){ %>
-								<% if (JSON.stringify(currentUser._id) === JSON.stringify(user._id)) { %>
-									<li><%= user.firstName %><input type="checkbox" name="users" value="<%= user._id %>" checked></li>
-								<% } else { %>
-									<li><%= user.firstName %><input type="checkbox" name="users" value="<%= user._id %>"></li>
+								<% if(teamsArray.indexOf(user.team) === -1) { %>
+									<% 	teamsArray.push(user.team) %>
 								<% } %>
+							<% }); %>
+							<% teamsArray = (teamsArray).sort() %>
+							<% teamsArray.forEach(function(team) { %>
+							<li><a href="#"><%= team %></a><ul class="submenu">
+								<% users.forEach(function(user){ %>
+									<% if(user.team === team){ %>
+										<% if (JSON.stringify(currentUser._id) === JSON.stringify(user._id)) { %>
+										<li>
+											<a href="#" class="checked" onclick="return false;"><%= user.firstName %></a>
+											<input type="checkbox" name="users" value="<%= user._id %>" checked>
+										</li>
+										<% } else { %>
+										<li>
+											<a href="#" class="" onclick="return false;"><%= user.firstName %></a>
+											<input type="checkbox" name="users" value="<%= user._id %>">
+										</li>
+										<% } %>
+									<% } %>
+								<% }); %>
+							</ul>
+							</li>
 							<% }); %>
 						</ul>
 					</dd>

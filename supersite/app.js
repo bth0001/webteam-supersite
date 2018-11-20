@@ -118,7 +118,7 @@ app.use("/presence-url-tracker", presenceUrlTrackerRouter);
 app.use("/blueprint-generator", blueprintGeneratorRouter);
 app.use("/checklist", checklistRouter);
 app.use("/projects", projectsRouter);
-app.use("/api", apiTrackerRoutes);
+app.use("/api", apiTracker);
 app.use("/projects/:id/projectComments", projectCommentsRouter);
 // ----For Route Files----end
 
