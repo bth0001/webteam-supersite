@@ -1,5 +1,8 @@
 <% include partials/header %>
 <script src="/scripts/dashboard.js"></script>
+
+
+
 <div id="overview" class="center">
 	<h1>
 		<%= currentUser.team %> Dashboard</h1>
@@ -96,17 +99,17 @@
 							<% }); %>
 							<% teamsArray = (teamsArray).sort() %>
 							<% teamsArray.forEach(function(team) { %>
-							<li><a href="#"><%= team %></a><ul class="submenu">
+							<li><a href="javascript:void(0);"><%= team %></a><ul class="submenu">
 								<% users.forEach(function(user){ %>
 									<% if(user.team === team){ %>
 										<% if (JSON.stringify(currentUser._id) === JSON.stringify(user._id)) { %>
 										<li>
-											<a href="#" class="checked" onclick="return false;"><%= user.firstName %></a>
+											<a href="javascript:void(0);" class="checked" onclick="return false;"><%= user.firstName %></a>
 											<input type="checkbox" name="users" value="<%= user._id %>" checked>
 										</li>
 										<% } else { %>
 										<li>
-											<a href="#" class="" onclick="return false;"><%= user.firstName %></a>
+											<a href="javascript:void(0);" class="" onclick="return false;"><%= user.firstName %></a>
 											<input type="checkbox" name="users" value="<%= user._id %>">
 										</li>
 										<% } %>

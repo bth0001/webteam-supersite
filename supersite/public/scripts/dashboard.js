@@ -33,6 +33,16 @@ $(document).ready(function(){
                         }
                         getDashboardData();
                       });
+
+                    // Toggle for accordion on dashboard
+                    $("#bottomRow").on("click", "a", function() {
+                        var elem = $(this);
+                            if (elem.is( "[class*='arrow']")){
+                                $(this).toggleClass("open");
+                                $(this).parent().next().slideToggle(1000);
+                            }
+                        });
+
                 });
                 
                 // Grabs information from database depending on user selection
@@ -104,8 +114,7 @@ $(document).ready(function(){
                                     } 
                                 }); 
                                 taskArray.forEach(function(name) {
-                                    $('<div class="dashboardAccordion"><h2>'+name+'</h2>').appendTo("#bottomRow .widget");
-                                            $('    <div class="table">' +
+                                    $('<div class="dashboardAccordion"><h2>'+name+'</h2><div class="table">' +
                                             '    <div class="row title flexbox">' +
                                             '        <div class="cell url">Website URL</div>' +
                                             '        <div class="cell actNumber">Account Number</div>' +
@@ -123,7 +132,7 @@ $(document).ready(function(){
                                                     '       <div class="cell name">'+dataoutput.designer+'</div>' +
                                                     '            <div class="cell name">'+dataoutput.onboarder+'</div>' +
                                                     '            <div class="cell date">'+dataoutput.created_at+'</div>' +
-                                                    '            <div class="cell arrow"><i class="fas fa-angle-down"></i></div>' +
+                                                    '            <div class="cell arrow"><a class="arrow" href="javascript:void(0);"><i class="fas fa-angle-down"></a></i></div>' +
                                                     '            <div class="expanded" style="display:none">' +
                                                     '                <p><strong>Home Screenshot:</strong> <a href="" target="_blank">'+dataoutput.homeSS+'</a></p>' +
                                                     '                <p><strong>Interior Screenshot:</strong> <a href="" target="_blank">'+dataoutput.interiorSS+'</a></p>' +
