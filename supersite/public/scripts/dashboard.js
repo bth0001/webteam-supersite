@@ -10,7 +10,6 @@ $(document).ready(function() {
     });
     // Team/user dropdown to filter data
     $("#allTeamMembers > li > a").on("click", function() {
-        $("h4.activeUser").text($(this).text());
         if ($(this).hasClass("checked")) {
             $(this).removeClass("checked");
             $(this).next().find("a").removeClass("checked");
@@ -20,6 +19,7 @@ $(document).ready(function() {
             $(this).next().find("a").addClass("checked");
             $(this).next().find("input").prop("checked", true);
         }
+        assignNames();
         getDashboardData();
     });
     $("#allTeamMembers ul a").on("click", function() {
@@ -31,15 +31,33 @@ $(document).ready(function() {
             $(this).addClass("checked");
             $(this).next().prop("checked", true);
         }
+        assignNames();
         getDashboardData();
     });
+    
+    function assignNames(){
+        var activeArray = [];
+        var count = 0;
+        $("#allTeamMembers ul a").each(function() {
+            if($(this).hasClass("checked")){
+                var name = $(this).text();
+                activeArray.push(name);
+                count++;
+            } 
+            if(count > 0){
+                $("h4.activeUser").text(activeArray.join(", "));
+            } else {
+                $("h4.activeUser").text("No User Selected");
+            }
+        });
+    }
 
     // Toggle for accordion on dashboard
     $("#bottomRow").on("click", "a", function() {
         var elem = $(this);
         if (elem.is("[class*='arrow']")) {
             $(this).toggleClass("open");
-            $(this).parent().next().slideToggle(1000);
+            $(this).parent().next().slideToggle(300);
         }
     });
 
