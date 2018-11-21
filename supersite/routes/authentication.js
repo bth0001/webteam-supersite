@@ -123,7 +123,8 @@ router.post("/edit-profile", isLoggedIn, upload.single("image"), function (
       skills,
       team,
       quote,
-      funFacts
+      funFacts,
+      birthday
     } = req.body;
     // validate
     if (!email || !firstName || !lastName) {
@@ -142,6 +143,7 @@ router.post("/edit-profile", isLoggedIn, upload.single("image"), function (
     sanitizedUser.skills = skills;
     sanitizedUser.quote = quote;
     sanitizedUser.funFacts = funFacts;
+    sanitizedUser.birthday = birthday;
     // don't forget to save!
     sanitizedUser.setPassword(req.body.password, function () {
       sanitizedUser.save(function (err) {

@@ -33,6 +33,11 @@ const projectSchema = new mongoose.Schema(
         email: String
       }
     ],
+    actionItem: [
+      {
+        item: String
+      }
+    ],
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,

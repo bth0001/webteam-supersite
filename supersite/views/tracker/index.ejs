@@ -98,7 +98,7 @@
 							<div class="cell actNumber">Account Number</div>
 							<div class="cell name">Developer</div>
 							<div class="cell name">Designer</div>
-							<div class="cell name">OnBoarder</div>
+
 							<div class="cell date">Date</div>
 							<div class="cell arrow"></div>
 						</div>
@@ -113,13 +113,10 @@
 								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>">
 										<%= tracked.acctNum %></a></div>
 								<div class="cell name">
-									<%= tracked.developer %>
+									<%= tracked.author.firstName%>
 								</div>
 								<div class="cell name">
 									<%= tracked.designer %>
-								</div>
-								<div class="cell name">
-									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
 									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
@@ -189,7 +186,6 @@
 							<div class="cell actNumber">Account Number</div>
 							<div class="cell name">Developer</div>
 							<div class="cell name">Designer</div>
-							<div class="cell name">OnBoarder</div>
 							<div class="cell date">Date</div>
 							<div class="cell arrow"></div>
 						</div>
@@ -204,19 +200,19 @@
 								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>">
 										<%= tracked.acctNum %></a></div>
 								<div class="cell name">
-									<%= tracked.developer %>
+									<%= tracked.author.firstName%>
 								</div>
 								<div class="cell name">
 									<%= tracked.designer %>
-								</div>
-								<div class="cell name">
-									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
 									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
+									<p><strong>OnBoarder:</strong>
+										<%= tracked.onboarder %>
+									</p>
 									<p><strong>Starter Template:</strong>
 										<%= tracked.starterTemplate %>
 									</p>
@@ -273,7 +269,7 @@
 							<div class="cell actNumber">Account Number</div>
 							<div class="cell name">Developer</div>
 							<div class="cell name">Designer</div>
-							<div class="cell name">OnBoarder</div>
+
 							<div class="cell date">Date</div>
 							<div class="cell arrow"></div>
 						</div>
@@ -288,19 +284,19 @@
 								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>">
 										<%= tracked.acctNum %></a></div>
 								<div class="cell name">
-									<%= tracked.developer %>
+									<%= tracked.author.firstName%>
 								</div>
 								<div class="cell name">
 									<%= tracked.designer %>
-								</div>
-								<div class="cell name">
-									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
 									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
+									<p><strong>OnBoarder:</strong>
+										<%= tracked.onboarder %>
+									</p>
 									<p><strong>Build Package:</strong>
 										<%= tracked.buildPkg %>
 									</p>
@@ -360,7 +356,7 @@
 							<div class="cell actNumber">Account Number</div>
 							<div class="cell name">Developer</div>
 							<div class="cell name">Designer</div>
-							<div class="cell name">OnBoarder</div>
+
 							<div class="cell date">Date</div>
 							<div class="cell arrow"></div>
 						</div>
@@ -375,19 +371,19 @@
 								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>">
 										<%= tracked.acctNum %></a></div>
 								<div class="cell name">
-									<%= tracked.developer %>
+									<%= tracked.author.firstName%>
 								</div>
 								<div class="cell name">
 									<%= tracked.designer %>
-								</div>
-								<div class="cell name">
-									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
 									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
+									<p><strong>OnBoarder:</strong>
+										<%= tracked.onboarder %>
+									</p>
 									<p><strong>Build Package:</strong>
 										<%= tracked.buildPkg %>
 									</p>
@@ -447,7 +443,7 @@
 							<div class="cell actNumber">Account Number</div>
 							<div class="cell name">Developer</div>
 							<div class="cell name">Designer</div>
-							<div class="cell name">OnBoarder</div>
+
 							<div class="cell date">Date</div>
 							<div class="cell arrow"></div>
 						</div>
@@ -462,19 +458,19 @@
 								<div class="cell actNumber"><a href="/tracker/<%= tracked._id %>">
 										<%= tracked.acctNum %></a></div>
 								<div class="cell name">
-									<%= tracked.developer %>
+									<%= tracked.author.firstName%>
 								</div>
 								<div class="cell name">
 									<%= tracked.designer %>
-								</div>
-								<div class="cell name">
-									<%= tracked.onboarder %>
 								</div>
 								<div class="cell date">
 									<%= moment(tracked.created_at).format('MMM DD, YYYY') %>
 								</div>
 								<div class="cell arrow" data-panel-id="panel2"><i class="fas fa-angle-down"></i></div>
 								<div class="expanded" style="display:none">
+									<p><strong>OnBoarder:</strong>
+										<%= tracked.onboarder %>
+									</p>
 									<p><strong>Build Package:</strong>
 										<%= tracked.buildPkg %>
 									</p>

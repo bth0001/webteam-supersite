@@ -27,8 +27,13 @@
               <input type="text" name="email" placeholder="Email" value="<%= currentUser.email %>">
             </label>
             <label for="password"><span>Password:</span><input type="password" name="password" placeholder="Password"></label>
-            <label for="quote"><span>Quote:</span><input type="text" name="quote" placeholder="Quote"></label>
-            <label for="funFacts"><span>Fun Facts:</span><input type="text" name="funFacts" placeholder="Fun Facts"></label>
+            <label for="birthday"><span>Birthday:</span>
+              <input type="date" name="birthday" placeholder="Birthday" value="<%= moment(currentUser.birthday).format('YYYY-MM-DD') %>">
+            </label>
+            <label for="quote"><span>Quote:</span><input type="text" name="quote" value="<%= currentUser.quote %>"
+                placeholder="Quote"></label>
+            <label for="funFacts"><span>Fun Facts:</span><input type="text" value="<%= currentUser.funFacts %>" name="funFacts"
+                placeholder="Fun Facts"></label>
             <label for="team"><span>Team:</span>
               <select name="team">
                 <option value="<%= currentUser.team %>">

@@ -49,6 +49,14 @@
             <%= user.quote %>
           </p>
         </div>
+        <div class="detTitle">
+          <h6>Birthday:</h6>
+        </div>
+        <div class="details">
+          <p>
+            <%= moment(user.birthday).format("MMM DD, YYYY") %>
+          </p>
+        </div>
       </div>
     </div>
     <div class="summary">

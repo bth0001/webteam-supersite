@@ -30,9 +30,6 @@ const UserSchema = new mongoose.Schema({
   team: {
     type: String
   },
-  role: {
-    type: String
-  },
   isAdmin: {
     type: Boolean,
     default: false
@@ -40,6 +37,10 @@ const UserSchema = new mongoose.Schema({
   isMaster: {
     type: Boolean,
     default: false
+  },
+  birthday: {
+    type: Date,
+    default: null
   },
   resetPasswordToken: String,
   resetPasswordExpires: Date,

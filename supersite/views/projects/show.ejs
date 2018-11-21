@@ -78,6 +78,15 @@
             <p>
                 <%= project.description %>
             </p>
+            <h4>Action Items:</h4>
+            <ol style="list-style: decimal">
+                <% for(let i = 0; i < project.actionItem.length; i++) { %>
+                <li>
+                    <%= project.actionItem[i].item %>
+                </li>
+                <% } %>
+            </ol>
+
             <p><em>Created By: <strong>
                         <%= project.author.firstName %></strong>
                     <span style="float: right;"><strong>Requested By:</strong>

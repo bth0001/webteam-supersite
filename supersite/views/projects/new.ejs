@@ -1,18 +1,18 @@
 <% include ../partials/header %>
 <style>
-    .taskTable {
+    .taskTable, .itemTable {
     padding-bottom: 25px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.taskTable .header {
+.taskTable .header, .itemTable .header {
     font-weight: 400;
     padding: 5px;
     flex: 100%;
 }
-.task {
+.task, .item {
     padding-bottom: 25px;
     width: 100%;
     display: flex;
@@ -40,10 +40,10 @@
                                 <input type="text" name="requestedBy" placeholder="Requested By">
                             </label>
                             <label for="deadline"><span>Deadline:</span>
-                                <input type="date" name="deadline">
+                                <input type="datetime-local" name="deadline">
                             </label>
                             <label for="delivery"><span>Delivery:</span>
-                                <input type="date" name="delivery">
+                                <input type="datetime-local" name="delivery">
                             </label>
                             <label for="status"><span style="margin: 0 0 5px; display: block;">Project Status:</span>
                                 <select name="status">
@@ -59,6 +59,26 @@
                             <label for="description" class="labelNotes"><span>Project Description:</span>
                                 <textarea rows="6" name="description" placeholder="Project Description"></textarea>
                             </label>
+                        </section>
+                        <section style="width: 100%;">
+                            <div id="item">
+                                <div class="itemTable">
+                                    <div class="header flexbox">
+                                        <div class="cell type">Action Items</div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="row flexbox" style="flex: 100%; padding: 5px 10px;">
+                                            <label name="actionItem">
+                                                <input type="text" placeholder="Action Item" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="itemButtons flexbox flexRight">
+                                <button type="button" id="addItem">Add <i class="fas fa-plus"></i></button>
+                                <button type="button" id="removeItem">Remove <i class="fas fa-minus"></i></button>
+                            </div>
                         </section>
                         <section style="width: 100%;">
                             <div id="task">
@@ -85,14 +105,11 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="taskButtons flexbox flexRight">
                                 <button type="button" id="addTask">Add <i class="fas fa-plus"></i></button>
                                 <button type="button" id="removeTask">Remove <i class="fas fa-minus"></i></button>
                             </div>
                         </section>
-
-
                         <button type="submit">Create Project</button>
                     </div>
                 </form>
@@ -122,6 +139,24 @@
             } else {
                 var newTaskInput = $(".task .row:last-of-type");
                 newTaskInput.remove();
+            };
+        });
+        $("div.item div.row:first-of-type input").attr("name", "actionItem[" + count + "][item]");
+
+        $("#addItem").click(function () {
+            count++;
+            var newItemInput = $(".item .row:last-of-type");
+            newItemInput.clone().find("input:text").val("").end().appendTo(".item");
+            $("div.item div.row:last-of-type input").attr("name", "actionItem[" + count + "][item]");
+        });
+
+        $("#removeItem").click(function () {
+            var itemCount = $("div.item div.row").length;
+            if (itemCount === 1) {
+                alert("You cannot remove the only item");
+            } else {
+                var newItemInput = $(".item .row:last-of-type");
+                newItemInput.remove();
             };
         });
     });

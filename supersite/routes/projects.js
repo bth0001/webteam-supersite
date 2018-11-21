@@ -29,22 +29,23 @@ router.get("/done", function (req, res) {
 //POST new Project
 router.post("/", function (req, res) {
   //Get Data from form
-  const { name, status, date, desc, owners, deadline, delivery, requestedBy } = req.body;
+  const { name, status, date, description, owners, deadline, delivery, requestedBy, actionItem } = req.body;
   var author = {
     id: req.user._id,
     firstName: req.user.firstName,
     email: req.user.email
   };
   var newProject = {
-    name: name,
-    status: status,
-    date: date,
-    description: desc,
-    author: author,
-    deadline: deadline,
-    delivery: delivery,
-    owners: owners,
-    requestedBy: requestedBy
+    name,
+    status,
+    date,
+    description,
+    author,
+    deadline,
+    delivery,
+    owners,
+    requestedBy,
+    actionItem
   };
   Project.create(newProject, function (err, newlyCreatedProject) {
     if (err) {
@@ -76,7 +77,7 @@ router.get("/:id", function (req, res) {
         console.log(err);
       } else {
         console.log(foundProject);
-        //render show template with that campground
+        //render show template with that project
         res.render("projects/show", { project: foundProject, moment: moment });
       }
     });
@@ -130,8 +131,6 @@ router.put("/:id", function (req, res) {
     });
   });
 });
-
-///////////////////////////
 
 //Destroy Route
 router.delete("/:id", middleware.checkProjectOwnership, function (req, res) {

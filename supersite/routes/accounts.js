@@ -102,7 +102,7 @@ router.post("/:id", upload.single("image"), function (req, res) {
       req.flash("error", "No account found");
       return res.redirect("/accounts");
     }
-    const { email, firstName, lastName, bio, socials, skills, team, quote, funFacts } = req.body;
+    const { email, firstName, lastName, bio, socials, skills, team, quote, funFacts, birthday } = req.body;
     if (req.body.adminCode === "true") {
       sanitizedUser.isAdmin = true;
       sanitizedUser.isMaster = false;
@@ -139,6 +139,7 @@ router.post("/:id", upload.single("image"), function (req, res) {
     sanitizedUser.skills = skills;
     sanitizedUser.quote = quote;
     sanitizedUser.funFacts = funFacts;
+    sanitizedUser.birthday = birthday;
     // don't forget to save!
     sanitizedUser.setPassword(req.body.password, function () {
       sanitizedUser.save(function (err) {

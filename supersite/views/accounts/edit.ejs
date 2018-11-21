@@ -66,6 +66,9 @@
                   </option>
                 </select>
               </label>
+              <label for="birthday"><span>Birthday:</span>
+                <input type="date" name="birthday" placeholder="Birthday" value="<%= moment(user.birthday).format('YYYY-MM-DD') %>">
+              </label>
             </section>
             <section class="flexbox flexJustify">
               <label for="quote" style="flex: 48%;"><span>Quote:</span>

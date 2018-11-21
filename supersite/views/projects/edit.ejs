@@ -96,6 +96,57 @@
               <script>
                 $(document).ready(function () {
                   var count = 0;
+                  $("div.item label input:first-of-type").attr("name", "project[actionItem][" + count + "][item]");
+
+                  $("#addItem").click(function () {
+                    count++;
+                    var newItemInput = $(".item:last-of-type");
+                    newItemInput.clone().find("input:text").val("").end().appendTo(".itemTable");
+                    $("div.item:last-of-type input").attr("name", "project[actionItem][" + count + "][item]");
+                  });
+
+                  $("#removeItem").click(function () {
+                    var itemCount = $("div.item").length;
+                    if (itemCount === 1) {
+                      alert("You cannot remove the only item");
+                    } else {
+                      var newItemInput = $(".item:last-of-type");
+                      newItemInput.remove();
+                    };
+                  });
+                });
+              </script>
+              <section style="width: 100%;">
+                <div id="item">
+                  <div class="itemTable">
+                    <div class="header flexbox">
+                      <div class="cell type">Action Items</div>
+                    </div>
+                    <% if(project.actionItem.length === 0){ %>
+                    <div class="item flexbox row" style="padding: 5px 10px">
+                      <label name="actionItem">
+                        <input type="text" placehold="Action Item" />
+                      </label>
+                    </div>
+                    <% } %>
+                    <% for (i=0; i < project.actionItem.length; i++) { %>
+                    <div class="item flexbox row" style="padding: 5px 10px">
+                      <label name="actionItem">
+                        <input type="text" value="<%= project.actionItem[i].item %>" />
+                      </label>
+                    </div>
+                    <% } %>
+                  </div>
+                </div>
+                <div class="itemButtons flexbox flexRight">
+                  <button type="button" id="addItem">Add <i class="fas fa-plus"></i></button>
+                  <button type="button" id="removeItem">Remove <i class="fas fa-minus"></i></button>
+                </div>
+              </section>
+
+              <script>
+                $(document).ready(function () {
+                  var count = 0;
                   $("div.task:first-of-type select.owner").attr("name", "project[owners][" + count + "][firstName]");
 
                   $("#addTask").click(function () {
@@ -142,23 +193,24 @@
                     <% } %>
                   </div>
                 </div>
-            </div>
+                <div class="taskButtons flexbox flexRight">
+                  <button type="button" id="addTask">Add <i class="fas fa-plus"></i></button>
+                  <button type="button" id="removeTask">Remove <i class="fas fa-minus"></i></button>
+                </div>
 
-            <div class="taskButtons flexbox flexRight">
-              <button type="button" id="addTask">Add <i class="fas fa-plus"></i></button>
-              <button type="button" id="removeTask">Remove <i class="fas fa-minus"></i></button>
             </div>
             <button type="submit">Update Project!</button>
-            </section>
-
           </div>
-
+          </section>
 
       </div>
 
-      </form>
+
     </div>
+
+    </form>
   </div>
+</div>
 </div>
 </div>
 <script>
@@ -167,6 +219,7 @@
     var count = 0;
     $("div.task").each(function () {
       $(this).find(".owners").attr("name", "project[owners][" + count + "][firstName]");
+      $(this).find(".actionItemClass").attr("name", "project[actionItem][" + count + "][item]");
       count++;
     });
   }
