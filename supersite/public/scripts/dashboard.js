@@ -1,15 +1,15 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var date = new Date();
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
     var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     $("#startDate").val(firstDay.toISOString().substr(0, 10));
     $("#endDate").val(lastDay.toISOString().substr(0, 10));
     getDashboardData();
-    $("#dateFilter input, #allTeamMembers input").on("change", function() {
+    $("#dateFilter input, #allTeamMembers input").on("change", function () {
         getDashboardData();
     });
     // Team/user dropdown to filter data
-    $("#allTeamMembers > li > a").on("click", function() {
+    $("#allTeamMembers > li > a").on("click", function () {
         if ($(this).hasClass("checked")) {
             $(this).removeClass("checked");
             $(this).next().find("a").removeClass("checked");
@@ -22,7 +22,7 @@ $(document).ready(function() {
         assignNames();
         getDashboardData();
     });
-    $("#allTeamMembers ul a").on("click", function() {
+    $("#allTeamMembers ul a").on("click", function () {
         $("h4.activeUser").text($(this).text());
         if ($(this).hasClass("checked")) {
             $(this).removeClass("checked");
@@ -34,17 +34,17 @@ $(document).ready(function() {
         assignNames();
         getDashboardData();
     });
-    
-    function assignNames(){
+
+    function assignNames() {
         var activeArray = [];
         var count = 0;
-        $("#allTeamMembers ul a").each(function() {
-            if($(this).hasClass("checked")){
+        $("#allTeamMembers ul a").each(function () {
+            if ($(this).hasClass("checked")) {
                 var name = $(this).text();
                 activeArray.push(name);
                 count++;
-            } 
-            if(count > 0){
+            }
+            if (count > 0) {
                 $("h4.activeUser").text(activeArray.join(", "));
             } else {
                 $("h4.activeUser").text("No User Selected");
@@ -53,7 +53,7 @@ $(document).ready(function() {
     }
 
     // Toggle for accordion on dashboard
-    $("#bottomRow").on("click", "a", function() {
+    $("#bottomRow").on("click", "a", function () {
         var elem = $(this);
         if (elem.is("[class*='arrow']")) {
             $(this).toggleClass("open");
@@ -72,7 +72,7 @@ function getDashboardData() {
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     var today = now.getFullYear() + "-" + (month) + "-" + (day);
-    $("#allTeamMembers input").each(function() {
+    $("#allTeamMembers input").each(function () {
         if (this.checked) {
             userList.push($(this).val());
         }
@@ -81,7 +81,7 @@ function getDashboardData() {
         startDate: startDateInput,
         endDate: endDateInput,
         users: userList
-    }, function(data, status) {
+    }, function (data, status) {
         $("#dashboard #bottomRow .widget").empty();
         $("#bottomRow .row.data").remove();
         var essCount, strCount, prodCount, tlinkCount, contentCount, projectCount;
@@ -126,41 +126,40 @@ function getDashboardData() {
 
             //Create HTML and append to Bottom Section
             var taskArray = [];
-            data.forEach(function(taskName) {
+            data.forEach(function (taskName) {
                 if (taskArray.indexOf(taskName.buildPkg) === -1) {
                     taskArray.push(taskName.buildPkg)
                 }
             });
-            taskArray.forEach(function(name) {
-                $('<div class="dashboardAccordion"><h2>' + name + '</h2><div class="table">' +
-                    '    <div class="row title flexbox">' +
-                    '        <div class="cell url">Website URL</div>' +
-                    '        <div class="cell actNumber">Account Number</div>' +
-                    '        <div class="cell name">Designer</div>' +
-                    '        <div class="cell name">OnBoarder</div>' +
-                    '        <div class="cell date">Date</div>' +
-                    '        <div class="cell arrow"></div>' +
-                    '    </div></div></div>').appendTo("#bottomRow .widget");
+            taskArray.forEach(function (name) {
+                $(`<div style="display: none;" class="dashboardAccordion" id="dash${name}"><h2>${name}</h2><div class="table">
+                    <div class="row title flexbox">
+                    <div class="cell url">Website URL</div>
+                    <div class="cell actNumber">Account Number</div>
+                    <div class="cell name">Developer</div>
+                    <div class="cell name">Designer</div>
+                    <div class="cell date">Date</div>
+                    <div class="cell arrow"></div>
+                    </div></div></div>`).appendTo("#bottomRow .widget");
                 //loop through data
-                data.forEach(function(dataoutput) {
+                data.forEach(function (dataoutput) {
                     if (name.toString() === dataoutput.buildPkg.toString()) {
-                        $('<div class="row data flexbox">' +
-                            '<div class="cell url"><a href="" target="_blank">' + dataoutput.domain + '</a></div>' +
-                            '   <div class="cell actNumber">' + dataoutput.acctNum + '</div>' +
-                            '       <div class="cell name">' + dataoutput.designer + '</div>' +
-                            '            <div class="cell name">' + dataoutput.onboarder + '</div>' +
-                            '            <div class="cell date">' + dataoutput.created_at + '</div>' +
-                            '            <div class="cell arrow"><a class="arrow" href="javascript:void(0);"><i class="fas fa-angle-down"></a></i></div>' +
-                            '            <div class="expanded" style="display:none">' +
-                            '                <p><strong>Home Screenshot:</strong> <a href="" target="_blank">' + dataoutput.homeSS + '</a></p>' +
-                            '                <p><strong>Interior Screenshot:</strong> <a href="" target="_blank">' + dataoutput.interiorSS + '</a></p>' +
-                            '                <p><strong>Special Features:</strong>' + dataoutput.specialFeatures + '</p>' +
-                            '                <p><strong>CSS Path:</strong>' + dataoutput.cssPath + '</p>' +
-                            '                <p><strong>Task:</strong></p>                    ' +
-                            '                <p><strong>Notes:</strong>' + dataoutput.notes + '</p>' +
-                            '            </div>' +
-                            '        </div>'
-                        ).appendTo("#bottomRow .dashboardAccordion:last-of-type .table");
+                        $(`<div class="row data flexbox">
+                            <div class="cell url"><a href="${dataoutput.domain}" target="_blank">${dataoutput.domain}</a></div>
+                            <div class="cell actNumber">${dataoutput.acctNum}</div>
+                            <div class="cell name">${dataoutput.author.firstName}</div>
+                            <div class="cell name">${dataoutput.designer}</div>
+                            <div class="cell date">${moment(dataoutput.created_at).format("MMM DD, YYYY")}</div>
+                            <div class="cell arrow"><a class="arrow" href="javascript:void(0);"><i class="fas fa-angle-down"></a></i></div>
+                            <div class="expanded" style="display:none">
+                                <p><strong>Home Screenshot:</strong> <a href="${dataoutput.homeSS}" target="_blank">${dataoutput.homeSS}</a></p>
+                                <p><strong>Interior Screenshot:</strong> <a href="${dataoutput.interiorSS}" target="_blank">${dataoutput.interiorSS}</a></p>
+                                <p><strong>Special Features:</strong>${dataoutput.specialFeatures}</p>
+                                <p><strong>CSS Path:</strong>${dataoutput.cssPath}</p>
+                                <p><strong>Task:</strong></p>
+                                <p><strong>Notes:</strong>${dataoutput.notes}</p>
+                            </div>
+                            </div>`).appendTo("#bottomRow .dashboardAccordion:last-of-type .table");
                     }
                 });
             });
