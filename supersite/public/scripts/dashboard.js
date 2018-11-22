@@ -92,11 +92,11 @@ function getDashboardData() {
             for (var key in data) {
                 var value = data[key];
                 // Count Essential
-                if (value.buildPkg === "Essential") {
+                if (value.buildPkg === "Essential" && !value.archive) {
                     essCount++
                 }
                 // Count Starter
-                if (value.buildPkg === "Starter") {
+                if (value.buildPkg === "Starter" && !value.archive) {
                     strCount++
                 }
                 // Count Prod Changes
@@ -143,7 +143,7 @@ function getDashboardData() {
                     </div></div></div>`).appendTo("#bottomRow .widget");
                 //loop through data
                 data.forEach(function (dataoutput) {
-                    if (name.toString() === dataoutput.buildPkg.toString()) {
+                    if (name.toString() === dataoutput.buildPkg.toString() && !dataoutput.archive) {
                         $(`<div class="row data flexbox">
                             <div class="cell url"><a href="${dataoutput.domain}" target="_blank">${dataoutput.domain}</a></div>
                             <div class="cell actNumber">${dataoutput.acctNum}</div>
