@@ -102,14 +102,14 @@
                     <% if(project.actionItem.length === 0){ %>
                     <div class="item flexbox row" style="padding: 5px 10px">
                       <label name="actionItem">
-                        <input type="text" placehold="Action Item" />
+                        <input class="actionItem" type="text" placehold="Action Item" />
                       </label>
                     </div>
                     <% } %>
                     <% for (i=0; i < project.actionItem.length; i++) { %>
                     <div class="item flexbox row" style="padding: 5px 10px">
                       <label name="actionItem">
-                        <input type="text" value="<%= project.actionItem[i].item %>" />
+                        <input class="actionItem" type="text" value="<%= project.actionItem[i].item %>" />
                       </label>
                     </div>
                     <% } %>
@@ -172,7 +172,10 @@
     var count = 0;
     $("div.task").each(function () {
       $(this).find(".owners").attr("name", "project[owners][" + count + "][firstName]");
-      $(this).find(".actionItemClass").attr("name", "project[actionItem][" + count + "][item]");
+      count++;
+    });
+    $("div.item").each(function () {
+      $(this).find(".actionItem").attr("name", "project[actionItem][" + count + "][item]");
       count++;
     });
   }
