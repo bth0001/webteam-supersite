@@ -1,9 +1,161 @@
 <% include ../partials/header %>
 <div id="overview" class="center">
-  <h1>Edit Version </h1>
-  <div class="flexbox flexCenter">
-    <a href="/versions/new" class="myBtn" id="myBtn">New Versions<i class="fas fa-plus"></i></a>
+  <h1>Edit Version</h1>
+  <a href="/versions/help" target="_blank">Version Help</a>
+
+</div>
+<div id="dashboard">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form class="form profileForm" onsubmit="countTaskTypes();" class="form profileForm" action="/versions/<%= version._id %>?_method=PUT"
+          method="POST">
+          <section class="header flexbox flexJustify">
+            <h2>Editing Version
+              <%= version.version %>
+            </h2>
+          </section>
+          <div class="wrapper">
+            <section class="flexbox flexJustify">
+              <label for="name"><span style="margin: 0 0 5px; display: block;">Version Number:</span>
+                <input type="number" name="version[version]" placeholder="Version Number" value="<%= version.version %>">
+              </label>
+              <label for="status"><span style="margin: 0 0 5px; display: block;">Version Status:</span>
+                <select name="version[status]">
+                  <% if(version.status === "Released"){ %>
+                  <option value="Released" selected>Released</option>
+                  <option value="Not Released">Not Released</option>
+                  <% } else { %>
+                  <option value="Released">Released</option>
+                  <option value="Not Released" selected>Not Released</option>
+                  <% } %>
+                </select>
+              </label>
+            </section>
+            <section style="width: 100%;">
+              <label for="description" class="labelNotes"><span>Version Description:</span>
+                <textarea rows="4" name="version[description]" placeholder="Project Description"><%= version.description %></textarea>
+              </label>
+            </section>
+            <section style="width: 100%;">
+              <div id="item">
+                <div class="itemTable">
+                  <div class="header flexbox">
+                    <div class="cell type">Version Items</div>
+                  </div>
+                  <% if(version.versionItems.length === 0){ %>
+                  <div class="item flexbox row" style="padding: 5px 10px">
+                    <label name="versionItem">
+                      <input class="versionItem" type="text" placehold="Version Item" />
+                    </label>
+                  </div>
+                  <% } %>
+                  <% for (i=0; i < version.versionItems.length; i++) { %>
+                  <div class="item flexbox row" style="padding: 5px 10px">
+                    <label name="versionItem">
+                      <input class="versionItem" type="text" value="<%= version.versionItems[i].item %>" />
+                    </label>
+                  </div>
+                  <% } %>
+                </div>
+              </div>
+              <div class="itemButtons flexbox flexRight">
+                <button type="button" id="addItem">Add <i class="fas fa-plus"></i></button>
+                <button type="button" id="removeItem">Remove <i class="fas fa-minus"></i></button>
+              </div>
+            </section>
+            <section style="width: 100%;">
+              <div id="task">
+                <div class="taskTable">
+                  <div class="header flexbox">
+                    <div class="cell type">Version Bugs</div>
+                  </div>
+                  <% if(version.bugs.length === 0){ %>
+                  <div class="task flexbox row" style="padding: 5px 10px">
+                    <label name="bugs">
+                      <input class="bugs" type="text" placeholder="Version Bugs" />
+                    </label>
+                  </div>
+                  <% } %>
+                  <% for (i=0; i < version.bugs.length; i++) { %>
+                  <div class="task flexbox row" style="padding: 5px 10px">
+                    <label name="bugs">
+                      <input class="bugs" type="text" value="<%= version.bugs[i].item %>" />
+                    </label>
+                  </div>
+                  <% } %>
+                </div>
+              </div>
+              <div class="taskButtons flexbox flexRight">
+                <button type="button" id="addTask">Add <i class="fas fa-plus"></i></button>
+                <button type="button" id="removeTask">Remove <i class="fas fa-minus"></i></button>
+              </div>
+            </section>
+            <button type="submit">Update Version</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
+<script>
+  // Counts task types on form submit
+  function countTaskTypes() {
+    var count = 0;
+    $("div.task").each(function () {
+      $(this).find(".bugs").attr("name", "version[bugs][" + count + "][item]");
+      count++;
+    });
+    $("div.item").each(function () {
+      $(this).find(".versionItem").attr("name", "version[versionItems][" + count + "][item]");
+      count++;
+    });
+  }
 
+  $(document).ready(function () {
+    var count = 0;
+    $("div.item:nth-child(2) label input").attr("name", "version[versionItems][" + count + "][item]");
+
+    $("#addItem").click(function () {
+      count++;
+      var newItemInput = $(".item:last-of-type");
+      newItemInput.clone().find("input:text").val("").end().appendTo(".itemTable");
+      $("div.item:last-of-type input").attr("name", "version[versionItems][" + count + "][item]");
+    });
+
+    $("#removeItem").click(function () {
+      var itemCount = $("div.item").length;
+      if (itemCount === 1) {
+        alert("You cannot remove the only item");
+      } else {
+        var newItemInput = $(".item:last-of-type");
+        newItemInput.remove();
+      };
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    var count = 0;
+    $("div.task:nth-child(2) label input").attr("name", "version[bugs][" + count + "][item]");
+
+    $("#addTask").click(function () {
+      count++;
+      var newTaskInput = $(".task:last-of-type");
+      newTaskInput.clone().find("input:text").val("").end().appendTo(".taskTable");
+      $("div.task:last-of-type select.owner").attr("name", "version[bugs][" + count + "][item]");
+    });
+
+    $("#removeTask").click(function () {
+      var taskCount = $("div.task").length;
+      if (taskCount === 1) {
+        alert("You cannot remove the only task");
+      } else {
+        var newTaskInput = $(".task:last-of-type");
+        newTaskInput.remove();
+      };
+    });
+  });
+</script>
 <% include ../partials/footer %>

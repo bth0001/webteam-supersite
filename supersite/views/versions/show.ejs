@@ -1,0 +1,135 @@
+<% include ../partials/header %>
+
+<div id="overview" class="center">
+  <h1>Version
+    <%= version.version %>
+  </h1>
+</div>
+<% const now = moment(version.completedDate); %>
+<% const end = moment(version.created_at); %>
+<% const duration = moment.duration(now.diff(end));%>
+<% const days = duration.asDays(); %>
+<div id="dashboard">
+  <div class="container flexbox" style="align-items: flex-start;">
+    <div class="quickView projectQuickView">
+      <div class="empImg">
+        <img src="/images/Projectweb.png" alt="Strom Centre">
+      </div>
+      <div class="quickInfo">
+        <div class="detTitle">
+          <h6>Status:</h6>
+        </div>
+        <div class="details">
+          <p>
+            <%= version.status %>
+          </p>
+        </div>
+        <div class="detTitle">
+          <h6>Created Date:</h6>
+        </div>
+        <div class="details">
+          <p>
+            <%= moment(version.created_at).format("MMM DD, YYYY hh:mm a") %>
+          </p>
+        </div>
+        <% if(version.isReleased === true) { %>
+        <div class="detTitle">
+          <h6>Release Date:</h6>
+        </div>
+        <div class="details">
+          <p>
+            <%= moment(version.releaseDate).format("MMM DD, YYYY hh:mm a") %>
+          </p>
+        </div>
+        <% } %>
+
+        <% if (version.history.length > 0){ %>
+        <% var indexLength = version.history.length %>
+        <div class="detTitle">
+          <h6>Last Modified By:</h6>
+        </div>
+        <div class="details">
+          <p>
+            <%= version.history[indexLength - 1].historyName %>
+          </p>
+        </div>
+        <div class="detTitle">
+          <h6>Last Modified Time:</h6>
+        </div>
+        <div class="details">
+          <p>
+            <%= moment(version.history[indexLength - 1].time).format("MMM DD, YYYY hh:mm a") %>
+          </p>
+        </div>
+        <% } %>
+      </div>
+    </div>
+    <div class="summary">
+      <p>
+        <%= version.description %>
+      </p>
+      <h4>Version Items:</h4>
+      <ol style="list-style: decimal">
+        <% for(let i = 0; i < version.versionItems.length; i++) { %>
+        <li>
+          <%= version.versionItems[i].item %>
+        </li>
+        <% } %>
+      </ol>
+
+      <h4>Bugs:</h4>
+      <ol style="list-style: decimal">
+        <% for(let i = 0; i < version.bugs.length; i++) { %>
+        <li>
+          <%= version.bugs[i].item %>
+        </li>
+        <% } %>
+      </ol>
+
+      <p><em>Created By: <strong>
+            <%= version.author.firstName %></strong>
+      </p>
+
+      <div id="trackerBtn" style="margin: 20px 0 50px;">
+        <a class="edit" href="/versions/<%= version._id %>/edit">Edit</a>
+
+        <% if(currentUser.isAdmin || currentUser.isMaster ){ %>
+        <form id="delete-form" action="/versions/<%= version._id %>?_method=DELETE" method="POST">
+          <button class="delete">Delete</button>
+        </form>
+        <% } %>
+        <% if(version.isReleased === !true) { %>
+        <form id="delete-form" class="trackerForm" action="/versions/<%= version._id %>?_method=PUT" method="POST">
+          <div style="display: none">
+            <input name="version[status]" id="status" value="Released" />
+          </div>
+          <button class="archive archiveButton" value="Released" name="version[isReleased]" type="submit">Release</button>
+        </form>
+        <% } %>
+        <% if(version.isReleased === true) { %>
+        <form id="archive-form" class="trackerForm" action="/versions/<%= version._id %>?_method=PUT" method="POST">
+          <div style="display: none">
+            <input name="version[status]" id="status" value="Not Released" />
+          </div>
+          <button class="archive archiveButton" value="Not Released" name="version[isReleased]" type="submit">Close
+            Version</button>
+        </form>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function () {
+      $("#delete-form button.archiveButton").click(function () {
+        $("#delete-form button.archiveButton").each(function () {
+          $(this).val("true");
+        });
+      });
+      $("#archive-form button.archiveButton").click(function () {
+        $("#archive-form button.archiveButton").each(function () {
+          $(this).val("false");
+        });
+      });
+    });
+  </script>
+  <% include ../partials/footer %>

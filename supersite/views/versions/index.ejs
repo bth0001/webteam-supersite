@@ -37,15 +37,13 @@
             <div class="row flexbox">
               <div class="cell url">
                 <%= version.version _%></a></div>
-              <div class="cell actNumber"><a href="/version/<%= version._id %>">
+              <div class="cell actNumber"><a href="/versions/<%= version._id %>">
                   <%= version.status %></a></div>
               <div class="cell name">
                 <%= version.author.firstName%>
               </div>
               <div class="cell name">
-                <% for(let i = 0; i < version.bugs.length; i++) { %>
-                <%= i %>
-                <% } %>
+                <%= version.bugs.length %>
               </div>
               <div class="cell date">
                 <%= moment(version.created_at).format('MMM DD, YYYY') %>

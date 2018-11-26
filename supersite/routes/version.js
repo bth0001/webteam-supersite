@@ -62,20 +62,12 @@ router.get("/new", function (req, res) {
 });
 
 // //SHOW - show more info about one projects
-// router.get("/:id", function (req, res) {
-//   //find the projects with provided ID
-//   Project.findById(req.params.id)
-//     .populate({ path: 'comments', options: { sort: { created_at: -1 } } })
-//     .exec(function (err, foundProject) {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         console.log(foundProject);
-//         //render show template with that project
-//         res.render("projects/show", { project: foundProject, moment: moment });
-//       }
-//     });
-// });
+router.get("/:id", function (req, res) {
+  //find the projects with provided ID
+  db.Version.findById(req.params.id, function (err, foundVersion) {
+    res.render("versions/show", { version: foundVersion });
+  })
+});
 
 //edit projects route
 router.get("/:id/edit", function (req, res) {
@@ -99,13 +91,13 @@ router.put("/:id", function (req, res) {
     historyArray.push(history);
     //find and update correct project
     var versionTracking = req.body.version;
-    if (versionTracking.status === "Completed") {
-      versionTracking.completedDate = Date.now()
-      versionTracking.isCompleted = true;
+    if (versionTracking.status === "Released") {
+      versionTracking.releaseDate = Date.now()
+      versionTracking.isReleased = true;
     }
-    if (versionTracking.status.indexOf("Completed") === -1) {
-      versionTracking.completedDate = null;
-      versionTracking.isCompleted = false;
+    if (versionTracking.status.indexOf("Released") === -1) {
+      versionTracking.releaseDate = null;
+      versionTracking.isReleased = false;
     }
     const newVersion = Object.assign(versionTracking, {
       history: historyArray

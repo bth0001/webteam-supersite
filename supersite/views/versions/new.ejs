@@ -11,12 +11,12 @@
       <div class="col-md-12">
         <form class="form profileForm" action="/versions" method="POST">
           <section class="header flexbox flexJustify">
-            <h2>Project Creation</h2>
+            <h2>Version Creation</h2>
           </section>
           <div class="wrapper">
             <section class="flexbox flexJustify">
               <label for="name"><span style="margin: 0 0 5px; display: block;">Version Number:</span>
-                <input type="text" name="version" placeholder="Version Number">
+                <input type="number" name="version" placeholder="Version Number">
               </label>
               <label for="status"><span style="margin: 0 0 5px; display: block;">Version Status:</span>
                 <select name="status">
@@ -50,7 +50,7 @@
                 <button type="button" id="removeItem">Remove <i class="fas fa-minus"></i></button>
               </div>
             </section>
-            <button type="submit">Create Project</button>
+            <button type="submit">Create Version</button>
           </div>
         </form>
       </div>

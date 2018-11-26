@@ -5,6 +5,7 @@ const versionSchema = new mongoose.Schema(
     version: Number,
     description: String,
     status: String,
+    releaseDate: Date,
     isReleased: {
       type: Boolean,
       default: false
