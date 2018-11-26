@@ -10,3 +10,4 @@ mongoose.connect(
 
 module.exports.TeamTracker = require("./teamTracker");
 module.exports.User = require("./user");
+module.exports.Version = require("./version");

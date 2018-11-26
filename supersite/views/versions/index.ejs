@@ -1,0 +1,83 @@
+<% include ../partials/header %>
+<div id="overview" class="center">
+  <h1>Versions</h1>
+  <div class="flexbox flexCenter">
+    <a href="/versions/new" class="myBtn" id="myBtn">New Versions<i class="fas fa-plus"></i></a>
+  </div>
+  <div style="margin: 20px 0 0;">
+    <a href="/versions/help">Version Help</a>
+  </div>
+</div>
+<div id="dashboard">
+  <div class="container">
+    <div class="widget fullCol">
+      <div id="dashEssential">
+        <p>Version control is used to check github commits. You will simply check here for a description of the
+          previous github version for easier tracking. The purpose of this page is to prevent github commits from being
+          over done. You can simply just added the description/items and bugs for this release here.</p>
+        <p>On the commit side of things you will now simply just commit with a version number. Small changes will
+          follow the current version number. ie. 1.1. All Major Fixes/pushes will change the current version number.
+          ie. 2.</p>
+        <h3>Examples:</h3>
+        <p><strong>Strom Centre Version description:</strong> "Fixed the broken form input bug on the project
+          edit"<br />
+          <strong>GitHub commit:</strong> commit -m "v1.1"</p>
+        <p>For more Information and help visit the help page.</p>
+        <div class="table">
+          <div class="row title flexbox">
+            <div class="cell url">Version</div>
+            <div class="cell actNumber">Released</div>
+            <div class="cell name">Published By</div>
+            <div class="cell name">Bugs</div>
+            <div class="cell date">Date</div>
+            <div class="cell name"></div>
+          </div>
+          <div id="accordion">
+            <% versions.forEach(function(version){ %>
+            <div class="row flexbox">
+              <div class="cell url">
+                <%= version.version _%></a></div>
+              <div class="cell actNumber"><a href="/version/<%= version._id %>">
+                  <%= version.status %></a></div>
+              <div class="cell name">
+                <%= version.author.firstName%>
+              </div>
+              <div class="cell name">
+                <% for(let i = 0; i < version.bugs.length; i++) { %>
+                <%= i %>
+                <% } %>
+              </div>
+              <div class="cell date">
+                <%= moment(version.created_at).format('MMM DD, YYYY') %>
+              </div>
+              <div class="cell name">
+                <div id="trackerBtn">
+                  <a href="/versions/<%= version._id %>/edit" class="edit">Report Bugs</a>
+                </div>
+              </div>
+              <!-- <form id="delete-form" action="/version/<%= version._id %>?_method=DELETE" method="POST">
+                <button name="realDelete" disabled type="submit" class="btn btn-xs btn-danger realDelete">Delete</button>
+              </form> -->
+              <script>
+                $(document).ready(function () {
+                  $("#delete-form button.archiveButton").click(function () {
+                    $("#delete-form button.archiveButton").each(function () {
+                      $(this).val("true");
+                    });
+                  });
+                }); 
+              </script>
+            </div>
+          </div>
+          <!-- end of expanded -->
+        </div>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- end of dashEssential -->
+<% include ../partials/footer %>

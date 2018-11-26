@@ -36,6 +36,7 @@ var projectsRouter = require("./routes/projects");
 var projectCommentsRouter = require("./routes/projectsComment");
 var teamRoutes = require("./routes/teamProfile");
 var accountRoutes = require("./routes/accounts");
+var versionRoutes = require("./routes/version");
 const errorHandler = require("./handlers/error");
 // API ROUTES
 const apiTracker = require("./routes/api/apiTracker");
@@ -111,6 +112,7 @@ app.use("/tracker", trackerRoutes);
 app.use("/users", usersRouter);
 app.use("/team", teamRoutes);
 app.use("/accounts", isController, accountRoutes);
+app.use("/versions", isController, versionRoutes);
 app.use("/dashboard", dashboardRouter);
 app.use("/idea-warehouse", ideaWarehouseRouter);
 app.use("/hats-off", hatsOffRouter);

@@ -1,0 +1,40 @@
+<% include ../partials/header %>
+<style>
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+<div id="overview" class="center">
+  <h1>Versions</h1>
+  <div class="flexbox flexCenter">
+    <a href="/versions/new" class="myBtn" id="myBtn">New Versions<i class="fas fa-plus"></i></a>
+  </div>
+</div>
+<div id="dashboard">
+  <div class="container">
+    <div id="versionControl">
+      <p>Version control is used to check github commits. You will simply check here for a description of the
+        previous github version for easier tracking. The purpose of this page is to prevent github commits from being
+        over done. You can simply just added the description/items and bugs for this release here.</p>
+      <p>On the commit side of things you will now simply just commit with a version number. Small changes will
+        follow the current version number. ie. 1.1. All Major Fixes/pushes will change the current version number.
+        ie. 2.</p>
+      <h2>Processes on releasing a version</h2>
+      <h3>Strom-Centre</h3>
+      <p>First you will need to create a new version in strom-centre. You will simply visit the page for new. Below
+        will be a few screen grabs for help.</p>
+      <img src="/images/Version Help One.png" alt="version strom-centre help" />
+
+      <h3>Github</h3>
+      <p>Once you have created the request. You will need to push your changes to the github site. It is <em>important
+          you remember your version number</em> you are going to use.</p>
+      <p><strong>Strom Centre Version description:</strong> "Fixed the broken form input bug on the project
+        edit"<br />
+        <strong>GitHub commit:</strong> commit -m "v1.1"</p>
+    </div>
+  </div>
+</div>
+
+<!-- end of dashEssential -->
+<% include ../partials/footer %>

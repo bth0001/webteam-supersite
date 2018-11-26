@@ -149,7 +149,11 @@
           <li>
             <a href="/blueprint-generator"><span>Blueprint</span></a>
           </li>
-
+          <% if(currentUser.isMaster || currentUser.isAdmin){ %>
+          <li>
+            <a href="/versions"><span>Version Releases</span></a>
+          </li>
+          <% } %>
         </ul>
         <form action="/search" method="GET" class="searchBox flexbox flexJustify">
           <input class="searchText" type="text" name="search" placeholder="Custom Search" />
