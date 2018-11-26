@@ -93,29 +93,6 @@
               </label>
             </section>
             <div class="selectBox flexbox flexJustify alignCenter">
-              <script>
-                $(document).ready(function () {
-                  var count = 0;
-                  $("div.item label input:first-of-type").attr("name", "project[actionItem][" + count + "][item]");
-
-                  $("#addItem").click(function () {
-                    count++;
-                    var newItemInput = $(".item:last-of-type");
-                    newItemInput.clone().find("input:text").val("").end().appendTo(".itemTable");
-                    $("div.item:last-of-type input").attr("name", "project[actionItem][" + count + "][item]");
-                  });
-
-                  $("#removeItem").click(function () {
-                    var itemCount = $("div.item").length;
-                    if (itemCount === 1) {
-                      alert("You cannot remove the only item");
-                    } else {
-                      var newItemInput = $(".item:last-of-type");
-                      newItemInput.remove();
-                    };
-                  });
-                });
-              </script>
               <section style="width: 100%;">
                 <div id="item">
                   <div class="itemTable">
@@ -143,30 +120,6 @@
                   <button type="button" id="removeItem">Remove <i class="fas fa-minus"></i></button>
                 </div>
               </section>
-
-              <script>
-                $(document).ready(function () {
-                  var count = 0;
-                  $("div.task:first-of-type select.owner").attr("name", "project[owners][" + count + "][firstName]");
-
-                  $("#addTask").click(function () {
-                    count++;
-                    var newTaskInput = $(".task:last-of-type");
-                    newTaskInput.clone().appendTo(".taskTable");
-                    $("div.task:last-of-type select.owner").attr("name", "project[owners][" + count + "][firstName]");
-                  });
-
-                  $("#removeTask").click(function () {
-                    var taskCount = $("div.task").length;
-                    if (taskCount === 1) {
-                      alert("You cannot remove the only task");
-                    } else {
-                      var newTaskInput = $(".task:last-of-type");
-                      newTaskInput.remove();
-                    };
-                  });
-                });
-              </script>
               <section style="width: 100%;">
                 <div id="task">
                   <div class="taskTable">
@@ -224,6 +177,50 @@
     });
   }
 
-// });
+  $(document).ready(function () {
+    var count = 0;
+    $("div.item:nth-child(2) label input").attr("name", "project[actionItem][" + count + "][item]");
+
+    $("#addItem").click(function () {
+      count++;
+      var newItemInput = $(".item:last-of-type");
+      newItemInput.clone().find("input:text").val("").end().appendTo(".itemTable");
+      $("div.item:last-of-type input").attr("name", "project[actionItem][" + count + "][item]");
+    });
+
+    $("#removeItem").click(function () {
+      var itemCount = $("div.item").length;
+      if (itemCount === 1) {
+        alert("You cannot remove the only item");
+      } else {
+        var newItemInput = $(".item:last-of-type");
+        newItemInput.remove();
+      };
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    var count = 0;
+    $("div.task:first-of-type select.owner").attr("name", "project[owners][" + count + "][firstName]");
+
+    $("#addTask").click(function () {
+      count++;
+      var newTaskInput = $(".task:last-of-type");
+      newTaskInput.clone().appendTo(".taskTable");
+      $("div.task:last-of-type select.owner").attr("name", "project[owners][" + count + "][firstName]");
+    });
+
+    $("#removeTask").click(function () {
+      var taskCount = $("div.task").length;
+      if (taskCount === 1) {
+        alert("You cannot remove the only task");
+      } else {
+        var newTaskInput = $(".task:last-of-type");
+        newTaskInput.remove();
+      };
+    });
+  });
 </script>
 <% include ../partials/footer %>
