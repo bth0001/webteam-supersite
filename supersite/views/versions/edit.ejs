@@ -22,12 +22,22 @@
               </label>
               <label for="status"><span style="margin: 0 0 5px; display: block;">Version Status:</span>
                 <select name="version[status]">
-                  <% if(version.status === "Released"){ %>
+                  <% if(version.status === "Closed"){ %>
+                  <option value="Closed" selected>Closed</option>
+                  <option value="Released">Released</option>
+                  <option value="Not Released" disabled>Not Released</option>
+                  <% } else if(version.status === "Released") { %>
                   <option value="Released" selected>Released</option>
                   <option value="Not Released">Not Released</option>
+                  <% if(currentUser.isMaster) { %>
+                  <option value="Closed">Closed</option>
+                  <% } %>
                   <% } else { %>
                   <option value="Released">Released</option>
                   <option value="Not Released" selected>Not Released</option>
+                  <% if(currentUser.isMaster) { %>
+                  <option value="Closed">Closed</option>
+                  <% } %>
                   <% } %>
                 </select>
               </label>

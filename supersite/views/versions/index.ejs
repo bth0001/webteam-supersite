@@ -43,7 +43,11 @@
                 <%= version.author.firstName%>
               </div>
               <div class="cell name">
+                <% if(version.bugs[0].item === ""){ %>
+                0
+                <% } else { %>
                 <%= version.bugs.length %>
+                <% } %>
               </div>
               <div class="cell date">
                 <%= moment(version.created_at).format('MMM DD, YYYY') %>
@@ -68,12 +72,11 @@
             </div>
           </div>
           <!-- end of expanded -->
+          <% }); %>
         </div>
-        <% }); %>
       </div>
     </div>
   </div>
-</div>
 </div>
 </div>
 

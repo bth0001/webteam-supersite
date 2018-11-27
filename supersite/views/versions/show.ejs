@@ -1,5 +1,4 @@
 <% include ../partials/header %>
-
 <div id="overview" class="center">
   <h1>Version
     <%= version.version %>
@@ -32,7 +31,24 @@
             <%= moment(version.created_at).format("MMM DD, YYYY hh:mm a") %>
           </p>
         </div>
-        <% if(version.isReleased === true) { %>
+        <% if(version.closed === true) { %>
+        <div class="detTitle">
+          <h6>Closed Date:</h6>
+        </div>
+        <div class="details">
+          <p>
+            <%= moment(version.closedDate).format("MMM DD, YYYY hh:mm a") %>
+          </p>
+        </div>
+        <div class="detTitle">
+          <h6>Release Date:</h6>
+        </div>
+        <div class="details">
+          <p>
+            <%= moment(version.releaseDate).format("MMM DD, YYYY hh:mm a") %>
+          </p>
+        </div>
+        <% } else if(version.isReleased === true) { %>
         <div class="detTitle">
           <h6>Release Date:</h6>
         </div>
@@ -65,40 +81,48 @@
       </div>
     </div>
     <div class="summary">
+      <h2>Version Release Notes & Bugs.</h2>
       <p>
         <%= version.description %>
       </p>
       <h4>Version Items:</h4>
       <ol style="list-style: decimal">
+        <% if(version.versionItems[0].item === ""){ %>
+        <li>No Version Items exist currently</li>
+        <% } else { %>
         <% for(let i = 0; i < version.versionItems.length; i++) { %>
         <li>
-          <%= version.versionItems[i].item %>
+          <%= version.versionItems[i].item -%>
         </li>
         <% } %>
+        <% } %>
+
       </ol>
 
       <h4>Bugs:</h4>
       <ol style="list-style: decimal">
+        <% if(version.bugs[0].item === ""){ %>
+        <li>No Bugs have been found yet. Good Job Guys.</li>
+        <% } else { %>
         <% for(let i = 0; i < version.bugs.length; i++) { %>
         <li>
           <%= version.bugs[i].item %>
         </li>
         <% } %>
+        <% } %>
       </ol>
-
       <p><em>Created By: <strong>
             <%= version.author.firstName %></strong>
       </p>
-
       <div id="trackerBtn" style="margin: 20px 0 50px;">
         <a class="edit" href="/versions/<%= version._id %>/edit">Edit</a>
 
-        <% if(currentUser.isAdmin || currentUser.isMaster ){ %>
+        <% if(currentUser.isMaster){ %>
         <form id="delete-form" action="/versions/<%= version._id %>?_method=DELETE" method="POST">
           <button class="delete">Delete</button>
         </form>
         <% } %>
-        <% if(version.isReleased === !true) { %>
+        <% if(version.closed === !true && version.isReleased === !true) { %>
         <form id="delete-form" class="trackerForm" action="/versions/<%= version._id %>?_method=PUT" method="POST">
           <div style="display: none">
             <input name="version[status]" id="status" value="Released" />
@@ -109,9 +133,9 @@
         <% if(version.isReleased === true) { %>
         <form id="archive-form" class="trackerForm" action="/versions/<%= version._id %>?_method=PUT" method="POST">
           <div style="display: none">
-            <input name="version[status]" id="status" value="Not Released" />
+            <input name="version[status]" id="status" value="Closed" />
           </div>
-          <button class="archive archiveButton" value="Not Released" name="version[isReleased]" type="submit">Close
+          <button class="archive archiveButton" value="Closed" name="version[closed]" type="submit">Close
             Version</button>
         </form>
         <% } %>

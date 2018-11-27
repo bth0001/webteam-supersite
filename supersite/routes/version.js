@@ -94,9 +94,15 @@ router.put("/:id", function (req, res) {
     if (versionTracking.status === "Released") {
       versionTracking.releaseDate = Date.now()
       versionTracking.isReleased = true;
+      versionTracking.closed = false;
     }
-    if (versionTracking.status.indexOf("Released") === -1) {
-      versionTracking.releaseDate = null;
+    if (versionTracking.status === "Not Released") {
+      versionTracking.isReleased = false;
+      versionTracking.closed = false;
+    }
+    if (versionTracking.status === "Closed") {
+      versionTracking.closed = true;
+      versionTracking.closedDate = Date.now()
       versionTracking.isReleased = false;
     }
     const newVersion = Object.assign(versionTracking, {

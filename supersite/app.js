@@ -1,43 +1,34 @@
 // Packages
-var express = require("express");
-var app = express();
-var flash = require("connect-flash");
-var router = express.Router();
-var bodyParser = require("body-parser");
-var passport = require("passport");
-var localStrategy = require("passport-local");
-var session = require("express-session");
-var nodemailer = require("nodemailer");
-var bcrypt = require("bcrypt-nodejs");
-var async = require("async");
-var crypto = require("crypto");
-var smtpTransport = require("nodemailer-smtp-transport");
-var xoauth2 = require("xoauth2");
-var methodOverride = require("method-override");
-var multer = require("multer");
-var moment = require("moment");
-var middleware = require("./middleware");
+const express = require("express");
+const app = express();
+const flash = require("connect-flash");
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const session = require("express-session");
+const methodOverride = require("method-override");
+const moment = require("moment");
 
 // ROUTES
-var db = require("./models/index");
-var User = require("./models/user");
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var trackerRoutes = require("./routes/trackers");
-var authRoutes = require("./routes/authentication");
-var resetRoutes = require("./routes/forgotPassword");
-var dashboardRouter = require("./routes/dashboard");
-var ideaWarehouseRouter = require("./routes/idea-warehouse");
-var hatsOffRouter = require("./routes/hats-off");
-var presenceUrlTrackerRouter = require("./routes/presence-url-tracker");
-var blueprintGeneratorRouter = require("./routes/blueprint-generator");
-var checklistRouter = require("./routes/checklist");
-var projectsRouter = require("./routes/projects");
-var projectCommentsRouter = require("./routes/projectsComment");
-var teamRoutes = require("./routes/teamProfile");
-var accountRoutes = require("./routes/accounts");
-var versionRoutes = require("./routes/version");
+const db = require("./models/index");
+const indexRoutes = require("./routes/index");
+const usersRoutes = require("./routes/users");
+const trackerRoutes = require("./routes/trackers");
+const authRoutes = require("./routes/authentication");
+const resetRoutes = require("./routes/forgotPassword");
+const dashboardRoutes = require("./routes/dashboard");
+const ideaWarehouseRoutes = require("./routes/idea-warehouse");
+const hatsOffRoutes = require("./routes/hats-off");
+const presenceUrlTrackerRoutes = require("./routes/presence-url-tracker");
+const blueprintGeneratorRoutes = require("./routes/blueprint-generator");
+const checklistRoutes = require("./routes/checklist");
+const projectsRoutes = require("./routes/projects");
+const projectCommentsRoutes = require("./routes/projectsComment");
+const teamRoutes = require("./routes/teamProfile");
+const accountRoutes = require("./routes/accounts");
+const versionRoutes = require("./routes/version");
+const settingsRoutes = require("./routes/settings");
 const errorHandler = require("./handlers/error");
+
 // API ROUTES
 const apiTracker = require("./routes/api/apiTracker");
 
@@ -63,12 +54,9 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-// passport.use(User.createStrategy({
-//   passReqToCallback : true
-// }));
 passport.use(
-  User.createStrategy(function (email, password, done) {
-    User.findOne({ email: email }, function (err, user) {
+  db.User.createStrategy(function (email, password, done) {
+    db.User.findOne({ email: email }, function (err, user) {
       if (err) return done(err);
       if (!user) return done(null, false, { message: "Incorrect e-mail." });
       user.comparePassword(password, function (err, isMatch) {
@@ -86,42 +74,43 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
+  db.User.findById(id, function (err, user) {
     done(err, user);
   });
 });
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
 
-//==============================================================================
 app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
   res.locals.error = req.flash("error");
   res.locals.success = req.flash("success");
   res.locals.moment = moment;
+  res.locals.rmWhitespace = true;
   next();
 });
 
-// ----For Route Files----start
-app.use("/", [indexRouter, authRoutes, resetRoutes]);
 
 app.use("/api/tracker", apiTracker);
-
+// ----For Route Files----start
+app.use("/", [indexRoutes, authRoutes, resetRoutes]);
 app.all("*", isLoggedIn); // For Authentication
 app.use("/tracker", trackerRoutes);
-app.use("/users", usersRouter);
+app.use("/users", usersRoutes);
 app.use("/team", teamRoutes);
+app.use("/dashboard", dashboardRoutes);
+app.use("/idea-warehouse", ideaWarehouseRoutes);
+app.use("/hats-off", hatsOffRoutes);
+app.use("/presence-url-tracker", presenceUrlTrackerRoutes);
+app.use("/blueprint-generator", blueprintGeneratorRoutes);
+app.use("/checklist", checklistRoutes);
+app.use("/projects", projectsRoutes);
+app.use("/projects/:id/projectComments", projectCommentsRoutes);
+app.use("/settings", settingsRoutes);
 app.use("/accounts", isController, accountRoutes);
 app.use("/versions", isController, versionRoutes);
-app.use("/dashboard", dashboardRouter);
-app.use("/idea-warehouse", ideaWarehouseRouter);
-app.use("/hats-off", hatsOffRouter);
-app.use("/presence-url-tracker", presenceUrlTrackerRouter);
-app.use("/blueprint-generator", blueprintGeneratorRouter);
-app.use("/checklist", checklistRouter);
-app.use("/projects", projectsRouter);
+
+//Api Routes
 app.use("/api", apiTracker);
-app.use("/projects/:id/projectComments", projectCommentsRouter);
+
 // ----For Route Files----end
 
 app.get("/forgot", function (req, res) {
@@ -130,6 +119,7 @@ app.get("/forgot", function (req, res) {
   });
 });
 
+//Middleware for app.js
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();

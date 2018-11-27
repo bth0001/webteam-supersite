@@ -10,6 +10,11 @@ const versionSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
+    closed: {
+      type: Boolean,
+      default: false
+    },
+    closedDate: Date,
     author: {
       id: {
         type: mongoose.Schema.Types.ObjectId,

@@ -80,10 +80,14 @@
             </p>
             <h4>Action Items:</h4>
             <ol style="list-style: decimal">
+                <% if(project.actionItem[0].item === "") { %>
+                <li>No Action Items at this time.</li>
+                <% } else { %>
                 <% for(let i = 0; i < project.actionItem.length; i++) { %>
                 <li>
                     <%= project.actionItem[i].item %>
                 </li>
+                <% } %>
                 <% } %>
             </ol>
 
