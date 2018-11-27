@@ -10,18 +10,6 @@ setTimeout(function() {
         $(this).parent().parent().next().toggleClass("open");
     });
 
-
-  //Dashboard MOnth Drop Down and Select
-  $(".selectMonth .dropdown dd ul li a").click(function() {
-    var text = $(this).html();
-    $(".selectMonth .dropdown dt a h4").html(text);
-    $(".selectMonth .dropdown dd ul").hide();
-  }); 
-  $(document).on('click', function(e) {
-    var $clicked = $(e.target);
-    if (! $clicked.parents().hasClass("dropdown"))
-      $(".selectMonth .dropdown dd ul").hide();
-  });
 // Assigns names to textboxes for blueprint wizard
   var parentCount = 0;
   var htmlChild = '<div class="child"> <span>Child Page</span> <input type="text" placeholder="Child Page Name" value=""/> <input type="text" placeholder="Child Page Notes" value=""/><a onclick="this.parentNode.remove()" class="removeSpecificSubpage"></a> </div>';

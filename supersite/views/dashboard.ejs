@@ -1,6 +1,15 @@
 <% include partials/header %>
 <script src="/scripts/dashboard.js"></script>
 
+<style>
+/* Sorting arrows in tables on dashboard */
+div.dashboardAccordion a[data-sort] {background-color: transparent; display: inline-block; margin: 0 0 0 2px; text-align: center; width: 15px; height: 15px; position: relative;}
+div.dashboardAccordion a[data-sort]:before {font-family: FontAwesome; font-weight: bold; color: #fff; font-size: 12px; position: relative;}
+div.dashboardAccordion a[data-sort="none"]:before {content: "\f0dc"; bottom: 3px;}
+div.dashboardAccordion a[data-sort="descending"]:before {content: "\f0de"; top: 0px; bottom: auto;}
+div.dashboardAccordion a[data-sort="ascending"]:before {content: "\f0dd"; bottom: 5px;}
+</style>
+
 
 
 <div id="overview" class="center">
@@ -11,32 +20,10 @@
 		<!-- <i class="fas fa-angle-down"></i>  -->
 		<div class="selectMonth">
 			<dl class="dropdown selectMonth">
-				<dt>
-
-						<form id="dateFilter" action="" method="POST">
-								<input type="date" id="startDate" />
-								<input type="date" id="endDate" />
-						</form>
-						
-						<i class="fas fa-angle-down"></i>
-					
-				</dt>
-				<dd>
-					<ul id="allMonths">
-						<li><a>January</a></li>
-						<li><a>February</a></li>
-						<li><a>March</a></li>
-						<li><a>April</a></li>
-						<li><a>May</a></li>
-						<li><a>June</a></li>
-						<li><a>July</a></li>
-						<li><a>August</a></li>
-						<li><a>September</a></li>
-						<li><a>October</a></li>
-						<li><a>November</a></li>
-						<li><a>December</a></li>
-					</ul>
-				</dd>
+				<form id="dateFilter" action="" method="POST">
+					<input type="date" id="startDate" />
+					<input type="date" id="endDate" />
+				</form>
 			</dl>
 		</div>
 	</div>
@@ -79,7 +66,7 @@
 			<div class="selectTeamMember">
 				<dl class="dropdown">
 					<dt>
-						<a>
+						<a class="mainToggle" href="javascript:void(0);">
 							<h4 class="activeUser" id="active">
 								<%= currentUser.firstName %>
 							</h4>
@@ -87,6 +74,15 @@
 						</a>
 					</dt>
 					<dd>
+
+						<script>
+							$(document).ready(function(){
+								$("div.selectTeamMember a.mainToggle").on("click", function(){
+									$("#allTeamMembers").slideToggle(500);
+								});
+							});
+							
+						</script>
 
 
 						<ul id="allTeamMembers">
@@ -128,20 +124,28 @@
 				<div class="table graph">
 					<h2>Site Builds</h2>
 					<div class="wrapper flexbox">
-						<div class="column flexbox">
-							<div class="cell graph"><span class="circle showEssentials">
-									<%= essCount %></span></div>
-							<div class="cell build">Essentials</div>
-						</div>
-						<div class="column flexbox">
-							<div class="cell graph"><span class="circle showStarter">
-									<%= strCount %></span></div>
-							<div class="cell build">Starters</div>
-						</div>
+							<%_ var buildsArray = []; _%>
+							<%_ tracking.forEach(function(tracked){ _%>
+							<%_ if(buildsArray.indexOf(tracked.buildPkg) === -1) { _%>
+							<%_ 	buildsArray.push(tracked.buildPkg) _%>
+							<%_ } _%>
+							<%_ }); _%>
+							<%_ buildsArray.forEach(function(builds){ _%>
+								<div class="column flexbox">
+									<div class="cell graph">
+										<a href="javascript:void(0);" class="<%= builds.toLowerCase() %>" data-toggle="show" data-expand="closed">
+											<span class="circle">0</span>
+										</a>
+									</div>
+									<div class="cell build"><%= builds %></div>
+								</div>
+							<%_ }); _%>						
 					</div>
 				</div>
 			</div>
 			<!-- End leftCol -->
+
+
 
 			<div class="widget rightCol tasks">
 				<div class="table">
@@ -174,9 +178,12 @@
 			<!-- End rightCol -->
 		</div>
 		<!-- End topRow -->
-
-
 		<div id="bottomRow" class="flexbox" style="display:block">
+
+			<div class="quickSearch" style="display: none; text-align: right;">
+				<label for="filterTracked">Filter Results:</label>
+					<input type="text" id="filterTracked" />
+			</div>
 			<div class="widget fullCol">
 				
 			</div>
@@ -190,66 +197,4 @@
 	<!-- end stats -->
 </div>
 <!-- end dashboard -->
-<script>
-	$(document).ready(function () {
-		$('#bob span').click(function (event) {
-			event.preventDefault();
-			$('.widgetDisplay').hide();
-			var id = $(this).data("id");
-			$('#' + id).fadeIn(function () {
-				$(this).css({
-					'display': 'block'
-				}, 1000);
-			});
-		});
-
-		//if(window.location.href.match('/dashboard')){
-		// $("body").addClass("dashboard");
-		// }
-
-		// list of team members drop down when you click the purple arrow beside your name
-		$('.selectTeamMember .fa-angle-down').click(function () {
-			$('#allTeamMembers').slideToggle();
-		});
-		$('.selectMonth .fa-angle-down').click(function () {
-			$('#allMonths').slideToggle();
-		});
-
-		// when you click the purple arrow beside a task it expands for further info
-		$('#accordion .fa-angle-down').click(function () {
-			$(this).parent().next('.expanded').slideToggle();
-		});
-
-		// when you click on essentials circle it shows tracked essential tasks
-		$('.showEssentials').click(function () {
-			$('#dashStarter, #dashTlink, #dashProd, #dashContent, #dashProject').hide();
-			$('#bottomRow, #dashEssential').fadeIn("slow");
-		});
-		// when you click on essentials circle it shows tracked starter tasks
-		$('.showStarter').click(function () {
-			$('#dashEssential, #dashTlink, #dashProd, #dashContent, #dashProject').hide();
-			$('#bottomRow, #dashStarter').fadeIn("slow");
-		});
-		// when you click on essentials circle it shows tracked starter tasks
-		$('.showProd').click(function () {
-			$('#dashTlink, #dashEssential, #dashContent, #dashStarter, #dashProject').hide();
-			$('#bottomRow, #dashProd').fadeIn("slow");
-		});
-		// when you click on essentials circle it shows tracked starter tasks
-		$('.showTlink').click(function () {
-			$('#dashProd, #dashEssential, #dashContent, #dashStarter, #dashProject').hide();
-			$('#bottomRow, #dashTlink').fadeIn("slow");
-		});
-		// when you click on essentials circle it shows tracked starter tasks
-		$('.showContent').click(function () {
-			$('#dashProd, #dashEssential, #dashTlink, #dashStarter, #dashProject').hide();
-			$('#bottomRow, #dashContent').fadeIn("slow");
-		});
-		// when you click on essentials circle it shows tracked starter tasks
-		$('.showProject').click(function () {
-			$('#dashProd, #dashEssential, #dashTlink, #dashStarter, #dashContent').hide();
-			$('#bottomRow, #dashProject').fadeIn("slow");
-		});
-	});
-</script>
 <% include partials/footer %>
