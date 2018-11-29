@@ -20,4 +20,15 @@ router.get("/", function(req, res) {
         });
 });
 
+// API to pre-populate tracker form if account # exist
+router.get("/check-existing", function(req, res) {
+    var number = req.query.search;
+    db.TeamTracker.find({"acctNum": number }).then(function(allTracks) {
+        console.log(allTracks);
+        res.send(allTracks);
+    }).catch(function(err) {
+      res.send(err);
+    });
+});
+
 module.exports = router;

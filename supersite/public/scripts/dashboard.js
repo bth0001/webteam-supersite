@@ -132,7 +132,6 @@ $(document).ready(function () {
                 // Filters data on the dashboard once pulled from server
                 $("#filterTracked").on("keyup", function(){
                     var searchString = $(this).val().toString().toLowerCase();
-                    console.log(searchString);
                         if(searchString.length > 0){
                         //#bottomRow div.table div.data
                         $("#bottomRow").find("div.data.row").each(function(){
@@ -189,7 +188,7 @@ function getDashboardData() {
         $("#dashboard #bottomRow .widget").empty();
         $("#bottomRow .row.data").remove();
         if (data.length) {
-            //create variables
+            //create variables for build packages
             var buildNamesArray = [];
                 data.forEach(function (name) {
                     if (buildNamesArray.indexOf(name.buildPkg) === -1) {
@@ -250,7 +249,6 @@ function getDashboardData() {
                     }
                 });
             });
-
         } else {
             $("#topRow a[data-toggle='show'] span").html("0");
         }

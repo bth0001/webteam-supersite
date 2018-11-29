@@ -61,6 +61,7 @@ router.get("/quick-search", function(req, res) {
   }
     const regex = new RegExp(escapeRegex(req.query.search), "gi");
     TeamTracker.find({$text: { $search: regex } }, function(err, allTracks) {
+      Projects.find({ $text: { $search: regex } }, function(err, allProjects) {
         console.log(regex);
         if (err) {
           console.log("Something went wrong");
@@ -71,6 +72,7 @@ router.get("/quick-search", function(req, res) {
             projects: allProjects
           });
         }
+      }).sort({});
     }).sort({});
 });
 

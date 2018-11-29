@@ -538,27 +538,122 @@
 			<!-- Modal content -->
 			<div class="modal-content">
 				<div>
-					<form class="form trackerForm" action="/tracker" method="POST">
+					<form class="form trackerForm" action="/tracker" method="POST" onsubmit="submitTrackerForm();">
 						<section class="header flexbox flexJustify">
 							<h2>Tracker Form</h2>
 							<div class="form-exit"> <span class="formClose"><i class="fas fa-times"></i></span></div>
+							<div class="accountNumResults">
+									<h3></h3>
+									<a id="override" href="javascript:void(0);" class="locked" style="display: none;"></a>
+							</div>
 						</section>
 						<div class="wrapper">
 							<section class="date">
 								<div class="flexbox flexJustify">
 									<label for="username">
 										<div class="flexbox alignCenter"> <span>Developer:</span>
-											<input type="text" id="text" value="<%= currentUser.firstName %>" name="teamTrack[username]">
+											<input autocomplete="off" type="text" id="text" value="<%= currentUser.firstName %>" name="teamTrack[username]">
 										</div>
 									</label>
 									<div class="acctNumber">
 										<label for="acctNum">
 											<div class="flexbox alignCenter"><span>Account Number:</span>
-												<input required="" type="number" placeholder="######" id="number" name="teamTrack[acctNum]" min="1" max="999999">
+												<input autocomplete="off" required="" type="text" name="teamTrack[acctNum]" min="1" max="999999" id="trackingNumber">
 											</div>
 										</label>
 									</div>
 								</div>
+							
+<style>
+	/*highlights the populated fields in the tracker form*/
+	#tracker form .highlight {animation: highlight 1.25s normal forwards ease-in-out;}
+	@keyframes highlight {from {background-color: rgba(0, 255, 242, 0.5)} 50% {opacity: 1;} to {background-color: transparent;}}
+	/*override button*/
+	#override:before {content: "\f09c"; font-family: FontAwesome; color: #fff; font-size: 20px;}
+	#override.locked:before {content: "\f023"}
+	.accountNumResults {position: absolute; background-color: transparent; top: 0; bottom: 0; height: 100%; right: 70px; display: flex; align-items: center;}
+	.accountNumResults h3 {display: inline-block; color: #fff; margin: 0 20px 0 0;}
+	.accountNumResults #override {display: inline-block;}
+	.accountNumResults #override:hover:before, .accountNumResults #override:focus:before {color: #cfcfcf;}
+</style>
+								<script>
+									$(document).ready(function(){
+
+										// Looks up information when account number is entered into the form
+										$("#tracker #trackingNumber").on("keyup", function(){
+										var trackingNumber = $(this).val();
+										if(trackingNumber.length > 0){
+											$.get("/api/check-existing", {search: trackingNumber}, function(data, status){
+												if(data.length){
+													var count = 0;
+													for (var key in data) {
+														var value = data[key];
+														//If Statements to populate fields if record exist
+														//Designer
+														console.log("DESIGNER")
+														console.log(value.designer);
+														
+														if(value.designer.length){
+															$("#designer option:selected").prop("selected", false);
+															$("#designer option[value='"+value.designer.toString().trim()+"']").prop("selected", true);
+															$("#designer").addClass("highlight").prop("disabled", true);
+														}
+														//Onboarder
+														if(value.onboarder.length){
+															$("#onboarder option:selected").prop("selected", false);
+															$("#onboarder option[value='"+value.onboarder.toString().trim()+"']").prop("selected", true);
+															$("#onboarder").addClass("highlight").prop("disabled", true);
+														}
+														//Domain
+														if(value.domain.length){
+															$("#domain").addClass("highlight").val(value.domain.toString().trim()).prop("disabled", true);
+														}
+														//Build Package
+														if(value.buildPkg.length){
+															$("#buildPkg option:selected").prop("selected", false);
+															$("#buildPkg option[value='"+value.buildPkg.toString().trim()+"']").prop("selected", true);
+															$("#buildPkg").addClass("highlight").prop("disabled", true);
+														}
+														//Server
+														if(value.server.length){
+															$("#server option:selected").prop("selected", false);
+															$("#server option[value='"+value.server.toString().trim()+"']").prop("selected", true);
+															$("#server").addClass("highlight").prop("disabled", true);
+														}
+														count++
+													}
+													if (count > 1){
+														$(".accountNumResults h3").text(count + " Results Found");
+													} else {
+														$(".accountNumResults h3").text(count + " Result Found");
+													}
+													$("#override").show();
+												} else {
+													$("#designer, #onboarder, #buildPkg, #server").removeClass("highlight")
+													.val($(this).children().first().val());
+													$("#domain").val("");
+													$("#override").hide();
+													$(".accountNumResults h3").empty();
+												}
+											}); 
+										} else {
+										//else code
+										}
+									});
+
+										// Override button to enable all input fields in the tracker
+										$("#override").on("click", function(){
+											$(this).removeClass("locked");
+											$("#tracker input, #tracker select").prop("disabled", false);
+										});
+									});
+									  
+									//Script is ran when tracker form is submitted
+									function submitTrackerForm(){
+										$("#tracker input, #tracker select").prop("disabled", false);
+									}
+
+								</script>
 
 								<div class="selectBox flexbox flexJustify alignCenter">
 									<label class="flexItem" for="designer">
@@ -599,7 +694,7 @@
 							</section>
 							<section>
 								<label name="domain"> <span>Domain:</span>
-									<input name="teamTrack[domain]" placeholder="Domain" type="text">
+									<input autocomplete="off" name="teamTrack[domain]" placeholder="Domain" type="text" id="domain">
 								</label>
 								<div class="selectBox flexbox flexJustify alignCenter">
 									<label class="flexItem" for="buildPkg">
@@ -701,7 +796,7 @@
 											<div class="row flexbox">
 												<div class="cell type">
 													<div class="customSelect">
-														<select class="taskType">
+														<select class="taskType" required>
 															<option value="" selected disabled>Please Select a Task</option>
 															<option value="Content Entry">Content Entry</option>
 															<option value="Production Change">Production Change</option>
@@ -712,7 +807,7 @@
 												</div>
 												<div class="cell quantity">
 													<div class="customSelect">
-														<select class="taskQuantity">
+														<select class="taskQuantity" required>
 															<option value="N/A">N/A</option>
 															<option value="0 - 15">0 - 5</option>
 															<option value="6 - 15">6 - 10</option>
@@ -786,6 +881,7 @@
 			$("div.task div.row:last-of-type select.taskType").attr("name", "teamTrack[taskTypes][" + count + "][taskTypeName]");
 			$("div.task div.row:last-of-type select.taskQuantity").attr("name", "teamTrack[taskTypes][" + count + "][quantity]");
 			$("div.task div.row:last-of-type textarea.taskNotes").attr("name", "teamTrack[taskTypes][" + count + "][taskNotes]");
+			$("div.task div.row:last-of-type textarea").val("");
 		});
 
 		$("#removeTask").click(function () {
@@ -876,26 +972,6 @@
 		event.preventDefault();
 		// $('#dashProd, #dashEssential, #dashTlink, #dashStarter').hide();
 		$('#dashProd, #dashEssential, #dashTlink, #dashStarter, #dashContent').fadeIn("slow");
-	});
-
-	function SetDate() {
-		var date = new Date();
-
-		var day = date.getDate();
-		var month = date.getMonth() + 1;
-		var year = date.getFullYear();
-
-		if (month < 10) month = "0" + month;
-		if (day < 10) day = "0" + day;
-
-		var today = year + "-" + month + "-" + day;
-
-
-		document.getElementById('myDate').value = today;
-	}
-
-	$(document).ready(function () {
-		SetDate();
 	});
 </script>
 <% include ../partials/footer %>
